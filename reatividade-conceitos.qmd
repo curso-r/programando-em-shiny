@@ -13,7 +13,7 @@ Pensando na construção desse app, teríamos um input, o tamanho da amostra, e 
 
 Obviamente, sortear a amostra durante a construção de cada output (como exemplifica o código abaixo) não vai funcionar pois geraríamos duas amostras diferentes^[Claro que poderíamos usar a função `set.seed()` para garantir que as amostras fossem as mesmas, mas imagine que não queremos escolher uma semente para a geração dos dados ou que, em algum outro contexto, o processo de amostragem fosse demorado e não queremos fazê-lo duas vezes.]. 
 
-```{r}
+```{r, eval = FALSE}
 # Solução insuficiente, pois as amostras geradas serão diferentes
 server <- function(input, output, session) {
   
@@ -35,7 +35,7 @@ server <- function(input, output, session) {
 
 A solução ingênua seria criar a amostra uma única vez, fora das funções `render*()`, mas isso retornará um erro. O que a mensagem de erro diz, de maneira mais direta, é que essa solução fere as regras de reatividade do Shiny.
 
-```{r}
+```{r, eval = FALSE}
 # Solução incorreta, pois viola as regras de reatividade do Shiny.
 server <- function(input, output, session) {
   
@@ -106,7 +106,7 @@ Na prática, essa receita nada mais é do que a função `server()`. São os có
 
 Para ilustrar esses conceitos, considere o app gerado pelo código a seguir.
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 library(shiny)
 
 variaveis <- names(mtcars)
@@ -199,28 +199,40 @@ Os valores da lista `input` não são o único tipo de valores reativos, assim c
 
 ## Expressões reativas
 
-Muitas vezes, um aplicativo shiny precisa de passos intermediários entre o input de origem e o output final. Isto é, precisamos de uma estrutura que receba um valor reativo, faça alguma conta e devolva um valor também reativo que será utilizado posteriormente em um ou mais *observers*.
+Muitas vezes, precisamos criar objetos dentro do Shiny que dependem de valores reativos e que serão utilizados dentro de um ou mais funções observadoras. Tal objeto precisaria se comportar tanto como uma função observadora, pois opois observaria o valor reatido do qualpois observaria o valor reatido do qual, quanto como uma valor reativo, para disparar a reatividade dentro das funções observadoras onde ele será usado.
 
-Essas estruturas são as **expressões reativas**, a peça faltante do problema apresentado na introdução deste capítulo. 
-
-Para criar expressões reativas, utilizamos as funções `reactive({})` e `eventReactive({})`.
+Esses objetos existem e são chamados de **expressões reativas**, a peça faltante no problema apresentado na introdução deste capítulo. Para criar expressões reativas, utilizamos as funções `reactive()` e `eventReactive()`.
 
 ### A função `reactive()`
 
-Uma maneira de criarmos expressões reativas é utilizar a função `reactive()`. Podemos entender essas expressões como valores intermediários, que podem ser utilizados na construção de vários outputs diferentes.
+A função `reactive()` cria uma expressão reativa que observa todos os valores reativos presentes dentro de seu código. No exemplo a seguir, a expressão reativa `amostra` recalcula o seu valor sempre que o valor reativo `input$tamanho` mudar.
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 # server
 amostra <- reactive({
   sample(1:10, input$tamanho, replace = TRUE)
 })
 ```
 
-Para acessar o valor de uma expressão reativa, devemos usar parênteses após o nome, como se fosse uma função sem argumentos. Podemos utilizar esse valor dentro de qualquer outra expressão reativa ou observer, quantas vezes for preciso.
+Já neste próximo exemplo, a expressão reativa `soma` reacalcula o seu valor sempre que qualquer um dos valores reativos `input$valor1`, `input$valor2` e `input$valor3` mudar.
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
+soma <- reactive({
+  input$valor1 + input$valor2 + input$valor3
+})
+```
+
+Para acessar o valor de uma expressão reativa, devemos usar parênteses após o seu nome, como se estivéssemos chamando uma função sem argumentos. Podemos utilizar esse valor dentro de qualquer outra expressão reativa ou função observadora, quantas vezes for preciso.
+
+No código a seguir, criamos a expressão reativa `amostra` e utilizamos o seu valor chamabndo `amostra()` dentro das funções observadoras `renderPlot()` e `renderText()`. Essa é a solução para o problema apresentado no início do capítulo.
+
+```{r, eval = FALSE}
 # server
-output$summary <- renderPrint({
+amostra <- reactive({
+  sample(1:10, input$tamanho, replace = TRUE)
+})
+
+output$grafico <- renderPlot({
   amostra() |> 
     table() |> 
     barplot()
@@ -233,13 +245,61 @@ output$resultado <- renderText({
 })
 ```
 
-Veja que expressões reativas funcionam tanto como um *observer*, pois precisa observar mudanças dos valores reativos que estão dentro dela (`input$tamanho`, no exemplo), quanto como valores reativos, pois queremos usar os valores gerados de forma reativa na criação de outputs (`renderPrint` e `renderText`, no exemplo).
+Nesse exemplo, se o valor de input$tamanho mudar o seguinte processo acontecerá internamente no Shiny:
 
-Assim, a solução adequada para o problema apresentado na introdução do capítulo seria:
+- o valor reativo `input$tamanho` vai emitir um alerta avisando que seu valor está desatualizado;
 
-```{r}
+- a expressão reativa `amostra` receberá esse alerta, desatualizará o próprio valor (a amostra sorteada) e também emitirá um alerta;
+
+- tanto a função observadora `renderPlot()` quanto a `renderText()` receberão o alerta da expressão reativa `amostra` e invalidarão os seus resultados (o gráfico e o texto);
+
+- as funções observadoras consultarão o valor atualizado da expressão reativa amostra que, por sua vez, consultará o valor atualizado do valor reativo `input$tamanho`;
+
+- com o valor atualizado do `input$tamanho`, a expressão reativa `amostra` recalcula o seu valor (uma nova amostra é gerada) e, em seguida, as funções observadoras `renderPlot()` e `renderText()` recalculam seus resultados (o gráfico e o texto são gerados novamente).
+
+O diagrama reativo nesse caso pode ser representado pelo esquema a seguir:
+
+```{r, echo=FALSE}
+#| fig-cap: >
+#|   Diagrama de reatividade de um app com um valor reativo, uma expressão
+#|   reativa e duas funções observadoras.
+knitr::include_graphics("img/diagrama_reatividade_2.svg")
+```
+
+
+### A função `eventReactive()`
+
+Enquanto a função `reactive()` observa mudanças em todos os valores reativos presentes em seu código, a função `eventReactive()` observa mudanças em apenas um valor reativo, especificado na chamada da própria função. No código a seguir, a soma só reacalculada quando o valor `input$valor1` mudar. Alterar os valores de `input$valor2` ou `input$valor3` não vai fazer a expressão reativ `soma` disparar reatividade.
+
+```{r, eval = FALSE}
+soma <- eventReactive(input$valor1, {
+  input$valor1 + input$valor2 + input$valor3
+})
+```
+
+A `eventReactive()` é muito utilizada com botões, criados na UI com a função `actionButton()`. No app apresentado a seguir, a amostra só é gerada quando a pessoa usando o app clicar no botão "Gerar gráfico". Rode o app e teste esse comportamento.
+
+```{r, eval=FALSE}
+# ui
+library(shiny)
+
+ui <- fluidPage(
+  "Resultado do sorteio",
+  sliderInput(
+    inputId = "tamanho",
+    label = "Selecione o tamanho da amostra",
+    min = 1,
+    max = 1000,
+    value = 100
+  ),
+  actionButton("botao", "Gerar gráfico"),
+  plotOutput(outputId = "grafico"),
+  textOutput(outputId = "resultado")
+)
+
 server <- function(input, output, session) {
-  amostra <- reactive({
+  
+  amostra <- eventReactive(input$botao, {
     sample(1:10, input$tamanho, replace = TRUE)
   })
   
@@ -255,96 +315,59 @@ server <- function(input, output, session) {
     glue::glue("O valor mais sorteado foi o {mais_freq}.")
   })
 }
-```
-
-
-### A função `eventReactive()`
-
-Todos os valores reativos colocados dentro de uma função `reactive()` serão observados, isto é, iniciarão o fluxo de reatividade quando seus valores forem alterados. Para construírmos uma expressão reativa que observa apenas de um valor reativo específico, podemos usar a função `eventReactive()`.
-
-Ela é muito utilizada em conjunto de botões (criados na UI com a função `actionButton()`, por exemplo).
-
-No app apresentado no exemplo a seguir, a amostra só é gerada quando a pessoa usando o app clicar no botão "Gerar gráfico".
-
-
-```{r, echo = TRUE, eval=FALSE}
-# ui
-library(shiny)
-
-ui <- fluidPage(
-  "Resultado do sorteio",
-  sliderInput(
-    inputId = "tamanho",
-    label = "Selecione o tamanho da amostra",
-    min = 1,
-    max = 1000,
-    value = 100
-  ),
-  actionButton("atualizar", "Gerar gráfico"),
-  plotOutput(outputId = "grafico"),
-  textOutput(outputId = "resultado")
-)
-
-server <- function(input, output, session) {
-
-  amostra <- eventReactive(input$atualizar, {
-    sample(1:10, input$tamanho, replace = TRUE)
-  })
-
-  output$grafico <- renderPlot({
-    amostra() |>
-      table() |>
-      barplot()
-  })
-
-  output$resultado <- renderText({
-    contagem <- table(amostra())
-    mais_freq <- names(contagem[which.max(contagem)])
-    glue::glue("O valor mais sorteado foi o {mais_freq}.")
-  })
-}
 
 shinyApp(ui, server)
 ```
 
-Veja que o valor reativo `input$atualizar`, especificado no primeiro argumento da funcão `eventReactive()`, funciona como o gatilho do fluxo de reatividade. Isso significa que a expressão reativa será recalculada apenas quando apertarmos o botão *Gerar gráfico*. Mudanças no slider não resultarão em qualquer mudança no app (estamos impedindo que `input$tamanho` inicie o fluxo de reatividade). 
+Veja que o valor reativo `input$botao`, especificado no primeiro argumento da funcão `eventReactive()`, funciona como o gatilho do fluxo de reatividade. Isso significa que a expressão reativa `amostra` será recalculada apenas quando apertarmos o botão *Gerar gráfico*. Mudanças no slider não resultarão em qualquer mudança no app (estamos impedindo que `input$tamanho` inicie o fluxo de reatividade). Repare também que o código que gera a amostra é passado no segundo argumento da funcão `eventReactive()`.
 
-Repare também que o código que gera a amostra é passado no segundo argumento da funcão `eventReactive()`.
+O diagrama reativo desse app pode ser representado pelo esquema a seguir. A linha pontilhada indica que o `input$tamanho` não dispara reatividade.
+
+```{r, echo=FALSE}
+#| fig-cap: >
+#|   Diagrama de um fluxo de reatividade iniciado por um botão. 
+#|   A linha pontilhada indica que o `input$tamanho` não dispara reatividade.
+knitr::include_graphics("img/diagrama_reatividade_3.svg")
+```
 
 ## Contexto reativo
 
-Vimos na introdução do capítulo que a nossa segunda tentativa --- colocar a criação da amostra diretamente na função `server` --- retorna um erro. Isso acontece porque **valores reativos e expressões reativas só podem ser lidas dentro de um contexto reativo**. Essa é uma regra do Shiny, e precisamos segui-la para que ele consiga entender a nossa receita.
+Vimos na introdução do capítulo que a nossa segunda tentativa --- colocar a criação da amostra diretamente na função `server` --- retorna um erro. Isso acontece porque **valores e expressões reativas só podem ser lidas dentro de um contexto reativo**. Essa é outra regra do Shiny, e precisamos segui-la para que ele consiga montar o diagra de reatividade.
 
-No exemplo abaixo, a função `renderPlot()` cria um contexto reativo e, por isso, podemos utilizar o valor reativo `input$num` dentro dela.
+*Contexto reativo* remete a qualquer função que observe mudanças em valores reativos, como expressões reativas ou funções observadoras. Basicamente, o processo do Shiny que interpreta a função `server` e cria o driagrama de reatividade não sabe o que fazer quando valores e expressões reativas estão fora de contexto reativo. Então recebemos um erro.
+
+No exemplo abaixo, a função `renderPlot()` cria um contexto reativo e, por isso, podemos utilizar o valor reativo `input$variavel` dentro dela.
 
 ```{r, echo=TRUE, eval= FALSE}
 server <- function(input, output, session) {
-  output$hist <- renderPlot({hist(rnorm(input$num))}) 
+  output$hist <- renderPlot({
+    hist(input$variavel))
+  }) 
 }
 ```
 
-Sempre que tentamos usar um valor ou expressão reativa fora de um contexto reativo, o Shiny retornará esse erro.
+Sempre que tentamos usar um valor ou expressão reativa fora de um contexto reativo, o Shiny retornará o erro a seguir.
 
 ```{r, echo = TRUE, eval=FALSE}
 server <- function(input, output, session) {
-  output$hist <- hist(rnorm(input$num))
+  output$hist <- hist(input$variavel))
 }
-#> Error : Can't access reactive value 'tamanho' outside of
+#> Error : Can't access reactive value 'variavel' outside of
 # reactive consumer.
 ```
 
 
 ## Visualizando o diagrama de reatividade: `reactlog`
 
-A construção adequada do diagrama de dependências reativas costuma ser o maior desafio no desenvolvimento de aplicativos Shiny. Quanto mais engrenagens precisam girar juntas dentro de um app, mais complicada pode ser a lógica de programação para que o reatividade funcione de maneira eficiente.
+A construção adequada do diagrama de dependências reativas costuma ser o maior desafio no desenvolvimento de aplicativos Shiny. Quanto mais engrenagens precisam girar juntas dentro de um app, mais complicada pode ser a lógica de programação para que a reatividade funcione de maneira correta.
 
-Se ao mudar o valor de um *slider*, esperamos que um gráfico seja atualizado, dois problemas podem surgir: (1) o gráfico não ser recalculado e (2) o gráfico ser recalculado mais de uma vez.
+Se, ao mudar o valor de um *slider*, esperamos que um gráfico seja atualizado, dois problemas podem surgir: (1) o gráfico não ser recalculado e (2) o gráfico ser recalculado mais de uma vez.
 
 Os dois problemas indicam um diagrama de reatividade mal construído. A diferença é que, enquanto no primeiro caso o app não funciona, no segundo, ignorando-se o comportamento estranho, ele entrega o que se espera dele.
 
-> Um app que aparentemente funciona do jeito que gostaríamos pode esconder problemas de reatividade que o deixam mais lento ou com comportamentos estranhos, atrapalhando a experiência de uso.
+> Um app que aparentemente funciona do jeito que gostaríamos pode esconder problemas de reatividade que o deixam mais lento ou com comportamentos estranhos, atrapalhando a experiência na hora do uso.
 
-Para evitar esses problemas, que discutiremos com mais detalhes no Capítulo \@ref(reatividade3) , podemos imaginar ou desenhar o diagrama de reatividade para investigar onde está a falha. Essa é uma tarefa simples em apps com poucos inputs e outputs, mas extremamente difícil ou inviável em apps complexos.
+Para evitar esses problemas, que discutiremos com mais detalhes nos Capítulos @reatividade2 e @reatividade3, podemos imaginar ou desenhar o diagrama de reatividade para investigar onde está a falha. Essa é uma tarefa simples em apps com poucos inputs e outputs, mas extremamente difícil ou inviável em apps complexos.
 
 Nesses casos (ou mesmo nos casos simples), podemos utilizar o pacote `reactlog`. Com ele, conseguimos visualizar facilmente o diagrama de dependências reativas de qualquer Shiny app e olhar o que acontece por trás das curtinas da reatividade quando executamos o aplicativo.
 
@@ -360,24 +383,42 @@ Em seguida, no Console, rode o código abaixo. Isso vai habilitar o `reactlog` p
 options(shiny.reactlog = TRUE) 
 ```
 
-Por fim, rode o seu app e utilize o comando `CTRL + F3` (no Mac, `command + F3`). O seu navegador abrirá uma nova aba com o diagrama de reatividade. Veja o exemplo a seguir. Primeiro temos a UI de um aplicativo que gera o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado pelo sliderInput. Sempre qua o tamanho da amostra muda, o gráfico é recalculado.
+Por fim, rode o seu app e utilize o comando `CTRL + F3` (no Mac, `command + F3`). O seu navegador abrirá uma nova aba com o diagrama de reatividade. 
 
+No exemplo a seguir, temos a UI de um aplicativo que gera o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado pelo sliderInput. Sempre qua o tamanho da amostra muda, o gráfico é recalculado.
 
-```{r, echo = FALSE, fig.cap="Shiny app que mostra o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado por um sliderInput.", fig.alt = "Shiny app que mostra o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado por um sliderInput."}
+```{r, echo = FALSE}
+#| fig-cap: >
+#|   Shiny app que mostra o histograma de uma amostra com distribuição normal. 
+#|   O tamanho da amostra é determinado por um sliderInput.
+#| fig-alt: >
+#|   Shiny app que mostra o histograma de uma amostra com distribuição normal. 
+#|   O tamanho da amostra é determinado por um sliderInput, que na imagem
+#|   possui valor 100.
 knitr::include_graphics("img/app_hist_normal.png")
 ```
 
-Veja agora o diagrama de reatividade associado a esse app. A forma dos 4 elementos mais a esquerda representa valores reativos, a forma do elemento `plotObj` representa expressões reativas e a forma do elemento `output$hist` representa observers.
+Veja agora o diagrama de reatividade associado a esse app. A forma dos 4 elementos mais a esquerda representa valores reativos, a forma do elemento `plotObj` representa expressões reativas e a forma do elemento `output$hist` representa funções observadoras.
 
-```{r, echo = FALSE, fig.cap="Diagrama de reatividade do app anterior.", fig.alt = "Diagrama de reatividade do app anterior criado pelo pacote reactlog."}
+```{r, echo = FALSE}
+#| fig-cap: >
+#|   Diagrama de reatividade do app anterior.
+#| fig-alt: >
+#|   Diagrama de reatividade do app anterior criado pelo pacote reactlog.
 knitr::include_graphics("img/reaclog_diagrama_completo.png")
 ```
 
-Parece muito mais complicado do que deveria, né? Acontece que além do input e output, o diagrama também apresenta elementos referentes ao tamanho da janela da pessoa que está utilizando o app. Esses elementos influenciam na imagem produzida para o gráfico dentro do HTML, que é redimensionada a depender do tamanho da tela. Por isso a existência do elemento intermediário `plotObj`, que guarda as instruções para gerar o gráfico criadas pelo código R. Assim, o código R no servidor não precisa ser rodado novamente para que a imagem do gráfico seja redimensionada.
+Parece muito mais complicado do que deveria, né? Acontece que além do input e output, o diagrama também apresenta elementos referentes ao tamanho da janela do navegador que está acessando o app. Esses elementos influenciam na imagem produzida para o gráfico dentro do HTML, que é redimensionada a depender do tamanho da tela. Por isso a existência do elemento intermediário `plotObj`, que guarda as instruções para gerar o gráfico criadas pelo código R. Assim, o código R no servidor não precisa ser rodado novamente para que a imagem do gráfico seja redimensionada.
 
-Podemos filtrar o diagrama para mostrar apenas o fluxo relacionado aos inputs do aplicativo escrevendo `input` no campo de busca. Repare também que os comandos no canto superior esquerdo permitem visualizar o fluxo de reatividade das ações realizadas entre a inicialização do app e o momento em que criamos o diagrama (quando pressionamos CTRL + F3).
+Podemos filtrar o diagrama para mostrar apenas o fluxo relacionado aos inputs do aplicativo escrevendo `input` no campo de busca no canto superior direito. Repare também que os controles no canto superior esquerdo permitem visualizar o fluxo de reatividade das ações realizadas entre a inicialização do app e o momento em que criamos o diagrama (quando pressionamos CTRL + F3).
 
-```{r, echo = FALSE, fig.cap="Diagrama de reatividade do app anterior.", fig.alt = "Diagrama de reatividade do app anterior criado pelo pacote reactlog."}
+```{r, echo = FALSE}
+#| fig-cap: >
+#|   Campo de busca e controles de visualização do fluxo de reatividade.
+#| fig-alt: >
+#|   Diagrama de reatividade do app anterior criado pelo pacote reactlog, 
+#|   com foco no campo de busca no canto superior direito da tela e nos 
+#|   controles do fluxo de reatividade no canto superior esquerdo da tela.
 knitr::include_graphics("img/reactlog_comandos.png")
 ```
 
@@ -389,9 +430,7 @@ Em resumo, com um diagrama de reatividade em mãos, podemos:
 
 - ter uma visão menos abstrada do fluxo de reatividade e entender melhor o que acontece quando executamos cada parte do nosso app.
 
-Embora o exemplo apresentado tenha um diagrama de reatividade bem simples, utilize o código a seguir para reproduzir o app. Mexa algumas vezes no *slider* e acesse o driagrama de reatividade. Tente usar os controles de navegação para visualizar cada etapa do ciclo reativo. 
-
-> Para os exemplos passados e futuros, utilize o `reactlog` sempre que ficar com dúvida sobre o diagrama de reatividade de um app.
+Utilize o código a seguir para reproduzir o app mostrado nesta seção. Mexa algumas vezes no *slider* e gere o driagrama de reatividade. Use os controles de navegação para visualizar cada etapa do ciclo reativo. 
 
 ```{r, eval = FALSE}
 library(shiny)
@@ -423,5 +462,7 @@ shinyApp(ui, server)
 
 Como descrito na [documentação da ferramenta](https://shiny.rstudio.com/reference/shiny/0.14/showReactLog.html), por razões de segurança e performance, nunca habilite o `reactlog` em ambientes de produção. Quando ele está habilitado, qualquer pessoal utilizando o seu app pode ver pelo menos parte do seu código fonte (que eventualmente pode conter informações sensíveis).
 
-Você pode aprender mais sobre o funcionamento do `reactlog` [clicando aqui](https://rstudio.github.io/reactlog/articles/reactlog.html). 
+Você pode aprender mais sobre o funcionamento do `reactlog` [clicando aqui](https://rstudio.github.io/reactlog/articles/reactlog.html).
+
+Na sequência deste livro, sugerimos utilizar o `reactlog` sempre que ficar com dúvida sobre o diagrama de reatividade de um app.
 
