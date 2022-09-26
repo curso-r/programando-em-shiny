@@ -1,0 +1,427 @@
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  fig.align = "center"
+)
+```
+
+# Reatividade: conceitos básicos {#reatividade}
+
+Imagine que gostaríamos de criar um app que geresse um gráfico com o resultado do sorteio de uma amostra de números entre 1 e 10 e que o tamanho dessa amostra fosse definido por um input. Além disso, que esse app também indicasse em texto qual foi o número mais sorteado. 
+
+Pensando na construção desse app, teríamos um input, o tamanho da amostra, e dois outputs, um gráfico (de barras) indicando a frequência de cada número e um texto dizendo qual o número mais sorteado. Pelo que aprendemos no capítulo anterior, podemos usar um `sliderInput()` para receber o tamanho da amostra e as funções `renderPlot()` e `renderText()` para construir os textos. No entanto, uma dúvida emerge com relação ao sorteio da amostra: onde ele deve ser feito?
+
+Obviamente, sortear a amostra durante a construção de cada output (como exemplifica o código abaixo) não vai funcionar pois geraríamos duas amostras diferentes^[Claro que poderíamos usar a função `set.seed()` para garantir que as amostras fossem as mesmas, mas imagine que não queremos escolher uma semente para a geração dos dados ou que, em algum outro contexto, o processo de amostragem fosse demorado e não queremos fazê-lo duas vezes.]. 
+
+```{r}
+# Solução insuficiente, pois as amostras geradas serão diferentes
+server <- function(input, output, session) {
+  
+  output$grafico <- renderPlot({
+    amostra <- sample(1:10, input$tamanho, replace = TRUE)
+    amostra |> 
+      table() |> 
+      barplot()
+  })
+  
+  output$resultado <- renderText({
+    amostra <- sample(1:10, input$tamanho, replace = TRUE)
+    contagem <- table(amostra)
+    mais_freq <- names(contagem[which.max(contagem)])
+    glue::glue("O valor mais sorteado foi o {mais_freq}.")
+  })
+}
+```
+
+A solução ingênua seria criar a amostra uma única vez, fora das funções `render*()`, mas isso retornará um erro. O que a mensagem de erro diz, de maneira mais direta, é que essa solução fere as regras de reatividade do Shiny.
+
+```{r}
+# Solução incorreta, pois viola as regras de reatividade do Shiny.
+server <- function(input, output, session) {
+  
+  amostra <- sample(1:10, input$tamanho, replace = TRUE)
+  
+  output$grafico <- renderPlot({
+    amostra |> 
+      table() |> 
+      barplot()
+  })
+  
+  output$resultado <- renderText({
+    contagem <- table(amostra)
+    mais_freq <- names(contagem[which.max(contagem)])
+    glue::glue("O valor mais sorteado foi o {mais_freq}.")
+  })
+}
+
+#> Error in : Can't access reactive value 'tamanho' outside of reactive consumer.
+```
+
+A construção desse app traz à tona a necessidade de uma nova peça do Shiny, que não mencionamos ainda. Sem ela não consiguiríamos criar esse app de maneira eficiente. 
+
+Antes de falar dela, no entanto, como podemos ver pela mensagem de erro da tentiva anterior, precisamos falar de um dos temas centrais do desenvolvimento de aplicativos Shiny: a reatividade.
+
+Embora dê para fazer muita coisa no Shiny na tentativa e erro, entender a reatividade nos desvia de vários problemas explícitos  --- como o erro acima --- e, principalmente, de problemas invisíveis --- quando o app funciona, mas de maneira ineficiente ou incorreta. Economizamos muito tempo (e sanidade) não cometendo esses erros durante o desenvolvimento de um app e, por isso, vale a pena estudar reatividade desde o início da sua jornada pelo Shiny.
+
+Na próxima seção, faremos uma breve introdução explicando o que é reatividade e por que ela é importante no Shiny. Em seguida, introduziremos o conceito de diagrama de reatividade e apresentaremos as suas estruturas básicas. Por fim, vamos conhecer o `reactlog`, uma ferramente muito útil para visualizar a reatividade de um aplicativo.
+
+## O que é reatividade?
+
+Quando escrevemos código R, dois paradigmas estão sempre presentes:
+
+- podemos avaliar uma linha de código assim que a escrevermos; e
+
+- se decidirmos rodar todo o script de uma vez, as linhas de código serão avaliadas sequencialmente.
+
+Isso faz nossas tarefas de análise de dados virarem scripts sequenciais, cujo código não pode ser executado fora de ordem.
+
+O código abaixo, que executa a corriqueira tarefa de importar, manipular e visualizar uma base, mostra um exemplo disso. Construímos o código rodando linha a linha, para testar se estamos seguindo pelo caminho certo. Ao final, podemos rodar tudo de uma vez para obter o resultado desejado (o gráfico). Se o código for rodado fora de ordem, nada vai funcionar. Essa maneira de escrever e avaliar códigos é conhecida como **programação imperativa**.
+
+```{r, eval = FALSE}
+tab_starwars <- dplyr::starwars
+
+tab_grafico <- tab_starwars |>
+  tidyr::unnest(films) |> 
+  tidyr::drop_na(species) |> 
+  dplyr::group_by(films) |>
+  dplyr::summarise(total_especies = dplyr::n_distinct(species)) |> 
+  dplyr::mutate(
+    films = forcats::fct_reorder(films, total_especies)
+  )
+
+tab_grafico |> 
+  ggplot2::ggplot(ggplot2::aes(y = films, x = total_especies)) +
+  ggplot2::geom_col() +
+  ggplot2::theme_minimal() +
+  ggplot2::labs(x = "Total de espécies", y = "Filme")
+```
+
+A reatividade reside em um outro paradigma de programação, conhecido como **programação declarativa**. Nela, não construímos códigos que serão rodados interativamente ou sequencialmente, mas sim uma *receita* que especifica o que o computador deve fazer a depender da situação apresentada. Mais especificamente, a receita ensina ao computador qual código deve ser executado e quando.
+
+No contexto do Shiny, essa receita é um conjunto de dependências que será utilizado para decidir quais outputs devem ser recalculados quando um input muda. Não somos nós que rodamos o código que gera um output, nós apenas definimos qual código será esse. O ambiente criado pelo Shiny a partir da nossa receita (quando um app está em funcionamento) é quem decide a hora certa de executar esse código (se é que ele será executado).
+
+Todo esse processo, que envolve monitorar mudanças nos inputs para atualizar os outputs a partir de uma receita composta de códigos executados apenas quando necessário, é o que chamamos de **reatividade**. A melhor parte é que o Shiny cuida sozinho de quase tudo, cabendo a nós *apenas* especificar a receita de maneira adequada.
+
+Na prática, essa receita nada mais é do que a função `server()`. São os códigos que escrevemos na função `server()` que determinam as dependências entre inputs e outputs. Chamaremos aqui o conjunto de dependências de um app de **diagrama de reatividade**. 
+
+Para ilustrar esses conceitos, considere o app gerado pelo código a seguir.
+
+```{r, eval=FALSE}
+library(shiny)
+
+variaveis <- names(mtcars)
+
+ui <- fluidPage(
+  selectInput(
+    inputId = "variavel_A",
+    label = "Variável A",
+    choices = variaveis
+  ),
+  plotOutput(outputId = "histograma_A"),
+  selectInput(
+    inputId = "variavel_B",
+    label = "Variável B",
+    choices = variaveis,
+    selected = variaveis[2],
+  ),
+  plotOutput(outputId = "histograma_B")
+)
+
+server <- function(input, output, session) {
+  
+  output$histograma_A <- renderPlot({
+    print("Gerando histograma A...")
+    hist(mtcars[[input$variavel_A]], main = "Histograma A")
+  })
+  
+  output$histograma_B <- renderPlot({
+    print("Gerando histograma B...")
+    hist(mtcars[[input$variavel_B]], main = "Histograma B")
+  })
+  
+}
+
+shinyApp(ui, server)
+```
+
+```{r, echo = FALSE, out.width="80%"}
+#| fig-cap: >
+#|   Imagem de um Shiny app com dois inputs e dois outputs.
+#| fig-alt: >
+#|   Imagem de um aplicativo Shiny app. Ele contém uma caixa de seleção com 
+#|   o label "Variável A" e o valor mpg selecionado. Abaixo, um histograma 
+#|   da variável mpg um histograma com título "Histograma A". Abaixo, uma segunda
+#|   caixa de seleção com o label "Variável B" e o valor cyl selecionado. Abaixo
+#|   um segundo histograma, agora da variável cyl, com título "Histograma B".
+
+knitr::include_graphics("img/app_dois_outputs.png")
+```
+
+O diagrama de reatividade desse app, determinado pela função `server()`, pode ser representado pelo seguinte esquema:
+
+```{r, echo = FALSE}
+#| fig-cap: >
+#|   Diagrama de reatividade de um app com dois inputs e dois outputs.
+knitr::include_graphics("img/diagrama_reatividade.svg")
+```
+
+O diagrama mostra que a reatividade desse aplicativo possui dois caminhos independentes, um começando com o input `variavel_A` e terminando no output `histograma_A` e o outro começando com o `variavel_B` e terminando no output `histograma_B`. A ausência de conexão entre o `histograma_A` e a `variavel_B` indica que, ao mudarmos a `variavel_B`, o `histograma_A` não será recalculado. A mesma ausência de conexão existe entre o `histograma_B` e a `variavel_A`.
+
+A ligação direta de um único input com um único output é o esquema reativo mais simples que um app pode apresentar. Na prática, vamos precisar construir interações mais complexas entre inputs e outputs, o que ainda não é possível com as peças que temos disponíveis. Para isso, precisaremos de funções que manipulem o caminho da reatividade.
+
+No restante deste capítulo, aprenderemos alguns conceitos e funções que nos permitirão ter um controle maior sobre a reatividade no Shiny. Não esgotaremos o assunto reatividade aqui, ele será retomado nos Capítulos @reatividade2 e @reatividade3, mas já sairemos capazes de construir diversos tipos de interação entre inputs e outputs em nossos apps.
+
+Começaremos aprendendo as estruturas básicas do diagrama de reatividade: valores reativos, observers e expressões reativas.
+
+## Valores reativos e funções observadoras
+
+Para programar em Shiny, precisamos aprender um conjunto de conceitos e ferramentas. Até aqui, fizemos isso definindo como o Shiny funciona e explicando como utilizar o pacote `shiny` para criar nossos apps. Agora, além de explorar novas funções, adicionaremos à nossa lista de conceitos algumas regras importantes para que nossos apps funcionem corretamente.
+
+Vimos na seção anterior que um aplicativo Shiny depende da especificação **adequada** do diagrama de reatividade. Isso quer dizer que devemos seguir alguns princípios na construção da função `server` para que o Shiny consiga montar esse diagrama e para que a reatividade aconteça.
+
+O primeiro desses princípios é o seguinte: todo diagrama de reatividade deve começar com um **valor reativo** e terminar com uma **função observadora**. Nós já utilizamos valores reativos e funções observadoras antes. Vamos definir o que são estrutruras.
+
+Valores reativos são objetos que **disparam** a reatividade do app a partir de mudanças nos seus valores. Os objetos da `input` são o exemplo mais comum de valores reativos. Funções observadoras são funções que "observam" mudanças nos valores reativos e, quando elas acontecem, recalculam o seu código. As funções da famílias `render*()` são os exemplos mais comuns de funções obervadoras.
+
+Voltando app dado como exemplo na seçao anterior, quando a "Variável A" é alterada na UI, o seguinte processo acontece:
+
+- o valor reativo `input$variavel_A` emite um sinal de alerta a todas as funções obervadoras que dependem dele dizendo que seu valor mudou;
+
+- a função observadora `renderPlot()`, que depende de `input$variavel_A`, ao saber que esse valor reativo está desatualizado, desatualiza o seu próprio resultado, isto é, o output `histograma_A`;
+
+- a função `renderPlot()` consulta o novo valor de `input$variavel_A` e o utiliza para recalcular seu resultado (o código dentro da `renderPlot()` é rodado novamente);
+
+- o novo histograma é gerado e enviado para a UI, encerrando o processo reativo.
+
+Esse processo, que podemos chamar de *fluxo reativo*, só é disparado por mudanças em valores reativos e só acontece quando o ponto final é uma função observadora.
+
+Os valores da lista `input` não são o único tipo de valores reativos, assim como as funções `render*()` não são o único tipo de funções observadoras. Falaremos mais de outros valores reativos e observers no Capítulo @reatividade2.
+
+## Expressões reativas
+
+Muitas vezes, um aplicativo shiny precisa de passos intermediários entre o input de origem e o output final. Isto é, precisamos de uma estrutura que receba um valor reativo, faça alguma conta e devolva um valor também reativo que será utilizado posteriormente em um ou mais *observers*.
+
+Essas estruturas são as **expressões reativas**, a peça faltante do problema apresentado na introdução deste capítulo. 
+
+Para criar expressões reativas, utilizamos as funções `reactive({})` e `eventReactive({})`.
+
+### A função `reactive()`
+
+Uma maneira de criarmos expressões reativas é utilizar a função `reactive()`. Podemos entender essas expressões como valores intermediários, que podem ser utilizados na construção de vários outputs diferentes.
+
+```{r, eval=FALSE}
+# server
+amostra <- reactive({
+  sample(1:10, input$tamanho, replace = TRUE)
+})
+```
+
+Para acessar o valor de uma expressão reativa, devemos usar parênteses após o nome, como se fosse uma função sem argumentos. Podemos utilizar esse valor dentro de qualquer outra expressão reativa ou observer, quantas vezes for preciso.
+
+```{r, eval=FALSE}
+# server
+output$summary <- renderPrint({
+  amostra() |> 
+    table() |> 
+    barplot()
+})
+
+output$resultado <- renderText({
+  contagem <- table(amostra())
+  mais_freq <- names(contagem[which.max(contagem)])
+  glue::glue("O valor mais sorteado foi o {mais_freq}.")
+})
+```
+
+Veja que expressões reativas funcionam tanto como um *observer*, pois precisa observar mudanças dos valores reativos que estão dentro dela (`input$tamanho`, no exemplo), quanto como valores reativos, pois queremos usar os valores gerados de forma reativa na criação de outputs (`renderPrint` e `renderText`, no exemplo).
+
+Assim, a solução adequada para o problema apresentado na introdução do capítulo seria:
+
+```{r}
+server <- function(input, output, session) {
+  amostra <- reactive({
+    sample(1:10, input$tamanho, replace = TRUE)
+  })
+  
+  output$grafico <- renderPlot({
+    amostra() |> 
+      table() |> 
+      barplot()
+  })
+  
+  output$resultado <- renderText({
+    contagem <- table(amostra())
+    mais_freq <- names(contagem[which.max(contagem)])
+    glue::glue("O valor mais sorteado foi o {mais_freq}.")
+  })
+}
+```
+
+
+### A função `eventReactive()`
+
+Todos os valores reativos colocados dentro de uma função `reactive()` serão observados, isto é, iniciarão o fluxo de reatividade quando seus valores forem alterados. Para construírmos uma expressão reativa que observa apenas de um valor reativo específico, podemos usar a função `eventReactive()`.
+
+Ela é muito utilizada em conjunto de botões (criados na UI com a função `actionButton()`, por exemplo).
+
+No app apresentado no exemplo a seguir, a amostra só é gerada quando a pessoa usando o app clicar no botão "Gerar gráfico".
+
+
+```{r, echo = TRUE, eval=FALSE}
+# ui
+library(shiny)
+
+ui <- fluidPage(
+  "Resultado do sorteio",
+  sliderInput(
+    inputId = "tamanho",
+    label = "Selecione o tamanho da amostra",
+    min = 1,
+    max = 1000,
+    value = 100
+  ),
+  actionButton("atualizar", "Gerar gráfico"),
+  plotOutput(outputId = "grafico"),
+  textOutput(outputId = "resultado")
+)
+
+server <- function(input, output, session) {
+
+  amostra <- eventReactive(input$atualizar, {
+    sample(1:10, input$tamanho, replace = TRUE)
+  })
+
+  output$grafico <- renderPlot({
+    amostra() |>
+      table() |>
+      barplot()
+  })
+
+  output$resultado <- renderText({
+    contagem <- table(amostra())
+    mais_freq <- names(contagem[which.max(contagem)])
+    glue::glue("O valor mais sorteado foi o {mais_freq}.")
+  })
+}
+
+shinyApp(ui, server)
+```
+
+Veja que o valor reativo `input$atualizar`, especificado no primeiro argumento da funcão `eventReactive()`, funciona como o gatilho do fluxo de reatividade. Isso significa que a expressão reativa será recalculada apenas quando apertarmos o botão *Gerar gráfico*. Mudanças no slider não resultarão em qualquer mudança no app (estamos impedindo que `input$tamanho` inicie o fluxo de reatividade). 
+
+Repare também que o código que gera a amostra é passado no segundo argumento da funcão `eventReactive()`.
+
+## Contexto reativo
+
+Vimos na introdução do capítulo que a nossa segunda tentativa --- colocar a criação da amostra diretamente na função `server` --- retorna um erro. Isso acontece porque **valores reativos e expressões reativas só podem ser lidas dentro de um contexto reativo**. Essa é uma regra do Shiny, e precisamos segui-la para que ele consiga entender a nossa receita.
+
+No exemplo abaixo, a função `renderPlot()` cria um contexto reativo e, por isso, podemos utilizar o valor reativo `input$num` dentro dela.
+
+```{r, echo=TRUE, eval= FALSE}
+server <- function(input, output, session) {
+  output$hist <- renderPlot({hist(rnorm(input$num))}) 
+}
+```
+
+Sempre que tentamos usar um valor ou expressão reativa fora de um contexto reativo, o Shiny retornará esse erro.
+
+```{r, echo = TRUE, eval=FALSE}
+server <- function(input, output, session) {
+  output$hist <- hist(rnorm(input$num))
+}
+#> Error : Can't access reactive value 'tamanho' outside of
+# reactive consumer.
+```
+
+
+## Visualizando o diagrama de reatividade: `reactlog`
+
+A construção adequada do diagrama de dependências reativas costuma ser o maior desafio no desenvolvimento de aplicativos Shiny. Quanto mais engrenagens precisam girar juntas dentro de um app, mais complicada pode ser a lógica de programação para que o reatividade funcione de maneira eficiente.
+
+Se ao mudar o valor de um *slider*, esperamos que um gráfico seja atualizado, dois problemas podem surgir: (1) o gráfico não ser recalculado e (2) o gráfico ser recalculado mais de uma vez.
+
+Os dois problemas indicam um diagrama de reatividade mal construído. A diferença é que, enquanto no primeiro caso o app não funciona, no segundo, ignorando-se o comportamento estranho, ele entrega o que se espera dele.
+
+> Um app que aparentemente funciona do jeito que gostaríamos pode esconder problemas de reatividade que o deixam mais lento ou com comportamentos estranhos, atrapalhando a experiência de uso.
+
+Para evitar esses problemas, que discutiremos com mais detalhes no Capítulo \@ref(reatividade3) , podemos imaginar ou desenhar o diagrama de reatividade para investigar onde está a falha. Essa é uma tarefa simples em apps com poucos inputs e outputs, mas extremamente difícil ou inviável em apps complexos.
+
+Nesses casos (ou mesmo nos casos simples), podemos utilizar o pacote `reactlog`. Com ele, conseguimos visualizar facilmente o diagrama de dependências reativas de qualquer Shiny app e olhar o que acontece por trás das curtinas da reatividade quando executamos o aplicativo.
+
+Antes de mais nada, instale o pacote `reactlog`.
+
+```{r, eval = FALSE}
+install.packages("reactlog")
+```
+
+Em seguida, no Console, rode o código abaixo. Isso vai habilitar o `reactlog` para qualquer app que você rodar na atual sessão de R.
+
+```{r, eval=FALSE}
+options(shiny.reactlog = TRUE) 
+```
+
+Por fim, rode o seu app e utilize o comando `CTRL + F3` (no Mac, `command + F3`). O seu navegador abrirá uma nova aba com o diagrama de reatividade. Veja o exemplo a seguir. Primeiro temos a UI de um aplicativo que gera o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado pelo sliderInput. Sempre qua o tamanho da amostra muda, o gráfico é recalculado.
+
+
+```{r, echo = FALSE, fig.cap="Shiny app que mostra o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado por um sliderInput.", fig.alt = "Shiny app que mostra o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado por um sliderInput."}
+knitr::include_graphics("img/app_hist_normal.png")
+```
+
+Veja agora o diagrama de reatividade associado a esse app. A forma dos 4 elementos mais a esquerda representa valores reativos, a forma do elemento `plotObj` representa expressões reativas e a forma do elemento `output$hist` representa observers.
+
+```{r, echo = FALSE, fig.cap="Diagrama de reatividade do app anterior.", fig.alt = "Diagrama de reatividade do app anterior criado pelo pacote reactlog."}
+knitr::include_graphics("img/reaclog_diagrama_completo.png")
+```
+
+Parece muito mais complicado do que deveria, né? Acontece que além do input e output, o diagrama também apresenta elementos referentes ao tamanho da janela da pessoa que está utilizando o app. Esses elementos influenciam na imagem produzida para o gráfico dentro do HTML, que é redimensionada a depender do tamanho da tela. Por isso a existência do elemento intermediário `plotObj`, que guarda as instruções para gerar o gráfico criadas pelo código R. Assim, o código R no servidor não precisa ser rodado novamente para que a imagem do gráfico seja redimensionada.
+
+Podemos filtrar o diagrama para mostrar apenas o fluxo relacionado aos inputs do aplicativo escrevendo `input` no campo de busca. Repare também que os comandos no canto superior esquerdo permitem visualizar o fluxo de reatividade das ações realizadas entre a inicialização do app e o momento em que criamos o diagrama (quando pressionamos CTRL + F3).
+
+```{r, echo = FALSE, fig.cap="Diagrama de reatividade do app anterior.", fig.alt = "Diagrama de reatividade do app anterior criado pelo pacote reactlog."}
+knitr::include_graphics("img/reactlog_comandos.png")
+```
+
+Em resumo, com um diagrama de reatividade em mãos, podemos:
+
+- ver os inputs dos quais cada output depende e não depende;
+
+- investigar por que o código de um output não é rodado ou roda duas vezes quando acionamos um input do qual ele deveria depender;
+
+- ter uma visão menos abstrada do fluxo de reatividade e entender melhor o que acontece quando executamos cada parte do nosso app.
+
+Embora o exemplo apresentado tenha um diagrama de reatividade bem simples, utilize o código a seguir para reproduzir o app. Mexa algumas vezes no *slider* e acesse o driagrama de reatividade. Tente usar os controles de navegação para visualizar cada etapa do ciclo reativo. 
+
+> Para os exemplos passados e futuros, utilize o `reactlog` sempre que ficar com dúvida sobre o diagrama de reatividade de um app.
+
+```{r, eval = FALSE}
+library(shiny)
+
+ui <- fluidPage(
+  "Histograma da distribuição normal",
+  sliderInput(
+    inputId = "num",
+    label = "Selecione o tamanho da amostra",
+    min = 1,
+    max = 1000,
+    value = 100
+  ),
+  plotOutput(outputId = "hist")
+)
+
+server <- function(input, output, session) {
+  
+  output$hist <- renderPlot({
+    amostra <- rnorm(input$num)
+    hist(amostra)
+  })
+  
+}
+
+shinyApp(ui, server)
+
+```
+
+Como descrito na [documentação da ferramenta](https://shiny.rstudio.com/reference/shiny/0.14/showReactLog.html), por razões de segurança e performance, nunca habilite o `reactlog` em ambientes de produção. Quando ele está habilitado, qualquer pessoal utilizando o seu app pode ver pelo menos parte do seu código fonte (que eventualmente pode conter informações sensíveis).
+
+Você pode aprender mais sobre o funcionamento do `reactlog` [clicando aqui](https://rstudio.github.io/reactlog/articles/reactlog.html). 
+
