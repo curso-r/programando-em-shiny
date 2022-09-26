@@ -6,8 +6,8 @@ O texto deste livro foi eleborado por [William Amorim](https://wamorim.com/) com
 
 A Curso-R é o braço de Educação da R6 Consultoria, uma empresa de treinamentos e consultoria em Ciência de Dados e linguagem de programação R. 
 
-- Conheça os cursos da Curso-R: https://loja.curso-r.com/
-- Conheça o blog da Curso-R: https://www.curso-r.com/blog/
+- [Conheça os cursos da Curso-R](https://loja.curso-r.com/) 
+- [Conheça o blog da Curso-R](https://www.curso-r.com/blog/)
 - Conheça os outros livros elaborados pela equipe da Curso-R:
   - [Ciência de Dados em R](https://livro.curso-r.com/)
   - [Zen do R](https://curso-r.github.io/zen-do-r/)
