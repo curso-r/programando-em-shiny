@@ -1,0 +1,13 @@
+name: seletor-visualizacoes
+title: seletor-visualizacoes
+username:
+account: curso-r-shiny
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4343340
+bundleId: 4778255
+url: https://acursor.shinyapps.io/seletor-visualizacoes/
+when: 1625167651.81535
+lastSyncTime: 1625167651.81537
+asMultiple: FALSE
+asStatic: FALSE

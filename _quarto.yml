@@ -1,0 +1,26 @@
+project:
+  type: book
+
+book:
+  title: "Programando em Shiny"
+  date: "2022/09/26"
+  chapters:
+    - index.qmd
+    - sobre.qmd
+
+    - part: Parte 1
+      chapters:
+        - primeiro-app.qmd
+        - add-reatividade.qmd
+        - reatividade-conceitos.qmd
+
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  #pdf:
+    #documentclass: scrreprt
+

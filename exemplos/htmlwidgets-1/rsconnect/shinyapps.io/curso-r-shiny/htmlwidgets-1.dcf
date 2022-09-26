@@ -1,0 +1,13 @@
+name: htmlwidgets-1
+title: htmlwidgets-1
+username:
+account: curso-r-shiny
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4279524
+bundleId: 4723045
+url: https://curso-r-shiny.shinyapps.io/htmlwidgets-1/
+when: 1623848672.76764
+lastSyncTime: 1623848672.76766
+asMultiple: FALSE
+asStatic: FALSE

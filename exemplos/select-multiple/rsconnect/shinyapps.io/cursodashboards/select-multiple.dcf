@@ -1,0 +1,13 @@
+name: select-multiple
+title: select-multiple
+username:
+account: cursodashboards
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4149711
+bundleId: 4612773
+url: https://cursodashboards.shinyapps.io/select-multiple/
+when: 1621365264.45556
+lastSyncTime: 1621365264.45558
+asMultiple: FALSE
+asStatic: FALSE
