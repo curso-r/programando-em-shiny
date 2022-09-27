@@ -1,0 +1,13 @@
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  fig.align = "center"
+)
+```
+
+# Módulos {#modulos}
+
+## O que são módulos?
+
+## Quando e onde usar módulos?
+
+## Criando um app modularizado
