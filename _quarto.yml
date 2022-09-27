@@ -18,6 +18,14 @@ book:
         - shiny-na-pratica-1.qmd
         - reatividade-mais-pecas.qmd
         - htmlwidgets.qmd
+        - deploy.qmd
+    - part: Parte 2
+      chapters:
+        - modulos.qmd
+        - golem.qmd
+        - html-css-js.qmd
+        - shiny-na-pratica-2.qmd
+        - reatividade-problemas-complexos.qmd
     - references.qmd
 
 bibliography: references.bib

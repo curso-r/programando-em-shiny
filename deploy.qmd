@@ -1,0 +1,22 @@
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  fig.align = "center"
+)
+```
+
+# Deploy {#deploy}
+
+## shinyapps.io
+
+O [shinyapps.io](https://www.shinyapps.io/) é um serviço da [RStudio](https://rstudio.com/) para hospedagem de aplicativos Shiny.
+
+A conta gratuita permite você ter até 5 aplicações e 25 horas mensais de uso (um aplicativo utilizado por 1 hora consome 1 hora do seu plano, 2 aplicativos utilizados simultaneamente por 1 hora consomem 2 horas do seu plano). As contas pagas, além de mais horas, fornecem outras vantagens, como suporte personalizado e autenticação.
+
+Criada uma conta, você deve conectá-la com o RStudio. Feito isso, você conseguirá fazer o deploy do seu app com alguns cliques. A seguir, mostramos o passo a passo para conectar a sua conta e para fazer o deploy do seu app.
+
+### Conectando a sua conta com o RStudio
+
+### Subindo o seu app
+
+## Autenticação com o pacote `auth0`
+
