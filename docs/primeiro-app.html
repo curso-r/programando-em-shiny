@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.612">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Programando em Shiny - 1&nbsp; Seu primeiro aplicativo Shiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./add-interatividade.html" rel="next">
+<link href="./sobre.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Seu primeiro aplicativo Shiny</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Programando em Shiny</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/curso-r/programando-em-shiny/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./Programando-em-Shiny.pdf">
+            <i class="bi bi-bi-file-pdf pe-1"></i>
+          Download PDF
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./Programando-em-Shiny.epub">
+            <i class="bi bi-bi-journal pe-1"></i>
+          Download ePub
+          </a>
+        </li>
+    </ul>
+    <a href="" title="Share" id="sidebar-tool-dropdown-1" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-1">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+            <i class="bi bi-bi-facebook pe-1"></i>
+          Facebook
+          </a>
+        </li>
+    </ul>
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Boas-vindas!</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sobre.html" class="sidebar-item-text sidebar-link">Sobre este livro</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Parte 1</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./primeiro-app.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Seu primeiro aplicativo Shiny</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./add-interatividade.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Adicionando interatividade</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reatividade-conceitos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reatividade: conceitos básicos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./debug.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Debug</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./layouts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Layouts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./shiny-na-pratica-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Shiny na prática I</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reatividade-mais-pecas.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reatividade: mais peças</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./htmlwidgets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">htmlwidgets</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./deploy.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Deploy</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Parte 2</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modulos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Módulos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./golem.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Golem</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./html-css-js.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">HTML, CSS e JavaScript</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./shiny-na-pratica-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Shiny na prática II</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reatividade-problemas-complexos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reatividade: problemas complexos</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">Referências</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#o-que-é-um-aplicativo-shiny" id="toc-o-que-é-um-aplicativo-shiny" class="nav-link active" data-scroll-target="#o-que-é-um-aplicativo-shiny"> <span class="header-section-number">1.1</span> O que é um aplicativo Shiny?</a></li>
+  <li><a href="#os-componentes-básicos" id="toc-os-componentes-básicos" class="nav-link" data-scroll-target="#os-componentes-básicos"> <span class="header-section-number">1.2</span> Os componentes básicos</a></li>
+  <li><a href="#estrutura-de-um-código-shiny" id="toc-estrutura-de-um-código-shiny" class="nav-link" data-scroll-target="#estrutura-de-um-código-shiny"> <span class="header-section-number">1.3</span> Estrutura de um código Shiny</a></li>
+  <li><a href="#rodando-um-aplicativo" id="toc-rodando-um-aplicativo" class="nav-link" data-scroll-target="#rodando-um-aplicativo"> <span class="header-section-number">1.4</span> Rodando um aplicativo</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/primeiro-app.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-primeio-app" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Seu primeiro aplicativo Shiny</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<p>Neste capítulo, vamos discutir o que é um aplicativo Shiny e o como ele funciona. Também vamos construir e rodar o nosso primeiro app, apresentando quais são os seus componentes básicos.</p>
+<p>Antes de começarmos, você precisa ter o pacote <code>shiny</code> instalado.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"shiny"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A versão do pacote que estamos utilizando neste livro é a 1.7.2.</p>
+<p>É uma boa prática criarmos novos repositórios (ou projetos, no RStudio) para cada nova análise de dados que começamos, mantendo todos os arquivos da análise dentro desse repositório. Veremos que, para aplicavios Shiny, isso será especialmente importante. Para reproduzir os exemplos deste livro, recomendamos criar uma nova pasta para cada aplicativo. Por mais que em alguns casos isso não seja particularmente útil, será uma boa maneira de praticar essa maneira de organização.</p>
+<p>Para mais dicas de organização de projetos de análide de dados, em um contexto geral, recomendamos a leitura do <a href="https://curso-r.github.io/zen-do-r/">Zen do R</a>, especialmente o <a href="https://curso-r.github.io/zen-do-r/rproj-dir.html">Capítulo 3</a>.</p>
+<section id="o-que-é-um-aplicativo-shiny" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="o-que-é-um-aplicativo-shiny"><span class="header-section-number">1.1</span> O que é um aplicativo Shiny?</h2>
+<p>Na tentativa de explicar o que é um aplicativo Shiny, podemos reduzi-lo a diversos elementos.</p>
+<p>Um aplicativo Shiny é um site, uma página na web. Ele terá um endereço (URL) que, quando acessado, exibirá informações em forma de texto e imagens<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Ser uma página web também significa que ele será constituído de HTML, CSS e JavaScript. Se você não conhece essas linguagens, uma boa maneira de entender o papel de cada uma delas na construção de um site é pensar em uma casa.</p>
+<p>Podemos pensar o HTML como a estrutura física da casa: chão, paredes, colunas, teto, encanamento, fiação etc; o CSS é o responsável pela aparência: pintura, pisos, azulejos, decoração em geral; e o JavaScript traz funcionalidades a cada cômodo: pia, vaso sanitário, geladeira, cama, televisão e por aí vai.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/html_css.jpeg" class="img-fluid figure-img" alt="Prédio sem acabamento representando o HTML e prédio acabado representando HTML com CSS." style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Com o Shiny, construiremos essa casa utilizando funções de R.</p>
+<p>Um aplicativo Shiny também é uma aplicação web. Isso significa que, além de exibir informações, o nosso site/aplicativo também permitirá que a gente interaja com ele enviando dados que serão processados para criar novas informações. Essa interação gera um componente fundamental de um Shiny app: o servidor. Todo aplicativo Shiny será hospedado em um servidor com uma sessão de R rodando.</p>
+<p>Por fim, um aplicativo Shiny também é um código (ou uma coleção de códigos) em linguagem R. O pacote <code>shiny</code>, ao lado de muitos outros pacotes criados pela RStudio e pela comunidade, possui funções que (1) criam a estrutura e o visual do site/aplicativo, (2) montam a lógica de comunicação entre a pessoa que está utilizando o app e o servidor e (3) permite a construção da lógica interna do aplicativo, onde criamos as visualizações que serão exibidas na página a partir de código R puro. Esse último item significa que podemos utilizar todo arsenal de manipulação, visualização e modelagem do R em nossos aplicativos Shiny!</p>
+<p>Além dessas definições, ainda há diversos pontos sobre implantação e hospedagem dos aplicativos para completar a discussão sobre o framework Shiny. Esses tópicos serão tratados mais a frente neste livro, no <a href="deploy.html">Capítulo&nbsp;<span>9</span></a>.</p>
+<p>Na próxima seção, apresentaremos os componentes básicos de um aplicativo Shiny, tanto conceitualmente quanto no código.</p>
+</section>
+<section id="os-componentes-básicos" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="os-componentes-básicos"><span class="header-section-number">1.2</span> Os componentes básicos</h2>
+<p>Um aplicativo Shiny tem dois componentes básicos: a <strong>interface de usuário</strong> e o <strong>servidor</strong>.</p>
+<p>O primeiro componente se refere à(s) tela(s) do aplicativo, àquilo que veremos quando estivermos usando o app. Já o segundo componente se refere ao que não veremos: a lógica interna do app.</p>
+<p>Desenvolver a interface de usuário ou <strong>UI</strong> (sigla para o termo <em>user interface</em>, em inglês) significa construir o código HTML que compõe o app. Retomando a analogia da casa, você precisa determinar explicitamente quais são e onde ficam <em>as paredes</em> do seu aplicativo. Isso é feito a partir de funções do pacote Shiny que geram HTML.</p>
+<p>A princípio, você não precisará se preocupar com CSS, pois a aparência padrão do Shiny<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> é bem razoável. O mesmo vale para o JavaScript: quando você programa em Shiny, todo o JavaScript necessário para o seu app funcionar corretamente já está pronto e será utilizado automaticamente.</p>
+<p>A figura a seguir mostra a UI de um app bem simples, que permite a escolha de duas variáveis e apresenta o gráfico de dispersão delas:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/app_penguins_disp.png" class="img-fluid figure-img" alt="UI de um app simples." style="width:100.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">UI de um app simples.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>O lado do servidor (<em>server side</em> ou simplesmente <em>server</em>, em inglês) contém toda a lógica para a construção das visualizações apresentadas na UI. No exemplo da figura anterior, o código que gera o gráfico de dispersão fica dentro do servidor.</p>
+<p>Embora precisemos aprender alguns conceitos e regras novas, a maior parte do código que compõe o servidor é aquele bom e velho R que já utilizamos no dia-a-dia para gerar tabelas, gráficos e qualquer outro tipo de visualização. Em resumo, para fazer um ggplot aparecer no Shiny, basta adaptar o código que gera esse gráfico para receber as informações que vêm da UI (<em>inputs</em>) e devolver o resultado (<em>output</em>) de maneira adequada.</p>
+<p>A UI e o servidor são os dois elementos básicos de um aplicativo Shiny. Embora sejam construídos separadamente, um depende do outro e a correta conexão desses componentes é o que gera a interatividade do app. Teremos sempre requisições sendo feitas pela UI, processadas pelo servidor e seus resultados devolvidos à UI. Esse processo está resumido no esquema a seguir:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/esquema_ui_servidor.png" class="img-fluid figure-img" alt="Esquema UI/servidor de um aplicativo Shiny." style="width:80.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Esquema UI/servidor de um aplicativo Shiny.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Você pode acessar o app utilizado como exemplo nesta seção <a href="https://cursodashboards.shinyapps.io/penguins-dispersao/">clicando aqui</a>. Dado o esquema apresentado na figura anterior, tente imaginar o que está acontecendo sempre que você seleciona uma nova variável dentro do app. Como o novo gráfico é gerado? Qual é o papel do servidor? Como ele se comunica com a UI que você está vendo?</p>
+<p>Na próxima seção, vamos começar a responder essas perguntas mostrando como construímos a UI e o servidor de um Shiny app utilizando o pacote <code>shiny</code>.</p>
+</section>
+<section id="estrutura-de-um-código-shiny" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="estrutura-de-um-código-shiny"><span class="header-section-number">1.3</span> Estrutura de um código Shiny</h2>
+<p>Na seção anterior, falamos que a construção da UI corresponde à construção do código HTML que compõe o aplicativo. Fazemos isso utilizando funções do R que retornam HTML. Esse é um dos papéis do pacote <code>shiny</code> e um dos desafios da programação em Shiny. <strong>Não precisaremos aprender HTML formalmente, mas precisaremos aprender quais funções utilizar para construir uma UI bem estruturada</strong>.</p>
+<p>Também falamos que o servidor é responsável por receber os códigos que geram as visualizações apresentadas na UI, conectando os <em>inputs</em> e <em>outputs</em> do aplicativo. No código, isso sempre será feito dentro de uma função chamada <code>server</code>.</p>
+<p>Com isso em mente, o código de qualquer aplicativo Shiny terá a estrutura abaixo:</p>
+<ul>
+<li><p>um objeto chamado <code>ui</code>;</p></li>
+<li><p>uma função chamada <code>server</code>;</p></li>
+<li><p>e uma chamada da função <code>shinyApp()</code>.</p></li>
+</ul>
+<p>Como exemplo, observe o código a seguir. Ele representa um dos aplicativos mais simples que podemos construir:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(<span class="st">"Olá, mundo!"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Esse código resultará no <em>aplicativo</em> com a seguinte UI:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/app_ola_mundo.png" class="img-fluid figure-img" alt="UI do aplicativo Olá, mundo!" style="width:100.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">UI do aplicativo “Olá, mundo!”.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Vejam que a UI se trata apenas de uma página de fundo branco com a frase “Olá, mundo!” escrita no canto superior esquerdo. O app não possui nenhuma interatividade.</p>
+<p>Olhando o código anterior, encontramos a frase “Olá, mundo!” na definição do objeto <code>ui</code>, dentro da função <code>fluidPage()</code>. Essa função do pacote <code>shiny</code> é uma entre várias que utilizaremos para retornar código HTML e precisamos utilizá-la para que o HTML do aplicativo funcione corretamente. Falaremos mais sobre ela no <a href="layouts.html">Capítulo&nbsp;<span>5</span></a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(<span class="st">"Olá, mundo!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>O importante por enquanto é sabermos que <strong>o objeto <code>ui</code> é responsável por receber todo o código HTML do nosso aplicativo</strong>.</p>
+<p>A função <code>server</code> sempre receberá os argumentos <code>input</code>, <code>output</code> e <code>session</code>. A partir desses argumentos, montaremos a lógica interna (ou reativa, guarde esse nome) do app. O código que gera as visualizações será escrito dentro dessa função. Como o nosso app <em>Olá, mundo!</em> não possui visualizações ou interatividade, a sua função <code>server</code> está vazia<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># O código do server seria colocado aqui.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A última linha de código do nosso pequeno app contém a chamada <code>shinyApp(ui, server)</code>. Essa função vai juntar o objeto <code>ui</code> e a função <code>server</code>, construir toda a arquitetura necessária e rodar o aplicativo. Não discutiremos aqui como tudo isso é feito pois envolve tópicos fora do escopo de um material introdutório. Por enquanto, é importante lembrar que <strong>essa função sempre deve ser chamada ao fim do código de um Shiny app</strong>.</p>
+<p>Na próxima seção, vamos discutir como rodar localmente um aplicativo Shiny e o que acontece no nosso computador quando estamos fazendo isso.</p>
+</section>
+<section id="rodando-um-aplicativo" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="rodando-um-aplicativo"><span class="header-section-number">1.4</span> Rodando um aplicativo</h2>
+<p>Para fazer o seu primeiro aplicativo em Shiny, abra o RStudio e copie o código do app <em>Olá, mundo!</em> (apresentado novamente a seguir) em um arquivo chamado <code>app.R</code>. Recomendamos fortemente que vocês utilizem <a href="https://livro.curso-r.com/2-3-projetos.html">projetos</a> e que, neste primeiro momento, sempre salvem o script dos aplicativos na raiz do projeto.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(<span class="st">"Olá, mundo!"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Repare que algumas opções novas aparecerão no RStudio quando salvamos o arquivo. Isso acontece porque o RStudio reconhece a sintaxe do código como a de um aplacativo Shiny, habilitando para nós algumas ferramentas que são úteis apenas para trabalhar com apps. A mais importante por enquanto será o botão <strong>Run App</strong>.</p>
+<p>Como discutimos anteriormente, um aplicativo Shiny em funcionamento sempre terá um computador rodando uma sessão de R por trás. Esse computador, chamado genericamente de <em>servidor</em>, pode ser uma máquina virtual em um serviço de nuvem, uma máquina virtual em um serviço de hospedagem, um servidor dentro da sua empresa, um servidor na sua casa ou mesmo o seu próprio computador pessoal.</p>
+<p>Normalmente, enquanto estamos desenvolvendo um aplicativo Shiny, queremos testá-lo localmente<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> para verificar se tudo funciona corretamente, se está ficando bonito ou simplesmente para gastar alguns minutos apreciando a nossa obra de arte. Testar localmente significa que <strong>o seu próprio computador fará as vezes de servidor</strong>, embora isso não signifique que seu app ficará disponível na internet.</p>
+<p>Quando servimos um app localmente, isto é, quando <em>rodamos um app</em>, ganhamos um endereço que será acessível apenas do nosso computador. A partir desse endereço, podemos testar nosso app no navegador, como se ele já estivesse em produção. No RStudio, para rodar nossos apps, utilizamos justamente o botão <strong>Run App</strong>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/botao_run_app.png" class="img-fluid figure-img" alt="Botão Run App no Rstudio. Fica logo acima do script." style="width:80.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Botão Run App no Rstudio.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Ao clicar nesse botão, o seu navegador padrão será aberto<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> e você verá a UI do nosso modesto app com apenas a frase “Olá, mundo!”.</p>
+<p>Se você voltar ao RStudio, eventualmente vai notar algo muito importante: a sua sessão de R estará ocupada! Mas isso não deveria ser uma surpresa, pois já discutimos que todo Shiny app tem uma sessão de R rodando por trás.</p>
+<p>Essa sessão fornece a comunicação da UI (ou do nosso navegador) com o servidor e é responsável por atualizar as visualizações apresentadas na UI, sempre que alguém interagir com o app. Embora o nosso app <em>Olá, mundo</em> não possuir interatividade, a estrutura necessária para que a interatividade aconteça ainda assim é criada pelo Shiny.</p>
+<p>Para liberar a sessão, basta clicar no botão “<em>stop</em>”, na parte de cima do Console, ou pressionar a tecla <code>Esc</code>. Veja que, ao fazer isso, a tela do app ficará cinza, indicando que ele foi desconectado do servidor e não funcionará mais corretamente.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/console_sessao_ocupada.png" class="img-fluid figure-img" alt="Console do RStudio com sinal de ocupado (stop)." style="width:80.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Veja que o sinal de <em>stop</em> identifica que a sessão de R está ocupada.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>No console, após rodarmos o app, também aparecerá uma mensagem idenficicando o <em>endereço</em> do nosso aplicativo. Nesse caso, será um IP (<code>http://127.0.0.1</code>)<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> com alguma porta que esteja disponível escolhida aleatoriamente (<code>:4028</code>). Esse endereço aparecerá no nosso navegador e poderemos copiá-lo e colá-lo em qualquer outra aba ou navegador que quisermos rodar o app.</p>
+
+
+</section>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p>Embora seja incomum, você também pode mostrar vídeos em um Shiny app.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Isto é, o código CSS que o Shiny importa por padrão.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>A função <code>server</code> sempre precisa existir, mesmo neste caso, quando não há interatividade<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>E locamente também.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p>Se o app foi aberto na aba Viewer ou em uma janela do próprio RStudio, clique na setinha para baixo ao lado do botão <strong>Run App</strong> e selecione a opção <code>Run External</code>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p>Esse número de IP é padrão e significa “o seu computador”.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+    } else {
+      disableStylesheet(alternateStylesheets);
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./sobre.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Sobre este livro</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./add-interatividade.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Adicionando interatividade</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Escrito por <a href="https://twitter.com/wamorim_">William Amorim</a> e mantido pela equipe da <a href="https://curso-r.com/">Curso-R</a>.</div>
+  </div>
+</footer>
+
+
+
+</body></html>
