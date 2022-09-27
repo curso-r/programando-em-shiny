@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.612">
@@ -109,15 +109,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "type": "textbox",
   "limit": 20,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
   }
 }</script>
 
@@ -307,7 +307,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Índice</h2>
    
   <ul>
   <li><a href="#um-pouco-sobre-html" id="toc-um-pouco-sobre-html" class="nav-link active" data-scroll-target="#um-pouco-sobre-html"> <span class="header-section-number">5.1</span> Um pouco sobre HTML</a></li>
@@ -326,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   <li><a href="#adicionando-css" id="toc-adicionando-css" class="nav-link" data-scroll-target="#adicionando-css"> <span class="header-section-number">5.4</span> Adicionando CSS</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/layouts.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/layouts.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -361,8 +361,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 
-<div id="htmlwidget-4564da5f688e38f41197" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-4564da5f688e38f41197">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"função":["a()","hr()","br()","h1(), ..., h6()","img()","p()","em()","strong()"],"para que serve":["cria um hiperlink","cria uma linha horizontal","insere uma quebra de linha","cria títulos","insere uma imagem","cria um parágrafo","formata o texto em itálico","formata o texto em negrito"]},"columns":[{"accessor":"função","name":"função","type":"character"},{"accessor":"para que serve","name":"para que serve","type":"character"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"0db6023337cd0a471d22ed87e8a351e1"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-8b030bc84c0e911964cb" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-8b030bc84c0e911964cb">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"função":["a()","hr()","br()","h1(), ..., h6()","img()","p()","em()","strong()"],"para que serve":["cria um hiperlink","cria uma linha horizontal","insere uma quebra de linha","cria títulos","insere uma imagem","cria um parágrafo","formata o texto em itálico","formata o texto em negrito"]},"columns":[{"accessor":"função","name":"função","type":"character"},{"accessor":"para que serve","name":"para que serve","type":"character"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"0db6023337cd0a471d22ed87e8a351e1"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Podemos utilizar essas funções à vontade na UI para construirmos o layout do nosso app. O código abaixo, por exemplo, gera o código HTML a seguir.</p>
@@ -376,7 +376,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">p</span>(<span class="fu">strong</span>(<span class="st">"Lorem ipsum dolor"</span>), <span class="st">"sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</span>),</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hr</span>(),</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">img</span>(<span class="at">src =</span> <span class="st">"img/logo.png"</span>, <span class="at">width =</span> <span class="st">"50%"</span>, <span class="at">style =</span> <span class="st">"display: block; margin: auto;"</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"container-fluid"</span><span class="kw">&gt;</span></span>
@@ -393,7 +393,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/p&gt;</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;hr/&gt;</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">"img/logo.png"</span> <span class="er">width</span><span class="ot">=</span><span class="st">"50%"</span> <span class="er">style</span><span class="ot">=</span><span class="st">"display: block; margin: auto;"</span><span class="kw">/&gt;</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Que, por sua vez, gera a seguinte UI:</p>
 <div class="cell" data-layout-align="center">
@@ -502,7 +502,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -520,10 +520,10 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <p>Agora que sabemos um pouco sobre Boostrap, podemos falar por que construímos a nossa UI dentro da função <code>fluidPage()</code>.</p>
 <p>Ao rodar essa função, vemos que ela devolve o seguinte código HTML.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fluidPage</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fluidPage</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"container-fluid"</span><span class="kw">&gt;&lt;/div&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"container-fluid"</span><span class="kw">&gt;&lt;/div&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A classe <code>container-fluid</code> aplicada ao elemento <code>&lt;div&gt;</code> é a explicação. Classes são utilizadas no HTML para atribuir propriedades a elementos da página. Essa classe em específico contém parte do código CSS necessário para a responsividade do Bootstrap funcionar.</p>
 <p>Em resumo, o Boostrap fala que o conteúdo da página precisa estar dentro de um elemento (<code>&lt;div&gt;</code>) com classe <code>col</code>, que por sua vez deve estar dentro de um elemento com classe <code>row</code> e que, por fim, deve estar dentro de um elemento com classe <code>container</code>.</p>
@@ -536,14 +536,14 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">"O conteúdo do app vem aqui."</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"container-fluid"</span><span class="kw">&gt;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"row"</span><span class="kw">&gt;</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"col-sm-4"</span><span class="kw">&gt;</span>O conteúdo do app vem aqui.<span class="kw">&lt;/div&gt;</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Repare que a classe <code>col</code> é acompanhada de mais dois valores. O <code>4</code> representa o tamanho da coluna (foi esse o tamanho definido pela função <code>column()</code>). Já o <code>sm</code> representa o quão estreita precisa ser a tela do dispositivo para que a responsividade seja ativada. O termo <code>sm</code> é diminutivo para <em>small</em>, indicando que se a tela for menor que 750px, todas as colunas terão comprimento 12. Esse é o padrão no Shiny e <strong>não</strong> pode ser alterado por meio da função <code>column()</code>. Você pode saber mais sobre a classe <code>col</code> lendo <a href="https://getbootstrap.com/docs/3.4/css/#grid-options">a documentação do Boostrap</a>.</p>
 <p>A classe <code>container</code> também possui um qualificador: <code>fluid</code>. Isso porque existem dois tipos de grades Boostrap: <code>fluid</code> e <code>fixed</code>. Páginas construídas com a grade fluida sempre ocuparão todo o comprimento da tela, redimensionando os seus elementos dinamicamente caso o comprimento da tela mude. Já a grade fixa ocupa sempre um tamanho fixo da tela: 724px, 940px ou 1170px, a depender do quão grande for a tela. O conteúdo sempre ficará centralizado e o espaço restante ficará em branco, como uma margem aos lados.</p>
@@ -594,7 +594,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">"hist"</span>)</span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p>Todos os elementos do layout são colocados dentro da função <code>fluidPage()</code>.</p></li>
@@ -631,7 +631,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">"Item 2"</span>),</span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">"Item 3"</span>)</span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p>Todo o código fica agora dentro da função <code>navbarPage()</code>. Não precisamos utilizar aqui a função <code>fluidPage()</code>. Além da barra de navegação, a função <code>navbarPage()</code> cria uma página com grade fluida.</p></li>
@@ -673,7 +673,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Conteúdo da página 3"</span></span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p>Podemos usar o <code>navlistPanel</code> em qualquer tipo de página/layout. Aqui utilizamos dentro de uma <code>fluidPage</code> simples.</p></li>
@@ -685,7 +685,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <h3 data-number="5.3.4" class="anchored" data-anchor-id="shinydashboard"><span class="header-section-number">5.3.4</span> <code>shinydashboard</code></h3>
 <p>O <code>shinydasboard</code> é um pacote que introduz diversas ferramentas para o Shiny. Antes de mais nada, instale o pacote:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"shinydasboard"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"shinydasboard"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A principal é um novo layout, dividido em três áreas:</p>
 <ul>
@@ -717,7 +717,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p>A função <code>dashboardPage()</code> é responsável por criar a página do <code>shinydashboard</code>. Ela recebe três funções como argumentos: <code>dashboardHeader()</code>, <code>dashboardSidebar()</code> e <code>dashboardBody()</code>.</p></li>
@@ -732,7 +732,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">menuItem</span>(<span class="at">text =</span> <span class="st">"Página 1"</span>, <span class="at">tabName =</span> <span class="st">"pagina1"</span>),</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">menuItem</span>(<span class="at">text =</span> <span class="st">"Página 2"</span>, <span class="at">tabName =</span> <span class="st">"pagina2"</span>)</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Dentro do <code>dashboardBody()</code> usamos a função <code>tabItems()</code> para listar os itens do menu. O conteúdo das páginas é criado utilizando a função <code>tabItem()</code>. Precisamos passar para essa função o argumento <code>tabName</code>, para nos referirmos a qual item do menu pertence o conteúdo de cada <code>tabItem()</code>. No código abaixo, substituiríamos o <code>...</code> pelos inputs e outputs que quisermos construir em cada página do dashboard.</p>
 <div class="cell" data-layout-align="center">
@@ -742,7 +742,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabItem</span>(<span class="at">tabName =</span> <span class="st">"pagina1"</span>, ...),</span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabItem</span>(<span class="at">tabName =</span> <span class="st">"pagina2"</span>, ...)</span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Assim, o código da <code>ui</code> ficaria:</p>
 <div class="cell" data-layout-align="center">
@@ -760,7 +760,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tabItem</span>(<span class="at">tabName =</span> <span class="st">"pagina2"</span>, ...)</span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Além do layout de dashboard, o pacote <code>shinydashboard</code> trás novos elementos para a UI, como o <code>box()</code> e o <code>tabBox()</code>.</p>
 <p>A função <code>box()</code> cria caixinhas que permitem separarmos conteúdo do restante da página.</p>
@@ -782,7 +782,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">solidHeader =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    ... <span class="co"># conteúdo do box</span></span>
 <span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -795,14 +795,14 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 </div>
 <p>Se olharmos o código HTML gerado por um <code>box()</code>, notamos que essas estruturas são colunas dentro do Bootstrap. Por essa razão, a função <code>box()</code> deve sempre estar dentro de uma <code>fluidRow()</code>, como fizemos no código acima.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">box</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">box</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"col-sm-6"</span><span class="kw">&gt;</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"box"</span><span class="kw">&gt;</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"box-body"</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>O <code>tabBox()</code> permite a criação de caixinhas com abas, possibilitando a divisão de conteúdo em várias <em>camadas</em> que ocupam o mesmo espaço da tela. No código abaixo, substituiríamos o <code>...</code> pelo conteúdo de cada aba.</p>
 <div class="cell" data-layout-align="center">
@@ -812,7 +812,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Aba 2"</span>, ...),</span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Aba 3"</span>, ...)</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -825,7 +825,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 </div>
 <p>A estrutura criada pelo <code>tabBox()</code> também é uma coluna no contexto do Boostrap, então também deve estar sempre dentro de uma <code>fluidRow()</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabBox</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabBox</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"col-sm-6"</span><span class="kw">&gt;</span></span>
@@ -833,7 +833,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;ul</span> <span class="er">class</span><span class="ot">=</span><span class="st">"nav nav-tabs"</span> <span class="er">data-tabsetid</span><span class="ot">=</span><span class="st">"4764"</span><span class="kw">&gt;&lt;/ul&gt;</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"tab-content"</span> <span class="er">data-tabsetid</span><span class="ot">=</span><span class="st">"4764"</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>O pacote shinydashboard também possui novos outputs: o <code>valueBox()</code> e o <code>infoBox()</code>. Ambos servem para a criação de caixinhas coloridas para destacar valores. Para utilizá-las no Shiny, usamos a combinação <code>valueBoxOutput()</code>/<code>renderValueBox()</code></p>
 <div class="cell" data-layout-align="center">
@@ -864,7 +864,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <p>O pacote <code>bs4Dash</code> é uma outra opção para construir um layout com menu de navegação lateral. Ele se diferencia do <code>shinydashboard</code> por utilizar uma versão do Bootstrap mais recente: ele utiliza a versão 4, enquanto o <code>shinydashboard</code> a 3.</p>
 <p>Para instalar o pacote, utilize o código a seguir:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"bs4Dash"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"bs4Dash"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A construção do layout com o pacote <code>bs4Dash</code> é equivalente ao que vimos com o <code>shinydashboard</code>.</p>
 <div class="cell" data-layout-align="center">
@@ -884,7 +884,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tabItem</span>(<span class="at">tabName =</span> <span class="st">"pagina2"</span>,...)</span>
 <span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A maioria das funções do <code>bs4Dash</code> possuem <em>aliases</em> com nomes iguais aos do <code>shinydashboard</code>. Isso significa que você pode construir um <code>bs4dash</code> usando praticamente o mesmo código de um <code>shinydashboard</code>, mudando apenas o pacote que está sendo carregado no início.</p>
 <div class="cell" data-layout-align="center">
@@ -905,7 +905,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tabItem</span>(<span class="at">tabName =</span> <span class="st">"pagina2"</span>,...)</span>
 <span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>O pacote <code>bs4Dash</code> também possui diversos outros elementos para complementar a construção dos nossos apps. Você pode ver um exemplo da maioria deles e do <code>bs4Dash</code> como um todo <a href="https://rinterface.github.io/bs4Dash/index.html">neste exemplo de demonstração</a>.</p>
 <p>Para mais informações sobre o <code>bs4Dash</code>, acesse a <a href="https://rinterface.github.io/bs4Dash/index.html">vignette do pacote</a>.</p>
@@ -920,7 +920,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>body {</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span>: <span class="cn">lightblue</span><span class="op">;</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>No seu app, supondo que o arquivo se chama <code>custom.css</code>, ele deverá ser referenciado dentro da UI da seguinte forma:</p>
 <div class="cell" data-layout-align="center">
@@ -928,7 +928,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">head</span>(</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    tags<span class="sc">$</span><span class="fu">link</span>(<span class="at">rel =</span> <span class="st">"stylesheet"</span>, <span class="at">href =</span> <span class="st">"custom.css"</span>)</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A função <code>tags$head()</code> indica que o código HTML colocado dentro dela será inserido no final da seção <code>&lt;head&gt;</code> do HTML. É sempre nessa seção que referenciamos arquivos CSS externos. A função <code>tags$link()</code> serve para referenciarmos o arquivo CSS ao HTML, sendo que o argumento <code>rel = "stylesheet"</code> indica que esse arquivo deverá ser encarado pelo HTML como uma folha de estilo.</p>
 <p>No arquivo CSS, você pode colocar quantas regras CSS você precisar.</p>
@@ -943,7 +943,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>p {</span>
 <span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-size</span>: <span class="dv">12</span><span class="dt">pt</span><span class="op">;</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -1075,7 +1075,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Copiada");
     setTimeout(function() {
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');

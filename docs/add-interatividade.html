@@ -345,8 +345,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 
-<div id="htmlwidget-2173cecab272aec9efbc" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-2173cecab272aec9efbc">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Função":["plotOutput()","tableOutput()","textOutput()"],"Saída":["Gráficos","Tabelas","Textos"]},"columns":[{"accessor":"Função","name":"Função","type":"character"},{"accessor":"Saída","name":"Saída","type":"character"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"5741b422c2aaa75e56aea745c8ce9a22"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-81e21be2599fd94964d0" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-81e21be2599fd94964d0">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Função":["plotOutput()","tableOutput()","textOutput()"],"Saída":["Gráficos","Tabelas","Textos"]},"columns":[{"accessor":"Função","name":"Função","type":"character"},{"accessor":"Saída","name":"Saída","type":"character"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"5741b422c2aaa75e56aea745c8ce9a22"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Essas funções especificam <strong>onde</strong> os outputs serão colocados dentro da UI. Elas não especificam <strong>como</strong> eles serão criados. Para isso, utilizamos as funções do tipo <code>render*()</code>, responsáveis por definir o código R que gera cada output. Além disso, elas <em>renderizam</em> os resultados para HTML, possibilitando que essas visualizações sejam inseridas no código HTML que gera a UI. Na grande maioria dos casos, teremos o par <code>visualizacaoOutput()</code> e <code>renderVisualizacao()</code>.</p>
@@ -354,8 +354,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 
-<div id="htmlwidget-f6ccf9aac897cfc8c592" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-f6ccf9aac897cfc8c592">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"*Output()":["plotOutput()","tableOutput()","textOutput()"],"render*()":["renderPlot()","renderTable()","renderText()"]},"columns":[{"accessor":"*Output()","name":"*Output()","type":"character"},{"accessor":"render*()","name":"render*()","type":"character"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"28989452b04574d14eaed12cc94cce30"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-de76394da2e3f81cfc7a" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-de76394da2e3f81cfc7a">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"*Output()":["plotOutput()","tableOutput()","textOutput()"],"render*()":["renderPlot()","renderTable()","renderText()"]},"columns":[{"accessor":"*Output()","name":"*Output()","type":"character"},{"accessor":"render*()","name":"render*()","type":"character"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"28989452b04574d14eaed12cc94cce30"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>O argumento <code>outputId</code> das funções <code>*Output()</code> é utilizado para identificarmos cada output dentro da função <code>server</code>. Todos os outputs criados ficarão dentro da lista <code>output</code>. Veja a seguir, o exemplo de um aplicativo que contém um histograma da variável <code>mpg</code> da base <code>mtcars</code>.</p>

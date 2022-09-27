@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.612">
@@ -109,15 +109,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "type": "textbox",
   "limit": 20,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
   }
 }</script>
 
@@ -299,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Índice</h2>
    
   <ul>
   <li><a href="#importando-bases-de-dados" id="toc-importando-bases-de-dados" class="nav-link active" data-scroll-target="#importando-bases-de-dados"> <span class="header-section-number">6.1</span> Importando bases de dados</a></li>
@@ -308,7 +308,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#barras-de-carregamento" id="toc-barras-de-carregamento" class="nav-link" data-scroll-target="#barras-de-carregamento"> <span class="header-section-number">6.4</span> Barras de carregamento</a></li>
   <li><a href="#usando-markdown-para-textos" id="toc-usando-markdown-para-textos" class="nav-link" data-scroll-target="#usando-markdown-para-textos"> <span class="header-section-number">6.5</span> Usando Markdown para textos</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/shiny-na-pratica-1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/shiny-na-pratica-1.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -373,7 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  })</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -392,11 +392,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(p)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "gg"     "ggplot"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(p)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "data"        "layers"      "scales"      "mapping"     "theme"      
 [6] "coordinates" "facet"       "plot_env"    "labels"     </code></pre>
@@ -427,7 +427,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Se você ainda não tem esses pacotes instalados, ambos estão no CRAN:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"shinycssloaders"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"shinyWidgets"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"shinyWidgets"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>O <code>shinycssloaders</code> é um pacote mantido pelo <a href="https://github.com/daattali">Dean Attali</a> que possui uma única função: <code>withSpinner()</code>. Para colocar a animação de carregamento em uma visualização, basta colocar a função <code>*Output()</code> dentro da função <code>withSpinner()</code>. Sempre que ela estiver sendo calculada, um <em>spinner</em> será mostrado no lugar.</p>
 <p>Rode o Shiny app abaixo para ver um exemplo:</p>
@@ -465,7 +465,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Além várias opções de animações diferentes, que você pode trocar no argumento <code>type</code>, também é possível ajustar o tamanho, a cor, a cor de fundo e até usar uma imagem própria como animação<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p>O pacote <code>shinyWidgets</code> é mantido pela equipe da <a href="https://github.com/dreamRs">dreamRs</a>. Além de diversos widgets muito úteis, ele possui a função <code>shinyWidgets::addSpinner()</code>. Assm como a função <code>shinycssloards::withSpinner()</code>, basta embrulhar suas funções <code>*Output()</code> com a função <code>shinyWidgets::addSpinner()</code> para adicionar a animação às suas visualizações.</p>
@@ -503,7 +503,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="barras-de-carregamento" class="level2" data-number="6.4">
@@ -554,7 +554,7 @@ Procurado por crimes contra o espaço interdimensional. Saiba mais [aqui](https:
 <span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>      )</span>
 <span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Mesmo um exemplo simples já começa a deixar claro o problema: produzir muitos elementos HTML na UI rapidamente transforma seu código em um emaranhado de funções aninhadas. O mesmo vale para textos muito grandes. Embora nesse caso nem sempre tenhámos muitas tags HTML para criar, scripts R não foram feitos para atender os cuiddos que textos carecem.</p>
 <p>A melhor prática nessas situações é justamente transferir esses elementos para um arquivo Markdown e pedir que o Shiny o transforme em HTML e o inclua no lugar adequado apenas na hora do <code>runApp()</code>. Para isso usamos a função <code>shiny::includeMarkdown()</code>.</p>
@@ -567,7 +567,7 @@ Procurado por crimes contra o espaço interdimensional. Saiba mais [aqui](https:
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">includeMarkdown</span>(<span class="st">"rick.md"</span>)</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Vale ressaltar que essa função compila arquivos Markdown (<code>.md</code>) e não R Markdown (<code>.Rmd</code>). Se quisermos rodar códigos R para gerar saídas HTML, devemos fazer isso dentro do próprio Shiny.</p>
 
@@ -700,7 +700,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Copiada");
     setTimeout(function() {
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');

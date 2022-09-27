@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.612">
@@ -109,15 +109,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "type": "textbox",
   "limit": 20,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
   }
 }</script>
 
@@ -299,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Índice</h2>
    
   <ul>
   <li><a href="#mais-funções-observadoras" id="toc-mais-funções-observadoras" class="nav-link active" data-scroll-target="#mais-funções-observadoras"> <span class="header-section-number">7.1</span> Mais funções observadoras</a></li>
@@ -310,7 +310,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#mensagens-de-erro-personalizadas" id="toc-mensagens-de-erro-personalizadas" class="nav-link" data-scroll-target="#mensagens-de-erro-personalizadas"> <span class="header-section-number">7.3.2</span> Mensagens de erro personalizadas</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/reatividade-mais-pecas.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/reatividade-mais-pecas.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -369,7 +369,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">choices =</span> opcoes</span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Na função <code>server</code>, atualizamos as escolhas da segunda caixa de seleção com a função <code>updateSelectInput()</code>. Veja que, como essa função está dentro de um <code>observe</code>, esse código será rodado novamente sempre que o valor de <code>input$direcao</code> mudar.</p>
 <p>Nesse exemplo, o objetivo final do fluxo reativo é atualizar as opções da segunda caixa de seleção sempre que alterarmos o valor da primeira. Repare que não há nenhum output. A reatividade só funciona nesse caso porque a função <code>observe()</code> é uma função observadora.</p>
@@ -388,7 +388,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>enviar, {</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(input<span class="sc">$</span>email, <span class="st">"emails.txt"</span>, <span class="at">append =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As funções <code>observe()</code> e <code>oberveEvent()</code> aumentam bastante o leque de opções dos nossos aplicativos. Agora conseguimos criar fluxos reativos que não estão associados necessariamente a um output.</p>
 </section>
@@ -398,17 +398,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Em alguns casos, no entanto, vamos precisar de valores reativos que não são inputs, isto é, não estão associados a ações vindas da UI. Esses valores reativos servirão para contralar a reatividade, disparando-a diretamente a partir do servidor. Como não podemos escrever na lista <code>input</code>, precisamos de uma nova peça para criar esses valores: a função <code>reactiveVal()</code>.</p>
 <p>Para criar um valor reativo utilizando essa função, utilizamos a seguinte notação:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>vr <span class="ot">&lt;-</span> <span class="fu">reactiveVal</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>vr <span class="ot">&lt;-</span> <span class="fu">reactiveVal</span>(<span class="dv">1</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Isso criará um valor reativo chamado <code>vr</code> que possui, inicialmente, o valor 1.</p>
 <p>Para acessar esse valor, fazemos:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vr</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vr</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Esse código retornará o valor 1. Repare que é a mesma notação das expressões reativas, criadas com as funções <code>reactive()</code> ou <code>eventReactive()</code>.</p>
 <p>Para alterar o valor de um valor reativo, fazemos:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vr</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vr</span>(<span class="dv">2</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Dessa maneira, o <code>vr</code> passa a guardar o valor 2 e, se rodarmos <code>vr()</code> novamente, receberemos o valor 2 dentro de 1. Além disso, sempre que alteramos o valor de um valor reativo, ele vai disparar reatividade. Isso quer dizer que todos as expressões reativas e funções observadoras que dependerem de <code>vr()</code> serão invalidadas e seus códigos rodados novamente.</p>
 <p>Também podemos usar a função <code>reactiveValues()</code> para criar valores reativos. Com ela, podemos criar uma lista de valores, em vez de apenas um. A notação nesse caso será a seguinte:</p>
@@ -422,7 +422,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Para atualizar os valores</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>rv<span class="sc">$</span>a <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>rv<span class="sc">$</span>b <span class="ot">&lt;-</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>rv<span class="sc">$</span>b <span class="ot">&lt;-</span> <span class="dv">4</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Um caso em que criar valores reativos no servidor se torna útil aparece quando precisamos modificar a base de dados que alimenta os outputs a patir de alguma ação na UI, como a possibilidade de adicionar ou remover uma linha. Veja o exemplo abaixo.</p>
 <div class="cell" data-layout-align="center">
@@ -468,7 +468,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Repare que a base mtcars foi transformada em um valor reativo chamado <code>rv_mtcars</code>. Assim, sempre que a instrução de remover uma linha é feita na UI a partir do botão <code>remover</code>, o <code>rv_mtcars</code> é atualizado com a base sem a linha escolhida. Como o output <code>tabela</code> depende de <code>rv_mtcars</code>, a tabela na tela também é atualizada<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
 <p>Como desafio, tente refazer esse app sem a criar valores reativos no servidor, utilizando expressões reativos, por exemplo. É possível?</p>
@@ -508,7 +508,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> orcamento</span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="mensagens-de-erro-personalizadas" class="level3" data-number="7.3.2">
@@ -532,7 +532,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Orçamento"</span>,</span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> orcamento</span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -543,7 +543,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol>
 <li id="fn1" role="doc-endnote"><p>Isto é, todos os caminhos de um diagrama de reatividade devem começar com um valore reativo e terminar com uma função observadora<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2" role="doc-endnote"><p>Sem a necessidade de recriá-los do zero com <code>uiOutput()</code> e <code>renderUI()</code>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3" role="doc-endnote"><p>Se você não conhece o pacote <code>reactable</code>, falaremos dele na Seção <a href="htmlwidgets.html#sec-reactable"><span>Section&nbsp;8.1.1</span></a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>Se você não conhece o pacote <code>reactable</code>, falaremos dele na Seção <a href="htmlwidgets.html#sec-reactable"><span>Seção&nbsp;8.1.1</span></a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4" role="doc-endnote"><p>Em cor cinza, não o vermelho padrão das mensagens de erro.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
@@ -668,7 +668,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Copiada");
     setTimeout(function() {
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');

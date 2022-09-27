@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.612">
@@ -109,15 +109,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "type": "textbox",
   "limit": 20,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
   }
 }</script>
 
@@ -299,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Índice</h2>
    
   <ul>
   <li><a href="#o-que-é-reatividade" id="toc-o-que-é-reatividade" class="nav-link active" data-scroll-target="#o-que-é-reatividade"> <span class="header-section-number">3.1</span> O que é reatividade?</a></li>
@@ -312,7 +312,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#contexto-reativo" id="toc-contexto-reativo" class="nav-link" data-scroll-target="#contexto-reativo"> <span class="header-section-number">3.4</span> Contexto reativo</a></li>
   <li><a href="#visualizando-o-diagrama-de-reatividade-reactlog" id="toc-visualizando-o-diagrama-de-reatividade-reactlog" class="nav-link" data-scroll-target="#visualizando-o-diagrama-de-reatividade-reactlog"> <span class="header-section-number">3.5</span> Visualizando o diagrama de reatividade: <code>reactlog</code></a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/reatividade-conceitos.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/reatividade-conceitos.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -356,7 +356,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    mais_freq <span class="ot">&lt;-</span> <span class="fu">names</span>(contagem[<span class="fu">which.max</span>(contagem)])</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"O valor mais sorteado foi o {mais_freq}."</span>)</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A solução ingênua seria criar a amostra uma única vez, fora das funções <code>render*()</code>, mas isso retornará um erro. O que a mensagem de erro diz, de maneira mais direta, é que essa solução fere as regras de reatividade do Shiny.</p>
 <div class="cell" data-layout-align="center">
@@ -378,7 +378,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  })</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in : Can't access reactive value 'tamanho' outside of reactive consumer.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in : Can't access reactive value 'tamanho' outside of reactive consumer.</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A construção desse app traz à tona a necessidade de uma nova peça do Shiny, que não mencionamos ainda. Sem ela não consiguiríamos criar esse app de maneira eficiente.</p>
 <p>Antes de falar dela, no entanto, como podemos ver pela mensagem de erro da tentiva anterior, precisamos falar de um dos temas centrais do desenvolvimento de aplicativos Shiny: a reatividade.</p>
@@ -409,7 +409,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">y =</span> films, <span class="at">x =</span> total_especies)) <span class="sc">+</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_col</span>() <span class="sc">+</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Total de espécies"</span>, <span class="at">y =</span> <span class="st">"Filme"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Total de espécies"</span>, <span class="at">y =</span> <span class="st">"Filme"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A reatividade reside em um outro paradigma de programação, conhecido como <strong>programação declarativa</strong>. Nela, não construímos códigos que serão rodados interativamente ou sequencialmente, mas sim uma <em>receita</em> que especifica o que o computador deve fazer a depender da situação apresentada. Mais especificamente, a receita ensina ao computador qual código deve ser executado e quando.</p>
 <p>No contexto do Shiny, essa receita é um conjunto de dependências que será utilizado para decidir quais outputs devem ser recalculados quando um input muda. Não somos nós que rodamos o código que gera um output, nós apenas definimos qual código será esse. O ambiente criado pelo Shiny a partir da nossa receita (quando um app está em funcionamento) é quem decide a hora certa de executar esse código (se é que ele será executado).</p>
@@ -451,7 +451,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -506,13 +506,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># server</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>amostra <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, input<span class="sc">$</span>tamanho, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Já neste próximo exemplo, a expressão reativa <code>soma</code> reacalcula o seu valor sempre que qualquer um dos valores reativos <code>input$valor1</code>, <code>input$valor2</code> e <code>input$valor3</code> mudar.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>soma <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  input<span class="sc">$</span>valor1 <span class="sc">+</span> input<span class="sc">$</span>valor2 <span class="sc">+</span> input<span class="sc">$</span>valor3</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Para acessar o valor de uma expressão reativa, devemos usar parênteses após o seu nome, como se estivéssemos chamando uma função sem argumentos. Podemos utilizar esse valor dentro de qualquer outra expressão reativa ou função observadora, quantas vezes for preciso.</p>
 <p>No código a seguir, criamos a expressão reativa <code>amostra</code> e utilizamos o seu valor chamabndo <code>amostra()</code> dentro das funções observadoras <code>renderPlot()</code> e <code>renderText()</code>. Essa é a solução para o problema apresentado no início do capítulo.</p>
@@ -532,7 +532,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  contagem <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">amostra</span>())</span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  mais_freq <span class="ot">&lt;-</span> <span class="fu">names</span>(contagem[<span class="fu">which.max</span>(contagem)])</span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"O valor mais sorteado foi o {mais_freq}."</span>)</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nesse exemplo, se o valor de input$tamanho mudar o seguinte processo acontecerá internamente no Shiny:</p>
 <ul>
@@ -560,7 +560,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>soma <span class="ot">&lt;-</span> <span class="fu">eventReactive</span>(input<span class="sc">$</span>valor1, {</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  input<span class="sc">$</span>valor1 <span class="sc">+</span> input<span class="sc">$</span>valor2 <span class="sc">+</span> input<span class="sc">$</span>valor3</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A <code>eventReactive()</code> é muito utilizada com botões, criados na UI com a função <code>actionButton()</code>. No app apresentado a seguir, a amostra só é gerada quando a pessoa usando o app clicar no botão “Gerar gráfico”. Rode o app e teste esse comportamento.</p>
 <div class="cell" data-layout-align="center">
@@ -600,7 +600,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>  })</span>
 <span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Veja que o valor reativo <code>input$botao</code>, especificado no primeiro argumento da funcão <code>eventReactive()</code>, funciona como o gatilho do fluxo de reatividade. Isso significa que a expressão reativa <code>amostra</code> será recalculada apenas quando apertarmos o botão <em>Gerar gráfico</em>. Mudanças no slider não resultarão em qualquer mudança no app (estamos impedindo que <code>input$tamanho</code> inicie o fluxo de reatividade). Repare também que o código que gera a amostra é passado no segundo argumento da funcão <code>eventReactive()</code>.</p>
 <p>O diagrama reativo desse app pode ser representado pelo esquema a seguir. A linha pontilhada indica que o <code>input$tamanho</code> não dispara reatividade.</p>
@@ -626,7 +626,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>hist <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist</span>(input<span class="sc">$</span>variavel)<span class="er">)</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  }) </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Sempre que tentamos usar um valor ou expressão reativa fora de um contexto reativo, o Shiny retornará o erro a seguir.</p>
 <div class="cell" data-layout-align="center">
@@ -634,7 +634,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>hist <span class="ot">&lt;-</span> <span class="fu">hist</span>(input<span class="sc">$</span>variavel)<span class="er">)</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error : Can't access reactive value 'variavel' outside of</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># reactive consumer.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># reactive consumer.</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="visualizando-o-diagrama-de-reatividade-reactlog" class="level2" data-number="3.5">
@@ -649,11 +649,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Nesses casos (ou mesmo nos casos simples), podemos utilizar o pacote <code>reactlog</code>. Com ele, conseguimos visualizar facilmente o diagrama de dependências reativas de qualquer Shiny app e olhar o que acontece por trás das curtinas da reatividade quando executamos o aplicativo.</p>
 <p>Antes de mais nada, instale o pacote <code>reactlog</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"reactlog"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"reactlog"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Em seguida, no Console, rode o código abaixo. Isso vai habilitar o <code>reactlog</code> para qualquer app que você rodar na atual sessão de R.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">shiny.reactlog =</span> <span class="cn">TRUE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">shiny.reactlog =</span> <span class="cn">TRUE</span>) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Por fim, rode o seu app e utilize o comando <code>CTRL + F3</code> (no Mac, <code>command + F3</code>). O seu navegador abrirá uma nova aba com o diagrama de reatividade.</p>
 <p>No exemplo a seguir, temos a UI de um aplicativo que gera o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado pelo sliderInput. Sempre qua o tamanho da amostra muda, o gráfico é recalculado.</p>
@@ -721,7 +721,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Como descrito na <a href="https://shiny.rstudio.com/reference/shiny/0.14/showReactLog.html">documentação da ferramenta</a>, por razões de segurança e performance, nunca habilite o <code>reactlog</code> em ambientes de produção. Quando ele está habilitado, qualquer pessoal utilizando o seu app pode ver pelo menos parte do seu código fonte (que eventualmente pode conter informações sensíveis).</p>
 <p>Você pode aprender mais sobre o funcionamento do <code>reactlog</code> <a href="https://rstudio.github.io/reactlog/articles/reactlog.html">clicando aqui</a>.</p>
@@ -856,7 +856,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Copiada");
     setTimeout(function() {
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');

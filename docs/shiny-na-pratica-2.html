@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.612">
@@ -109,15 +109,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "type": "textbox",
   "limit": 20,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
   }
 }</script>
 <script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
@@ -306,14 +306,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Índice</h2>
    
   <ul>
   <li><a href="#caixas-de-diálogo" id="toc-caixas-de-diálogo" class="nav-link active" data-scroll-target="#caixas-de-diálogo"> <span class="header-section-number">13.1</span> Caixas de diálogo</a></li>
   <li><a href="#tooltips" id="toc-tooltips" class="nav-link" data-scroll-target="#tooltips"> <span class="header-section-number">13.2</span> Tooltips</a></li>
   <li><a href="#seletor-de-visualizações" id="toc-seletor-de-visualizações" class="nav-link" data-scroll-target="#seletor-de-visualizações"> <span class="header-section-number">13.3</span> Seletor de visualizações</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/shiny-na-pratica-2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/shiny-na-pratica-2.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -343,15 +343,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Essencialmente, elas são textos que só aparecem quando passamos o ponteiro do mouse em algum elemento da tela. Por exemplo, passe o mouse em cima da frase a seguir:</p>
 <div class="cell">
 <div class="cell-output-display">
-<span id="htmlwidget-c3968e166d262aaed7a3" class="tippy html-widget" width="100%" height="464px"></span>
-<script type="application/json" data-for="htmlwidget-c3968e166d262aaed7a3">{"x":{"opts":{"content":"Olá! Eu sou uma tooptip!"},"text":"Passe o mouse aqui!"},"evals":[],"jsHooks":[]}</script>
+<span id="htmlwidget-426d3824ca1d43003558" class="tippy html-widget" width="100%" height="464px"></span>
+<script type="application/json" data-for="htmlwidget-426d3824ca1d43003558">{"x":{"opts":{"content":"Olá! Eu sou uma tooptip!"},"text":"Passe o mouse aqui!"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><br></p>
 <p>Existem várias soluções disponíveis para incluirmos <em>tooltips</em> em um aplicativo Shiny, entre elas o pacote <code>tippy</code>.</p>
 <p>Esse pacote está no CRAN, então basta rodar o código abaixo para instalá-lo:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tippy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tippy"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Para colocar uma <em>tooltip</em> em um elemento do seu app, basta usar a função <code>tippy::with_tippy()</code>.</p>
 <div class="cell">
@@ -363,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">step =</span> <span class="dv">1000</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">tooltip =</span> <span class="st">"Amostra de uma distribuição Normal com média 0 e variância 100."</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -402,7 +402,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"valuebox-tip"</span>,</span>
 <span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">content =</span> <span class="st">"Você precisa importar o css do pacote shinydashboard se quiser usar valueBoxes fora do shinydashboard."</span></span>
 <span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -416,7 +416,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">content =</span> <span class="st">"Você precisa importar o css do pacote shinydashboard se quiser usar valueBoxes fora do shinydashboard."</span>,</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">arrow =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">placement =</span> <span class="st">"left"</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -512,7 +512,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="seletor-de-visualizações" class="level2" data-number="13.3">
@@ -532,7 +532,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="st">"lg"</span>,</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">selected =</span> <span class="st">"barras"</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Agora, precisamos construir a lógina do Output, tanto na UI como no server. Como a nossa visualização pode gerar gráficos ou uma tabela, precisaremos de funções <code>*Output()</code> e <code>render*()</code> diferentes. Dessa forma, vamos utilizar na nossa UI um <code>OutputUI()</code>.</p>
 <div class="cell">
@@ -570,7 +570,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">uiOutput</span>(<span class="st">"vis"</span>)</span>
 <span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Agora, no server, podemos criar funções <code>*Output()</code> diferentes a depender da visualização escolhida. Usamos <code>plotOutput()</code> para os gráficos e <code>reactable::reactableOutput()</code> para a tabela.</p>
 <div class="cell">
@@ -580,13 +580,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (input<span class="sc">$</span>vis_escolhida <span class="sc">==</span> <span class="st">"tabela"</span>) {</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    reactable<span class="sc">::</span><span class="fu">reactableOutput</span>(<span class="st">"tabela"</span>)</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Agora vamos construir nossas visualizações. Primeiro, vamos montar a base que precisamos para gerar tanto os gráficos quanto a tabela.</p>
 <p>Os dados vêm do pacote <code>brasileirao</code>. Se você não possui esse pacote instalado, basta rodar o código abaixo:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"williamorim/brasileirao"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"williamorim/brasileirao"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Como a tabela que gera os gráficos não depende de nenhum valor ou expressão reativa, podemos colocar o código que a gera diretamente no server.</p>
 <div class="cell">
@@ -605,7 +605,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">gols =</span> gols_casa <span class="sc">+</span> gols_visitante</span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(season) <span class="sc">|&gt;</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">gols =</span> <span class="fu">sum</span>(gols))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">gols =</span> <span class="fu">sum</span>(gols))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Para gerar os gráficos, só precisamos de um <code>renderPlot()</code> e um <code>if/else</code> para devolver o gráfico certo.</p>
 <div class="cell">
@@ -624,7 +624,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    grafico_base <span class="sc">+</span></span>
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> <span class="st">"dark green"</span>)</span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Para gerar a tabela, precisamos apenas de um <code>renderReactable()</code>.</p>
 <div class="cell">
@@ -641,7 +641,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>        )</span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>      )</span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Juntando tudo, temos o app a seguir:</p>
 <div class="cell">
@@ -743,7 +743,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-96"><a href="#cb13-96" aria-hidden="true" tabindex="-1"></a>  })</span>
 <span id="cb13-97"><a href="#cb13-97" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb13-98"><a href="#cb13-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-99"><a href="#cb13-99" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-99"><a href="#cb13-99" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -875,7 +875,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Copiada");
     setTimeout(function() {
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
