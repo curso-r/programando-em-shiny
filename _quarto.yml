@@ -1,9 +1,22 @@
 project:
   type: book
+  output-dir: docs
+
+website:
+  favicon: img/shiny.png
+  twitter-card:
+    creator: "@wamorim_"
+    site: "@curso_r"
 
 book:
   title: "Programando em Shiny"
-  date: "2022/09/26"
+  date: today
+  repo-url: https://github.com/curso-r/programando-em-shiny/
+  downloads: [pdf, epub]
+  repo-actions: [edit, issue]
+  sharing: [twitter, facebook]
+  page-footer: |
+    Escrito por [William Amorim](https://twitter.com/wamorim_) e mantido pela equipe da [Curso-R](https://curso-r.com/).
   chapters:
     - index.qmd
     - sobre.qmd
@@ -11,7 +24,7 @@ book:
     - part: Parte 1
       chapters:
         - primeiro-app.qmd
-        - add-reatividade.qmd
+        - add-interatividade.qmd
         - reatividade-conceitos.qmd
         - debug.qmd
         - layouts.qmd
@@ -26,13 +39,16 @@ book:
         - html-css-js.qmd
         - shiny-na-pratica-2.qmd
         - reatividade-problemas-complexos.qmd
-    - references.qmd
-
-bibliography: references.bib
+    - referencias.qmd
 
 format:
   html:
-    theme: cosmo
+    css: style.css
+    lang: pt
+    theme:
+      light: cosmo
+      dark: darkly
   #pdf:
+    # lang: pt
     #documentclass: scrreprt
 
