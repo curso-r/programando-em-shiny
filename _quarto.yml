@@ -15,7 +15,9 @@ book:
         - reatividade-conceitos.qmd
         - debug.qmd
         - layouts.qmd
+        - shiny-na-pratica-1.qmd
         - reatividade-mais-pecas.qmd
+        - htmlwidgets.qmd
     - references.qmd
 
 bibliography: references.bib

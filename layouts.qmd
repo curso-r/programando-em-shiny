@@ -382,7 +382,14 @@ ui <- fluidPage(
 
 ### `shinydashboard`
 
-O `shinydasboard` é um pacote que introduz diversas ferramentas para o Shiny. A principal é um novo layout, dividido em três áreas:
+O `shinydasboard` é um pacote que introduz diversas ferramentas para o Shiny. Antes de mais nada, instale o pacote:
+
+```{r, eval = FALSE}
+install.packages("shinydasboard")
+```
+
+
+A principal é um novo layout, dividido em três áreas:
 
 - o `header`, uma barra superior onde podemos colocar títulos, botões e links;
 
@@ -561,6 +568,12 @@ Para saber mais sobre o `shinydashboard`, acesso o [site do pacote](https://rstu
 
 O pacote `bs4Dash` é uma outra opção para construir um layout com menu de navegação lateral. Ele se diferencia do `shinydashboard` por utilizar uma versão do Bootstrap mais recente: ele utiliza a versão 4, enquanto o `shinydashboard` a 3.
 
+Para instalar o pacote, utilize o código a seguir:
+
+```{r, eval = FALSE}
+install.packages("bs4Dash")
+```
+
 A construção do layout com o pacote `bs4Dash` é equivalente ao que vimos com o `shinydashboard`.
 
 ```{r, eval = FALSE}
@@ -654,88 +667,4 @@ p {
   font-size: 12pt;
 }
 ```
-
-## Usando Markdown para textos
-
-É comum precisarmos colocar em nossos aplicativos páginas com orientações, informações adicionais ou referências. 
-
-Essas páginas geralmente são compostas por textos, links e imagens, facilmente produzidos em um arquivo Markdown. Em contrapartida, construir esses elementos dentro da UI dá bem mais trabalho, pois tudo precisa ser encapsulado por uma função da lista `shiny::tags$`.
-
-Por exemplo, vamos supor que queiramos colocar a seguinte *mini bio* em um app que estamos fazendo.
-
-<br>
-
-<center>
-<img src="img/rick.jpeg" width="130px" style="border-radius: 65px;"/>
-
-**Rick Sanchez**
-
-Procurado por crimes contra o espaço interdimensional. Saiba mais [aqui](https://rickandmorty.fandom.com/wiki/Rick_Sanchez).
-</center>
-
-<br>
-<br>
-
-O arquivo Markdown para construir essa mini bio seria bem simples:
-
-```
-<center>
-<img src="img/rick.jpeg" width="130px" style="border-radius: 65px;"/>
-
-**Rick Sanchez**
-
-Procurado por crimes contra o espaço interdimensional. Saiba mais [aqui](https://rickandmorty.fandom.com/wiki/Rick_Sanchez).
-</center>
-```
-
-A mesma mini bio na UI, já é bem mais chato de construir e manter.
-
-```{r, eval = FALSE}
-fluidPage(
-  fluidRow(
-    column(
-      width = 12,
-      shiny::tags$img(
-        src = "img/rick.jpeg",
-        width = "130px",
-        style = "border-radius: 65px; display: block; margin: auto;"
-      ),
-      shiny::tags$p(
-        shiny::tags$strong("Rick Sanchez"),
-        style = "text-align: center;"
-      ),
-      shiny::tags$p(
-        style = "text-align: center;",
-        "Procurado por crimes contra o espaço interdimensional. Saiba mais",
-        shiny::tags$a(
-          href = "https://rickandmorty.fandom.com/wiki/Rick_Sanchez",
-          "aqui"
-        )
-      )
-    )
-  )
-)
-```
-
-Mesmo um exemplo simples já começa a deixar claro o problema: produzir muitos elementos HTML na UI rapidamente transforma seu código em um emaranhado de funções aninhadas. O mesmo vale para textos muito grandes. Embora nesse caso nem sempre tenhámos muitas tags HTML para criar, scripts R não foram feitos para atender os cuiddos que textos carecem.
-
-A melhor prática nessas situações é justamente transferir esses elementos para um arquivo Markdown e pedir que o Shiny o transforme em HTML e o inclua no lugar adequado apenas na hora do `runApp()`. Para isso usamos a função `shiny::includeMarkdown()`.
-
-Supondo que salvamos o markdown da mini bio em um arquivo `rick.md`, a nossa UI então ficaria:
-
-```{r, eval=FALSE}
-ui <- fluidPage(
-  fluidRow(
-    column(
-      width = 12,
-      includeMarkdown("rick.md")
-    )
-  )
-)
-```
-
-Vale ressaltar que essa função compila arquivos Markdown (`.md`) e não R Markdown (`.Rmd`). Se quisermos rodar códigos R para gerar saídas HTML, devemos fazer isso dentro do próprio Shiny.
-
-
-
 

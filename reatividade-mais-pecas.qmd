@@ -6,23 +6,23 @@ knitr::opts_chunk$set(
 
 # Reatividade: mais peças {#reatividade2}
 
-No [Capítulo -@sec-reatividade], vimos que o fluxo de reatividade é disparado por uma mudança em um valor reativo e que termina na atualização de um observer^[Isto é, todos os caminhos de um diagrama de reatividade devem começar com um valore reativo e terminar com um observer.]. Também vimos que os valores reativos representam nossos inputs e os observers são as funções `render*()` que criam nossos outputs. Mas inputs e outputs não são a única maneira de criar valores reativos e observers. 
+No [Capítulo -@sec-reatividade], vimos que o fluxo de reatividade é disparado por uma mudança em um valor reativo e que termina na atualização de uma função observadora^[Isto é, todos os caminhos de um diagrama de reatividade devem começar com um valore reativo e terminar com uma função observadora]. Também vimos que os inputs fazem o papel de valores reativos e as funções `render*()` que criam nossos outputs fazem o pepel de funções observadoras. 
 
-O pacote `shiny` possui funções para criarmos diretamente valores reativos e observers, o que nos permite desenvolver uma porção de novas funcionalidades. Essas novas peças serão o foco deste capítulo.
+A depender do tipo de interação que queremos construir no app, vamos precisar de valores reativos que não são inputs e de funções observadoras que não estão associadas a um output. Felizmente o pacote `shiny` possui formas de fazer isso. Apresentar essas novas peças será o objetivo deste capítulo.
 
-## Mais observers
+## Mais funções observadoras
 
-Os observers são o ponto final de um diagrama de reatividade de um aplicativo Shiny e, sem eles, o fluxo reativo não acontece. As funções `render*()`, que geram os nossos outputs, são o tipo mais comum de observer. Mas eles não são os únicos.
+As funções observadoras são o ponto final do diagrama de reatividade e sem eles o fluxo reativo não acontece. As funções `render*()`, que geram os nossos outputs, são o tipo mais comum de funções observadoras, mas não são o único.
 
-Muitas vezes queremos usar a reatividade para disparar ações que não estão ligadas a geração de outputs, como o registro de informações em bases de dados, o envio de e-mails ou a atualização de elementos da UI.
+Muitas vezes queremos usar a reatividade para disparar ações que não estão ligadas à geração de outputs, como o registro de informações em bases de dados, o envio de e-mails ou a atualização de informações nos inputs^[Sem a necessidade de recriá-los do zero com `uiOutput()` e `renderUI()`.]. Nesses casos, precisamos utilizar as funções `observe()` e `oberveEvent()`. 
 
-Nesses casos, precisamos utilizar as funções `observe()` e `oberveEvent()`. Elas funcionam de maneira similar às funções `reactive()` e `eventReactive()`, mas em vez de criar expressões reativas, elas possuem um *efeito colataral*.
+A função `observe()` monitora os valores e expressões reativas que estão dentro dela e roda seu código quando algum desses valores são modificados. Ao contrário da função `reactive()`, ela não cria um novo valor reativo. O código atribuído a ela é o ponto chegada de um fluxo reativo, isto é, a ação que a função `observe()` executa é o objetivo final do fluxo.
 
-A função `observe()` monitora os valores e expressões reativas que estão dentro dela e roda seu código quando algum desses valores são modificados. Essa função é muito utilizada com as funções da família `update*()`, que servem para atualizar valores de um input na UI.
-
-Na segunda caixa de seleção do exemplo a seguir, queremos selecionar apenas os filmes do(a) diretor(a) que selecionamos na primeira. Veja que usamos o texto `Carregando...` como um *placeholder* para o segundo `selectInput()`.
+Essa função é muito utilizada com as funções da família `update*()`, que servem para atualizar valores de um input na UI. Na segunda caixa de seleção do exemplo a seguir, queremos selecionar apenas os filmes do diretor ou diretora que selecionamos na primeira caixa. Veja que usamos o texto `Carregando...` como um *placeholder* para o segundo `selectInput()`.
 
 ```{r, eval = FALSE}
+library(shiny)
+
 ui <- fluidPage(
   selectInput(
     "direcao",
@@ -35,11 +35,7 @@ ui <- fluidPage(
     choices = "Carregando..."
   )
 )
-```
 
-Na função `server`, atualizamos as escolhas da segunda caixa de seleção com a função `updateSelectInput()`. Veja que, como essa função está dentro de um `observe`, esse código será rodado novamente sempre que o valor de `input$direcao` mudar.
-
-```{r, eval = FALSE}
 server <- function(input, output, session) {
   observe({
     opcoes <- imdb |> 
@@ -54,13 +50,17 @@ server <- function(input, output, session) {
 }
 ```
 
-A função `observeEvent()` funciona assim como a `observe()`, mas ela escuta apenas um valor ou expressão reativa, que é definido em seu primeiro argumento, assim como na função `eventReactive()`.
+Na função `server`, atualizamos as escolhas da segunda caixa de seleção com a função `updateSelectInput()`. Veja que, como essa função está dentro de um `observe`, esse código será rodado novamente sempre que o valor de `input$direcao` mudar.
 
-Ela é muito utiliza para disparar ações, como gravar informações em uma base de dados, a partir de botões.
+Nesse exemplo, o objetivo final do fluxo reativo é atualizar as opções da segunda caixa de seleção sempre que alterarmos o valor da primeira. Repare que não há nenhum output. A reatividade só funciona nesse caso porque a função `observe()` é uma função observadora.
+
+A função `observeEvent()` funciona assim como a `observe()`, mas ela escuta apenas um valor ou expressão reativa, que é definido em seu primeiro argumento, assim como na função `eventReactive()`. Ela é muito utiliza para disparar ações, como gravar informações em uma base de dados, a partir de botões.
 
 No exemplo a seguir, queremos salvar o e-mail de uma pessoa quando ela clicar no botão "Enviar dados". A função `observeEvent()` roda o código definido dentro dela quando o botão é clicado, salvando o e-mail em um arquivo de texto.
 
 ```{r, eval = FALSE}
+library(shiny)
+
 ui <- fluidPage(
   textInput("email", "Informe seu e-mail"),
   actionButton("enviar", "Enviar dados")
@@ -104,7 +104,7 @@ Para alterar o valor de um valor reativo, fazemos:
 vr(2)
 ```
 
-Dessa maneira, o `vr` passa a guardar o valor 2 e, se rodarmos `vr()` novamente, receberemos o valor 2 dentro de 1. Além disso, sempre que alteramos o valor de um valor reativo, ele vai disparar reatividade. Isso quer dizer que todos as expressões reativas e observers que depende de `vr()` serão invalidados e seus códigos rodados novamente.
+Dessa maneira, o `vr` passa a guardar o valor 2 e, se rodarmos `vr()` novamente, receberemos o valor 2 dentro de 1. Além disso, sempre que alteramos o valor de um valor reativo, ele vai disparar reatividade. Isso quer dizer que todos as expressões reativas e funções observadoras que dependerem de `vr()` serão invalidadas e seus códigos rodados novamente.
 
 Também podemos usar a função `reactiveValues()` para criar valores reativos. Com ela, podemos criar uma lista de valores, em vez de apenas um. A notação nesse caso será a seguinte:
 
@@ -169,13 +169,13 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-Repare que a base mtcars foi transformada em um valor reativo chamado `rv_mtcars`. Assim, sempre que a instrução de remover uma linha é feita na UI a patir do botão `remover`, o `rv_mtcars` é atualizado com a base sem a linha escolhida. Como o output `tabela` depende de `rv_mtcars`, a tabela na tela também é atualizada^[Se você não conhece o pacote `reactable`, falaremos dele na Seção \@ref(reactable).].
+Repare que a base mtcars foi transformada em um valor reativo chamado `rv_mtcars`. Assim, sempre que a instrução de remover uma linha é feita na UI a partir do botão `remover`, o `rv_mtcars` é atualizado com a base sem a linha escolhida. Como o output `tabela` depende de `rv_mtcars`, a tabela na tela também é atualizada^[Se você não conhece o pacote `reactable`, falaremos dele na Seção @reactable.].
 
 Como desafio, tente refazer esse app sem a criar valores reativos no servidor, utilizando expressões reativos, por exemplo. É possível?
 
 ## Validação
 
-O pacote `shiny` possui algumas funções que nos ajudam a validar valores reativos antes de rodarmos um código que gera  um output. Na UI, isso impede que mensagens de erros internas do R apareçam na tela e nos possibilita enviar mensagens quando quem estar usando o app faz algo que não devia. Internamente, nos permite controlar melhor a reatividade e deixa o app mais eficiente.
+O pacote `shiny` possui algumas funções que nos ajudam a validar valores reativos antes de rodarmos um código que gera  um output. Na UI, isso impede que mensagens de erros internas do R apareçam na tela e nos possibilita enviar mensagens quando quem está usando o app faz algo que não deveria. Internamente, nos permite controlar melhor a reatividade e deixa o app mais eficiente.
 
 Nas próximas seções falaremos da função `req()` e da função `validate()`.
 
@@ -199,11 +199,11 @@ A função `req(x)` retorna um erro silencioso caso `x` seja inválido. O erro �
 
 - Um valor reativo que represente um `actionButton()` que ainda não foi clicado
 
-> Você também pode testar diretamente se um valor é *inválido* utilizando a função `isTruthy`.
+Você também pode testar diretamente se um valor é *inválido* utilizando a função `isTruthy`.
 
 O erro silencioso é passado adiante, até o *observer* que está sendo recalculado. Se você utilizar a opção `cancelOutput = TRUE` e estiver recalculando uma função `render`, o output associado será mantido no estado atual, isto é, não será substituído por uma tela vazia caso o valor testado seja inválido. 
 
-Veja um exemplo de utilização da função `req()`. No código abaixo, a `infoBox` só será criada se o valor reativo `input$filme` tiver um valor válido (no caso, uma string não nula). Caso o valor seja inválido, a infoBox não será mostrada no app. Nenhuma mensagem de erro ou aviso será retornado.
+Veja um exemplo de utilização da função `req()`. No código abaixo, a `infoBox` só será criada se o valor reativo `input$filme` tiver um valor válido (no caso, uma string não vazia). Caso o valor seja inválido, a infoBox não será mostrada no app. Nenhuma mensagem de erro ou aviso será retornado.
 
 ```{r, eval = FALSE}
 # server
@@ -231,11 +231,11 @@ Em vez de enviar gerar um erro silencioso, não mostrando nada na tela, podemos 
 
 - `FALSE`, se o você quiser retornar um erro silencioso, assim como na função `req()`;
 
-- uma string, que será transformada em uma mensagem de erro e mostrada na tela (com um visual agradável).
+- uma string, que será transformada em uma mensagem de erro e mostrada na tela^[Em cor cinza, não o vermelho padrão das mensagens de erro.].
 
 Essa função é muito utilizada com a função `need()`, que recebe um teste lógico e uma string. Se o teste for verdadeiro, ela retorna `NULL` e, se for falso, retorna a string.
 
-No exemplo abaixo, se o `input$filme não for válido`, além de o aplicativo não mostrar a `infoBox`, a mensagem "Nenhum filme selecionado." é mostrada na tela explicando o porquê. No código, utilizamos `isTruthy(input$filme)` para testar se `input$filme` é válido.
+No exemplo abaixo, se o `input$filme` não for válido, além de o aplicativo não mostrar a `infoBox`, a mensagem "Nenhum filme selecionado." é mostrada na tela explicando o porquê. No código, utilizamos `isTruthy(input$filme)` para testar se `input$filme` é válido.
 
 ```{r, eval = FALSE}
 #server

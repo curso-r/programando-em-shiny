@@ -1,0 +1,702 @@
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  fig.align = "center"
+)
+```
+
+# htmlwidgets {#sec-htmlwidgets}
+
+HTML widgets são bibliotecas de visualização JavaScript encapsuladas em pacotes de R. Elas nos permitem usar diversas ferramentas JavaScript adicionando algumas poucas linhas de código R em nossos scripts.
+
+Usando htmlwidgets, conseguimos construir tabelas, gráficos, mapas e muito outras visualizações interativas e naturalmente bonitas. Neste capítulo, vamos ver como utilizar as seguintes bibliotecas
+
+- React Table e DT, para tabelas
+- plotly, ECharts e Highcharts para gráficos 
+- Leaflet, para mapas
+
+Além de diversos recursos interativos nativos, esssas bibliotecas permitem a captura de certos **eventos**, que são transformados em inputs dentro Shiny e podem ser utilizados para gerar ou modificar resultados. Veremos também como acessar e utilizar esses eventos dentro do servidor.
+
+## Tabelas
+
+Falaremos a seguir como utilziar as bibliotecas React Table e DT para construir tabelas interativas em seu Shiny app.
+
+### React Table {#reactable}
+
+O pacote `reactable` nos permite criar tabelas interativas baseadas na biblioteca [React Table](https://github.com/tannerlinsley/react-table). 
+
+Primeiro precisamos instalar o pacote:
+
+```{r, eval = FALSE}
+install.packages("reactable")
+```
+
+Para transformar qualquer `data.frame` em uma React Table, basta usar a função `reactable()`:
+
+```{r}
+mtcars |> 
+  reactable::reactable()
+```
+
+Repare que a tabela é automaticamente paginada e, como ela possui muitas colunas, uma barra de rolagem horizontal é criada. Além disso, se você clicar no nome das colunas, as linhas serão ordenadas pelos seus valores.
+
+A função `reactable()` possui diversos argumentos para customizar a tabela. No exemplo abaixo, deixamos a tabela listrada e incluídos um campo de busca global.
+
+```{r}
+mtcars |> 
+  reactable::reactable(
+    striped = TRUE,
+    searchable = TRUE
+  )
+```
+
+Para criar uma reactable no nosso app, precisaremos das funções `reactable::reactableOutput()` e `reactable::renderReactable()`.
+
+```{r, eval = FALSE}
+# ui
+reactable::reactableOutput("tabela")
+
+# server
+output$tabela <- reactable::renderReactable({
+  reactable::reactable(mtcars)
+})
+```
+
+<!-- TODO: colocar dica como sobre traduzir os textos da reactable -->
+
+Um recurso muito útil dentro do Shiny é a possibilidade de selecionar linhas. Fazemos isso utilizando o argumento `selection`, que pode receber os valores `single` (se apenas uma linha poderá ser selecionada) ou `multiple` (se várias linhas poderão ser selecionadas).
+
+```{r}
+mtcars |> 
+  reactable::reactable(
+    selection = "multiple"
+  )
+```
+
+Para acessar quais linhas estão selecionadas, basta utilizar a função `getReactableState("outputId", name = "selected")` dentro de um contexto reativo. Ela devolverá um vetor com o índice das linhas selecionadas.
+
+A partir dessa função, também podemos recuperar o número da página, o número de linhas da página e o número de páginas da tabela. Basta trocar o parâmetro `name` respectivamente por `"page"`, `"pageSize"` ou `"pages"`.
+
+Para saber mais sobre `reactable`, [clique aqui](https://glin.github.io/reactable/) para acessar o tutorial completo do pacote.
+
+### DT
+
+O pacote `DT` embruha a biblioteca JavaScript [DataTables](http://datatables.net/) e é uma alternativa ao `reactable` para a criação de tabelas interativas. Embora seja mais burocrático na customização, essa biblioteca possui um recurso muito útil para a aplicativos Shiny: a edição de tabelas.
+
+Antes de mais nada, instale o pacote `DT`:
+
+```{r, eval = FALSE}
+install.packages("DT")
+```
+
+
+Para criar uma tabela DT, basta utilizar a função `DT::datatable()` em qualquer `data.frame`.
+
+```{r}
+mtcars |> 
+  DT::datatable()
+```
+
+Veja que assim como a React Table, a tabela já é paginada automaticamente. As colunas também podem ser ordenadas clicando em seus nomes. Além disso, o campo de busca global é criado por padrão.
+
+<!-- TODO: colocar dica como sobre traduzir os textos da DT -->
+
+Para criar uma DT dentro do Shiny, utilizamos as funções `DT::dataTableOutput()` e `DT::renderDataTable()`.
+
+```{r, eval = FALSE}
+# ui
+DT::dataTableOutput("tabela")
+
+# server
+output$tabela <- DT::renderDataTable({
+  DT::datatable(mtcars)
+})
+```
+
+Para criar uma tabela editável, utilizamos o parâmetro `editable = TRUE`.
+
+```{r, eval = FALSE}
+# ui
+DT::dataTableOutput("tabela")
+
+# server
+output$tabela <- DT::renderDataTable({
+  mtcars |> 
+    DT::datatable(editable = TRUE)
+})
+```
+
+Para capturar os valores editados, utilizamos o valor `input$outputId_cell_edit`, sendo `outputId` o id dado para a tabela em questão (`tabela` no exemplo anterior). Esse valor é criado automaticamente na lista `input` quando um dado é editado na tabela.
+
+Para que os dados editados realmente passem a fazer parte da tabela mostrada na tela (não voltem ao estado original caso você troque de página, por exemplo), você precisa, dentro do servidor, explicitamente substituir esses novos valores na tabela.
+
+Abaixo, apresentamos um exemplo de como fazer isso.
+
+```{r, eval = FALSE}
+library(shiny)
+
+ui <- fluidPage(
+  DT::dataTableOutput("tabela")
+)
+
+# server
+
+server <- function(input, output, server) {
+  
+  tabela_atual <- reactiveVal(mtcars)
+  
+  output$tabela <- DT::renderDataTable({
+    mtcars |>
+      DT::datatable(editable = TRUE)
+  })
+  
+  # Criamos uma forma de nos comunicarmos
+  # com a tabela criada na tela
+  proxy <- DT::dataTableProxy("tabela")
+  
+  observeEvent(input$tabela_cell_edit, {
+    
+    # Criamos um objeto com a tabela atualizada
+    # a partir dos dados alterados na tela
+    tab_atualizada <- DT::editData(
+      tabela_atual(),
+      input$tabela_cell_edit
+    )
+    
+    # O valor reativo que guarda a tabela
+    # atual recebe a tabela atualizada
+    tabela_atual(tab_atualizada)
+    
+    # Os dados da tabela na tela são substituídos
+    DT::replaceData(
+      proxy,
+      tab_atualizada
+    )
+    
+  })
+}
+
+shinyApp(ui, server)
+
+```
+
+O objeto `proxy` é utilizado para se comunicar com a tabela, de tal forma que os novos valores possam ser substituídos diretamente na tabela que já está dentro do HTML mostrado na tela sem precisar recriá-la. Essa tarefa é feita pela função `DT::replaceData()`. A tabela atualizada é criada pela função `DT::editData()`, que recebe a tabela atual e as alterações, salvas dentro do valor reativo `input$tabela_cell_edit`.
+
+Repare que, para guardarmos sempre qual é a tabela atual, criamos um valor reativo que é atualizado sempre que uma mudança é feita na tabela.
+
+Além do `input$outputId_cell_edit`, o pacote `DT` cria outros valores reativos na lista `input` que podem ser utilizados para gerar interatividade:
+
+- `input$outputId_rows_selected`: para capturar linhas selecionadas
+
+- `input$outputId_columns_selected`: para capturar colunas selecionadas
+
+- `input$outputId_cell_clicked`: para capturar o valor, a linha e a coluna da célula clicada
+
+- `input$tableId_search`: para capturar a string atualmente no campo de busca global da tabela
+
+Saiba mais sobre `DT` acessando a [documentação do pacote](https://rstudio.github.io/DT/shiny.html).
+
+## Gráficos
+
+Nesta seção, falaremos das bibliotecas JavaScript plotly, ECharts e Highcharts para criação de gráficos interativos e de como utilizá-las dentro do Shiny.
+
+### plotly
+
+Quando estamos construindo páginas ou aplicações Web (ou apresentações de slides em HTML), além de gráficos em formato de imagem, podemos construir visualizações utilizando bibliotecas JavaScript, que permitem animações e possuem diversas funcionalidades interativas, como *tooltips*, filtros, zoom e drilldrown.
+
+Nesta seção, vamos falar da biblioteca plotly, que permite transformarmos rapidamente nossos gráficos feitos com `ggplot2` em gráficos animados e interativos.
+
+Antes de mais nada, precisamos instalar o pacote `plotly`.
+
+```{r, eval = FALSE}
+install.packages("plotly")
+```
+
+A função mais legal desse pacote é a `plotly::ggplotly()`. Com ela transformamos facilmente um `ggplot` em um gráfico plotly.
+
+```{r, message=FALSE, warning = FALSE}
+library(ggplot2)
+library(plotly)
+
+p <- mtcars |> 
+  ggplot(aes(x = wt, y = mpg)) +
+  geom_point()
+
+ggplotly(p)
+```
+
+Veja que esse gráfico possui um visual muito parecido com o do `ggplot` e, além disso,
+
+- mostra uma *tooltip* quando passamos o cursor em cima de um ponto
+
+- permite selecionar uma área do gráfico para dar zoom;
+
+- e possui uma barra de ferramentas que nos permite aumentar e diminuir o zoom, focar em regiões do gráfico e baixar o gráfico como uma imagem estática.
+
+No exemplo a seguir, além das funcionalidades acima, também podemos clicar na legenda para adicionar ou remover grupos de pontos do gráfico.
+
+```{r}
+library(ggplot2)
+library(plotly)
+
+p <- mtcars |> 
+  ggplot(aes(x = wt, y = mpg, color = as.character(cyl))) +
+  geom_point()
+
+ggplotly(p)
+```
+
+Para controlar o que aparece na *tooltip*, podemos usar o parâmetro `tooltip`. Veja que adicionamos o modelo do carro e passamos por meio do aes `text`. O tema escolhido para o ggplot é, na medida do possível, respeitado pelo plotly.
+
+```{r}
+library(ggplot2)
+library(plotly)
+
+p <- mtcars |> 
+  tibble::rownames_to_column() |> 
+  ggplot(aes(x = wt, y = mpg, color = as.character(cyl), text = rowname)) +
+  geom_point() +
+  theme_minimal()
+
+ggplotly(p, tooltip = c("x", "y", "text"))
+```
+
+Também podemos construir um gráfico diretamente pelo `plotly`, mas isso exige aprendermos a sintaxe das suas funções e as opções disponíveis da biblioteca JS plotly.
+
+```{r}
+plot_ly(mtcars, x = ~wt, y = ~mpg, type = "scatter", mode = "markers")
+```
+
+Para aprender mais sobre como fazer gráficos diretamente no `plotly`, confira o [tutorial oficial da biblioteca](https://plotly.com/r/getting-started/#next-steps).
+
+Para adicionar um plotly no Shiny, criado a partir da função `ggplotly()` ou da função `plot_ly()`, utilizamos o par de funções `plotly::plotlyOutput()` e `plotly::renderPlotly()`.
+
+Rode o app abaixo para ver um exemplo.
+
+```{r, eval = FALSE}
+library(shiny)
+library(ggplot2)
+
+vars <- names(mtcars)
+
+ui <- fluidPage(
+  titlePanel("Plotly"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        "x",
+        "Eixo x",
+        choices = vars
+      ),
+      selectInput(
+        "y",
+        "Eixo y",
+        choices = vars,
+        selected = vars[2]
+      )
+    ),
+    mainPanel(
+      plotly::plotlyOutput("grafico")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  output$grafico <- plotly::renderPlotly({
+    p <- mtcars |>
+      tibble::rownames_to_column() |>
+      ggplot(aes(
+        x = .data[[input$x]],
+        y = .data[[input$y]],
+        text = rowname
+      )) +
+      geom_point() +
+      theme_minimal()
+    
+    plotly::ggplotly(p)
+  })
+}
+
+shinyApp(ui, server)
+```
+
+Eventos no `plotly` podem ser acessados a partir da função `plotly::event_data()`. Essa função guarda valores reativos com informação de diversas ações realizadas no gráfico, entre elas
+
+- cliques realizados no gráfico
+
+- área do gráfico selecionada
+
+- seleção de itens do gráfico
+
+Para selecionar um tipo de evento, basta passar seu nome como argumento: 
+
+```{r, eval = FALSE}
+event_data("plotly_click")
+event_data("plotly_selected")
+```
+
+Se você tiver mais de um plotly no app, utilize o argumento `source` das funções `plotly::ggplotly()` ou `plotly::plot_ly()` e da `plotly::event_data()` para se referenciar a um gráfico específico.
+
+<!-- TODO: colocar GIF com exemplo, com o código-->
+
+Para saber mais veja o `help(event_data)` ou leia  [a documentação oficial](https://plotly-r.com/linking-views-with-shiny.html#shiny-plotly-inputs). 
+
+### ECharts
+
+Para utilizar a biblioteca JS ECharts no R, podemos utilizar o pacote `echarts4r`.
+
+```{r, eval = FALSE}
+install.packages("echarts4r")
+```
+
+Esse pacote **não** possui uma função `ggecharts`, equivalente à `ggplotly` do pacote `plotly`, que possibilitaria transformar gráficos feitos em `ggplot` em gráficos ECharts. Assim, precisamos sempre construir nossos gráficos do zero, usando a sintaxe do `echarts4r`.
+
+O `echarts4r` possui semelhanças e diferenças com relação ao `ggplot2`. A semelhança mais importante é que construímos gráficos em camadas. A primeira diferença relevante é que essas camadas são unidas pelo `%>%`/`|>`, não pelo `+`. Outra diferença é que não temos uma função `aes()`, então o mapeamento das variáveis é feito diretamente nos argumentos das funções.
+
+Vamos começar com um exemplo simples: um gráfico de dispersão.
+
+```{r}
+mtcars |> 
+  echarts4r::e_charts(x = wt) |> 
+  echarts4r::e_scatter(serie = mpg)
+```
+
+Veja que o gráfico não possui `tooltip` por padrão. Precisamos incluí-la na pipeline:
+
+```{r}
+mtcars |> 
+  echarts4r::e_charts(x = wt) |> 
+  echarts4r::e_scatter(serie = mpg) |> 
+  echarts4r::e_tooltip()
+```
+
+Para fazermos um gráfico de linhas, usamos a função `e_line()`. Cada tipo de gráfico será produzido a partir de uma função do tipo `e_*()`, equivalente às funções `geom_*()` no `ggplot2`.
+
+```{r}
+ggplot2::txhousing |> 
+  dplyr::mutate(year = as.character(year)) |> 
+  dplyr::group_by(year) |> 
+  dplyr::summarise(sales = mean(sales, na.rm = TRUE)) |> 
+  echarts4r::e_charts(x = year) |> 
+  echarts4r::e_line(serie = sales) |> 
+  echarts4r::e_tooltip()
+```
+
+Ao contrário do `ggplot2`, dados agrupados com `dplyr::group_by()` influenciam a construção do gráfico. No código abaixo, a base sai da função `summarise()` agrupada por `city`, fazendo com que o ECharts construa uma linha para cada cidade.
+
+```{r}
+ggplot2::txhousing |> 
+  dplyr::filter(city %in% c("Austin", "Dallas", "Houston")) |> 
+  dplyr::mutate(year = as.character(year)) |> 
+  dplyr::group_by(city, year) |> 
+  dplyr::summarise(sales = mean(sales, na.rm = TRUE)) |> 
+  echarts4r::e_charts(x = year) |> 
+  echarts4r::e_line(serie = sales) |> 
+  echarts4r::e_tooltip()
+```
+
+
+A biblioteca ECharts possui uma extensa variedade de gráficos disponíveis. Você pode visitar a [galeria de exemplos](https://echarts.apache.org/examples/en/index.html) para ter uma boa ideia do que é possível fazer. Além disso, clicando nos exemplos, você tem acesso aos códigos JavaScript utilizados para construir os gráficos.
+
+Com as funções do pacote `echarts4r`, podemos replicar bastante do que a biblioteca ECharts tem para oferecer. Para aprender mais sobre o `echarts4r` vale a pena olhar [os tutoriais na página do pacote](https://echarts4r.john-coene.com/index.html).
+
+Em alguns casos, vamos encontrar gráficos ou elementos dentro de um gráfico que não podem ser construídos a partir dos parâmetros das funções do `echarts4r`. Nesses casos, vamos precisar olhar a [documentação do ECharts](https://echarts.apache.org/en/option.html#title) e usar parâmetros que não estão definidos nas funções do `echarts4r` (o que é possível já que a maioria das funções possuem o argumento `...`).
+
+A documentação do ECharts pode assustar à primeira vista, mas segue um modelo padrão de documentação de bibliotecas JavaScript. Conforme vamos usando mais essas bibliotecas, seja para fazer gráficos, tabelas, mapas ou o que for, vamos nos acostumando a ler essas documentações.
+
+Nesse sentido, uma forma de seguir a maneira JavaScript de construir um ECharts é usar a função `e_list()`. Com ela, definimos os parâmetros do gráfico a partir de listas e conseguimos reproduzir linha a linha um exemplo feito em JS. A seguir, reproduzimos exatamente [este exemplo](https://echarts.apache.org/examples/en/editor.html?c=pie-borderRadius). Veja que a estrutura dos dois códigos é muito parecida.
+
+```{r}
+echarts4r::e_chart() |> 
+  echarts4r::e_list(list(
+    tooltip = list(trigger = "item"),
+    legend = list(top = "5%", left = "center"),
+    series = list(
+      list(
+        name = "Access From",
+        type = "pie",
+        radius = c("40%", "70%"),
+        avoidLabelOverlap = FALSE,
+        itemStyle = list(
+          borderRadius = 10,
+          borderColor = "#fff",
+          borderWidth = 2
+        ),
+        label = list(show = FALSE, position = "center"),
+        emphasis = list(
+          label = list(
+            show = TRUE, 
+            fontSize = 40,
+            fontWeight = "bold"
+          )
+        ),
+        labelLine = list(show = FALSE),
+        data = list(
+          list(value = 1048, name = "Search Engine"),
+          list(value = 735, name = "Direct"),
+          list(value = 580, name = "Email"),
+          list(value = 484, name = "Union Ads"),
+          list(value = 300, name = "Video Ads")
+        )
+      )
+    )
+  ))
+```
+
+Para adicionar um ECharts. no Shiny, utilizamos o par de funções `echarts4r::echarts4rOutput()` e `echarts4r::renderEcharts4r()`. Na função `renderEcharts4r()`, basta passarmos um código que retorne um gráfico ECharts.
+
+Rode o app abaixo para ver um exemplo.
+
+```{r, eval = FALSE}
+library(shiny)
+
+vars <- names(mtcars)
+
+ui <- fluidPage(
+  titlePanel("Highcharts"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        "x",
+        "Eixo x",
+        choices = vars
+      ),
+      selectInput(
+        "y",
+        "Eixo y",
+        choices = vars,
+        selected = vars[2]
+      )
+    ),
+    mainPanel(
+      echarts4r::echarts4rOutput("grafico")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  output$grafico <- echarts4r::renderEcharts4r({
+    mtcars |>
+      echarts4r::e_charts_(x = input$x) |>
+      echarts4r::e_scatter_(serie = input$y)
+  })
+}
+
+shinyApp(ui, server)
+
+```
+
+O echarts disponibiliza automaticamente diversos eventos na lista `input` com a seguinte nomenclatura: `outputId_eventType`. Alguns deles são
+
+- `input$outputId_clicked_data`: retorna os dados de um elemento clicado.
+
+- `input$outputId_clicked_serie`: retorna a série de um elemento clicado.
+
+- `input$outputId_mouseover_data`: retorna os dados de um elemento indicado pelo mouse (cursor do mouse em cima do elemento).
+
+<!-- TODO: colocar GIF como exemplo -->
+
+Veja a lista completa na [documentação do pacote](https://echarts4r.john-coene.com/articles/shiny.html).
+
+### Highcharts
+
+Para utilizar a biblioteca JavaScript [Highcharts](https://www.highcharts.com/) no R, podemos utilizar o pacote `highcharter`.
+
+```{r, eval = FALSE}
+install.packages("highcharter")
+```
+
+> **Importante!** A biblioteca Highcharts é gratuita apenas para fins educacionais e não lucrativos (exceto órgãos governamentais). Para outros usos, você pode precisar de uma licença.
+
+O `highcharter` também **não** possui uma função tradutora de ggplot, equivalente à `ggplotly` do pacote `plotly`. Para criar um Highchart, podemos utilizar a função `highcharter::hchart()` ou `highcharter::highchart()`.
+
+A função `highcharter::hchart()` tem uma sintaxe parecida com a do pacote `ggplot2`. No entanto, nem todo gráfico será possível ser contruído a partir dessa função.
+
+```{r}
+mtcars |> 
+  highcharter::hchart(highcharter::hcaes(x = wt, y = mpg), type = "scatter")
+```
+
+A função `highcharter::highchart()` segue uma estrutura parecida com a da biblioteca JS, sendo uma opção melhor para construir gráficos mais complexos, pois podemos com essa sintaxe seguir mais facilmente a documentação da Highcharts.
+
+```{r}
+highcharter::highchart() |> 
+  highcharter::hc_add_series(
+    data = highcharter::list_parse2(mtcars[, c("wt", "mpg")]),
+    type = "scatter"
+  )
+```
+
+Veja que, nesse caso, os dados precisaram ser passados em forma de lista. Para isso, utilizamos a função `highcharter::list_parse2()`, que faz algo equivalente a `purrr::map2(mtcars$wt, mtcars$mpg, function(x, y) list(x, y))`.
+
+Para adicionar um Highchart no Shiny, utilizamos o par de funções `highcharter::highchartOutput()` e `highcharter::renderHighchart()`. Veja um exemplo a seguir. 
+
+```{r, eval = FALSE}
+library(shiny)
+
+vars <- names(mtcars)
+
+ui <- fluidPage(
+  titlePanel("Highcharts"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        "x",
+        "Eixo x",
+        choices = vars
+      ),
+      selectInput(
+        "y",
+        "Eixo y",
+        choices = vars,
+        selected = vars[2]
+      )
+    ),
+    mainPanel(
+      highcharter::highchartOutput("grafico")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  output$grafico <- highcharter::renderHighchart({
+    highcharter::highchart() |>
+      highcharter::hc_add_series(
+        data = highcharter::list_parse2(mtcars[, c(input$x, input$y)]),
+        type = "scatter"
+      )
+  })
+}
+
+shinyApp(ui, server)
+```
+
+Para acessarmos eventos em um highchart, precisamos adicionar as funções `hc_add_event_point()` ou `hc_add_event_series`() no código que gera os gráficos. Dessa forma, a informação é adiciona à lista `input` em valores com a seguinte nomenclatura `outputId_eventType`.
+
+Por exemplo, para um highchart com `outputId = "grafico"`, teremos
+
+```{r, eval = FALSE}
+input$grafico_click
+input$grafico_mouseOver
+```
+
+Para saber mais, acesse a [documentação do pacote](https://jkunst.com/highcharter/articles/shiny.html).
+
+## Mapas
+
+Nesta seção, mostraremos como construir mapas interativos com a biblioteca Leaflet.
+
+### Leaflet
+
+O pacote `leaflet` nos permite criar mapas interativos baseados na biblioteca  JavaScript open-source [Leaflet](https://leafletjs.com/). 
+
+Para instalar o pacote, rode o código abaixo:
+
+```{r, eval = FALSE}
+install.packages("leaflet")
+```
+
+Para criar um mapa leaflet, utilizamos a função `leaflet::leaflet()` em conjunto de diversas funções auxiliares que caracterizam o nosso mapa.
+
+```{r}
+leaflet::leaflet() |> 
+  leaflet::addTiles() |> 
+  leaflet::addMarkers(
+    lng = -46.6623969, 
+    lat = -23.5581664, 
+    popup = "Antes da pandemia, a Curso-R morava aqui."
+  )
+```
+
+<br>
+
+A função `leaflet::addTiles()` define o tipo de mapa que será mostrado (o padrão é um mapa de ruas) e a função `leaflet::addMarkers()` coloca um marcador no mapa. Você também pode associar colunas de uma base aos argumentos `lat` e `lng`.
+
+```{r}
+quakes |> 
+  dplyr::slice(1:100) |> 
+  leaflet::leaflet() |> 
+  leaflet::addTiles() |> 
+  leaflet::addMarkers(
+    lng = ~long, 
+    lat = ~lat
+  )
+```
+
+<br>
+
+Um tutorial de como utilizar o `leaflet` pode ser encontrado [aqui](http://rstudio.github.io/leaflet/).
+
+Para colocar um mapa leaflet no nosso app, precisaremos criar um leaflet e das funções `leaflet::leafletOutput()` e `leaflet::renderLeaflet()`. Rode o app abaixo para ver um exemplo.
+
+```{r, eval = FALSE}
+library(shiny)
+
+vars <- names(mtcars)
+
+ui <- fluidPage(
+  titlePanel("Leaflet"),
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput(
+        "mag",
+        "Magnitude",
+        min = min(quakes$mag),
+        max = max(quakes$mag),
+        value = c(5, 6)
+      ),
+    ),
+    mainPanel(
+      leaflet::leafletOutput("mapa")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+
+  output$mapa <- leaflet::renderLeaflet({
+
+    quakes |>
+      dplyr::filter(mag >= input$mag[1], mag <= input$mag[2]) |>
+      leaflet::leaflet() |>
+      leaflet::addTiles() |>
+      leaflet::addMarkers(
+        lng = ~long,
+        lat = ~lat
+      )
+
+  })
+
+}
+
+shinyApp(ui, server)
+
+```
+
+O `leaflet` envia automaticamente valores provenientes de eventos para a lista `input`. O seguinte padrão de nome é utilizado: `input$outputId_tipoObjeto_nomeEvento`.
+
+Se um mapa com `outputId = "mapa"` tiver um círculo, por exemplo, ao clicar no círculo o `input$mapa_shape_click` será atualizado. Antes do primeiro clique, o valor de `input$mapa_shape_click` é `NULL`.
+
+O leaflet possui os seguintes tipos de objeto (`tipoObjeto`): `marker`, `shape`, `geojson` e `topojson`; e os seguintes tipos de eventos (`nomeEvento`): `click`, `mouseover` and `mouseout`.
+
+Ao realizar uma ação, o valor do `input` correspondente passa a ser uma lista com os seguintes valores:
+
+- `lat`: a latitude do objeto
+
+- `lng`: a longitude do objeto
+
+- `id`: o `layerId`, se disponível
+
+Além dos eventos associados a um objeto, o `leaflet` também disponibiliza os seguintes valores
+
+- `input$outputId_click`: que é atualizado sempre que o mapa base é clicado (o clique não é em um elemento, e sim diretamente no mapa). O valor é uma lista com a latitude e a longitude.
+
+- `input$outputId_bounds`: que contém a latitude/longitude dos limites do mapa atualmente visível na tela.
+
+- `input$outputId_zoom`: que contém um inteiro indicando o nível do zoom aplicado ao mapa.
+
+- `input$outputId_center`: que contém a latitude/longitude do centro do mapa atualmente visível na tela.
+
+<!-- TODO: colocar GIF com exemplo, com o código-->
+
+
+
