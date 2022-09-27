@@ -1,0 +1,20 @@
+# Referências {-}
+
+Abaixo, listamos as referências utilizadas na construção deste livro.
+
+#### Programação em R {-}
+
+- [Ciência de Dados em R](https://livro.curso-r.com/), da Curso-R
+
+- [R for Data Sciente](https://r4ds.had.co.nz/), do Garrett Grolemund e Hadley Wickham
+
+- [Advanced R](https://adv-r.hadley.nz/), do Hadley Wickham
+
+- [R packages](http://r-pkgs.had.co.nz/intro.html), do Hadley Wickham
+
+#### Shiny
+
+- [Mastering Shiny](https://mastering-shiny.org/), do Hadley Wickham
+
+- [Engineering Shiny](https://engineering-shiny.org/), do Colin Fay, Sébastien Rochette, Vincent Guyader e Cervan Girard.
+
