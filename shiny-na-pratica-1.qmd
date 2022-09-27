@@ -2,7 +2,7 @@
 
 ## Importando bases de dados
 
-## Gráficos com `ggplot2`
+## Gráficos com `ggplot2` {#sec-ggplot2}
 
 Gráficos são a alegria da festa na hora de comunicarmos os resultados de uma análise de dados. Embora possamos usar tabelas, textos ou caixinhas coloridas com valores para comunicar nossos resultados, são eles que geralmente chamam e prendem a atenção de quem está utilizando o app.
 
@@ -80,6 +80,110 @@ knitr::include_graphics("img/redimensionando_janela.gif")
 Sem esse recurso, nossos gráficos seriam apenas imagens sendo esticadas e achatadas, o que provavelmente os deixaria pixelados. Ao contrário do que acontece no R Markdown, em um relatório HTML ou em um flexdashboard por exemplo, no Shiny não precisamos nos preocupar muito com as dimensões de um `ggplot`. Ele será sempre automaticamente otimizado para o espaço disponível na tela.
 
 Mas nem tudo são flores... Por melhor que consigamos mexer no visual do nosso ggplot utilizando a função `theme()`, no fim do dia ele continuará sendo apenas uma imagem no nosso app. Isso significa que não será possível atribuir a ele qualquer comportamento interativo, como *tooltips*, *drildown* ou ações geradas por cliques no gráfico. Para isso, precisaremos utilizar as bibliotecas gráficas próprias para a Web, que utilizam JavaScript para criar esses recursos. Falaremos sobre elas no [Capítulo -@sec-htmlwidgets].
+
+## Animações de carregamento
+
+É muito comum termos visualizações no nosso app que demoram para serem geradas. Quando estamos carregando o app, isso pode fazer com que parte da UI fique em branco, parecendo que a página está quebrada ou fazendo com que alguém passe em branco pelo output que você teve tanto trabalho para fazer. Quando a visualização está sendo recalculada, o padrão do Shiny é deixar a versão anterior acinzentada até que a nova apareça, o que pode gerar estranheza e também passar a ideia de que o aplicativo quebrou.
+
+É uma boa prática sempre avisarmos a quem estiver usando o app que alguma coisa está acontecendo por trás das cortinas. Quando a espera é muito longa, devemos sempre que possível explicar o porquê a pessoa está esperando e dar uma estimativa do tempo. Nesses casos, barras de carregamento são a melhor alternativa. Falaremos delas na próxima seção.
+
+Quando a espera não é tão grande (entre 2 e 10 segundos, por exemplo), animações giratórias ou de looping infinito podem ser utilizadas para indicar que algo vai aparecer ali e reduzir um pouco a percepção do tempo de espera.
+
+Nesta seção, falaremos de dois pacotes que deixam muito simples a tarefa de incluir essas animações em nossos outputs: o `shinycssloaders` e o `shinyWidgets`.
+
+Se você ainda não tem esses pacotes instalados, ambos estão no CRAN:
+
+```{r, eval = FALSE}
+install.packages("shinycssloaders")
+install.packages("shinyWidgets")
+```
+
+O `shinycssloaders` é um pacote mantido pelo [Dean Attali](https://github.com/daattali) que possui uma única função: `withSpinner()`. Para colocar a animação de carregamento em uma visualização, basta colocar a função `*Output()` dentro da função `withSpinner()`. Sempre que ela estiver sendo calculada, um *spinner* será mostrado no lugar.
+
+Rode o Shiny app abaixo para ver um exemplo:
+
+```{r, eval = FALSE}
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel("Exemplo shinyWidgets::addSpinner"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        inputId = "variavel",
+        label = "Escolha uma variável",
+        choices = names(mtcars)
+      )
+    ),
+    mainPanel(
+      shinycssloaders::withSpinner(
+        plotOutput(outputId = "histograma"),
+        type = 4,
+        color = "orange",
+        size = 2
+      )
+    )
+  )
+)
+
+server <- function(input, output, session) {
+
+  output$histograma <- renderPlot({
+    Sys.sleep(5)
+    hist(mtcars[[input$variavel]])
+  })
+
+
+}
+
+shinyApp(ui, server)
+
+```
+
+Além várias opções de animações diferentes, que você pode trocar no argumento `type`, também é possível ajustar o tamanho, a cor, a cor de fundo e até usar uma imagem própria como animação^[Pode ser uma imagem estática ou GIF.].
+
+O pacote `shinyWidgets` é mantido pela equipe da [dreamRs](https://github.com/dreamRs). Além de diversos widgets muito úteis, ele possui a função `shinyWidgets::addSpinner()`. Assm como a função `shinycssloards::withSpinner()`, basta embrulhar suas funções `*Output()` com a função `shinyWidgets::addSpinner()` para adicionar a animação às suas visualizações.
+
+São diversas opções de animação, escolhidas por meio do argumento `spin`. Aqui você pode customizar apenas a cor delas. Rode o app a seguir para ver um exemplo.
+
+```{r, eval = FALSE}
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel("Exemplo shinyWidgets::addSpinner"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        inputId = "variavel",
+        label = "Escolha uma variável",
+        choices = names(mtcars)
+      )
+    ),
+    mainPanel(
+      shinyWidgets::addSpinner(
+        plotOutput(outputId = "histograma"),
+        spin = "cube",
+        color = "purple"
+      )
+    )
+  )
+)
+
+server <- function(input, output, session) {
+
+  output$histograma <- renderPlot({
+    Sys.sleep(5)
+    hist(mtcars[[input$variavel]])
+  })
+
+
+}
+
+shinyApp(ui, server)
+
+```
+
+## Barras de carregamento
 
 ## Usando Markdown para textos
 

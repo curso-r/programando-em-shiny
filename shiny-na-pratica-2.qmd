@@ -1,0 +1,443 @@
+# Shiny na prática II
+
+## Tooltips
+
+*Tooltips* são uma ótima maneira de se comunicar com a pessoa utilizando o seu app. Elas permitem passar todo tipo de informação extra e não oculpam espaço da UI.
+
+Essencialmente, elas são textos que só aparecem quando passamos o ponteiro do mouse em algum elemento da tela. Por exemplo, passe o mouse em cima da frase a seguir:
+
+```{r, echo = FALSE}
+tippy::tippy("Passe o mouse aqui!", tooltip = "Olá! Eu sou uma tooptip!")
+```
+
+<br>
+
+Existem várias soluções disponíveis para incluirmos *tooltips* em um aplicativo Shiny, entre elas o pacote `tippy`.
+
+Esse pacote está no CRAN, então basta rodar o código abaixo para instalá-lo:
+
+```{r, eval = FALSE}
+install.packages("tippy")
+```
+
+
+Para colocar uma *tooltip* em um elemento do seu app, basta usar a função `tippy::with_tippy()`.
+
+```{r, eval = FALSE}
+tippy::with_tippy(
+  numericInput(
+    "tamanho",
+    label = "Selecione o tamanho da amostra",
+    value = 1000,
+    step = 1000
+  ),
+  tooltip = "Amostra de uma distribuição Normal com média 0 e variância 100."
+)
+```
+
+```{r, echo = FALSE, out.width="70%"}
+knitr::include_graphics("img/tippy.png")
+```
+
+
+Para aplicar a mesma *tooltip* a vários elementos, utilize a função `tippy::tippy_class()`.
+
+```{r, eval = FALSE}
+fluidRow(
+  column(
+    width = 4,
+    div(
+      class = "valuebox-tip",
+      shinydashboard::valueBoxOutput("valor_1", width = 12)
+    )
+  ),
+  column(
+    width = 4,
+    div(
+      class = "valuebox-tip",
+      shinydashboard::valueBoxOutput("valor_2", width = 12)
+    )
+  ),
+  column(
+    width = 4,
+    div(
+      class = "valuebox-tip",
+      shinydashboard::valueBoxOutput("valor_3", width = 12)
+    )
+  ),
+  column(
+    width = 12,
+    plotOutput("grafico")
+  ),
+  tippy::tippy_class(
+    "valuebox-tip",
+    content = "Você precisa importar o css do pacote shinydashboard se quiser usar valueBoxes fora do shinydashboard."
+  )
+)
+```
+
+```{r, echo = FALSE, out.width="90%"}
+knitr::include_graphics("img/tippy_class.png")
+```
+
+Você pode customizar a *tooltip* seguindo os parâmetros da [documentação oficial da biblioteca `tippy.js`](https://atomiks.github.io/tippyjs/v6/all-props/).
+
+```{r, eval = FALSE}
+tippy::tippy_class(
+  "valuebox-tip",
+  content = "Você precisa importar o css do pacote shinydashboard se quiser usar valueBoxes fora do shinydashboard.",
+  arrow = TRUE,
+  placement = "left"
+)
+```
+
+```{r, echo = FALSE, out.width="90%"}
+knitr::include_graphics("img/tippy_left.png")
+```
+
+Os fragmentos de código acima pertencem ao app a seguir. Rode o app para ver as *tooltips* em funcionamento.
+
+```{r, eval = FALSE}
+library(shiny)
+
+ui <- fluidPage(
+  shinyWidgets::useShinydashboard(),
+  titlePanel("Usando tooltips"),
+  sidebarLayout(
+    sidebarPanel(
+      tippy::with_tippy(
+        numericInput(
+          "tamanho",
+          label = "Selecione o tamanho da amostra",
+          value = 1000,
+          step = 1000
+        ),
+        tooltip = "Amostra de uma distribuição Normal com média 0 e variância 100."
+      )
+    ),
+    mainPanel(
+      fluidRow(
+        column(
+          width = 4,
+          div(
+            class = "valuebox-tip",
+            shinydashboard::valueBoxOutput("valor_1", width = 12)
+          )
+        ),
+        column(
+          width = 4,
+          div(
+            class = "valuebox-tip",
+            shinydashboard::valueBoxOutput("valor_2", width = 12)
+          )
+        ),
+        column(
+          width = 4,
+          div(
+            class = "valuebox-tip",
+            shinydashboard::valueBoxOutput("valor_3", width = 12)
+          )
+        ),
+        column(
+          width = 12,
+          plotOutput("grafico")
+        ),
+        tippy::tippy_class(
+          "valuebox-tip",
+          content = "Você precisa importar o css do pacote shinydashboard se quiser usar valueBoxes fora do shinydashboard.",
+          arrow = TRUE,
+          placement = "left"
+        )
+      )
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  
+  amostra <- reactive(rnorm(input$tamanho, sd = 10))
+  
+  output$valor_1 <- shinydashboard::renderValueBox({
+    shinydashboard::valueBox(
+      value = round(mean(amostra()), 1),
+      subtitle = "Média dos valores",
+      icon = icon("info-circle")
+    )
+  })
+  
+  output$valor_2 <- shinydashboard::renderValueBox({
+    shinydashboard::valueBox(
+      value = round(var(amostra()), 1),
+      subtitle = "Variância dos valores",
+      icon = icon("info-circle")
+    )
+  })
+  
+  output$valor_3 <- shinydashboard::renderValueBox({
+    shinydashboard::valueBox(
+      value = round(sd(amostra()), 1),
+      subtitle = "Desvio-padrão dos valores",
+      icon = icon("info-circle")
+    )
+  })
+  
+  output$grafico <- renderPlot(hist(amostra()))
+  
+}
+
+shinyApp(ui, server)
+
+```
+
+
+## Seletor de visualizações
+
+Nesta seção, vamos mostrar como usar o widget `radioGroupButtons` do pacote `shinyWidgets` para construir um [app com seletor de visualizações](https://acursor.shinyapps.io/seletor-visualizacoes/), isto é, botões que mudam o tipo de visualização apresentada na tela.
+
+Como exemplo, vamos construir um shiny app que mostra um gráfico de barras, um gráfico de linhas ou uma tabela (a depender da escolha da pessoa que estiver usando) do número de gols do Brasileirão^[Campeonato Brasileiro de futebol da Série A.] por temporada.
+
+O primeiro passo é configurar o widget corretamente. Veja abaixo que o segredo é utilizar os argumentos `choiceValues` e `choiceNames`. Para o primeiro, passamos os valores que serão acessados dentro do `server` a depender da escolha na UI (equivalente ao argumento `choices`). Ao segundo, podemos passar tanto textos (que seriam escritos dentro do botão) quanto ícones. Nesse caso, utilizamos ícones da biblioteca [Font Awesome](https://fontawesome.com/), com ajuda da função `shiny::icon()`. Repare também que deixamos o tamanho dos botões um pouco maiores com o argumento `size = "lg"`.
+
+```{r, eval = FALSE}
+shinyWidgets::radioGroupButtons(
+  inputId = "vis_escolhida",
+  label = "",
+  choiceValues = c("barras", "linhas", "tabela"),
+  choiceNames = list(
+    icon("bar-chart"),
+    icon("line-chart"),
+    icon("table")
+  ),
+  size = "lg",
+  selected = "barras"
+)
+```
+
+
+Agora, precisamos construir a lógina do Output, tanto na UI como no server. Como a nossa visualização pode gerar gráficos ou uma tabela, precisaremos de funções `*Output()` e `render*()` diferentes. Dessa forma, vamos utilizar na nossa UI um `OutputUI()`.
+
+```{r, eval = FALSE}
+# A nossa UI ficará assim
+ui <- fluidPage(
+  fluidRow(
+    column(
+      width = 12,
+      h1("App com seletor de visualizações")
+    )
+  ),
+  br(),
+  fluidRow(
+    column(
+      offset = 1,
+      width = 11,
+      shinyWidgets::radioGroupButtons(
+        inputId = "vis_escolhida",
+        label = "",
+        choiceValues = c("barras", "linhas", "tabela"),
+        choiceNames = list(
+          icon("bar-chart"),
+          icon("line-chart"),
+          icon("table")
+        ),
+        size = "lg",
+        selected = "barras"
+      )
+    )
+  ),
+  br(),
+  fluidRow(
+    column(
+      width = 12,
+      uiOutput("vis")
+    )
+  )
+)
+```
+
+Agora, no server, podemos criar funções `*Output()` diferentes a depender da visualização escolhida. Usamos `plotOutput()` para os gráficos e `reactable::reactableOutput()` para a tabela.
+
+```{r, eval = FALSE}
+output$vis <- renderUI({
+  if (input$vis_escolhida %in% c("barras", "linhas")) {
+    plotOutput("grafico")
+  } else if (input$vis_escolhida == "tabela") {
+    reactable::reactableOutput("tabela")
+  }
+})
+```
+
+Agora vamos construir nossas visualizações. Primeiro, vamos montar a base que precisamos para gerar tanto os gráficos quanto a tabela.
+
+Os dados vêm do pacote `brasileirao`. Se você não possui esse pacote instalado, basta rodar o código abaixo:
+
+```{r, eval = FALSE}
+install.packages("remotes")
+remotes::install_github("williamorim/brasileirao")
+```
+
+Como a tabela que gera os gráficos não depende de nenhum valor ou expressão reativa, podemos colocar o código que a gera diretamente no server.
+
+```{r, eval = FALSE}
+tab <- brasileirao::matches |>
+  dplyr::filter(
+    score != "x",
+    season %in% 2006:2020
+  ) |>
+  tidyr::separate(
+    score,
+    c("gols_casa", "gols_visitante"),
+    sep = "x",
+    convert = TRUE
+  ) |>
+  dplyr::mutate(
+    gols = gols_casa + gols_visitante
+  ) |>
+  dplyr::group_by(season) |>
+  dplyr::summarise(gols = sum(gols))
+```
+
+
+Para gerar os gráficos, só precisamos de um `renderPlot()` e um `if/else` para devolver o gráfico certo. 
+
+```{r, eval = FALSE}
+output$grafico <- renderPlot({
+  
+  grafico_base <- tab |>
+    ggplot(aes(x = season, y = gols)) +
+    labs(x = "Temporada", y = "Número de gols") +
+    theme_minimal() +
+    ggtitle("Número de gols do Brasileirão por temporada")
+  
+  if (input$vis_escolhida == "linhas") {
+    grafico_base +
+      geom_line(color = "dark green")
+  } else if (input$vis_escolhida == "barras") {
+    grafico_base +
+      geom_col(width = 0.5, fill = "dark green")
+  }
+})
+```
+
+Para gerar a tabela, precisamos apenas de um `renderReactable()`.
+
+```{r, eval = FALSE}
+output$tabela <- reactable::renderReactable({
+  tab |>
+    reactable::reactable(
+      fullWidth = FALSE,
+      columns = list(
+        season = reactable::colDef(
+          name = "Temporada"
+        ),
+        gols = reactable::colDef(
+          name = "Número de gols"
+        )
+      )
+    )
+})
+```
+
+Juntando tudo, temos o app a seguir:
+
+```{r, eval = FALSE}
+library(shiny)
+library(ggplot2)
+
+ui <- fluidPage(
+  fluidRow(
+    column(
+      width = 12,
+      h1("App com seletor de visualizações")
+    )
+  ),
+  br(),
+  fluidRow(
+    column(
+      offset = 1,
+      width = 11,
+      shinyWidgets::radioGroupButtons(
+        inputId = "vis_escolhida",
+        label = "",
+        choiceValues = c("barras", "linhas", "tabela"),
+        choiceNames = list(
+          icon("bar-chart"),
+          icon("line-chart"),
+          icon("table")
+        ),
+        size = "lg",
+        selected = "barras"
+      )
+    )
+  ),
+  br(),
+  fluidRow(
+    column(
+      width = 12,
+      uiOutput("vis")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+
+  output$vis <- renderUI({
+    if (input$vis_escolhida %in% c("barras", "linhas")) {
+      plotOutput("grafico")
+    } else if (input$vis_escolhida == "tabela") {
+      reactable::reactableOutput("tabela")
+    }
+  })
+
+  tab <- brasileirao::matches |>
+    dplyr::filter(
+      score != "x",
+      season %in% 2006:2020
+    ) |>
+    tidyr::separate(
+      score,
+      c("gols_casa", "gols_visitante"),
+      sep = "x",
+      convert = TRUE
+    ) |>
+    dplyr::mutate(
+      gols = gols_casa + gols_visitante
+    ) |>
+    dplyr::group_by(season) |>
+    dplyr::summarise(gols = sum(gols))
+
+  output$grafico <- renderPlot({
+
+    grafico_base <- tab |>
+      ggplot(aes(x = season, y = gols)) +
+      labs(x = "Temporada", y = "Número de gols") +
+      theme_minimal() +
+      ggtitle("Número de gols do Brasileirão por temporada")
+
+    if (input$vis_escolhida == "linhas") {
+      grafico_base +
+        geom_line(color = "dark green")
+    } else if (input$vis_escolhida == "barras") {
+      grafico_base +
+        geom_col(width = 0.5, fill = "dark green")
+    }
+  })
+
+  output$tabela <- reactable::renderReactable({
+    tab |>
+      reactable::reactable(
+        fullWidth = FALSE,
+        columns = list(
+          season = reactable::colDef(
+            name = "Temporada"
+          ),
+          gols = reactable::colDef(
+            name = "Número de gols"
+          )
+        )
+      )
+  })
+}
+
+shinyApp(ui, server)
+
+```
