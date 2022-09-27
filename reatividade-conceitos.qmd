@@ -5,7 +5,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Reatividade: conceitos básicos {#reatividade}
+# Reatividade: conceitos básicos {#sec-reatividade}
 
 Imagine que gostaríamos de criar um app que geresse um gráfico com o resultado do sorteio de uma amostra de números entre 1 e 10 e que o tamanho dessa amostra fosse definido por um input. Além disso, que esse app também indicasse em texto qual foi o número mais sorteado. 
 

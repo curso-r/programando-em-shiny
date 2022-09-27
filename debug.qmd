@@ -1,0 +1,122 @@
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  fig.align = "center"
+)
+```
+
+# Debug
+
+Na programação, *debug*^[Também conhecido como *debugging* (depuração, em português).] se refere ao processo de encontrar e corrigir erros em códigos. 
+
+No desenvolvimento de aplicativos Shiny, esse processo é um pouco mais complicado em comparação com outras utilizações da linguagem R (como a construção de um gráfico ou o ajuste de um modelo). O código especificado no `server` do nosso aplicativo só é avaliado com o app em funcionamento, por trás de toda a infraestrutura (JavaScript) do Shiny. 
+
+Isso quer dizer que quase nunca conseguimos testar diretamente os códigos na função `server` e precisamos rodar o app para ver se ele de fato vai funcionar. No entanto, mesmo quando o aplicativo roda, pode ser que ele não esteja funcionando adequadamente. E quando recebemos mensagens de erro, nem sempre fica claro onde ele aconteceu.
+
+Neste capítulo descreveremos erros comuns do desenvolvimento de aplicativos Shiny e apresentaremos estratégias para facilitar o processo de debug.
+
+## Erros comuns
+
+A seguir, listamos erros frequentes no desenvolvimento de apps em Shiny. Alguns acontecem mais quando estamos começando a programar nesse framework, outros nos seguem ao longo de toda a jornada.
+
+##### Erros comuns de programação em R {-}
+
+Erros comuns de programação em R, como chamar objetos ou funções inexistentes, operações não permitidas ou utilização inadequada de funções costumam devolver mensagens de erro informativas no Console. O primeiro passo para resolver esses problemas é ler a mensagem de erro. Caso a mensagem não te dê informação o suficiente para corrigir o erro, sempre vale a pena jogar a mensagem no Google e buscar pela resposta em fóruns de dúvidas.
+
+##### Erros de sintaxe na UI ou no servidor {-}
+
+Em geral, o app não roda e receberemos a mensagem de erro `unexpected symbol`. Esses erros são causados principalmente por falta ou excesso de vírgulas, parênteses ou chaves. 
+
+##### Erros de reatividade {-}
+
+Esses erros violam premissas do Shiny, impedindo o Shiny de construir o diagrama de reatividade.
+
+A principal causa é utilizar um valor reativo ou avaliar uma expressão reativa fora de um *consumidor reativo*, isto é, uma função que *observa* valores reativos. O app não vai rodar e você verá a seguinte mensagem de erro:
+
+```{r}
+#> Can't access reactive value 'inputId' outside of
+#> reactive consumer..
+```
+
+Outro erro de reatividade muito comum é esquecer os parênteses ao chamar uma expressão reativa (objeto criado pelas funções `reactive()` e `eventReactive()`). Normalmente receberemos uma mensagem indicando que a classe de algum objeto está errada, como  `'x' must be numeric` ou a famosa mensagem `cannot coerce type 'closure' to vector of type ...`.
+
+Outras causas dizem respeito a utilização das listas `input` e `output`.
+
+Você só pode *ler* valores da lista `input`. Se você tentar gravar um valor diretamente, será retornado um erro. Isso acontece porque a lista `input` deve sempre uma *cópia* das ações do usuário no navegador, uma premissa para que o diagrama de reatividade funcione de forma correta para atualizar os valores na tela.
+
+Você só pode *escrever* valores na lista `output`. Se você tentar ler um valor, será retornado um erro. A lista `output` não contém os valores devolvidos para as funções `render*()` , mas sim o conteúdo transformado por essas funções para ser inserido no HTML.
+
+##### Violação de outras premissas do Shiny {-}
+
+Um erro comum é não fazer a correspondência certa entre as funções `_Output()` e `render_()`. O app vai rodar, mas a visualização não será mostrada. Em algumas situações, uma mensagem de erro vai ser retornada. Em outras, o erro será silencioso.
+
+Também não é raro errarmos o nome de um input (usar um input que não existe). O app vai rodar e, geralmente, retornar um erro relacionado a uma função receber um valor que não deveria ser `NULL` (já que o objeto `input` é uma lista e acessar um elemento que não existe em uma lista retorna o valor `NULL`).
+
+Se errarmos o nome de um output, o app vai rodar e não vai retornar erro. O output não será gerado. Nesse caso, estamos apenas criando uma visualização que não aparece em nenhum lugar no app.
+
+Já quando usamos o mesmo ID para dois outputs, o app vai rodar e não vai retornar erro. Os dois outputs não serão gerados.
+
+## Encontrando erros
+
+A seguir, discutiremos dois métodos para encontrarmos a causa de erros em aplicativos Shiny: as funções `cat()` e `browser()`.
+
+### A função `cat()`
+
+Uma maneira simples e eficiente de olhar o que está acontecendo dentro do `server` enquanto o app está rodando é imprimir no Console mensagens ou valores que nos dê pistas sobre a validade do nosso código.
+
+No Shiny, a melhor maneira de fazer isso é utilizando a função `cat(file = stderr(), "mensagem")`. Utilizamos essa função em detrimento das funções `print("mensagem")` ou simplesmente `cat("mensagem")` pois essas duas não vão funcionar em alguns contextos^[Como dentro da função `renderPrint()`.]. O argumento `file = stderr()` garante que a mensagem será mostrada na conexão padrão para mensagens de erro (no Console, em geral).
+
+Esse método é muito útil para saber se ou quantas vezes o Shiny está passando por uma determinada parte do código ou para retornar e validar valores calculados dentro do servidor.
+
+Exemplos:
+
+```{r, eval = FALSE}
+# Verificando quando o Shiny passa pelo reactive
+dados_filtrados <- reactive({
+  cat(file = stderr(), "O código no observe foi executado!\n")
+   dados |> 
+     dplyr::filter(UF %in% input$uf)
+})
+
+
+# Verificando número de cidades antes de gerar o gráfico
+output$grafico <- renderPlot({
+  cat(file = stderr(), "Fazendo gráfico para a renda per capita média de", nrow(dados_filtrados()), "cidades\n")
+  dados_filtrados() |> 
+    dplyr::group_by(ano) |> 
+    dplyr::summarise(renda_per_capita_media = mean(renda_per_capita)) |> 
+    ggplot2::ggplot(ggplot2::aes(x = ano, y = renda_per_capita_media)) +
+    ggplot2::geom_line()
+})
+```
+
+O `\n` ao final das mensagens garante que a próxima mensagem no Console comece em uma nova linha.
+
+### A função `browser()`
+
+Em algumas situações, a gente realmente gostaria de estar dentro da função `server` durante a sua execução para avaliar quais valores nossos códigos estão recebendo e quais valores eles estão gerando. Graças à função `browser()` isso é possível!
+
+Com a função `browser()`, podemos espiar o que está acontecendo dentro do server quando rodamos o nosso aplicativo. Basta colocar essa função onde você suspeita que o problema está acontecendo e, quando o Shiny passar por ela, a execução do app será pausada e o Console ficará disponível para testes. 
+
+Colocando a função `browser()` dentro de um consumidor reativo (funções da família `render*()`, por exemplo), você poderá acessar valores da lista `input` ou expressões reativas geradas com `reactive()` ou `eventReactive()`.
+
+```{r, eval=FALSE}
+# server
+valor_reativo <- reactive({
+  sample(1:10, 1)
+})
+
+output$plot <- renderPlot({
+  browser()
+  hist(rnorm(100, valor_reativo, 1))
+})
+
+```
+
+```{r}
+# No console
+
+# Browse[1]> valor_reativo()
+# [1] 4
+```
+
+Para sair do `browser` e voltar à execução do app, basta clicar no botão `Continue`, no topo do Console. Clicando no botão `Stop`, tanto o `browser` quanto a execução do app serão finalizadas. Após encontrar e solucionar o problema, não se esqueça de remover a função `browser()` do seu código.

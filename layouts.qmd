@@ -1,0 +1,741 @@
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  fig.align = "center"
+)
+```
+
+# Layouts {#layouts}
+
+Até então, todos os exemplos que fizemos não possuem qualquer preocupação com o layout. Apenas empilhamos elementos na UI, tanto no código quanto na tela.
+
+Neste capítulo, vamos discutir como customizar o layout de um aplicativo Shiny. Para isso, precisamos falar um pouco de HTML e do framework Boostrap, utilizado por padrão pelo Shiny para lidar com questões importantes no desenvolvimento Web. Além de sairmos capazes de construir nossos próprios layouts, também aprenderemos aqui como utilizar alguns layouts prontos do pacote `shiny` e, pela primeira vez, exploraremos recursos em outros pacotes da comunidade Shiny.
+
+## Um pouco sobre HTML
+
+HTML é uma [linguagem de marcação](https://pt.wikipedia.org/wiki/Linguagem_de_marca%C3%A7%C3%A3o) para construir páginas web. 
+
+Uma linguagem de marcação é apenas um tipo de documento que contem texto simples (como em um bloco de notas) e um conjunto de instruções para formatar (anotar, marcar) partes específicas do conteúdo. Esse texto simples é então transformado em um texto bem formatado por algum mecanismo que renderiza as instruções. Além do HTML, o LaTeX e o (R) Markdown são outros exemplos comuns de linguagem de marcação bastante utilizadas. No caso do HTML, os navegadores são os responsáveis por renderizar documentos HTML em  páginas bem formatadas.
+
+A maior parte do esforço em aprender uma linguagem de marcação está em aprender quais são e como utilizar as instruções de formatação. No HTML, as instrução de formatação são chamadas *tags*. Utilizaremos as *tags* para formatar o texto da página web que estamos criando. Com elas, podemos, por exemplo, transformar um texto em negrito ou itálico, criar títulos e inserir imagens. 
+
+O pacote `shiny` traz diversas funções para criarmos essas tags. As principais são:
+
+```{r, echo = FALSE}
+tibble::tribble(
+  ~`função`, ~`para que serve`,
+  "a()", "cria um hiperlink",
+  "hr()", "cria uma linha horizontal",
+  "br()", "insere uma quebra de linha",
+  "h1(), ..., h6()", "cria títulos",
+  "img()", "insere uma imagem",
+  "p()", "cria um parágrafo",
+  "em()", "formata o texto em itálico",
+  "strong()", "formata o texto em negrito"
+) |> 
+  reactable::reactable(
+    sortable = FALSE
+  )
+```
+
+Podemos utilizar essas funções à vontade na UI para construirmos o layout do nosso app. O código abaixo, por exemplo, gera o código HTML a seguir.
+
+```{r, eval = FALSE}
+#ui
+fluidPage(
+  h1("Esse é o título do meu app!", align = "center"),
+  hr(),
+  h3("Sobre"),
+  p("Lorem ipsum", tags$em("dolor sit amet", .noWS = "after"), ", consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+  p(strong("Lorem ipsum dolor"), "sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+  hr(),
+  img(src = "img/logo.png", width = "50%", style = "display: block; margin: auto;")
+)
+```
+
+```{html}
+<div class="container-fluid">
+  <h1 align="center">Esse é o título do meu app!</h1>
+  <hr/>
+  <h3>Sobre</h3>
+  <p>
+    Lorem ipsum
+    <em>dolor sit amet</em>, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </p>
+  <p>
+    <strong>Lorem ipsum dolor</strong>
+    sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </p>
+  <hr/>
+  <img src="img/logo.png" width="50%" style="display: block; margin: auto;"/>
+</div>
+```
+
+Que, por sua vez, gera a seguinte UI:
+
+```{r, echo = FALSE, results='asis'}
+library(shiny)
+#ui
+fluidPage(
+  h1("Esse é o título do meu app!", align = "center"),
+  hr(),
+  h3("Sobre"),
+  p("Lorem ipsum", tags$em("dolor sit amet", .noWS = "after"), ", consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+  p(strong("Lorem ipsum dolor"), "sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+  hr(),
+  img(src = "img/logo.png", width = "50%", style = "display: block; margin: auto;")
+)
+```
+
+<br>
+<br>
+
+Repare que algumas tags, como a `h1` e a `img` possuem parâmetros (ou atributos, como são chamados no HTML). O parâmetro `align` na tag `h1` faz com que o texto fique alinhado no centro da página. Esse parâmetro é típico das tags de título (`h1`, ..., `h6`). Outras tags de texto não possuem necessariamente esse argumento. 
+
+Já o argumento `src` da tag `img` é utilizado para definirmos o caminho para a imagem que queremos mostrar. O argumento `width` especifica o comprimento da imagem com relação ao espaço disponível para ela. No exemplo, o logo da Curso-R ocupa 50% do comprimento da página deste livro. O argumento `style` nos permite formatar ainda mais a imagem a partir de atributos CSS, centralizando a imagem horizontalmente na tela nesse caso.
+
+Conforme aprendemos e utilizamos o Shiny, inevitavelmente aprendemos bastante sobre HTML. Isso aumenta bastante a nossa capacidade de personalizar a UI dos nossos aplicativos e nos ajuda a entender como o Shiny funciona. Por enquanto, vamos manter o foco em explorar as principais ferramentas do Shiny, mas no Capítulo @html-css-js faremos uma breve introdução formal tanto de HTML quanto de CSS. 
+
+## Bootstrap
+
+Hoje em dia, uma página Web pode ser vista em dispositivos de diferentes tamanhos (celulares, tablets, notebooks, televisões...) e o layout da página deve se adaptar à enorme variedade de tamanho de telas. Isso é um grande desafio para quem desenvolve.
+
+Uma solução seria produzir uma versão para telas pequenas e uma versão para telas grandes, direcionando as visitas para a versão adequada a depender do dispositivo utilizado. Muitos sites utilizam essa alternativa, e você pode verificar isso pela URL. Páginas próprias para dispositivos *mobile* possuem um `m.` no início da URL.
+
+Nem sempre essa alternativa é viável, pois produzir duas versões de uma página ou aplicação Web pode ser muito custoso. Nesses casos, a solução é produzir um layout *responsivo*, isto é, que se adapte a depender do tamanho da tela. É aí que entra o **Bootstrap**.
+
+O [Bootstrap Framework](https://getbootstrap.com.br/docs/4.1/getting-started/introduction/) é uma coleção de códigos CSS que nos ajudam a construir páginas Web responsivas. Boa parte da internet hoje em dia é construída em cima do Bootstrap, e nossos aplicativos Shiny não serão diferentes.
+
+O Shiny importa o Bootstrap por padrão, isto é, todos os códigos CSS desse framework já estão disponíveis em nossos apps sem precisarmos especificar nada. E a melhor parte é que não precisamos saber CSS para utilizar o Boostrap no Shiny. Só precisamos aprender algumas funções de R.
+
+### Grid system
+
+Antes de vermos essas funções, precisamos entender como funciona o *grid system*. O Bootstrap estabelece que:
+
+1. os elementos em uma página serão dispostos primeiramente em linhas;
+
+2. cada nova linha será colocada embaixo da anterior;
+
+3. cada linha pode ser dividida em até 12 colunas; independentemente do tamanho da tela;
+
+4. cada coluna pode ter até 12 unidades de comprimento, sendo que a soma dos comprimentos das colunas de uma linha deve ser no máximo 12;
+
+5. quando a tela for pequena o suficiente^[Você pode conferir os tamanhos limites na documentação do Bootstrap: https://getbootstrap.com.br/docs/4.1/getting-started/introduction/)] todas as colunas passarão a ter comprimento 12.
+
+```{r, out.width="100%", echo = FALSE}
+#| fig-cap: >
+#|   Exemplos de layouts que podem ser criados com o grid system.
+#| fig-alt: >
+#|   Esquema exemplificando layouts que podem ser criados com o grid system.
+#|   Primeiro uma linha dividida em 12 colunas de tamanho 1. Abaixo, uma linha
+#|   dividida em 4 colunas de tamanho 4. Abaixo, uma linha dividida em uma 
+#|   coluna de tamanho 4 e outra de tamanho 8. Abaixo, uma linha dividida 
+#|   em duas colunas de tamanho 6. Por fim, uma linha composta por uma 
+#|   única coluna de tamanho 12.
+knitr::include_graphics("img/gridsystem.jpg")
+```
+
+Em resumo, o conceito por trás do Boostrap estabelece que o layout dos nossos apps serão formados por linhas com até 12 colunas cada. O comprimento de cada coluna pode variar de 1 a 12 unidades e a soma dos comprimentos dessas colunas pode ser no máximo 12. Se o comprimento da tela for menor que um valor limite, todas as colunas automaticamente passam a ter tamanho 12 e os elementos da página passam a ficar um embaixo do outro.
+
+No Shiny, para criar novas linhas, utilizamos a função `fluidRow()`. Para criar colunas dentro de uma linha, utilizamos a função `column()`. Essa função tem dois argumentos: `width` e `offset`. O primeiro determina o comprimento da coluna (de 1 a 12). O segundo indica quanto espaço horizontal gostaríamos de "pular" antes de começar a nossa coluna. A função `column()` é sempre utilizada dentro da função `fluidRow()`.
+
+Seguindo esse esquema, passamos a colocar o conteúdo da página dentro das colunas, isto é, dentro da função `column()`.
+
+```{r, echo = FALSE, out.width="100%"}
+#| fig-cap: >
+#|   Exemplos de layouts que podem ser criados com as funções `fluidRow()` e `column()`.
+knitr::include_graphics("img/gridsystem2.png")
+```
+
+Utilizando essas funções, podemos mudar o exemplo da seção anterior e construir o app a seguir:
+
+```{r, results='asis', eval = FALSE}
+library(shiny)
+
+fluidPage(
+  fluidRow(
+    column(
+      width = 8,
+      offset = 2,
+      h1("Esse é o título do meu app!", align = "center")
+    ),
+    column(
+      width = 2,
+      img(src = "img/logo.png", width = "100%")
+    )
+  ),
+  hr(),
+  h3("Sobre"),
+  fluidRow(
+    column(
+      width = 6,
+      p("Lorem ipsum", tags$em("dolor sit amet", .noWS = "after"), ", consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+    ),
+    column(
+      width = 6,
+      p(strong("Lorem ipsum dolor"), "sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+    )
+  ),
+  hr(),
+  fluidRow(
+    column(
+      width = 6,
+      offset = 3,
+      img(src = "img/logo.png", width = "100%")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  
+}
+
+shinyApp(ui, server)
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("img/app_bootstrap.png")
+```
+
+Repare que agora a imagem no fim da página foi centralizada utilizando as funções `fluidRow()` e `column()`. Não foi mais necessário definir CSS diretamente para realizar essa tarefa. Como exercício, rode esse app e veja o que acontece com a página conforme você diminui o comprimento da tela.
+
+### Fluid grid vs Fixed grid
+
+Agora que sabemos um pouco sobre Boostrap, podemos falar por que construímos a nossa UI dentro da função `fluidPage()`.
+
+Ao rodar essa função, vemos que ela devolve o seguinte código HTML.
+
+```{r, eval = FALSE}
+fluidPage()
+```
+
+```{html}
+<div class="container-fluid"></div>
+```
+
+
+A classe `container-fluid` aplicada ao elemento `<div>` é a explicação. Classes são utilizadas no HTML para atribuir propriedades a elementos da página. Essa classe em específico contém parte do código CSS necessário para a responsividade do Bootstrap funcionar.
+
+Em resumo, o Boostrap fala que o conteúdo da página precisa estar dentro de um elemento (`<div>`) com classe `col`, que por sua vez deve estar dentro de um elemento com classe `row` e que, por fim, deve estar dentro de um elemento com classe `container`.
+
+Veja que é exatamente isso que acontece quando escrevemos o código abaixo:
+
+```{r, eval = FALSE}
+fluidPage(
+  fluidRow(
+    column(
+      width = 4,
+      "O conteúdo do app vem aqui."
+    )
+  )
+)
+```
+
+```{html}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4">O conteúdo do app vem aqui.</div>
+  </div>
+</div>
+```
+
+Repare que a classe `col` é acompanhada de mais dois valores. O `4` representa o tamanho da coluna (foi esse o tamanho definido pela função `column()`). Já o `sm` representa o quão estreita precisa ser a tela do dispositivo para que a responsividade seja ativada. O termo `sm` é diminutivo para *small*, indicando que se a tela for menor que 750px, todas as colunas terão comprimento 12. Esse é o padrão no Shiny e **não** pode ser alterado por meio da função `column()`. Você pode saber mais sobre a classe `col` lendo [a documentação do Boostrap](https://getbootstrap.com/docs/3.4/css/#grid-options).
+
+A classe `container` também possui um qualificador: `fluid`. Isso porque existem dois tipos de grades Boostrap: `fluid` e `fixed`. Páginas construídas com a grade fluida sempre ocuparão todo o comprimento da tela, redimensionando os seus elementos dinamicamente caso o comprimento da tela mude. Já a grade fixa ocupa sempre um tamanho fixo da tela: 724px, 940px ou 1170px, a depender do quão grande for a tela. O conteúdo sempre ficará centralizado e o espaço restante ficará em branco, como uma margem aos lados.
+
+Podemos criar um app com grade fixa utilizando a função `fixedPage()` no lugar da `fluidPage()`.
+
+## Layouts prontos
+
+O pacote `shiny` fornece alguns layouts prontos para serem usados. Os principais são:
+
+- `sidebarLayout()`: para criar um aplicativo com uma barra lateral;
+
+- `navbarPage()`: para criar um aplicativo com um menu de navegação no topo da tela;
+
+- `navlistPanel()`: para criar um menu de navegação lateral;
+
+Também falaremos nesta seção de layouts que não estão no pacote `shiny`. São eles:
+
+- `shinydashboard`: possui um layout com menu navegação lateral e diversos elementos visuais extras;
+
+- `bs4Dash`: cria o mesmo layout que o `shinydashboard`, mas utiliza uma versão mais recente do Boostrap.
+
+A seguir, vamos falar com mais detalhes de cada um deles.
+
+### `sidebarLayout`
+
+O `sidebarLayout` é um layout bem simples, para apps com poucas visualizações. Ele possui uma barra lateral, onde geralmente colamos os inputs, e uma área principal, onde colocamos os outputs. A figura abaixo mostra um app sem conteúdo, mas construído com `sidebarLayout`.
+
+```{r, echo = FALSE, out.width="100%"}
+knitr::include_graphics("img/sidebarLayout.png")
+```
+
+Para criar esse layout, utilizamos a estrutura a seguir.
+
+```{r, eval = FALSE}
+ui <- fluidPage(
+  titlePanel("Shiny com sidebarLayout"),
+  sidebarLayout( 
+    sidebarPanel(
+      sliderInput(
+        "num",
+        "Número de observações:",
+        min = 0,
+        max = 1000,
+        value = 500
+      )
+    ),
+    mainPanel(
+      plotOutput("hist")
+    )
+  )
+)
+```
+
+- Todos os elementos do layout são colocados dentro da função `fluidPage()`.
+
+- A função `titlePanel()` é utilizada para inserirmos um título no app.
+
+- Especificamos o layout com a função `sidebarLayout()`.
+
+- Criamos uma barra lateral com a função `sidebarPanel()`.
+
+- Dentro do `sidebarPanel()`, colocamos tudo o que queremos que apareça na barra lateral. No exemplo, teremos um slider.
+
+- Por fim, utilizamos a função `mainPanel()` para especificar tudo o que aparecerá na área principal do app. No exemplo, teremos apenas um gráfico.
+
+### `navbarPage`
+
+O `navbarPage` é um layout dividido em páginas, muito útil para organizar o conteúdo de apps mais maiores, com muitas visualizações. Ele possui uma barra de navegação superior, onde é possível colocar um título e acessar cada uma das páginas do app. A figura abaixo mostra um app construído com esse layout.
+
+```{r, echo = FALSE, out.width="100%"}
+knitr::include_graphics("img/navbarpage.png")
+```
+
+Apesar do nome, um aplicativo construído com `navbarPage` não possui de fato várias páginas. No fundo, esse app será composto por um único arquivo HTML, contendo o código de todas as abas. Não estamos acessando páginas diferentes (a URL não muda), mas sim acessando partes de uma mesma página que ficam escondidas enquanto não olhamos para elas. 
+
+Para criar um layout com menu de navegação superior, utilizamos a função `navbarPage()`, com a estrutura a seguir.
+
+```{r, eval=FALSE}
+ui <- navbarPage(
+  title = "Shiny com navbarPage",
+  tabPanel(title = "Painel 1"),
+  tabPanel(title = "Painel 2"),
+  tabPanel(title = "Painel 3"),
+  navbarMenu(
+    title = "Mais opções",
+    tabPanel(title = "Item 1"),
+    tabPanel(title = "Item 2"),
+    tabPanel(title = "Item 3")
+  )
+)
+```
+
+- Todo o código fica agora dentro da função `navbarPage()`. Não precisamos utilizar aqui a função `fluidPage()`. Além da barra de navegação, a função `navbarPage()` cria uma página com grade fluida.
+
+- Com a função `tabPanel()`, criamos as diferentes páginas do aplicativo, que são acessadas pela barra superior. O argumento `title` indica o título que aparecerá em cada botão. 
+
+- A função `navbarMenu()` nos permite agrupar opções de página em uma caixinha de seleção.
+
+- Os itens desse menu também são criados pela função `tabPanel()`, colocadas dentro da função `navbarMenu()`.
+
+- Os inputs e outputs (e qualquer outro elemento da página) são colocados dentro de cada `tabPanel()`.
+
+### `navlistPanel`
+
+Se você prefere menus laterais, você consegue um efeito parecido com o do `navbarPage()` utilizando a função `navlistPanel()`.
+
+A figura abaixo mostra um app construído com esse menu lateral.
+
+```{r, echo = FALSE, out.width="100%"}
+knitr::include_graphics("img/navlistPage.png")
+```
+
+Para criar esse layout, utilizamos a função `navlistPanel()` como mostrado a seguir.
+
+```{r}
+ui <- fluidPage(
+  titlePanel("App com navlistPanel"),
+  navlistPanel(
+    widths = c(2, 10),
+    tabPanel(
+      title = "Página 1",
+      "Conteúdo da página 1"
+    ),
+    tabPanel(
+      title = "Página 2",
+      "Conteúdo da página 2"
+    ),
+    tabPanel(
+      title = "Página 3",
+      "Conteúdo da página 3"
+    )
+  )
+)
+```
+
+- Podemos usar o `navlistPanel` em qualquer tipo de página/layout. Aqui utilizamos dentro de uma `fluidPage` simples.
+
+- Cada página do app é colocada dentro de uma `tabPanel()` dentro da função `navlistPanel()`, igual no `navbarPage` (o conceito de "página" também é o mesmo).
+
+- O argumento `widths` da função `navlistPanel()` determina quanto espaço a barra lateral e a área reservada para o conteúdo (à direita) vão ocupar. Você deve passar dois valores de 1 a 12, somando 12 no total.
+
+### `shinydashboard`
+
+O `shinydasboard` é um pacote que introduz diversas ferramentas para o Shiny. A principal é um novo layout, dividido em três áreas:
+
+- o `header`, uma barra superior onde podemos colocar títulos, botões e links;
+
+- o `sidebar`, uma barra lateral onde podemos colocar um menu de navegação, logos e textos;
+
+- o `body`, a área do app onde construímos o conteúdo em si (inputs e outputs).
+
+A figura a seguir mostra o layout básico de um `shinydasboard`.
+
+```{r, echo = FALSE, out.width="60%"}
+knitr::include_graphics("img/shinydashboard.png")
+```
+
+Para construir esse layout, utilizamos o seguinte código:
+
+```{r, eval=FALSE}
+library(shinydashboard)
+
+ui <- dashboardPage(
+  dashboardHeader(),
+  dashboardSidebar(),
+  dashboardBody()
+)
+
+server <- function(input, output, session) {
+  
+}
+
+shinyApp(ui, server)
+```
+
+- A função `dashboardPage()` é responsável por criar a página do `shinydashboard`. Ela recebe três funções como argumentos: `dashboardHeader()`, `dashboardSidebar()` e `dashboardBody()`.
+
+- A função `dashboardHeader()` é responsável por elementos da barra superior (azul).
+
+- A função `dashboardSidebar()` é responsável por elementos da barra lateral (preta). Geralmente colocamos um menu para criar várias páginas no nosso dashboard, mas também é possível colocar imagens, logos e, embora seja incomum, até inputs e outputs.
+
+- A função `dashboardBody()` controla os elementos da área principal do app (cinza). É nela que desenvolveremos o conteúdo do nosso app.
+
+Para construir um menu na barra lateral, utilizamos a função `sidebarMenu()` dentro da função `dashboardSidebar()`. Cada item do menu é criado pela função `menuItem()`. Ao argumento `text`, passamos o nome que será apresentado na tela. Já ao `tabName`, passamos um código que será utilizado para nos referirmos a esse item de menu dentro da função `dashboardBody()`, para podermos construir o conteúdo dele. 
+
+```{r, eval=FALSE}
+dashboardSidebar(
+  sidebarMenu(
+    menuItem(text = "Página 1", tabName = "pagina1"),
+    menuItem(text = "Página 2", tabName = "pagina2")
+  )
+)
+```
+
+Dentro do `dashboardBody()` usamos a função `tabItems()` para listar os itens do menu. O conteúdo das páginas é criado utilizando a função `tabItem()`. Precisamos passar para essa função o argumento `tabName`, para nos referirmos a qual item do menu pertence o conteúdo de cada `tabItem()`. No código abaixo, substituiríamos o `...` pelos inputs e outputs que quisermos construir em cada página do dashboard.
+
+```{r, eval=FALSE}
+# ui
+dashboardBody(
+  tabItems(
+    tabItem(tabName = "pagina1", ...),
+    tabItem(tabName = "pagina2", ...)
+  )
+)
+```
+
+Assim, o código da `ui` ficaria:
+
+```{r, eval=FALSE}
+ui <- dashboardPage(
+  dashboardHeader(),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Página 1", tabName = "pagina1"),
+      menuItem("Página 2", tabName = "pagina2")
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      tabItem(tabName = "pagina1", ...),
+      tabItem(tabName = "pagina2", ...)
+    )
+  )
+)
+```
+
+Além do layout de dashboard, o pacote `shinydashboard` trás novos elementos para a UI, como o `box()` e o `tabBox()`.
+
+A função `box()` cria caixinhas que permitem separarmos conteúdo do restante da página.
+
+```{r, eval=FALSE}
+fluidRow(
+  box(
+    title = "Histograma",
+    status = "primary",
+    solidHeader = TRUE,
+    collapsible = TRUE,
+    ... # conteúdo do box
+  )
+)
+
+fluidRow(
+  box(
+    title = "Inputs",
+    status = "warning",
+    solidHeader = TRUE,
+    ... # conteúdo do box
+  )
+)
+```
+
+```{r, echo = FALSE, out.width="60%"}
+knitr::include_graphics("img/box.png")
+```
+
+Se olharmos o código HTML gerado por um `box()`, notamos que essas estruturas são colunas dentro do Bootstrap. Por essa razão, a função `box()` deve sempre estar dentro de uma `fluidRow()`, como fizemos no código acima.
+
+```{r, eval = FALSE}
+box()
+```
+
+```{html}
+<div class="col-sm-6">
+  <div class="box">
+    <div class="box-body"></div>
+  </div>
+</div>
+```
+
+O `tabBox()` permite a criação de caixinhas com abas, possibilitando a divisão de conteúdo em várias *camadas* que ocupam o mesmo espaço da tela. No código abaixo, substituiríamos o `...` pelo conteúdo de cada aba.
+
+```{r, eval=FALSE}
+fluidRow(
+  tabBox(
+    tabPanel("Aba 1", ...),
+    tabPanel("Aba 2", ...),
+    tabPanel("Aba 3", ...)
+  )
+)
+```
+
+```{r, echo = FALSE, out.width="50%"}
+knitr::include_graphics("img/tabbox.png")
+```
+
+A estrutura criada pelo `tabBox()` também é uma coluna no contexto do Boostrap, então também deve estar sempre dentro de uma `fluidRow()`.
+
+```{r, eval = FALSE}
+tabBox()
+```
+
+```{html}
+<div class="col-sm-6">
+  <div class="nav-tabs-custom">
+    <ul class="nav nav-tabs" data-tabsetid="4764"></ul>
+    <div class="tab-content" data-tabsetid="4764"></div>
+  </div>
+</div>
+```
+
+O pacote shinydashboard também possui novos outputs: o `valueBox()` e o `infoBox()`. Ambos servem para a criação de caixinhas coloridas para destacar valores. Para utilizá-las no Shiny, usamos a combinação `valueBoxOutput()`/`renderValueBox()`
+
+```{r, echo = FALSE, out.width="80%"}
+knitr::include_graphics("img/valuebox.png")
+```
+
+e `infoBoxOutput()`/`renderInfoBox()`.
+
+```{r, echo = FALSE, out.width="80%"}
+knitr::include_graphics("img/infobox.png")
+```
+
+Dentro de cada função `render`, utilizamos as funções `valueBox()` e `infoBox()` para criar as caixinhas.
+
+Como as funções `valueBox()` e `infoBox()` retornam HTML, podemos utilizá-las diretamente na `ui` (sem `output`/`render`) caso esse conteúdo não dependa de valores reativos.
+
+Para saber mais sobre o `shinydashboard`, acesso o [site do pacote](https://rstudio.github.io/shinydashboard/). Para inspiração de como usar esse layout, confira a [galeria de exemplos](https://rstudio.github.io/shinydashboard/examples.html).
+
+### `bs4Dash`
+
+O pacote `bs4Dash` é uma outra opção para construir um layout com menu de navegação lateral. Ele se diferencia do `shinydashboard` por utilizar uma versão do Bootstrap mais recente: ele utiliza a versão 4, enquanto o `shinydashboard` a 3.
+
+A construção do layout com o pacote `bs4Dash` é equivalente ao que vimos com o `shinydashboard`.
+
+```{r, eval = FALSE}
+library(bs4Dash)
+
+ui <- bs4DashPage(
+  bs4DashNavbar(),
+  bs4DashSidebar(
+    bs4SidebarMenu(
+      bs4SidebarMenuItem("Página 1", tabName = "pagina1"),
+      bs4SidebarMenuItem("Página 2", tabName = "pagina2")
+    )
+  ),
+  bs4DashBody(
+    tabItems(
+      tabItem(tabName = "pagina1",...),
+      tabItem(tabName = "pagina2",...)
+    )
+  )
+)
+```
+
+A maioria das funções do `bs4Dash` possuem *aliases* com nomes iguais aos do `shinydashboard`. Isso significa que você pode construir um `bs4dash` usando praticamente o mesmo código de um `shinydashboard`, mudando apenas o pacote que está sendo carregado no início.
+
+```{r, eval = FALSE}
+# Esse código gera a ui de um bs4Dash
+library(bs4Dash)
+
+ui <- dashboardPage(
+  dashboardHeader(),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Página 1", tabName = "pagina1"), #<<
+      menuItem("Página 2", tabName = "pagina2")
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      tabItem(tabName = "pagina1",...), #<<
+      tabItem(tabName = "pagina2",...)
+    )
+  )
+)
+```
+
+
+O pacote `bs4Dash` também possui diversos outros elementos para complementar a construção dos nossos apps. Você pode ver um exemplo da maioria deles e do `bs4Dash` como um todo [neste exemplo de demonstração](https://rinterface.github.io/bs4Dash/index.html).
+
+Para mais informações sobre o `bs4Dash`, acesse a [vignette do pacote](https://rinterface.github.io/bs4Dash/index.html).
+
+## Adicionando CSS
+
+Você pode customizar o visual do seu aplicativo utilizando CSS. Nesta seção, falaremos apenas como adicionar CSS ao Shiny. Uma introdução formal ao CSS será feita no Capítulo @html-css-js.
+
+A melhor maneira de adicionar CSS a elementos HTML de um aplicativo Shiny é escrever o código em um arquivo `.css` e referenciá-lo na seção `<head>`.
+
+Para fazer isso, primeiro crie um arquivo de texto com extensão `.css` e salve dentro da pasta `/www`. A pasta `/www` deve estar na mesma pasta que o `.R` que gera o aplicativo e é nela que colocamos os arquivos que o navegador poderá ter acesso enquanto roda o app.
+
+Nesse arquivo, coloque a seguinte regra CSS:
+
+```{css, eval = FALSE}
+body {
+  background-color: lightblue;
+}
+```
+
+No seu app, supondo que o arquivo se chama `custom.css`, ele deverá ser referenciado dentro da UI da seguinte forma:
+
+```{r}
+ui <- fluidPage(
+  tags$head(
+    tags$link(rel = "stylesheet", href = "custom.css")
+  )
+)
+```
+
+A função `tags$head()` indica que o código HTML colocado dentro dela será inserido no final da seção `<head>` do HTML. É sempre nessa seção que referenciamos arquivos CSS externos. A função `tags$link()` serve para referenciarmos o arquivo CSS ao HTML, sendo que o argumento `rel = "stylesheet"` indica que esse arquivo deverá ser encarado pelo HTML como uma folha de estilo.
+
+No arquivo CSS, você pode colocar quantas regras CSS você precisar.
+
+```{css, eval = FALSE}
+body {
+  background-color: lightblue;
+}
+
+h1 {
+  color: purple;
+}
+
+p {
+  font-size: 12pt;
+}
+```
+
+## Usando Markdown para textos
+
+É comum precisarmos colocar em nossos aplicativos páginas com orientações, informações adicionais ou referências. 
+
+Essas páginas geralmente são compostas por textos, links e imagens, facilmente produzidos em um arquivo Markdown. Em contrapartida, construir esses elementos dentro da UI dá bem mais trabalho, pois tudo precisa ser encapsulado por uma função da lista `shiny::tags$`.
+
+Por exemplo, vamos supor que queiramos colocar a seguinte *mini bio* em um app que estamos fazendo.
+
+<br>
+
+<center>
+<img src="img/rick.jpeg" width="130px" style="border-radius: 65px;"/>
+
+**Rick Sanchez**
+
+Procurado por crimes contra o espaço interdimensional. Saiba mais [aqui](https://rickandmorty.fandom.com/wiki/Rick_Sanchez).
+</center>
+
+<br>
+<br>
+
+O arquivo Markdown para construir essa mini bio seria bem simples:
+
+```
+<center>
+<img src="img/rick.jpeg" width="130px" style="border-radius: 65px;"/>
+
+**Rick Sanchez**
+
+Procurado por crimes contra o espaço interdimensional. Saiba mais [aqui](https://rickandmorty.fandom.com/wiki/Rick_Sanchez).
+</center>
+```
+
+A mesma mini bio na UI, já é bem mais chato de construir e manter.
+
+```{r, eval = FALSE}
+fluidPage(
+  fluidRow(
+    column(
+      width = 12,
+      shiny::tags$img(
+        src = "img/rick.jpeg",
+        width = "130px",
+        style = "border-radius: 65px; display: block; margin: auto;"
+      ),
+      shiny::tags$p(
+        shiny::tags$strong("Rick Sanchez"),
+        style = "text-align: center;"
+      ),
+      shiny::tags$p(
+        style = "text-align: center;",
+        "Procurado por crimes contra o espaço interdimensional. Saiba mais",
+        shiny::tags$a(
+          href = "https://rickandmorty.fandom.com/wiki/Rick_Sanchez",
+          "aqui"
+        )
+      )
+    )
+  )
+)
+```
+
+Mesmo um exemplo simples já começa a deixar claro o problema: produzir muitos elementos HTML na UI rapidamente transforma seu código em um emaranhado de funções aninhadas. O mesmo vale para textos muito grandes. Embora nesse caso nem sempre tenhámos muitas tags HTML para criar, scripts R não foram feitos para atender os cuiddos que textos carecem.
+
+A melhor prática nessas situações é justamente transferir esses elementos para um arquivo Markdown e pedir que o Shiny o transforme em HTML e o inclua no lugar adequado apenas na hora do `runApp()`. Para isso usamos a função `shiny::includeMarkdown()`.
+
+Supondo que salvamos o markdown da mini bio em um arquivo `rick.md`, a nossa UI então ficaria:
+
+```{r, eval=FALSE}
+ui <- fluidPage(
+  fluidRow(
+    column(
+      width = 12,
+      includeMarkdown("rick.md")
+    )
+  )
+)
+```
+
+Vale ressaltar que essa função compila arquivos Markdown (`.md`) e não R Markdown (`.Rmd`). Se quisermos rodar códigos R para gerar saídas HTML, devemos fazer isso dentro do próprio Shiny.
+
+
+
+

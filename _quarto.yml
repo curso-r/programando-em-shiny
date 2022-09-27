@@ -13,7 +13,9 @@ book:
         - primeiro-app.qmd
         - add-reatividade.qmd
         - reatividade-conceitos.qmd
-
+        - debug.qmd
+        - layouts.qmd
+        - reatividade-mais-pecas.qmd
     - references.qmd
 
 bibliography: references.bib
