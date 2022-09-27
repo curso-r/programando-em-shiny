@@ -169,7 +169,7 @@ O diagrama mostra que a reatividade desse aplicativo possui dois caminhos indepe
 
 A ligação direta de um único input com um único output é o esquema reativo mais simples que um app pode apresentar. Na prática, vamos precisar construir interações mais complexas entre inputs e outputs, o que ainda não é possível com as peças que temos disponíveis. Para isso, precisaremos de funções que manipulem o caminho da reatividade.
 
-No restante deste capítulo, aprenderemos alguns conceitos e funções que nos permitirão ter um controle maior sobre a reatividade no Shiny. Não esgotaremos o assunto reatividade aqui, ele será retomado nos Capítulos @reatividade2 e @reatividade3, mas já sairemos capazes de construir diversos tipos de interação entre inputs e outputs em nossos apps.
+No restante deste capítulo, aprenderemos alguns conceitos e funções que nos permitirão ter um controle maior sobre a reatividade no Shiny. Não esgotaremos o assunto reatividade aqui, ele será retomado no [Capítulo -@sec-reatividade2] e no [Capítulo -sec-reatividade3], mas já sairemos capazes de construir diversos tipos de interação entre inputs e outputs em nossos apps.
 
 Começaremos aprendendo as estruturas básicas do diagrama de reatividade: valores reativos, observers e expressões reativas.
 
@@ -195,7 +195,7 @@ Voltando app dado como exemplo na seçao anterior, quando a "Variável A" é alt
 
 Esse processo, que podemos chamar de *fluxo reativo*, só é disparado por mudanças em valores reativos e só acontece quando o ponto final é uma função observadora.
 
-Os valores da lista `input` não são o único tipo de valores reativos, assim como as funções `render*()` não são o único tipo de funções observadoras. Falaremos mais de outros valores reativos e observers no Capítulo @reatividade2.
+Os valores da lista `input` não são o único tipo de valores reativos, assim como as funções `render*()` não são o único tipo de funções observadoras. Falaremos mais de outros valores reativos e observers no [Capítulo -sec-reatividade2].
 
 ## Expressões reativas
 
@@ -367,7 +367,7 @@ Os dois problemas indicam um diagrama de reatividade mal construído. A diferen�
 
 > Um app que aparentemente funciona do jeito que gostaríamos pode esconder problemas de reatividade que o deixam mais lento ou com comportamentos estranhos, atrapalhando a experiência na hora do uso.
 
-Para evitar esses problemas, que discutiremos com mais detalhes nos Capítulos @reatividade2 e @reatividade3, podemos imaginar ou desenhar o diagrama de reatividade para investigar onde está a falha. Essa é uma tarefa simples em apps com poucos inputs e outputs, mas extremamente difícil ou inviável em apps complexos.
+Para evitar esses problemas, que discutiremos com mais detalhes no [Capítulo -@sec-reatividade2] e no [Capítulo -sec-reatividade3], podemos imaginar ou desenhar o diagrama de reatividade para investigar onde está a falha. Essa é uma tarefa simples em apps com poucos inputs e outputs, mas extremamente difícil ou inviável em apps complexos.
 
 Nesses casos (ou mesmo nos casos simples), podemos utilizar o pacote `reactlog`. Com ele, conseguimos visualizar facilmente o diagrama de dependências reativas de qualquer Shiny app e olhar o que acontece por trás das curtinas da reatividade quando executamos o aplicativo.
 

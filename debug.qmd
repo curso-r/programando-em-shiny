@@ -4,7 +4,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Debug
+# Debug {#sec-debug}
 
 Na programação, *debug*^[Também conhecido como *debugging* (depuração, em português).] se refere ao processo de encontrar e corrigir erros em códigos. 
 

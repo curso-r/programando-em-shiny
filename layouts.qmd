@@ -4,7 +4,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Layouts {#layouts}
+# Layouts {#sec-layouts}
 
 Até então, todos os exemplos que fizemos não possuem qualquer preocupação com o layout. Apenas empilhamos elementos na UI, tanto no código quanto na tela.
 
@@ -93,7 +93,7 @@ Repare que algumas tags, como a `h1` e a `img` possuem parâmetros (ou atributos
 
 Já o argumento `src` da tag `img` é utilizado para definirmos o caminho para a imagem que queremos mostrar. O argumento `width` especifica o comprimento da imagem com relação ao espaço disponível para ela. No exemplo, o logo da Curso-R ocupa 50% do comprimento da página deste livro. O argumento `style` nos permite formatar ainda mais a imagem a partir de atributos CSS, centralizando a imagem horizontalmente na tela nesse caso.
 
-Conforme aprendemos e utilizamos o Shiny, inevitavelmente aprendemos bastante sobre HTML. Isso aumenta bastante a nossa capacidade de personalizar a UI dos nossos aplicativos e nos ajuda a entender como o Shiny funciona. Por enquanto, vamos manter o foco em explorar as principais ferramentas do Shiny, mas no Capítulo @html-css-js faremos uma breve introdução formal tanto de HTML quanto de CSS. 
+Conforme aprendemos e utilizamos o Shiny, inevitavelmente aprendemos bastante sobre HTML. Isso aumenta bastante a nossa capacidade de personalizar a UI dos nossos aplicativos e nos ajuda a entender como o Shiny funciona. Por enquanto, vamos manter o foco em explorar as principais ferramentas do Shiny, mas no [Capítulo -@sec-html-css-js] faremos uma breve introdução formal tanto de HTML quanto de CSS. 
 
 ## Bootstrap
 
@@ -626,7 +626,7 @@ Para mais informações sobre o `bs4Dash`, acesse a [vignette do pacote](https:/
 
 ## Adicionando CSS
 
-Você pode customizar o visual do seu aplicativo utilizando CSS. Nesta seção, falaremos apenas como adicionar CSS ao Shiny. Uma introdução formal ao CSS será feita no Capítulo @html-css-js.
+Você pode customizar o visual do seu aplicativo utilizando CSS. Nesta seção, falaremos apenas como adicionar CSS ao Shiny. Uma introdução formal ao CSS será feita no Capítulo [Capítulo -@sec-html-css-js].
 
 A melhor maneira de adicionar CSS a elementos HTML de um aplicativo Shiny é escrever o código em um arquivo `.css` e referenciá-lo na seção `<head>`.
 

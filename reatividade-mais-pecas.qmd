@@ -4,7 +4,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Reatividade: mais peças {#reatividade2}
+# Reatividade: mais peças {#sec-reatividade2}
 
 No [Capítulo -@sec-reatividade], vimos que o fluxo de reatividade é disparado por uma mudança em um valor reativo e que termina na atualização de uma função observadora^[Isto é, todos os caminhos de um diagrama de reatividade devem começar com um valore reativo e terminar com uma função observadora]. Também vimos que os inputs fazem o papel de valores reativos e as funções `render*()` que criam nossos outputs fazem o pepel de funções observadoras. 
 
@@ -169,7 +169,7 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-Repare que a base mtcars foi transformada em um valor reativo chamado `rv_mtcars`. Assim, sempre que a instrução de remover uma linha é feita na UI a partir do botão `remover`, o `rv_mtcars` é atualizado com a base sem a linha escolhida. Como o output `tabela` depende de `rv_mtcars`, a tabela na tela também é atualizada^[Se você não conhece o pacote `reactable`, falaremos dele na Seção @reactable.].
+Repare que a base mtcars foi transformada em um valor reativo chamado `rv_mtcars`. Assim, sempre que a instrução de remover uma linha é feita na UI a partir do botão `remover`, o `rv_mtcars` é atualizado com a base sem a linha escolhida. Como o output `tabela` depende de `rv_mtcars`, a tabela na tela também é atualizada^[Se você não conhece o pacote `reactable`, falaremos dele na Seção @sec-reactable.].
 
 Como desafio, tente refazer esse app sem a criar valores reativos no servidor, utilizando expressões reativos, por exemplo. É possível?
 

@@ -5,7 +5,7 @@ knitr::opts_chunk$set(
 library(magrittr)
 ```
 
-# Adicionando interatividade
+# Adicionando interatividade {#-sec-add-interatividade}
 
 A interatividade de um aplicativo Shiny é dada pela relação de *inputs* e *outputs*. Os inputs permitem enviarmos informação para o servidor, que é utilizada na construção dos outputs devolvidos para a tela.
 

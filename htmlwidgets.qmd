@@ -20,7 +20,7 @@ Além de diversos recursos interativos nativos, esssas bibliotecas permitem a ca
 
 Falaremos a seguir como utilziar as bibliotecas React Table e DT para construir tabelas interativas em seu Shiny app.
 
-### React Table {#reactable}
+### React Table {#sec-reactable}
 
 O pacote `reactable` nos permite criar tabelas interativas baseadas na biblioteca [React Table](https://github.com/tannerlinsley/react-table). 
 

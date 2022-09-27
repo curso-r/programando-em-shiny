@@ -6,7 +6,7 @@ knitr::opts_chunk$set(
 ```
 
 
-# Seu primeiro aplicativo Shiny
+# Seu primeiro aplicativo Shiny {#sec-primeio-app}
 
 Neste capítulo, vamos discutir o que é um aplicativo Shiny e o como ele funciona. Também vamos construir e rodar o nosso primeiro app, apresentando quais são os seus componentes básicos.
 
@@ -40,7 +40,7 @@ Um aplicativo Shiny também é uma aplicação web. Isso significa que, além de
 
 Por fim, um aplicativo Shiny também é um código (ou uma coleção de códigos) em linguagem R. O pacote `shiny`, ao lado de  muitos outros pacotes criados pela RStudio e pela comunidade, possui funções que (1) criam a estrutura e o visual do site/aplicativo, (2) montam a lógica de comunicação entre a pessoa que está utilizando o app e o servidor e (3) permite a construção da lógica interna do aplicativo, onde criamos as visualizações que serão exibidas na página a partir de código R puro. Esse último item significa que podemos utilizar todo arsenal de manipulação, visualização e modelagem do R em nossos aplicativos Shiny!
 
-Além dessas definições, ainda há diversos pontos sobre implantação e hospedagem dos aplicativos para completar a discussão sobre o framework Shiny. Esses tópicos serão tratados mais a frente neste livro, no Capítulo @deploy.
+Além dessas definições, ainda há diversos pontos sobre implantação e hospedagem dos aplicativos para completar a discussão sobre o framework Shiny. Esses tópicos serão tratados mais a frente neste livro, no [Capítulo -@sec-deploy].
 
 Na próxima seção, apresentaremos os componentes básicos de um aplicativo Shiny, tanto conceitualmente quanto no código.
 
@@ -110,7 +110,7 @@ knitr::include_graphics("img/app_ola_mundo.png")
 
 Vejam que a UI se trata apenas de uma página de fundo branco com a frase "Olá, mundo!" escrita no canto superior esquerdo. O app não possui nenhuma interatividade.
 
-Olhando o código anterior, encontramos a frase "Olá, mundo!" na definição do objeto `ui`, dentro da função `fluidPage()`. Essa função do pacote `shiny` é uma entre várias que utilizaremos para retornar código HTML e precisamos utilizá-la para que o HTML do aplicativo funcione corretamente. Falaremos mais sobre ela no Capítulo @layouts.
+Olhando o código anterior, encontramos a frase "Olá, mundo!" na definição do objeto `ui`, dentro da função `fluidPage()`. Essa função do pacote `shiny` é uma entre várias que utilizaremos para retornar código HTML e precisamos utilizá-la para que o HTML do aplicativo funcione corretamente. Falaremos mais sobre ela no [Capítulo -@sec-layouts].
 
 ```{r, eval = FALSE}
 ui <- fluidPage("Olá, mundo!")

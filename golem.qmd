@@ -4,4 +4,4 @@ knitr::opts_chunk$set(
 )
 ```
 
-# O pacote `golem`
+# Golem {#sec-golem}

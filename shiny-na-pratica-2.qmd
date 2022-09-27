@@ -1,4 +1,6 @@
-# Shiny na prática II
+# Shiny na prática II {#sec-shiny-pratica-2}
+
+## Caixas de diálogo
 
 ## Tooltips
 
