@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  favicon: img/shiny.png
+  favicon: img/hex-shiny.png
   twitter-card:
     creator: "@wamorim_"
     site: "@curso_r"
