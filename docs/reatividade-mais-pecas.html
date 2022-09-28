@@ -120,6 +120,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Enviar"
   }
 }</script>
+<base target="_blank">
+<script src="script.js"></script>
 
 
 <link rel="stylesheet" href="style.css">
@@ -304,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#mais-funções-observadoras" id="toc-mais-funções-observadoras" class="nav-link active" data-scroll-target="#mais-funções-observadoras"> <span class="header-section-number">7.1</span> Mais funções observadoras</a></li>
   <li><a href="#mais-valores-reativos" id="toc-mais-valores-reativos" class="nav-link" data-scroll-target="#mais-valores-reativos"> <span class="header-section-number">7.2</span> Mais valores reativos</a></li>
-  <li><a href="#validação" id="toc-validação" class="nav-link" data-scroll-target="#validação"> <span class="header-section-number">7.3</span> Validação</a>
+  <li><a href="#sec-validacao" id="toc-sec-validacao" class="nav-link" data-scroll-target="#sec-validacao"> <span class="header-section-number">7.3</span> Validação</a>
   <ul class="collapse">
   <li><a href="#a-função-req" id="toc-a-função-req" class="nav-link" data-scroll-target="#a-função-req"> <span class="header-section-number">7.3.1</span> A função <code>req()</code></a></li>
   <li><a href="#mensagens-de-erro-personalizadas" id="toc-mensagens-de-erro-personalizadas" class="nav-link" data-scroll-target="#mensagens-de-erro-personalizadas"> <span class="header-section-number">7.3.2</span> Mensagens de erro personalizadas</a></li>
@@ -473,8 +475,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Repare que a base mtcars foi transformada em um valor reativo chamado <code>rv_mtcars</code>. Assim, sempre que a instrução de remover uma linha é feita na UI a partir do botão <code>remover</code>, o <code>rv_mtcars</code> é atualizado com a base sem a linha escolhida. Como o output <code>tabela</code> depende de <code>rv_mtcars</code>, a tabela na tela também é atualizada<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
 <p>Como desafio, tente refazer esse app sem a criar valores reativos no servidor, utilizando expressões reativos, por exemplo. É possível?</p>
 </section>
-<section id="validação" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="validação"><span class="header-section-number">7.3</span> Validação</h2>
+<section id="sec-validacao" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="sec-validacao"><span class="header-section-number">7.3</span> Validação</h2>
 <p>O pacote <code>shiny</code> possui algumas funções que nos ajudam a validar valores reativos antes de rodarmos um código que gera um output. Na UI, isso impede que mensagens de erros internas do R apareçam na tela e nos possibilita enviar mensagens quando quem está usando o app faz algo que não deveria. Internamente, nos permite controlar melhor a reatividade e deixa o app mais eficiente.</p>
 <p>Nas próximas seções falaremos da função <code>req()</code> e da função <code>validate()</code>.</p>
 <section id="a-função-req" class="level3" data-number="7.3.1">
@@ -549,6 +551,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 
 </main> <!-- /main -->
+<script>
+  remover_target_blank();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const disableStylesheet = (stylesheets) => {

@@ -120,6 +120,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Enviar"
   }
 }</script>
+<base target="_blank">
+<script src="script.js"></script>
 
 <script src="site_libs/core-js-2.5.3/shim.min.js"></script>
 <script src="site_libs/react-17.0.0/react.min.js"></script>
@@ -345,8 +347,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 
-<div id="htmlwidget-7d159cd001aefa57e6ca" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-7d159cd001aefa57e6ca">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Função":["plotOutput()","tableOutput()","textOutput()","uiOutput()"],"Saída":["Gráficos","Tabelas","Textos","Elementos HTML"]},"columns":[{"accessor":"Função","name":"Função","type":"character"},{"accessor":"Saída","name":"Saída","type":"character"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"cbc17ef94b0b5dd72fdb1b16f5e569e0"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-8cda4e9557ffcbcc7615" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-8cda4e9557ffcbcc7615">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Função":["plotOutput()","tableOutput()","textOutput()","uiOutput()"],"Saída":["Gráficos","Tabelas","Textos","Elementos HTML"]},"columns":[{"accessor":"Função","name":"Função","type":"character"},{"accessor":"Saída","name":"Saída","type":"character"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"cbc17ef94b0b5dd72fdb1b16f5e569e0"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Essas funções especificam <strong>onde</strong> os outputs serão colocados dentro da UI. Elas não especificam <strong>como</strong> eles serão criados. Para isso, utilizamos as funções do tipo <code>render*()</code>, responsáveis por definir o código R que gera cada output. Além disso, elas <em>renderizam</em> os resultados para HTML, possibilitando que essas visualizações sejam inseridas no código HTML que gera a UI. Na grande maioria dos casos, teremos o par <code>visualizacaoOutput()</code> e <code>renderVisualizacao()</code>.</p>
@@ -354,8 +356,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 
-<div id="htmlwidget-43d07f2dba213ac1aa3d" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-43d07f2dba213ac1aa3d">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"*Output()":["plotOutput()","tableOutput()","textOutput()","uiOutput()"],"render*()":["renderPlot()","renderTable()","renderText()","renderUI()"]},"columns":[{"accessor":"*Output()","name":"*Output()","type":"character"},{"accessor":"render*()","name":"render*()","type":"character"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"a48ac10b68b61e3086f0990e06af3116"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-6ffe82e39588e547ec2a" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-6ffe82e39588e547ec2a">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"*Output()":["plotOutput()","tableOutput()","textOutput()","uiOutput()"],"render*()":["renderPlot()","renderTable()","renderText()","renderUI()"]},"columns":[{"accessor":"*Output()","name":"*Output()","type":"character"},{"accessor":"render*()","name":"render*()","type":"character"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"a48ac10b68b61e3086f0990e06af3116"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>O argumento <code>outputId</code> das funções <code>*Output()</code> é utilizado para identificarmos cada output dentro da função <code>server</code>. Todos os outputs criados ficarão dentro da lista <code>output</code>. Veja a seguir, o exemplo de um aplicativo que contém um histograma da variável <code>mpg</code> da base <code>mtcars</code>.</p>
@@ -502,6 +504,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 
 </main> <!-- /main -->
+<script>
+  remover_target_blank();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const disableStylesheet = (stylesheets) => {
