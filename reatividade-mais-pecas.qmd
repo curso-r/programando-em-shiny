@@ -173,7 +173,7 @@ Repare que a base mtcars foi transformada em um valor reativo chamado `rv_mtcars
 
 Como desafio, tente refazer esse app sem a criar valores reativos no servidor, utilizando expressões reativos, por exemplo. É possível?
 
-## Validação
+## Validação {#sec-validacao}
 
 O pacote `shiny` possui algumas funções que nos ajudam a validar valores reativos antes de rodarmos um código que gera  um output. Na UI, isso impede que mensagens de erros internas do R apareçam na tela e nos possibilita enviar mensagens quando quem está usando o app faz algo que não deveria. Internamente, nos permite controlar melhor a reatividade e deixa o app mais eficiente.
 
