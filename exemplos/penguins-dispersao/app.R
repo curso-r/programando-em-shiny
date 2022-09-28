@@ -1,6 +1,5 @@
 library(shiny)
 library(ggplot2)
-library(magrittr)
 
 ui <- fluidPage(
   titlePanel("Palmer penguins 🐧🐧🐧"),
@@ -27,7 +26,7 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   output$grafico <- renderPlot({
-    palmerpenguins::penguins %>%
+    palmerpenguins::penguins |>
       ggplot(aes(x = .data[[input$var_x]], y = .data[[input$var_y]])) +
       geom_point()
   })
