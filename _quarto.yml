@@ -44,6 +44,10 @@ book:
 format:
   html:
     css: style.css
+    include-in-header:
+      - head.html
+    include-after-body:
+      - after-body.html
     lang: pt
     theme:
       light: cosmo
