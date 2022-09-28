@@ -18,10 +18,13 @@ Outputs representam as *saídas* do nosso aplicativo, isto é, tudo que queremos
 Os outputs são definidos na UI e criados no server. Cada tipo de output é definido por uma função do tipo `*Output()`. Veja as principais funções dessa família:
 
 ```{r, echo = FALSE}
-tibble::tribble(~Função, ~`Saída`,
-                "plotOutput()", "Gráficos",
-                "tableOutput()", "Tabelas",
-                "textOutput()", "Textos") %>%
+tibble::tribble(
+  ~Função, ~`Saída`,
+  "plotOutput()", "Gráficos",
+  "tableOutput()", "Tabelas",
+  "textOutput()", "Textos",
+  "uiOutput()", "Elementos HTML"
+) |> 
   reactable::reactable(
     sortable = FALSE
   )
@@ -32,10 +35,13 @@ Essas funções especificam **onde** os outputs serão colocados  dentro da UI. 
 Veja a seguir as principais funções `render*()` e como elas se comunicam com as funções `*Output()`.
 
 ```{r, echo = FALSE}
-tibble::tribble(~`*Output()`, ~`render*()`,
-                "plotOutput()", "renderPlot()",
-                "tableOutput()", "renderTable()",
-                "textOutput()", "renderText()") %>%
+tibble::tribble(
+  ~`*Output()`, ~`render*()`,
+  "plotOutput()", "renderPlot()",
+  "tableOutput()", "renderTable()",
+  "textOutput()", "renderText()",
+  "uiOutput()", "renderUI()"
+) |> 
   reactable::reactable(
     sortable = FALSE
   )
@@ -107,11 +113,11 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
-
+  
   output$histograma <- renderPlot({
     hist(mtcars[[input$variavel]])
   })
-
+  
 }
 
 shinyApp(ui, server)
@@ -164,17 +170,17 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
-
+  
   output$histograma_A <- renderPlot({
     print("Gerando histograma A...")
     hist(mtcars[[input$variavel_A]], main = "Histograma A")
   })
-
+  
   output$histograma_B <- renderPlot({
     print("Gerando histograma B...")
     hist(mtcars[[input$variavel_B]], main = "Histograma B")
   })
-
+  
 }
 
 shinyApp(ui, server)
