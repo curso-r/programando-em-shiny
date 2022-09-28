@@ -2,6 +2,176 @@
 
 ## Importando bases de dados
 
+A tarefa de importação de dados dentro do Shiny não possui nenhum desafio particular. Podemos seguir lendo nossos dados, seja de arquivos locais, da internet ou de banco de dados, da mesma maneira que fazemos em scripts R habituais. 
+
+A única questão importante é onde fazer isso.
+
+### Importar fora da função `server`
+
+Quando importamos os nossos dados fora da função `server`, podemos utilizá-los também na construção da UI. Essa opção é a ideal para quando os seus dados não mudam com o tempo. Veja um exemplo a seguir.
+
+```{r, eval = FALSE}
+library(shiny)
+
+link <- "https://raw.githubusercontent.com/williamorim/brasileirao/master/data-raw/csv/matches.csv"
+
+dados <- readr::read_csv(link)
+
+ui <- fluidPage(
+  titlePanel("Últimos 10 jogos do time"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        "time",
+        label = "Selecione um time",
+        choices = unique(dados$home)
+      )
+    ),
+    mainPanel(
+      tableOutput("tabela")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  
+  output$tabela <- renderTable({
+    dados |>
+      dplyr::filter(
+        score != "x",
+        home == input$time | away == input$time
+      ) |>
+      dplyr::slice_max(order_by = date, n = 10) |>
+      dplyr::mutate(
+        date = format(date, "%d/%m/%Y")
+      ) |>
+      dplyr::select(date, home, score, away)
+  })
+  
+}
+
+shinyApp(ui, server)
+
+```
+
+### Importando dentro da função `server`
+
+Você pode importar uma base de dados normalmente dentro da função server. Nesse caso, não temos acesso aos dados na construção da UI. Veja no exemplo a seguir que precisamos construir o `selectInput` dentro da UI utilizando a dupla de funções `uiOutput()` e `renderUI()`.
+
+```{r, eval = FALSE}
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel("Últimos 10 jogos do time"),
+  sidebarLayout(
+    sidebarPanel(
+      uiOutput("select_time")
+    ),
+    mainPanel(
+      tableOutput("tabela")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  
+  link <- "https://raw.githubusercontent.com/williamorim/brasileirao/master/data-raw/csv/matches.csv"
+  
+  dados <- readr::read_csv(link)
+  
+  output$select_time <- renderUI({
+    selectInput(
+      "time",
+      label = "Selecione um time",
+      choices = unique(dados$home)
+    )
+  })
+  
+  output$tabela <- renderTable({
+    dados |>
+      dplyr::filter(
+        score != "x",
+        home == input$time | away == input$time
+      ) |>
+      dplyr::slice_max(order_by = date, n = 10) |>
+      dplyr::mutate(
+        date = format(date, "%d/%m/%Y")
+      ) |>
+      dplyr::select(date, home, score, away)
+  })
+  
+}
+
+shinyApp(ui, server)
+
+```
+
+Quando rodamos esse app, um erro aparece por uma fração de segundos no lugar da tabela. Isso acontece pois, no momento em que o Shiny tenta gerar a tabela pela primeira vez, o `input$time` ainda não existe, ele ainda está sendo criado pelo `renderUI()`. Veremos como lidar com isso na seção de validação do [Capítulo -@sec-reatividade2].
+
+Devemos ler os dados dentro da função `server` quando eles forem atualizados frequentemente, pois dessa maneira eles serão importados no momento em que cada pessoa acessar o app. Importar dentro da função `server` também vai ser necessário quando a leitura dos dados depender de um valor reativo. 
+
+No exemplo a seguir, simulamos a conexão com um banco de dados para a leitura das partidas. Também permitimos a escolha da temporada antes da escolha do time. Os dados requisitados ao banco são apenas os da temporada escolhida, diminuindo a quantidade de dados transmitidos. Nesse caso, o objeto `dados` passa a ser uma expressão reativa, pois ele depende do `input$temporada`.
+
+```{r, eval = FALSE}
+# Esse exemplo não pode ser rodado,
+# pois a função conectar_com_o_banco()
+# não existe.
+
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel("Últimos 10 jogos do time"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        "temporada",
+        label = "Selecione uma temporada",
+        choices = 2003:2022
+      ),
+      uiOutput("select_time")
+    ),
+    mainPanel(
+      tableOutput("tabela")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  
+  dados <- reactive({
+    con <- conectar_com_o_banco()
+    dplyr::tbl(con, "partidas") |> 
+      dplyr::filter(season == input$temprada) |> 
+      dplyr::collect()
+  })
+  
+  output$select_time <- renderUI({
+    selectInput(
+      "time",
+      label = "Selecione um time",
+      choices = unique(dados()$home)
+    )
+  })
+  
+  output$tabela <- renderTable({
+    dados() |>
+      dplyr::filter(
+        score != "x",
+        home == input$time | away == input$time
+      ) |>
+      dplyr::slice_max(order_by = date, n = 10) |>
+      dplyr::mutate(
+        date = format(date, "%d/%m/%Y")
+      ) |>
+      dplyr::select(date, home, score, away)
+  })
+  
+}
+
+shinyApp(ui, server)
+```
+
+
 ## Gráficos com `ggplot2` {#sec-ggplot2}
 
 Gráficos são a alegria da festa na hora de comunicarmos os resultados de uma análise de dados. Embora possamos usar tabelas, textos ou caixinhas coloridas com valores para comunicar nossos resultados, são eles que geralmente chamam e prendem a atenção de quem está utilizando o app.
@@ -127,13 +297,13 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
-
+  
   output$histograma <- renderPlot({
     Sys.sleep(5)
     hist(mtcars[[input$variavel]])
   })
-
-
+  
+  
 }
 
 shinyApp(ui, server)
@@ -170,13 +340,13 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
-
+  
   output$histograma <- renderPlot({
     Sys.sleep(5)
     hist(mtcars[[input$variavel]])
   })
-
-
+  
+  
 }
 
 shinyApp(ui, server)
