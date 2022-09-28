@@ -345,8 +345,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 
-<div id="htmlwidget-81e21be2599fd94964d0" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-81e21be2599fd94964d0">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Função":["plotOutput()","tableOutput()","textOutput()"],"Saída":["Gráficos","Tabelas","Textos"]},"columns":[{"accessor":"Função","name":"Função","type":"character"},{"accessor":"Saída","name":"Saída","type":"character"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"5741b422c2aaa75e56aea745c8ce9a22"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-7d159cd001aefa57e6ca" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-7d159cd001aefa57e6ca">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Função":["plotOutput()","tableOutput()","textOutput()","uiOutput()"],"Saída":["Gráficos","Tabelas","Textos","Elementos HTML"]},"columns":[{"accessor":"Função","name":"Função","type":"character"},{"accessor":"Saída","name":"Saída","type":"character"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"cbc17ef94b0b5dd72fdb1b16f5e569e0"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Essas funções especificam <strong>onde</strong> os outputs serão colocados dentro da UI. Elas não especificam <strong>como</strong> eles serão criados. Para isso, utilizamos as funções do tipo <code>render*()</code>, responsáveis por definir o código R que gera cada output. Além disso, elas <em>renderizam</em> os resultados para HTML, possibilitando que essas visualizações sejam inseridas no código HTML que gera a UI. Na grande maioria dos casos, teremos o par <code>visualizacaoOutput()</code> e <code>renderVisualizacao()</code>.</p>
@@ -354,8 +354,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 
-<div id="htmlwidget-de76394da2e3f81cfc7a" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-de76394da2e3f81cfc7a">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"*Output()":["plotOutput()","tableOutput()","textOutput()"],"render*()":["renderPlot()","renderTable()","renderText()"]},"columns":[{"accessor":"*Output()","name":"*Output()","type":"character"},{"accessor":"render*()","name":"render*()","type":"character"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"28989452b04574d14eaed12cc94cce30"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-43d07f2dba213ac1aa3d" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-43d07f2dba213ac1aa3d">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"*Output()":["plotOutput()","tableOutput()","textOutput()","uiOutput()"],"render*()":["renderPlot()","renderTable()","renderText()","renderUI()"]},"columns":[{"accessor":"*Output()","name":"*Output()","type":"character"},{"accessor":"render*()","name":"render*()","type":"character"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"a48ac10b68b61e3086f0990e06af3116"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>O argumento <code>outputId</code> das funções <code>*Output()</code> é utilizado para identificarmos cada output dentro da função <code>server</code>. Todos os outputs criados ficarão dentro da lista <code>output</code>. Veja a seguir, o exemplo de um aplicativo que contém um histograma da variável <code>mpg</code> da base <code>mtcars</code>.</p>
@@ -412,11 +412,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>histograma <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist</span>(mtcars[[input<span class="sc">$</span>variavel]])</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -472,17 +472,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>histograma_A <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Gerando histograma A..."</span>)</span>
 <span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist</span>(mtcars[[input<span class="sc">$</span>variavel_A]], <span class="at">main =</span> <span class="st">"Histograma A"</span>)</span>
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>histograma_B <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
 <span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Gerando histograma B..."</span>)</span>
 <span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist</span>(mtcars[[input<span class="sc">$</span>variavel_B]], <span class="at">main =</span> <span class="st">"Histograma B"</span>)</span>
 <span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
