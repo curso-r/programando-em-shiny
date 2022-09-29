@@ -10,7 +10,7 @@ O conteúdo aqui presente se destina a:
 
 - pessoas que programam em Shiny e gostariam de aprender a personalizar a interface de seus aplicativos.
 
-## O que é o Shiny? {-}
+## O que é Shiny? {-}
 
 Shiny é um framework em linguagem R para a criação de aplicativos web. Por não exigir conhecimento prévio de HTML, CSS e JavaScript, ele democratiza o acesso a essa área de desenvolvimento, permitindo a criação de aplicativos bonitos e complexos a partir de um script R.
 
