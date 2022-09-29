@@ -188,3 +188,50 @@ shinyApp(ui, server)
 
 Repare pelas mensagens no Console^[Essas mensagens são geradas pelas funções `print()` presentes dentro de cada `renderPlot()`. Essas mensagens não aparecem no app, apenas no Console, e são uma boa alternativa para testar e procurar erros no código.] que, quando alteramos o valor da variável A, apenas o histograma A é recalculado. O mesmo vale para variável B e o histograma B. Isso acontece porque a relação entre inputs e outputs é mapeada quando rodamos o app e, quando modificamos um input, o Shiny roda novamente apenas o código necessário para recalcular os outputs associados a ele. Para entender como isso é feito e como podemos tirar proveito disso, precisamos entender o conceito de *reatividade*. Esse será o tópico do próximo capítulo.
 
+## Exercícios
+
+1 - No contexto do Shiny, o que são inputs? E outputs?
+
+2 - Como fazemos para acessar os valores dos inptus dentro da função `server`?
+
+3 - Qual a função da família de funções `*Output()`? Onde essas funções são utilizadas?
+
+4 - Qual a função da família de funções `render*()`? Onde essas funções são utilizadas?
+
+5 - Faça um shiny app para visualizar histogramas da base `ggplot2::diamonds`
+e o coloque no shinyapps.io.
+
+Seu shiny deve ter um input e um output.
+
+- Input: variáveis numéricas da base diamonds.
+- Output: histograma da variável selecionada.
+
+Para acessar a base diamonds, carrrege o pacote ggplot2
+
+```{r, eval = FALSE}
+library(ggplto2)
+
+ou rode
+
+ggplot2::diamonds
+```
+
+6 - Faça um Shiny app para explorar a base de filmes da Pixar.
+
+```{r, eval = FALSE}
+# Instale o pacote com a versão orinal da base (em inglês)
+install.packages("pixarfilms")
+
+# Instale pacote com versão em português da base
+install.packages("dados")
+```
+
+Sugestões:
+
+- **Input**: data de lançamento. **Output**: tabela de filmes.
+
+- **Input**: filme. **Outputs**: orçamento, bilheteria, gênero, prêmios e notas.
+
+- **Input**: caixa de texto para escrever um nome. **Outputs**: tabela com filmes que essa pessoa participou e qual papel ela exerceu no filme (direção, roteiro, produção etc)
+
+**Dica**: você precisará fazer join das bases do pacote para juntar as informações.
