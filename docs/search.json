@@ -348,5 +348,12 @@
     "title": "Referências",
     "section": "",
     "text": "Programação em R\n\nCiência de Dados em R, da Curso-R\nR for Data Sciente, do Garrett Grolemund e Hadley Wickham\nAdvanced R, do Hadley Wickham\nR packages, do Hadley Wickham\n\n\n\nShiny\n\nMastering Shiny, do Hadley Wickham\nEngineering Shiny, do Colin Fay, Sébastien Rochette, Vincent Guyader e Cervan Girard."
+  },
+  {
+    "objectID": "add-interatividade.html#exercícios",
+    "href": "add-interatividade.html#exercícios",
+    "title": "2  Adicionando interatividade",
+    "section": "2.3 Exercícios",
+    "text": "2.3 Exercícios\n1 - No contexto do Shiny, o que são inputs? E outputs?\n2 - Como fazemos para acessar os valores dos inptus dentro da função server?\n3 - Qual a função da família de funções *Output()? Onde essas funções são utilizadas?\n4 - Qual a função da família de funções render*()? Onde essas funções são utilizadas?\n5 - Faça um shiny app para visualizar histogramas da base ggplot2::diamonds e o coloque no shinyapps.io.\nSeu shiny deve ter um input e um output.\n\nInput: variáveis numéricas da base diamonds.\nOutput: histograma da variável selecionada.\n\nPara acessar a base diamonds, carrrege o pacote ggplot2\n\nlibrary(ggplto2)\n\nou rode\n\nggplot2::diamonds\n\n6 - Faça um Shiny app para explorar a base de filmes da Pixar.\n\n# Instale o pacote com a versão orinal da base (em inglês)\ninstall.packages(\"pixarfilms\")\n\n# Instale pacote com versão em português da base\ninstall.packages(\"dados\")\n\nSugestões:\n\nInput: data de lançamento. Output: tabela de filmes.\nInput: filme. Outputs: orçamento, bilheteria, prêmios e notas.\n\nDica: você precisará fazer join das bases do pacote para juntar as informações."
   }
 ]
