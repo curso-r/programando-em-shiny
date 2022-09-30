@@ -120,3 +120,57 @@ output$plot <- renderPlot({
 ```
 
 Para sair do `browser` e voltar à execução do app, basta clicar no botão `Continue`, no topo do Console. Clicando no botão `Stop`, tanto o `browser` quanto a execução do app serão finalizadas. Após encontrar e solucionar o problema, não se esqueça de remover a função `browser()` do seu código.
+
+## Exercícios
+
+1 - Por que, em geral, não conseguimos rodar diretamente o código escrito na função `server`?
+
+___
+
+2 - Para que serve a função `browser()`?
+
+___
+
+3 - Debug e arrume o código do app a seguir:
+
+```{r, eval = FALSE}
+library(shiny)
+
+ui <- fluidPage(
+  "Sorteio de números de 1 a 10",
+  sliderInput(
+    inputId = "tamanho",
+    label = "Selecione o tamanho da amostra",
+    min = 1,
+    max = 1000,
+    value = 5
+  ),
+  actionButton("sortear", "Sortear"),
+  plotOutput(outputId = "grafico"),
+  "Tabela de frequências"
+  tableOutput(outputId = "tabela")
+)
+
+server <- function(input, output, session) {
+  
+  amostra <- reactive({
+    sample(1:10, input$tamanho)
+  })
+  
+  output$plot <- renderPlot({
+    amostra |> 
+      table() |> 
+      barplot()
+  })
+  
+  output$tabela <- renderPlot({
+    data.frame(
+      numeros = amostra()
+    ) |> 
+      dplyr::count(numeros)
+  })
+  
+}
+
+shinyApp(ui, server)
+```

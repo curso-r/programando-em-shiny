@@ -4,7 +4,7 @@ Este é um livro em desenvolvimento. Toda contribuição, seja correção de err
 
 O conteúdo aqui presente se destina a:
 
-- pessoas que programam em linguagem R e gostaríam de começar a programar em Shiny;
+- pessoas que programam em linguagem R e gostariam de começar a programar em Shiny;
 
 - pessoas que programam em Shiny e gostariam de se aprofundar no conceito de reatividade;
 
@@ -32,7 +32,7 @@ Nas universidades, o Shiny já é uma poderosa ferramenta de ensino, que substit
 
 O Shiny fornece uma estrutura para gerarmos código HTML a partir de funções em R. Também possui uma base de JavaScript e CSS para deixar os aplicativos funcionais e com um visual satisfatório. Além disso, podemos utilizar por trás todo o poderio de análise de dados que o R e seus pacotes fornecem. Com esses elementos, já conseguimos construir qualquer tipo de layout e lógica interna. 
 
-Contudo, o grande poder do Shiny está em não limitar as posssibilidades apenas ao que foi feito pelos desenvolvedores do pacote^[O que já é muita coisa! Veja mais em https://shiny.rstudio.com/.]. Existem vários outros pacotes criados pela comunidade que trazem mais elementos visuais e funcionais para o Shiny, diminuindo ainda mais a necessidade de conhecermos HTML, CSS e JavaScript. E, se você tem conhecimento dessas linguagens, o céu é o limite! É muito simples incluir *tags* HTML, folhas de estilo CSS e suas próprias funções JavaScript em um aplicativo Shiny.
+Contudo, o grande poder do Shiny está em não limitar as possibilidades apenas ao que foi feito pelos desenvolvedores do pacote^[O que já é muita coisa! Veja mais em https://shiny.rstudio.com/.]. Existem vários outros pacotes criados pela comunidade que trazem mais elementos visuais e funcionais para o Shiny, diminuindo ainda mais a necessidade de conhecermos HTML, CSS e JavaScript. E, se você tem conhecimento dessas linguagens, o céu é o limite! É muito simples incluir *tags* HTML, folhas de estilo CSS e suas próprias funções JavaScript em um aplicativo Shiny.
 
 
 ## O que você vai aprender neste livro? {-}
@@ -67,7 +67,7 @@ Falar sobre Shiny em texto um grande desafio. A maior parte dos resultados que v
 
 Deixamos alguns poucos aplicativos utilizados como exemplo neste livro online^[Infelizmente seria muito trabalhoso e caro fazer isso com todos.]. Sempre que disponível, recomendamos acessar o link e interagir com o app. 
 
-No restante dos casos, deixaros disponível junto ao texto o código completo do app, que você pode copiar e colar no R para rodar o aplicativo. Recomendamos que você faça isso para todos os exemplos deste tipo, sempre fazendo o exercício de analisar qual parte do código gera cada parte do app.
+No restante dos casos, deixamos disponível junto ao texto o código completo do app, que você pode copiar e colar no R para rodar o aplicativo. Recomendamos que você faça isso para todos os exemplos deste tipo, sempre fazendo o exercício de analisar qual parte do código gera cada parte do app.
 
 ## O que eu preciso para começar a aprender Shiny? {-}
 

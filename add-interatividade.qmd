@@ -138,7 +138,7 @@ input$variavel <- 10
 #> Error in : Can't modify read-only reactive value 'variavel
 ```
 
-O widget `selectInput()` envia ao servidor uma string com o valor escolhido na caixa de seleção. Por isso utilizamos o operador `[[` para fazer a seleção da variável. Quando o app é inicado, por exemplo, `input$variavel` recebe o valor `"mpg"` e, por consequência, `mtcars[[input$variavel]]` será igual a  `mtcars[["mpg"]]`, que retorna um vetor com os valores da coluna `mpg` e será utilizado pela função `hist()` para gerar o gráfico.
+O widget `selectInput()` envia ao servidor uma string com o valor escolhido na caixa de seleção. Por isso utilizamos o operador `[[` para fazer a seleção da variável. Quando o app é iniciado, por exemplo, `input$variavel` recebe o valor `"mpg"` e, por consequência, `mtcars[[input$variavel]]` será igual a  `mtcars[["mpg"]]`, que retorna um vetor com os valores da coluna `mpg` e será utilizado pela função `hist()` para gerar o gráfico.
 
 ```{r}
 mtcars[["mpg"]]
@@ -192,46 +192,51 @@ Repare pelas mensagens no Console^[Essas mensagens são geradas pelas funções 
 
 1 - No contexto do Shiny, o que são inputs? E outputs?
 
+___
+
 2 - Como fazemos para acessar os valores dos inptus dentro da função `server`?
+
+___
 
 3 - Qual a função da família de funções `*Output()`? Onde essas funções são utilizadas?
 
+___
+
 4 - Qual a função da família de funções `render*()`? Onde essas funções são utilizadas?
+
+___
 
 5 - Faça um shiny app para visualizar histogramas da base `ggplot2::diamonds`
 e o coloque no shinyapps.io.
 
 Seu shiny deve ter um input e um output.
 
-- Input: variáveis numéricas da base diamonds.
+- Input: variáveis numéricas da base `diamonds`.
 - Output: histograma da variável selecionada.
 
-Para acessar a base diamonds, carrrege o pacote ggplot2
+Para acessar a base `diamonds`, carregue o pacote `ggplot2`
 
 ```{r, eval = FALSE}
 library(ggplto2)
+diamonds
 
-ou rode
+# ou rode
 
 ggplot2::diamonds
 ```
 
-6 - Faça um Shiny app para explorar a base de filmes da Pixar.
+___
+
+6 - Reproduza [este Shiny app](https://cursodashboards.shinyapps.io/select-date/). 
+
+Para acessar a base utilizada, rode o código abaixo:
 
 ```{r, eval = FALSE}
-# Instale o pacote com a versão orinal da base (em inglês)
-install.packages("pixarfilms")
+# Pacote com versão original da base (em inglês)
+install.packages("nycflights13")
+nycflights13::flights
 
-# Instale pacote com versão em português da base
+# Pacote com versão em português da base
 install.packages("dados")
+dados::voos
 ```
-
-Sugestões:
-
-- **Input**: data de lançamento. **Output**: tabela de filmes.
-
-- **Input**: filme. **Outputs**: orçamento, bilheteria, gênero, prêmios e notas.
-
-- **Input**: caixa de texto para escrever um nome. **Outputs**: tabela com filmes que essa pessoa participou e qual papel ela exerceu no filme (direção, roteiro, produção etc)
-
-**Dica**: você precisará fazer join das bases do pacote para juntar as informações.

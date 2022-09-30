@@ -14,7 +14,7 @@ Não falaremos neste livro sobre a utilização de computação em nuvem pois ex
 
 O [ShinyApps.io](https://www.shinyapps.io/) é um serviço da [RStudio](https://rstudio.com/) para hospedagem de aplicativos Shiny.
 
-A conta gratuita permite até 5 aplicações simultâmneas e 25 horas mensais de uso (um aplicativo utilizado por 1 hora consome 1 hora do seu plano, 2 aplicativos utilizados simultaneamente por 1 hora consomem 2 horas do seu plano). As contas pagas, além de mais horas, fornecem outras vantagens, como suporte personalizado e autenticação.
+A conta gratuita permite até 5 aplicações simultâneas e 25 horas mensais de uso (um aplicativo utilizado por 1 hora consome 1 hora do seu plano, 2 aplicativos utilizados simultaneamente por 1 hora consomem 2 horas do seu plano). As contas pagas, além de mais horas, fornecem outras vantagens, como suporte personalizado e autenticação.
 
 Criada uma conta, você deve conectá-la com o RStudio. Feito isso, você conseguirá fazer o deploy do seu app com alguns cliques. A seguir, mostramos o passo a passo para conectar a sua conta e para fazer o deploy do seu app.
 
@@ -22,7 +22,7 @@ Criada uma conta, você deve conectá-la com o RStudio. Feito isso, você conseg
 
 Primeiro, crie uma conta no serviço site [shinyapps.io](https://www.shinyapps.io/).
 
-Faço o login na sua conta e, no menu lateral, acesseo Account > Tokens.
+Faço o login na sua conta e, no menu lateral, acesse Account > Tokens.
 
 ```{r, echo = FALSE, out.width="30%"}
 knitr::include_graphics("img/shinyapps-sidebar.png")
@@ -69,7 +69,7 @@ knitr::include_graphics("img/shinyapps-publishing.png")
 
 O processo de deploy pode levar alguns minutos, a depender das dependências do seu app e tamanho dos arquivos que você subir. Quando o processo terminar, você receberá uma URL para acessar o aplicativo.
 
-Caso o seu app não abra devido a algum erro, você pode acessar a os logs de utilização para ter uma dica do que aconteceu. Para isso, no dashboard do ShinyApps.io, acesse Applications > All, no meu lateral. Em seguida, clique no app que você gostaria de investidar. Por fim, acesse a opção "Logs".
+Caso o seu app não abra devido a algum erro, você pode acessar a os logs de utilização para ter uma dica do que aconteceu. Para isso, no dashboard do ShinyApps.io, acesse Applications > All, no meu lateral. Em seguida, clique no app que você gostaria de investigar. Por fim, acesse a opção "Logs".
 
 ```{r, echo = FALSE, out.width="100%"}
 knitr::include_graphics("img/shinyapps-log.png")

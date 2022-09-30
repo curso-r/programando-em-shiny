@@ -18,9 +18,9 @@ install.packages("shiny")
 
 A versão do pacote que estamos utilizando neste livro é a `r packageVersion("shiny")`.
 
-É uma boa prática criarmos novos repositórios (ou projetos, no RStudio) para cada nova análise de dados que começamos, mantendo todos os arquivos da análise dentro desse repositório. Veremos que, para aplicavios Shiny, isso será especialmente importante. Para reproduzir os exemplos deste livro, recomendamos criar uma nova pasta para cada aplicativo. Por mais que em alguns casos isso não seja particularmente útil, será uma boa maneira de praticar essa maneira de organização.
+É uma boa prática criarmos novos repositórios (ou projetos, no RStudio) para cada nova análise de dados que começamos, mantendo todos os arquivos da análise dentro desse repositório. Veremos que, para aplicativos Shiny, isso será especialmente importante. Para reproduzir os exemplos deste livro, recomendamos criar uma nova pasta para cada aplicativo. Por mais que em alguns casos isso não seja particularmente útil, será uma boa maneira de praticar essa maneira de organização.
 
-Para mais dicas de organização de projetos de análide de dados, em um contexto geral, recomendamos a leitura do [Zen do R](https://curso-r.github.io/zen-do-r/), especialmente o [Capítulo 3](https://curso-r.github.io/zen-do-r/rproj-dir.html).
+Para mais dicas de organização de projetos de análise de dados, em um contexto geral, recomendamos a leitura do [Zen do R](https://curso-r.github.io/zen-do-r/), especialmente o [Capítulo 3](https://curso-r.github.io/zen-do-r/rproj-dir.html).
 
 ## O que é um aplicativo Shiny?
 
@@ -146,11 +146,11 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-Repare que algumas opções novas aparecerão no RStudio quando salvamos o arquivo. Isso acontece porque o RStudio reconhece a sintaxe do código como a de um aplacativo Shiny, habilitando para nós algumas ferramentas que são úteis apenas para trabalhar com apps. A mais importante por enquanto será o botão **Run App**.
+Repare que algumas opções novas aparecerão no RStudio quando salvamos o arquivo. Isso acontece porque o RStudio reconhece a sintaxe do código como a de um aplicativo Shiny, habilitando para nós algumas ferramentas que são úteis apenas para trabalhar com apps. A mais importante por enquanto será o botão **Run App**.
 
 Como discutimos anteriormente, um aplicativo Shiny em funcionamento sempre terá um computador rodando uma sessão de R por trás. Esse computador, chamado genericamente de *servidor*, pode ser uma máquina virtual em um serviço de nuvem, uma máquina virtual em um serviço de hospedagem, um servidor dentro da sua empresa, um servidor na sua casa ou mesmo o seu próprio computador pessoal.
 
-Normalmente, enquanto estamos desenvolvendo um aplicativo Shiny, queremos testá-lo localmente^[E locamente também.] para verificar se tudo funciona corretamente, se está ficando bonito ou simplesmente para gastar alguns minutos apreciando a nossa obra de arte. Testar localmente significa que **o seu próprio computador fará as vezes de servidor**, embora isso não signifique que seu app ficará disponível na internet.
+Normalmente, enquanto estamos desenvolvendo um aplicativo Shiny, queremos testá-lo localmente^[E loucamente também.] para verificar se tudo funciona corretamente, se está ficando bonito ou simplesmente para gastar alguns minutos apreciando a nossa obra de arte. Testar localmente significa que **o seu próprio computador fará as vezes de servidor**, embora isso não signifique que seu app ficará disponível na internet.
 
 Quando servimos um app localmente, isto é, quando *rodamos um app*, ganhamos um endereço que será acessível apenas do nosso computador. A partir desse endereço, podemos testar nosso app no navegador, como se ele já estivesse em produção. No RStudio, para rodar nossos apps, utilizamos justamente o botão **Run App**.
 
@@ -158,7 +158,7 @@ Quando servimos um app localmente, isto é, quando *rodamos um app*, ganhamos um
 knitr::include_graphics("img/botao_run_app.png")
 ```
 
-Ao clicar nesse botão, o seu navegador padrão será aberto^[Se o app foi aberto na aba Viewer ou em uma janela do próprio RStudio, clique na setinha para baixo ao lado do botão **Run App** e selecione a opção `Run External`.] e você verá a UI do nosso modesto app com apenas a frase "Olá, mundo!".
+Ao clicar nesse botão, o seu navegador padrão será aberto^[Se o app foi aberto na aba Viewer ou em uma janela do próprio RStudio, clique na seta para baixo ao lado do botão **Run App** e selecione a opção `Run External`.] e você verá a UI do nosso modesto app com apenas a frase "Olá, mundo!".
 
 Se você voltar ao RStudio, eventualmente vai notar algo muito importante: a sua sessão de R estará ocupada! Mas isso não deveria ser uma surpresa, pois já discutimos que todo Shiny app tem uma sessão de R rodando por trás. 
 
@@ -170,7 +170,47 @@ Para liberar a sessão, basta clicar no botão "*stop*", na parte de cima do Con
 knitr::include_graphics("img/console_sessao_ocupada.png")
 ```
 
-No console, após rodarmos o app, também aparecerá uma mensagem idenficicando o *endereço* do nosso aplicativo. Nesse caso, será um IP (`http://127.0.0.1`)^[Esse número de IP é padrão e significa "o seu computador".] com alguma porta que esteja disponível escolhida aleatoriamente (`:4028`). Esse endereço aparecerá no nosso navegador e poderemos copiá-lo e colá-lo em qualquer outra aba ou navegador que quisermos rodar o app.
+No console, após rodarmos o app, também aparecerá uma mensagem identificando o *endereço* do nosso aplicativo. Nesse caso, será um IP (`http://127.0.0.1`)^[Esse número de IP é padrão e significa "o seu computador".] com alguma porta que esteja disponível escolhida aleatoriamente (`:4028`). Esse endereço aparecerá no nosso navegador e poderemos copiá-lo e colá-lo em qualquer outra aba ou navegador que quisermos rodar o app.
 
+## Exercícios
 
+1 - O que é um aplicativo web?
+
+___
+
+2 - Quais são os componentes básicos de um aplicativo Shiny?
+
+___
+
+3 - Por que a sessão do R fica ocupada quando rodamos um app localmente?
+
+---
+
+4 - Sobre o código de um aplicativo Shiny, escolha a alternativa **falsa**.
+
+a. As funções do R utilizadas na construção da UI são funções que retornam código HMTL.
+
+b. Não precisamos criar a função `server` se o app não tiver interatividade.
+
+c. A função `server` pode ser escrita sem o parâmetro `session`.
+
+d. Embora seja uma boa prática usar os nomes `ui` e `server`, podemos adotar qualquer nome para esses elementos.
+
+___
+
+5 - Por que o app criado pelo código abaixo retorna erro quando o rodamos?
+
+```{r, eval = FALSE}
+library(shiny)
+
+ui <- fluidPage(
+  
+)
+
+server <- function() {
+  
+}
+
+shinyApp(ui, server)
+```
 

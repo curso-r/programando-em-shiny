@@ -668,3 +668,35 @@ p {
 }
 ```
 
+## Exercícios
+
+1 - O que é uma linguagem de marcação?
+
+___
+
+2 - Como criar as tags HTML usando o pacote `shiny`?
+
+___
+
+3 - O que é o framework Bootstrap? O que é o sistema de grade (*grid system*)?
+
+___
+
+4 - Refaça os apps dos exercícios dos capítulos anteriores utilizando o `sidebarLayout`.
+
+___
+
+5 - Utilizando a base `dados::clima` e o layout `navbarPage`, faça um shiny app que tenha duas páginas:
+
+- a primeira com uma série temporal da média diária da `temperatura`, permitindo a escolha do intervalo de dias em que o gráfico é gerado
+
+- a segunda com uma caixa de seleção permitindo escolher as opções `umidade`, `velocidade_vento` e `precipitacao` e um gráfico de dispersão da `temperatura` contra a variável escolhida.
+
+___
+
+6 - Transforme o aplicativo construído no exercício anterior em um `shinydasbhoard`.
+
+___
+
+7 - Transforme o aplicativo construído no exercício anterior em um `bs4Dash`.
+

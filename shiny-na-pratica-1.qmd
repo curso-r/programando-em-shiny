@@ -1,5 +1,7 @@
 # Shiny na prática I {#sec-shiny-pratica-1}
 
+Neste capítulo, vamos fazer uma pequena pausa na apresentação de conceitos e abordar alguns temas práticos muito úteis no desenvolvimento de aplicativos Shiny.
+
 ## Importando bases de dados
 
 A tarefa de importação de dados dentro do Shiny não possui nenhum desafio particular. Podemos seguir lendo nossos dados, seja de arquivos locais, da internet ou de banco de dados, da mesma maneira que fazemos em scripts R habituais. 
@@ -312,7 +314,7 @@ shinyApp(ui, server)
 
 Além várias opções de animações diferentes, que você pode trocar no argumento `type`, também é possível ajustar o tamanho, a cor, a cor de fundo e até usar uma imagem própria como animação^[Pode ser uma imagem estática ou GIF.].
 
-O pacote `shinyWidgets` é mantido pela equipe da [dreamRs](https://github.com/dreamRs). Além de diversos widgets muito úteis, ele possui a função `shinyWidgets::addSpinner()`. Assm como a função `shinycssloards::withSpinner()`, basta embrulhar suas funções `*Output()` com a função `shinyWidgets::addSpinner()` para adicionar a animação às suas visualizações.
+O pacote `shinyWidgets` é mantido pela equipe da [dreamRs](https://github.com/dreamRs). Além de diversos widgets muito úteis, ele possui a função `shinyWidgets::addSpinner()`. Assim como a função `shinycssloards::withSpinner()`, basta embrulhar suas funções `*Output()` com a função `shinyWidgets::addSpinner()` para adicionar a animação às suas visualizações.
 
 São diversas opções de animação, escolhidas por meio do argumento `spin`. Aqui você pode customizar apenas a cor delas. Rode o app a seguir para ver um exemplo.
 
@@ -417,7 +419,7 @@ fluidPage(
 )
 ```
 
-Mesmo um exemplo simples já começa a deixar claro o problema: produzir muitos elementos HTML na UI rapidamente transforma seu código em um emaranhado de funções aninhadas. O mesmo vale para textos muito grandes. Embora nesse caso nem sempre tenhámos muitas tags HTML para criar, scripts R não foram feitos para atender os cuiddos que textos carecem.
+Mesmo um exemplo simples já começa a deixar claro o problema: produzir muitos elementos HTML na UI rapidamente transforma seu código em um emaranhado de funções aninhadas. O mesmo vale para textos muito grandes. Embora nesse caso nem sempre tenhamos muitas tags HTML para criar, scripts R não foram feitos para atender os cuidados que textos carecem.
 
 A melhor prática nessas situações é justamente transferir esses elementos para um arquivo Markdown e pedir que o Shiny o transforme em HTML e o inclua no lugar adequado apenas na hora do `runApp()`. Para isso usamos a função `shiny::includeMarkdown()`.
 
@@ -435,3 +437,10 @@ ui <- fluidPage(
 ```
 
 Vale ressaltar que essa função compila arquivos Markdown (`.md`) e não R Markdown (`.Rmd`). Se quisermos rodar códigos R para gerar saídas HTML, devemos fazer isso dentro do próprio Shiny.
+
+
+
+
+
+
+

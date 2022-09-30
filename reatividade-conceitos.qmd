@@ -7,7 +7,7 @@ knitr::opts_chunk$set(
 
 # Reatividade: conceitos básicos {#sec-reatividade}
 
-Imagine que gostaríamos de criar um app que geresse um gráfico com o resultado do sorteio de uma amostra de números entre 1 e 10 e que o tamanho dessa amostra fosse definido por um input. Além disso, que esse app também indicasse em texto qual foi o número mais sorteado. 
+Imagine que gostaríamos de criar um app que gerasse um gráfico com o resultado do sorteio de uma amostra de números entre 1 e 10 e que o tamanho dessa amostra fosse definido por um input. Além disso, que esse app também indicasse em texto qual foi o número mais sorteado. 
 
 Pensando na construção desse app, teríamos um input, o tamanho da amostra, e dois outputs, um gráfico (de barras) indicando a frequência de cada número e um texto dizendo qual o número mais sorteado. Pelo que aprendemos no capítulo anterior, podemos usar um `sliderInput()` para receber o tamanho da amostra e as funções `renderPlot()` e `renderText()` para construir os textos. No entanto, uma dúvida emerge com relação ao sorteio da amostra: onde ele deve ser feito?
 
@@ -57,9 +57,9 @@ server <- function(input, output, session) {
 #> Error in : Can't access reactive value 'tamanho' outside of reactive consumer.
 ```
 
-A construção desse app traz à tona a necessidade de uma nova peça do Shiny, que não mencionamos ainda. Sem ela não consiguiríamos criar esse app de maneira eficiente. 
+A construção desse app traz à tona a necessidade de uma nova peça do Shiny, que não mencionamos ainda. Sem ela não conseguiríamos criar esse app de maneira eficiente. 
 
-Antes de falar dela, no entanto, como podemos ver pela mensagem de erro da tentiva anterior, precisamos falar de um dos temas centrais do desenvolvimento de aplicativos Shiny: a reatividade.
+Antes de falar dela, no entanto, como podemos ver pela mensagem de erro da tentativa anterior, precisamos falar de um dos temas centrais do desenvolvimento de aplicativos Shiny: a reatividade.
 
 Embora dê para fazer muita coisa no Shiny na tentativa e erro, entender a reatividade nos desvia de vários problemas explícitos  --- como o erro acima --- e, principalmente, de problemas invisíveis --- quando o app funciona, mas de maneira ineficiente ou incorreta. Economizamos muito tempo (e sanidade) não cometendo esses erros durante o desenvolvimento de um app e, por isso, vale a pena estudar reatividade desde o início da sua jornada pelo Shiny.
 
@@ -179,13 +179,13 @@ Para programar em Shiny, precisamos aprender um conjunto de conceitos e ferramen
 
 Vimos na seção anterior que um aplicativo Shiny depende da especificação **adequada** do diagrama de reatividade. Isso quer dizer que devemos seguir alguns princípios na construção da função `server` para que o Shiny consiga montar esse diagrama e para que a reatividade aconteça.
 
-O primeiro desses princípios é o seguinte: todo diagrama de reatividade deve começar com um **valor reativo** e terminar com uma **função observadora**. Nós já utilizamos valores reativos e funções observadoras antes. Vamos definir o que são estrutruras.
+O primeiro desses princípios é o seguinte: todo diagrama de reatividade deve começar com um **valor reativo** e terminar com uma **função observadora**. Nós já utilizamos valores reativos e funções observadoras antes. Vamos definir o que são estruturas.
 
-Valores reativos são objetos que **disparam** a reatividade do app a partir de mudanças nos seus valores. Os objetos da `input` são o exemplo mais comum de valores reativos. Funções observadoras são funções que "observam" mudanças nos valores reativos e, quando elas acontecem, recalculam o seu código. As funções da famílias `render*()` são os exemplos mais comuns de funções obervadoras.
+Valores reativos são objetos que **disparam** a reatividade do app a partir de mudanças nos seus valores. Os objetos da `input` são o exemplo mais comum de valores reativos. Funções observadoras são funções que "observam" mudanças nos valores reativos e, quando elas acontecem, recalculam o seu código. As funções da famílias `render*()` são os exemplos mais comuns de funções observadoras.
 
-Voltando app dado como exemplo na seçao anterior, quando a "Variável A" é alterada na UI, o seguinte processo acontece:
+Voltando app dado como exemplo na seção anterior, quando a "Variável A" é alterada na UI, o seguinte processo acontece:
 
-- o valor reativo `input$variavel_A` emite um sinal de alerta a todas as funções obervadoras que dependem dele dizendo que seu valor mudou;
+- o valor reativo `input$variavel_A` emite um sinal de alerta a todas as funções observadoras que dependem dele dizendo que seu valor mudou;
 
 - a função observadora `renderPlot()`, que depende de `input$variavel_A`, ao saber que esse valor reativo está desatualizado, desatualiza o seu próprio resultado, isto é, o output `histograma_A`;
 
@@ -199,7 +199,7 @@ Os valores da lista `input` não são o único tipo de valores reativos, assim c
 
 ## Expressões reativas
 
-Muitas vezes, precisamos criar objetos dentro do Shiny que dependem de valores reativos e que serão utilizados dentro de um ou mais funções observadoras. Tal objeto precisaria se comportar tanto como uma função observadora, pois opois observaria o valor reatido do qualpois observaria o valor reatido do qual, quanto como uma valor reativo, para disparar a reatividade dentro das funções observadoras onde ele será usado.
+Muitas vezes, precisamos criar objetos dentro do Shiny que dependem de valores reativos e que serão utilizados dentro de uma ou mais funções observadoras. Tal objeto precisaria se comportar tanto como uma função observadora, pois observaria o valor reativo do qual depende, quanto como uma valor reativo, para disparar a reatividade dentro das funções observadoras onde ele será usado.
 
 Esses objetos existem e são chamados de **expressões reativas**, a peça faltante no problema apresentado na introdução deste capítulo. Para criar expressões reativas, utilizamos as funções `reactive()` e `eventReactive()`.
 
@@ -214,7 +214,7 @@ amostra <- reactive({
 })
 ```
 
-Já neste próximo exemplo, a expressão reativa `soma` reacalcula o seu valor sempre que qualquer um dos valores reativos `input$valor1`, `input$valor2` e `input$valor3` mudar.
+Já neste próximo exemplo, a expressão reativa `soma` recalcula o seu valor sempre que qualquer um dos valores reativos `input$valor1`, `input$valor2` e `input$valor3` mudar.
 
 ```{r, eval = FALSE}
 soma <- reactive({
@@ -224,7 +224,7 @@ soma <- reactive({
 
 Para acessar o valor de uma expressão reativa, devemos usar parênteses após o seu nome, como se estivéssemos chamando uma função sem argumentos. Podemos utilizar esse valor dentro de qualquer outra expressão reativa ou função observadora, quantas vezes for preciso.
 
-No código a seguir, criamos a expressão reativa `amostra` e utilizamos o seu valor chamabndo `amostra()` dentro das funções observadoras `renderPlot()` e `renderText()`. Essa é a solução para o problema apresentado no início do capítulo.
+No código a seguir, criamos a expressão reativa `amostra` e utilizamos o seu valor chamando `amostra()` dentro das funções observadoras `renderPlot()` e `renderText()`. Essa é a solução para o problema apresentado no início do capítulo.
 
 ```{r, eval = FALSE}
 # server
@@ -269,7 +269,7 @@ knitr::include_graphics("img/diagrama_reatividade_2.svg")
 
 ### A função `eventReactive()`
 
-Enquanto a função `reactive()` observa mudanças em todos os valores reativos presentes em seu código, a função `eventReactive()` observa mudanças em apenas um valor reativo, especificado na chamada da própria função. No código a seguir, a soma só reacalculada quando o valor `input$valor1` mudar. Alterar os valores de `input$valor2` ou `input$valor3` não vai fazer a expressão reativ `soma` disparar reatividade.
+Enquanto a função `reactive()` observa mudanças em todos os valores reativos presentes em seu código, a função `eventReactive()` observa mudanças em apenas um valor reativo, especificado na chamada da própria função. No código a seguir, a soma só recalculada quando o valor `input$valor1` mudar. Alterar os valores de `input$valor2` ou `input$valor3` não vai fazer a expressão reativa `soma` disparar reatividade.
 
 ```{r, eval = FALSE}
 soma <- eventReactive(input$valor1, {
@@ -319,7 +319,7 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-Veja que o valor reativo `input$botao`, especificado no primeiro argumento da funcão `eventReactive()`, funciona como o gatilho do fluxo de reatividade. Isso significa que a expressão reativa `amostra` será recalculada apenas quando apertarmos o botão *Gerar gráfico*. Mudanças no slider não resultarão em qualquer mudança no app (estamos impedindo que `input$tamanho` inicie o fluxo de reatividade). Repare também que o código que gera a amostra é passado no segundo argumento da funcão `eventReactive()`.
+Veja que o valor reativo `input$botao`, especificado no primeiro argumento da função `eventReactive()`, funciona como o gatilho do fluxo de reatividade. Isso significa que a expressão reativa `amostra` será recalculada apenas quando apertarmos o botão *Gerar gráfico*. Mudanças no slider não resultarão em qualquer mudança no app (estamos impedindo que `input$tamanho` inicie o fluxo de reatividade). Repare também que o código que gera a amostra é passado no segundo argumento da função `eventReactive()`.
 
 O diagrama reativo desse app pode ser representado pelo esquema a seguir. A linha pontilhada indica que o `input$tamanho` não dispara reatividade.
 
@@ -332,9 +332,9 @@ knitr::include_graphics("img/diagrama_reatividade_3.svg")
 
 ## Contexto reativo
 
-Vimos na introdução do capítulo que a nossa segunda tentativa --- colocar a criação da amostra diretamente na função `server` --- retorna um erro. Isso acontece porque **valores e expressões reativas só podem ser lidas dentro de um contexto reativo**. Essa é outra regra do Shiny, e precisamos segui-la para que ele consiga montar o diagra de reatividade.
+Vimos na introdução do capítulo que a nossa segunda tentativa --- colocar a criação da amostra diretamente na função `server` --- retorna um erro. Isso acontece porque **valores e expressões reativas só podem ser lidas dentro de um contexto reativo**. Essa é outra regra do Shiny, e precisamos segui-la para que ele consiga montar o diagrama de reatividade.
 
-*Contexto reativo* remete a qualquer função que observe mudanças em valores reativos, como expressões reativas ou funções observadoras. Basicamente, o processo do Shiny que interpreta a função `server` e cria o driagrama de reatividade não sabe o que fazer quando valores e expressões reativas estão fora de contexto reativo. Então recebemos um erro.
+*Contexto reativo* remete a qualquer função que observe mudanças em valores reativos, como expressões reativas ou funções observadoras. Basicamente, o processo do Shiny que interpreta a função `server` e cria o diagrama de reatividade não sabe o que fazer quando valores e expressões reativas estão fora de contexto reativo. Então recebemos um erro.
 
 No exemplo abaixo, a função `renderPlot()` cria um contexto reativo e, por isso, podemos utilizar o valor reativo `input$variavel` dentro dela.
 
@@ -369,7 +369,7 @@ Os dois problemas indicam um diagrama de reatividade mal construído. A diferen�
 
 Para evitar esses problemas, que discutiremos com mais detalhes no [Capítulo -@sec-reatividade2] e no [Capítulo -sec-reatividade3], podemos imaginar ou desenhar o diagrama de reatividade para investigar onde está a falha. Essa é uma tarefa simples em apps com poucos inputs e outputs, mas extremamente difícil ou inviável em apps complexos.
 
-Nesses casos (ou mesmo nos casos simples), podemos utilizar o pacote `reactlog`. Com ele, conseguimos visualizar facilmente o diagrama de dependências reativas de qualquer Shiny app e olhar o que acontece por trás das curtinas da reatividade quando executamos o aplicativo.
+Nesses casos (ou mesmo nos casos simples), podemos utilizar o pacote `reactlog`. Com ele, conseguimos visualizar facilmente o diagrama de dependências reativas de qualquer Shiny app e olhar o que acontece por trás das cortinas da reatividade quando executamos o aplicativo.
 
 Antes de mais nada, instale o pacote `reactlog`.
 
@@ -385,7 +385,7 @@ options(shiny.reactlog = TRUE)
 
 Por fim, rode o seu app e utilize o comando `CTRL + F3` (no Mac, `command + F3`). O seu navegador abrirá uma nova aba com o diagrama de reatividade. 
 
-No exemplo a seguir, temos a UI de um aplicativo que gera o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado pelo sliderInput. Sempre qua o tamanho da amostra muda, o gráfico é recalculado.
+No exemplo a seguir, temos a UI de um aplicativo que gera o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado pelo sliderInput. Sempre que o tamanho da amostra muda, o gráfico é recalculado.
 
 ```{r, echo = FALSE}
 #| fig-cap: >
@@ -428,9 +428,9 @@ Em resumo, com um diagrama de reatividade em mãos, podemos:
 
 - investigar por que o código de um output não é rodado ou roda duas vezes quando acionamos um input do qual ele deveria depender;
 
-- ter uma visão menos abstrada do fluxo de reatividade e entender melhor o que acontece quando executamos cada parte do nosso app.
+- ter uma visão menos abstrata do fluxo de reatividade e entender melhor o que acontece quando executamos cada parte do nosso app.
 
-Utilize o código a seguir para reproduzir o app mostrado nesta seção. Mexa algumas vezes no *slider* e gere o driagrama de reatividade. Use os controles de navegação para visualizar cada etapa do ciclo reativo. 
+Utilize o código a seguir para reproduzir o app mostrado nesta seção. Mexa algumas vezes no *slider* e gere o diagrama de reatividade. Use os controles de navegação para visualizar cada etapa do ciclo reativo. 
 
 ```{r, eval = FALSE}
 library(shiny)
@@ -466,3 +466,103 @@ Você pode aprender mais sobre o funcionamento do `reactlog` [clicando aqui](htt
 
 Na sequência deste livro, sugerimos utilizar o `reactlog` sempre que ficar com dúvida sobre o diagrama de reatividade de um app.
 
+## Exercícios
+
+1 - Qual a diferença entre programação imperativa e programação declarativa?
+
+___
+
+2 - O que é reatividade?
+
+___
+
+3 - Qual o papel da função `server` no contexto da reatividade de um aplicativo Shiny?
+
+___
+
+4 - O que são valores reativos? E funções observadoras?
+
+___
+
+5 - Para que servem as expressões reativas?
+
+___
+
+6 - Qual a diferença entre as funções `reactive()` e `eventReactive()`?
+
+___
+
+7 - Selecione a opção **verdadeira**.
+
+a. Sempre que mudarmos o valor de um `input` na UI de um app, todo o código na função `server` será rodado novamente.
+
+b. Expressões reativas são o ponto de partida do diagrama de reatividade.
+
+c. Podemos criar valores reativos com a função `reactive()`.
+
+d. As funções da família `render*` são um exemplo de função observadora.
+
+___
+
+8 - Faça um shiny app para visualizarmos boxplots da base `ggplot2::diamonds`.
+
+O seu app deve ter dois inputs e um output:
+
+- o primeiro input deve ser uma caixa de seleção das variáveis numéricas da base (será o eixo y do gráfico).
+
+- o segundo input deve ser uma caixa de seleção das variáveis categóricas da base (será o eixo x do gráfico).
+
+- o output deve ser um gráfico com os boxplots da variável escolhida em (1) para cada categoria da variável escolhida em (2).
+
+Para acessar a base `diamonds`, carregue o pacote ggplot2:
+
+```{r, eval = FALSE}
+library(ggplto2)
+diamonds
+
+# ou rode
+
+ggplot2::diamonds
+```
+
+___
+
+9 - Selecionando várias opções em um `selectInput`.
+
+a. Reproduza o seguinte Shiny app:
+https://cursodashboards.shinyapps.io/select-multiple/
+
+b. Troque o selectInput pelo checkboxGroupInput().
+
+Para acessar a base utilizada, rode o código abaixo:
+
+```{r, eval = FALSE}
+install.packages("nycflights13")
+nycflights13::flights
+
+# Pacote com versão em português da base
+install.packages("dados")
+dados::voos
+```
+
+___
+
+10 - Faça um Shiny app para explorar a base de filmes da Pixar.
+
+```{r, eval = FALSE}
+# Instale o pacote com a versão original da base (em inglês)
+install.packages("pixarfilms")
+
+# Instale pacote com versão em português da base
+install.packages("dados")
+```
+
+Sugestões:
+
+- **Input**: data de lançamento (`dateRangeInput`). **Output**: tabela de filmes.
+
+- **Input**: filme. **Outputs**: orçamento, bilheteria, gênero, prêmios e notas.
+
+- **Input**: caixa de texto para escrever um nome. **Outputs**: tabela com filmes que essa pessoa participou e qual papel ela exerceu no filme (direção, roteiro, produção etc)
+
+**Dica**: você precisará fazer join das bases do pacote para juntar as informações.

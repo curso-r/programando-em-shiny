@@ -14,11 +14,11 @@ Usando htmlwidgets, conseguimos construir tabelas, gráficos, mapas e muito outr
 - plotly, ECharts e Highcharts para gráficos 
 - Leaflet, para mapas
 
-Além de diversos recursos interativos nativos, esssas bibliotecas permitem a captura de certos **eventos**, que são transformados em inputs dentro Shiny e podem ser utilizados para gerar ou modificar resultados. Veremos também como acessar e utilizar esses eventos dentro do servidor.
+Além de diversos recursos interativos nativos, essas bibliotecas permitem a captura de certos **eventos**, que são transformados em inputs dentro Shiny e podem ser utilizados para gerar ou modificar resultados. Veremos também como acessar e utilizar esses eventos dentro do servidor.
 
 ## Tabelas
 
-Falaremos a seguir como utilziar as bibliotecas React Table e DT para construir tabelas interativas em seu Shiny app.
+Falaremos a seguir como utilizar as bibliotecas React Table e DT para construir tabelas interativas em seu Shiny app.
 
 ### React Table {#sec-reactable}
 
@@ -80,7 +80,7 @@ Para saber mais sobre `reactable`, [clique aqui](https://glin.github.io/reactabl
 
 ### DT
 
-O pacote `DT` embruha a biblioteca JavaScript [DataTables](http://datatables.net/) e é uma alternativa ao `reactable` para a criação de tabelas interativas. Embora seja mais burocrático na customização, essa biblioteca possui um recurso muito útil para a aplicativos Shiny: a edição de tabelas.
+O pacote `DT` embrulha a biblioteca JavaScript [DataTables](http://datatables.net/) e é uma alternativa ao `reactable` para a criação de tabelas interativas. Embora seja mais burocrático na customização, essa biblioteca possui um recurso muito útil para a aplicativos Shiny: a edição de tabelas.
 
 Antes de mais nada, instale o pacote `DT`:
 
@@ -205,7 +205,7 @@ Na [Seção -@sec-ggplot2], falamos como colocar gráficos estáticos no Shiny u
 
 ### plotly
 
-A biblioteca plotly, além de permitir a criação de gráficos interativos, possibilita fazermos isso diretamente de um gráfico feito em `ggplot2`. Para utilizar essa biblioteca a patir do R, utilizamos o pacote `plotly`.
+A biblioteca plotly, além de permitir a criação de gráficos interativos, possibilita fazermos isso diretamente de um gráfico feito em `ggplot2`. Para utilizar essa biblioteca a partir do R, utilizamos o pacote `plotly`.
 
 ```{r, eval = FALSE}
 install.packages("plotly")
@@ -520,7 +520,7 @@ install.packages("highcharter")
 
 O `highcharter` também **não** possui uma função tradutora de ggplot, equivalente à `ggplotly` do pacote `plotly`. Para criar um Highchart, podemos utilizar a função `highcharter::hchart()` ou `highcharter::highchart()`.
 
-A função `highcharter::hchart()` tem uma sintaxe parecida com a do pacote `ggplot2`. No entanto, nem todo gráfico será possível ser contruído a partir dessa função.
+A função `highcharter::hchart()` tem uma sintaxe parecida com a do pacote `ggplot2`. No entanto, nem todo gráfico será possível ser construído a partir dessa função.
 
 ```{r}
 mtcars |> 
@@ -685,7 +685,7 @@ O `leaflet` envia automaticamente valores provenientes de eventos para a lista `
 
 Se um mapa com `outputId = "mapa"` tiver um círculo, sempre que o círculo for clicado o valor reativo `input$mapa_shape_click` será atualizado. Antes do primeiro clique, o valor de `input$mapa_shape_click` é `NULL`.
 
-O leaflet possui os seguintes tipos de objeto (`tipoObjeto`): `marker`, `shape`, `geojson` e `topojson`; e os seguintes tipos de eventos (`nomeEvento`): `click`, `mouseover` and `mouseout`.
+O leaflet possui os seguintes tipos de objeto (`tipoObjeto`): `marker`, `shape`, `geojson` e `topojson`; e os seguintes tipos de eventos (`nomeEvento`): `click`, `mouseover` e `mouseout`.
 
 Ao realizar uma ação, o valor do `input` correspondente passa a ser uma lista com os seguintes valores:
 
@@ -706,6 +706,17 @@ Além dos eventos associados a um elemento do mapa, o `leaflet` também disponib
 - `input$outputId_center`: que contém a latitude/longitude do centro do mapa atualmente visível na tela.
 
 <!-- TODO: colocar GIF com exemplo, com o código-->
+
+## Exercícios
+
+1 - O que são HTML Widgets?
+
+___
+
+2 - Reproduza [este app](https://acursor.shinyapps.io/htmlwidgets-1/).
+
+A base utilizada foi a `cetesb`. [Clique aqui](https://github.com/curso-r/programando-em-shiny/raw/main/exemplos/data/cetesb.rds) para fazer o download dela.
+
 
 
 

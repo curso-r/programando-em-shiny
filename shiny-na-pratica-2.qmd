@@ -4,7 +4,7 @@
 
 ## Tooltips
 
-*Tooltips* são uma ótima maneira de se comunicar com a pessoa utilizando o seu app. Elas permitem passar todo tipo de informação extra e não oculpam espaço da UI.
+*Tooltips* são uma ótima maneira de se comunicar com a pessoa utilizando o seu app. Elas permitem passar todo tipo de informação extra e não ocupam espaço da UI.
 
 Essencialmente, elas são textos que só aparecem quando passamos o ponteiro do mouse em algum elemento da tela. Por exemplo, passe o mouse em cima da frase a seguir:
 
@@ -216,7 +216,7 @@ shinyWidgets::radioGroupButtons(
 ```
 
 
-Agora, precisamos construir a lógina do Output, tanto na UI como no server. Como a nossa visualização pode gerar gráficos ou uma tabela, precisaremos de funções `*Output()` e `render*()` diferentes. Dessa forma, vamos utilizar na nossa UI um `OutputUI()`.
+Agora, precisamos construir a lógica do Output, tanto na UI como no server. Como a nossa visualização pode gerar gráficos ou uma tabela, precisaremos de funções `*Output()` e `render*()` diferentes. Dessa forma, vamos utilizar na nossa UI um `OutputUI()`.
 
 ```{r, eval = FALSE}
 # A nossa UI ficará assim

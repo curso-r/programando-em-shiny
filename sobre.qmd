@@ -2,7 +2,7 @@
 
 Este livro foi escrito em [R Markdown](https://rmarkdown.rstudio.com/), com o pacote [bookdown](https://bookdown.org/), e está em construção e em revisão aberta. Fique à vontade para corrigir qualquer tipo de erro que encontrar criando *issues* [neste repositório](https://github.com/curso-r/livro-shiny).
 
-O texto deste livro foi eleborado por [William Amorim](https://wamorim.com/) com colaboração do time da [Curso-R](https://www.curso-r.com/). Ele está disponível gratuitamente no Github sob a licença [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html).
+O texto deste livro foi elaborado por [William Amorim](https://wamorim.com/) com colaboração do time da [Curso-R](https://www.curso-r.com/). Ele está disponível gratuitamente no Github sob a licença [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
 A Curso-R é o braço de Educação da R6 Consultoria, uma empresa de treinamentos e consultoria em Ciência de Dados e linguagem de programação R. 
 

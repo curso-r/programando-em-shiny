@@ -14,7 +14,7 @@ A depender do tipo de interação que queremos construir no app, vamos precisar 
 
 As funções observadoras são o ponto final do diagrama de reatividade e sem eles o fluxo reativo não acontece. As funções `render*()`, que geram os nossos outputs, são o tipo mais comum de funções observadoras, mas não são o único.
 
-Muitas vezes queremos usar a reatividade para disparar ações que não estão ligadas à geração de outputs, como o registro de informações em bases de dados, o envio de e-mails ou a atualização de informações nos inputs^[Sem a necessidade de recriá-los do zero com `uiOutput()` e `renderUI()`.]. Nesses casos, precisamos utilizar as funções `observe()` e `oberveEvent()`. 
+Muitas vezes queremos usar a reatividade para disparar ações que não estão ligadas à geração de outputs, como o registro de informações em bases de dados, o envio de e-mails ou a atualização de informações nos inputs^[Sem a necessidade de recriá-los do zero com `uiOutput()` e `renderUI()`.]. Nesses casos, precisamos utilizar as funções `observe()` e `observeEvent()`. 
 
 A função `observe()` monitora os valores e expressões reativas que estão dentro dela e roda seu código quando algum desses valores são modificados. Ao contrário da função `reactive()`, ela não cria um novo valor reativo. O código atribuído a ela é o ponto chegada de um fluxo reativo, isto é, a ação que a função `observe()` executa é o objetivo final do fluxo.
 
@@ -74,7 +74,7 @@ server <- function(input, output, session) {
 }
 ```
 
-As funções `observe()` e `oberveEvent()` aumentam bastante o leque de opções dos nossos aplicativos. Agora conseguimos criar fluxos reativos que não estão associados necessariamente a um output.
+As funções `observe()` e `observeEvent()` aumentam bastante o leque de opções dos nossos aplicativos. Agora conseguimos criar fluxos reativos que não estão associados necessariamente a um output.
 
 ## Mais valores reativos
 
@@ -121,7 +121,7 @@ rv$a <- 3
 rv$b <- 4
 ```
 
-Um caso em que criar valores reativos no servidor se torna útil aparece quando precisamos modificar a base de dados que alimenta os outputs a patir de alguma ação na UI, como a possibilidade de adicionar ou remover uma linha. Veja o exemplo abaixo.
+Um caso em que criar valores reativos no servidor se torna útil aparece quando precisamos modificar a base de dados que alimenta os outputs a partir de alguma ação na UI, como a possibilidade de adicionar ou remover uma linha. Veja o exemplo abaixo.
 
 ```{r, eval = FALSE}
 library(shiny)
@@ -250,4 +250,35 @@ output$orcamento <- renderInfoBox({
   )
 })
 ```
+
+
+## Exercícios
+
+1 - Por que precisamos das funções `observe()` e `observeEvent()`? Qual a diferença entre elas?
+
+___
+
+2 - Para que serve a função `reactiveVal()`?
+
+___
+
+3 - Qual a diferença entre as funções `reactiveVal()` e `reactiveValues()`?
+
+___
+
+4 - Quais valores retornam `FALSE` na função `isTruth()`?
+
+___
+
+5 - Para que serve a função `req()`?
+
+___
+
+6 - Utilizando a base `dados::dados_gapminder`, construa um app que tenha um filtro de `continente` e outro de `pais`. Escolhido um `continente`, apenas países do continente escolhido devem permanecer no filtro de `pais`. Como output, seu app deve apresentar as séries de `populacao`, `expectativa_de_vida` e `pib_per_capita` ao longo dos anos disponíveis.
+
+___
+
+7 - Faça um app que contenha um formulário de cadastro com os campos "nome", "e-mail", "idade" e "cidade" e um botão de salvar dados que faça o app salvar as informações em uma planilha no computador. O app também deve mostrar a tabela mais atualizada de pessoas cadastradas.
+
+
 
