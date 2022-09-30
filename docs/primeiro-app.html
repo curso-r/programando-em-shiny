@@ -307,6 +307,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#os-componentes-básicos" id="toc-os-componentes-básicos" class="nav-link" data-scroll-target="#os-componentes-básicos"> <span class="header-section-number">1.2</span> Os componentes básicos</a></li>
   <li><a href="#estrutura-de-um-código-shiny" id="toc-estrutura-de-um-código-shiny" class="nav-link" data-scroll-target="#estrutura-de-um-código-shiny"> <span class="header-section-number">1.3</span> Estrutura de um código Shiny</a></li>
   <li><a href="#rodando-um-aplicativo" id="toc-rodando-um-aplicativo" class="nav-link" data-scroll-target="#rodando-um-aplicativo"> <span class="header-section-number">1.4</span> Rodando um aplicativo</a></li>
+  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"> <span class="header-section-number">1.5</span> Exercícios</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/primeiro-app.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
     </div>
@@ -338,8 +339,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"shiny"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A versão do pacote que estamos utilizando neste livro é a 1.7.2.</p>
-<p>É uma boa prática criarmos novos repositórios (ou projetos, no RStudio) para cada nova análise de dados que começamos, mantendo todos os arquivos da análise dentro desse repositório. Veremos que, para aplicavios Shiny, isso será especialmente importante. Para reproduzir os exemplos deste livro, recomendamos criar uma nova pasta para cada aplicativo. Por mais que em alguns casos isso não seja particularmente útil, será uma boa maneira de praticar essa maneira de organização.</p>
-<p>Para mais dicas de organização de projetos de análide de dados, em um contexto geral, recomendamos a leitura do <a href="https://curso-r.github.io/zen-do-r/">Zen do R</a>, especialmente o <a href="https://curso-r.github.io/zen-do-r/rproj-dir.html">Capítulo 3</a>.</p>
+<p>É uma boa prática criarmos novos repositórios (ou projetos, no RStudio) para cada nova análise de dados que começamos, mantendo todos os arquivos da análise dentro desse repositório. Veremos que, para aplicativos Shiny, isso será especialmente importante. Para reproduzir os exemplos deste livro, recomendamos criar uma nova pasta para cada aplicativo. Por mais que em alguns casos isso não seja particularmente útil, será uma boa maneira de praticar essa maneira de organização.</p>
+<p>Para mais dicas de organização de projetos de análise de dados, em um contexto geral, recomendamos a leitura do <a href="https://curso-r.github.io/zen-do-r/">Zen do R</a>, especialmente o <a href="https://curso-r.github.io/zen-do-r/rproj-dir.html">Capítulo 3</a>.</p>
 <section id="o-que-é-um-aplicativo-shiny" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="o-que-é-um-aplicativo-shiny"><span class="header-section-number">1.1</span> O que é um aplicativo Shiny?</h2>
 <p>Na tentativa de explicar o que é um aplicativo Shiny, podemos reduzi-lo a diversos elementos.</p>
@@ -455,7 +456,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Repare que algumas opções novas aparecerão no RStudio quando salvamos o arquivo. Isso acontece porque o RStudio reconhece a sintaxe do código como a de um aplacativo Shiny, habilitando para nós algumas ferramentas que são úteis apenas para trabalhar com apps. A mais importante por enquanto será o botão <strong>Run App</strong>.</p>
+<p>Repare que algumas opções novas aparecerão no RStudio quando salvamos o arquivo. Isso acontece porque o RStudio reconhece a sintaxe do código como a de um aplicativo Shiny, habilitando para nós algumas ferramentas que são úteis apenas para trabalhar com apps. A mais importante por enquanto será o botão <strong>Run App</strong>.</p>
 <p>Como discutimos anteriormente, um aplicativo Shiny em funcionamento sempre terá um computador rodando uma sessão de R por trás. Esse computador, chamado genericamente de <em>servidor</em>, pode ser uma máquina virtual em um serviço de nuvem, uma máquina virtual em um serviço de hospedagem, um servidor dentro da sua empresa, um servidor na sua casa ou mesmo o seu próprio computador pessoal.</p>
 <p>Normalmente, enquanto estamos desenvolvendo um aplicativo Shiny, queremos testá-lo localmente<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> para verificar se tudo funciona corretamente, se está ficando bonito ou simplesmente para gastar alguns minutos apreciando a nossa obra de arte. Testar localmente significa que <strong>o seu próprio computador fará as vezes de servidor</strong>, embora isso não signifique que seu app ficará disponível na internet.</p>
 <p>Quando servimos um app localmente, isto é, quando <em>rodamos um app</em>, ganhamos um endereço que será acessível apenas do nosso computador. A partir desse endereço, podemos testar nosso app no navegador, como se ele já estivesse em produção. No RStudio, para rodar nossos apps, utilizamos justamente o botão <strong>Run App</strong>.</p>
@@ -483,7 +484,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>No console, após rodarmos o app, também aparecerá uma mensagem idenficicando o <em>endereço</em> do nosso aplicativo. Nesse caso, será um IP (<code>http://127.0.0.1</code>)<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> com alguma porta que esteja disponível escolhida aleatoriamente (<code>:4028</code>). Esse endereço aparecerá no nosso navegador e poderemos copiá-lo e colá-lo em qualquer outra aba ou navegador que quisermos rodar o app.</p>
+<p>No console, após rodarmos o app, também aparecerá uma mensagem identificando o <em>endereço</em> do nosso aplicativo. Nesse caso, será um IP (<code>http://127.0.0.1</code>)<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> com alguma porta que esteja disponível escolhida aleatoriamente (<code>:4028</code>). Esse endereço aparecerá no nosso navegador e poderemos copiá-lo e colá-lo em qualquer outra aba ou navegador que quisermos rodar o app.</p>
+</section>
+<section id="exercícios" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">1.5</span> Exercícios</h2>
+<p>1 - O que é um aplicativo web?</p>
+<hr>
+<p>2 - Quais são os componentes básicos de um aplicativo Shiny?</p>
+<hr>
+<p>3 - Por que a sessão do R fica ocupada quando rodamos um app localmente?</p>
+<hr>
+<p>4 - Sobre o código de um aplicativo Shiny, escolha a alternativa <strong>falsa</strong>.</p>
+<ol type="a">
+<li><p>As funções do R utilizadas na construção da UI são funções que retornam código HMTL.</p></li>
+<li><p>Não precisamos criar a função <code>server</code> se o app não tiver interatividade.</p></li>
+<li><p>A função <code>server</code> pode ser escrita sem o parâmetro <code>session</code>.</p></li>
+<li><p>Embora seja uma boa prática usar os nomes <code>ui</code> e <code>server</code>, podemos adotar qualquer nome para esses elementos.</p></li>
+</ol>
+<hr>
+<p>5 - Por que o app criado pelo código abaixo retorna erro quando o rodamos?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>
@@ -493,8 +525,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li id="fn1" role="doc-endnote"><p>Embora seja incomum, você também pode mostrar vídeos em um Shiny app.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2" role="doc-endnote"><p>Isto é, o código CSS que o Shiny importa por padrão.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3" role="doc-endnote"><p>A função <code>server</code> sempre precisa existir, mesmo neste caso, quando não há interatividade<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4" role="doc-endnote"><p>E locamente também.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5" role="doc-endnote"><p>Se o app foi aberto na aba Viewer ou em uma janela do próprio RStudio, clique na setinha para baixo ao lado do botão <strong>Run App</strong> e selecione a opção <code>Run External</code>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>E loucamente também.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p>Se o app foi aberto na aba Viewer ou em uma janela do próprio RStudio, clique na seta para baixo ao lado do botão <strong>Run App</strong> e selecione a opção <code>Run External</code>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6" role="doc-endnote"><p>Esse número de IP é padrão e significa “o seu computador”.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>

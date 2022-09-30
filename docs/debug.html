@@ -309,6 +309,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#a-função-cat" id="toc-a-função-cat" class="nav-link" data-scroll-target="#a-função-cat"> <span class="header-section-number">4.2.1</span> A função <code>cat()</code></a></li>
   <li><a href="#a-função-browser" id="toc-a-função-browser" class="nav-link" data-scroll-target="#a-função-browser"> <span class="header-section-number">4.2.2</span> A função <code>browser()</code></a></li>
   </ul></li>
+  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"> <span class="header-section-number">4.3</span> Exercícios</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/debug.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
     </div>
@@ -423,9 +424,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 4</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Para sair do <code>browser</code> e voltar à execução do app, basta clicar no botão <code>Continue</code>, no topo do Console. Clicando no botão <code>Stop</code>, tanto o <code>browser</code> quanto a execução do app serão finalizadas. Após encontrar e solucionar o problema, não se esqueça de remover a função <code>browser()</code> do seu código.</p>
-
-
 </section>
+</section>
+<section id="exercícios" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">4.3</span> Exercícios</h2>
+<p>1 - Por que, em geral, não conseguimos rodar diretamente o código escrito na função <code>server</code>?</p>
+<hr>
+<p>2 - Para que serve a função <code>browser()</code>?</p>
+<hr>
+<p>3 - Debug e arrume o código do app a seguir:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sorteio de números de 1 a 10"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sliderInput</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">inputId =</span> <span class="st">"tamanho"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Selecione o tamanho da amostra"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="dv">1</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="dv">1000</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> <span class="dv">5</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">actionButton</span>(<span class="st">"sortear"</span>, <span class="st">"Sortear"</span>),</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="at">outputId =</span> <span class="st">"grafico"</span>),</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Tabela de frequências"</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tableOutput</span>(<span class="at">outputId =</span> <span class="st">"tabela"</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  amostra <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, input<span class="sc">$</span>tamanho)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    amostra <span class="sc">|&gt;</span> </span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">table</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">barplot</span>()</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>tabela <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">numeros =</span> <span class="fu">amostra</span>()</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">count</span>(numeros)</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
 </section>
 <section class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>

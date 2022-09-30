@@ -334,6 +334,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<p>Neste capítulo, vamos fazer uma pequena pausa na apresentação de conceitos e abordar alguns temas práticos muito úteis no desenvolvimento de aplicativos Shiny.</p>
 <section id="importando-bases-de-dados" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="importando-bases-de-dados"><span class="header-section-number">6.1</span> Importando bases de dados</h2>
 <p>A tarefa de importação de dados dentro do Shiny não possui nenhum desafio particular. Podemos seguir lendo nossos dados, seja de arquivos locais, da internet ou de banco de dados, da mesma maneira que fazemos em scripts R habituais.</p>
@@ -632,7 +633,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Além várias opções de animações diferentes, que você pode trocar no argumento <code>type</code>, também é possível ajustar o tamanho, a cor, a cor de fundo e até usar uma imagem própria como animação<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<p>O pacote <code>shinyWidgets</code> é mantido pela equipe da <a href="https://github.com/dreamRs">dreamRs</a>. Além de diversos widgets muito úteis, ele possui a função <code>shinyWidgets::addSpinner()</code>. Assm como a função <code>shinycssloards::withSpinner()</code>, basta embrulhar suas funções <code>*Output()</code> com a função <code>shinyWidgets::addSpinner()</code> para adicionar a animação às suas visualizações.</p>
+<p>O pacote <code>shinyWidgets</code> é mantido pela equipe da <a href="https://github.com/dreamRs">dreamRs</a>. Além de diversos widgets muito úteis, ele possui a função <code>shinyWidgets::addSpinner()</code>. Assim como a função <code>shinycssloards::withSpinner()</code>, basta embrulhar suas funções <code>*Output()</code> com a função <code>shinyWidgets::addSpinner()</code> para adicionar a animação às suas visualizações.</p>
 <p>São diversas opções de animação, escolhidas por meio do argumento <code>spin</code>. Aqui você pode customizar apenas a cor delas. Rode o app a seguir para ver um exemplo.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
@@ -720,7 +721,7 @@ Procurado por crimes contra o espaço interdimensional. Saiba mais [aqui](https:
 <span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Mesmo um exemplo simples já começa a deixar claro o problema: produzir muitos elementos HTML na UI rapidamente transforma seu código em um emaranhado de funções aninhadas. O mesmo vale para textos muito grandes. Embora nesse caso nem sempre tenhámos muitas tags HTML para criar, scripts R não foram feitos para atender os cuiddos que textos carecem.</p>
+<p>Mesmo um exemplo simples já começa a deixar claro o problema: produzir muitos elementos HTML na UI rapidamente transforma seu código em um emaranhado de funções aninhadas. O mesmo vale para textos muito grandes. Embora nesse caso nem sempre tenhamos muitas tags HTML para criar, scripts R não foram feitos para atender os cuidados que textos carecem.</p>
 <p>A melhor prática nessas situações é justamente transferir esses elementos para um arquivo Markdown e pedir que o Shiny o transforme em HTML e o inclua no lugar adequado apenas na hora do <code>runApp()</code>. Para isso usamos a função <code>shiny::includeMarkdown()</code>.</p>
 <p>Supondo que salvamos o markdown da mini bio em um arquivo <code>rick.md</code>, a nossa UI então ficaria:</p>
 <div class="cell">

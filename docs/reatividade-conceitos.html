@@ -120,7 +120,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Enviar"
   }
 }</script>
-<base target="_blank">
 <script src="script.js"></script>
 
 
@@ -313,6 +312,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   <li><a href="#contexto-reativo" id="toc-contexto-reativo" class="nav-link" data-scroll-target="#contexto-reativo"> <span class="header-section-number">3.4</span> Contexto reativo</a></li>
   <li><a href="#visualizando-o-diagrama-de-reatividade-reactlog" id="toc-visualizando-o-diagrama-de-reatividade-reactlog" class="nav-link" data-scroll-target="#visualizando-o-diagrama-de-reatividade-reactlog"> <span class="header-section-number">3.5</span> Visualizando o diagrama de reatividade: <code>reactlog</code></a></li>
+  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"> <span class="header-section-number">3.6</span> Exercícios</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/reatividade-conceitos.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
     </div>
@@ -338,7 +338,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 
 </div>
-<p>Imagine que gostaríamos de criar um app que geresse um gráfico com o resultado do sorteio de uma amostra de números entre 1 e 10 e que o tamanho dessa amostra fosse definido por um input. Além disso, que esse app também indicasse em texto qual foi o número mais sorteado.</p>
+<p>Imagine que gostaríamos de criar um app que gerasse um gráfico com o resultado do sorteio de uma amostra de números entre 1 e 10 e que o tamanho dessa amostra fosse definido por um input. Além disso, que esse app também indicasse em texto qual foi o número mais sorteado.</p>
 <p>Pensando na construção desse app, teríamos um input, o tamanho da amostra, e dois outputs, um gráfico (de barras) indicando a frequência de cada número e um texto dizendo qual o número mais sorteado. Pelo que aprendemos no capítulo anterior, podemos usar um <code>sliderInput()</code> para receber o tamanho da amostra e as funções <code>renderPlot()</code> e <code>renderText()</code> para construir os textos. No entanto, uma dúvida emerge com relação ao sorteio da amostra: onde ele deve ser feito?</p>
 <p>Obviamente, sortear a amostra durante a construção de cada output (como exemplifica o código abaixo) não vai funcionar pois geraríamos duas amostras diferentes<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <div class="cell" data-layout-align="center">
@@ -382,8 +382,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in : Can't access reactive value 'tamanho' outside of reactive consumer.</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>A construção desse app traz à tona a necessidade de uma nova peça do Shiny, que não mencionamos ainda. Sem ela não consiguiríamos criar esse app de maneira eficiente.</p>
-<p>Antes de falar dela, no entanto, como podemos ver pela mensagem de erro da tentiva anterior, precisamos falar de um dos temas centrais do desenvolvimento de aplicativos Shiny: a reatividade.</p>
+<p>A construção desse app traz à tona a necessidade de uma nova peça do Shiny, que não mencionamos ainda. Sem ela não conseguiríamos criar esse app de maneira eficiente.</p>
+<p>Antes de falar dela, no entanto, como podemos ver pela mensagem de erro da tentativa anterior, precisamos falar de um dos temas centrais do desenvolvimento de aplicativos Shiny: a reatividade.</p>
 <p>Embora dê para fazer muita coisa no Shiny na tentativa e erro, entender a reatividade nos desvia de vários problemas explícitos — como o erro acima — e, principalmente, de problemas invisíveis — quando o app funciona, mas de maneira ineficiente ou incorreta. Economizamos muito tempo (e sanidade) não cometendo esses erros durante o desenvolvimento de um app e, por isso, vale a pena estudar reatividade desde o início da sua jornada pelo Shiny.</p>
 <p>Na próxima seção, faremos uma breve introdução explicando o que é reatividade e por que ela é importante no Shiny. Em seguida, introduziremos o conceito de diagrama de reatividade e apresentaremos as suas estruturas básicas. Por fim, vamos conhecer o <code>reactlog</code>, uma ferramente muito útil para visualizar a reatividade de um aplicativo.</p>
 <section id="o-que-é-reatividade" class="level2" data-number="3.1">
@@ -485,11 +485,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="3.2" class="anchored" data-anchor-id="valores-reativos-e-funções-observadoras"><span class="header-section-number">3.2</span> Valores reativos e funções observadoras</h2>
 <p>Para programar em Shiny, precisamos aprender um conjunto de conceitos e ferramentas. Até aqui, fizemos isso definindo como o Shiny funciona e explicando como utilizar o pacote <code>shiny</code> para criar nossos apps. Agora, além de explorar novas funções, adicionaremos à nossa lista de conceitos algumas regras importantes para que nossos apps funcionem corretamente.</p>
 <p>Vimos na seção anterior que um aplicativo Shiny depende da especificação <strong>adequada</strong> do diagrama de reatividade. Isso quer dizer que devemos seguir alguns princípios na construção da função <code>server</code> para que o Shiny consiga montar esse diagrama e para que a reatividade aconteça.</p>
-<p>O primeiro desses princípios é o seguinte: todo diagrama de reatividade deve começar com um <strong>valor reativo</strong> e terminar com uma <strong>função observadora</strong>. Nós já utilizamos valores reativos e funções observadoras antes. Vamos definir o que são estrutruras.</p>
-<p>Valores reativos são objetos que <strong>disparam</strong> a reatividade do app a partir de mudanças nos seus valores. Os objetos da <code>input</code> são o exemplo mais comum de valores reativos. Funções observadoras são funções que “observam” mudanças nos valores reativos e, quando elas acontecem, recalculam o seu código. As funções da famílias <code>render*()</code> são os exemplos mais comuns de funções obervadoras.</p>
-<p>Voltando app dado como exemplo na seçao anterior, quando a “Variável A” é alterada na UI, o seguinte processo acontece:</p>
+<p>O primeiro desses princípios é o seguinte: todo diagrama de reatividade deve começar com um <strong>valor reativo</strong> e terminar com uma <strong>função observadora</strong>. Nós já utilizamos valores reativos e funções observadoras antes. Vamos definir o que são estruturas.</p>
+<p>Valores reativos são objetos que <strong>disparam</strong> a reatividade do app a partir de mudanças nos seus valores. Os objetos da <code>input</code> são o exemplo mais comum de valores reativos. Funções observadoras são funções que “observam” mudanças nos valores reativos e, quando elas acontecem, recalculam o seu código. As funções da famílias <code>render*()</code> são os exemplos mais comuns de funções observadoras.</p>
+<p>Voltando app dado como exemplo na seção anterior, quando a “Variável A” é alterada na UI, o seguinte processo acontece:</p>
 <ul>
-<li><p>o valor reativo <code>input$variavel_A</code> emite um sinal de alerta a todas as funções obervadoras que dependem dele dizendo que seu valor mudou;</p></li>
+<li><p>o valor reativo <code>input$variavel_A</code> emite um sinal de alerta a todas as funções observadoras que dependem dele dizendo que seu valor mudou;</p></li>
 <li><p>a função observadora <code>renderPlot()</code>, que depende de <code>input$variavel_A</code>, ao saber que esse valor reativo está desatualizado, desatualiza o seu próprio resultado, isto é, o output <code>histograma_A</code>;</p></li>
 <li><p>a função <code>renderPlot()</code> consulta o novo valor de <code>input$variavel_A</code> e o utiliza para recalcular seu resultado (o código dentro da <code>renderPlot()</code> é rodado novamente);</p></li>
 <li><p>o novo histograma é gerado e enviado para a UI, encerrando o processo reativo.</p></li>
@@ -499,7 +499,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="expressões-reativas" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="expressões-reativas"><span class="header-section-number">3.3</span> Expressões reativas</h2>
-<p>Muitas vezes, precisamos criar objetos dentro do Shiny que dependem de valores reativos e que serão utilizados dentro de um ou mais funções observadoras. Tal objeto precisaria se comportar tanto como uma função observadora, pois opois observaria o valor reatido do qualpois observaria o valor reatido do qual, quanto como uma valor reativo, para disparar a reatividade dentro das funções observadoras onde ele será usado.</p>
+<p>Muitas vezes, precisamos criar objetos dentro do Shiny que dependem de valores reativos e que serão utilizados dentro de uma ou mais funções observadoras. Tal objeto precisaria se comportar tanto como uma função observadora, pois observaria o valor reativo do qual depende, quanto como uma valor reativo, para disparar a reatividade dentro das funções observadoras onde ele será usado.</p>
 <p>Esses objetos existem e são chamados de <strong>expressões reativas</strong>, a peça faltante no problema apresentado na introdução deste capítulo. Para criar expressões reativas, utilizamos as funções <code>reactive()</code> e <code>eventReactive()</code>.</p>
 <section id="a-função-reactive" class="level3" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="a-função-reactive"><span class="header-section-number">3.3.1</span> A função <code>reactive()</code></h3>
@@ -510,14 +510,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, input<span class="sc">$</span>tamanho, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Já neste próximo exemplo, a expressão reativa <code>soma</code> reacalcula o seu valor sempre que qualquer um dos valores reativos <code>input$valor1</code>, <code>input$valor2</code> e <code>input$valor3</code> mudar.</p>
+<p>Já neste próximo exemplo, a expressão reativa <code>soma</code> recalcula o seu valor sempre que qualquer um dos valores reativos <code>input$valor1</code>, <code>input$valor2</code> e <code>input$valor3</code> mudar.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>soma <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  input<span class="sc">$</span>valor1 <span class="sc">+</span> input<span class="sc">$</span>valor2 <span class="sc">+</span> input<span class="sc">$</span>valor3</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Para acessar o valor de uma expressão reativa, devemos usar parênteses após o seu nome, como se estivéssemos chamando uma função sem argumentos. Podemos utilizar esse valor dentro de qualquer outra expressão reativa ou função observadora, quantas vezes for preciso.</p>
-<p>No código a seguir, criamos a expressão reativa <code>amostra</code> e utilizamos o seu valor chamabndo <code>amostra()</code> dentro das funções observadoras <code>renderPlot()</code> e <code>renderText()</code>. Essa é a solução para o problema apresentado no início do capítulo.</p>
+<p>No código a seguir, criamos a expressão reativa <code>amostra</code> e utilizamos o seu valor chamando <code>amostra()</code> dentro das funções observadoras <code>renderPlot()</code> e <code>renderText()</code>. Essa é a solução para o problema apresentado no início do capítulo.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># server</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>amostra <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
@@ -558,7 +558,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="a-função-eventreactive" class="level3" data-number="3.3.2">
 <h3 data-number="3.3.2" class="anchored" data-anchor-id="a-função-eventreactive"><span class="header-section-number">3.3.2</span> A função <code>eventReactive()</code></h3>
-<p>Enquanto a função <code>reactive()</code> observa mudanças em todos os valores reativos presentes em seu código, a função <code>eventReactive()</code> observa mudanças em apenas um valor reativo, especificado na chamada da própria função. No código a seguir, a soma só reacalculada quando o valor <code>input$valor1</code> mudar. Alterar os valores de <code>input$valor2</code> ou <code>input$valor3</code> não vai fazer a expressão reativ <code>soma</code> disparar reatividade.</p>
+<p>Enquanto a função <code>reactive()</code> observa mudanças em todos os valores reativos presentes em seu código, a função <code>eventReactive()</code> observa mudanças em apenas um valor reativo, especificado na chamada da própria função. No código a seguir, a soma só recalculada quando o valor <code>input$valor1</code> mudar. Alterar os valores de <code>input$valor2</code> ou <code>input$valor3</code> não vai fazer a expressão reativa <code>soma</code> disparar reatividade.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>soma <span class="ot">&lt;-</span> <span class="fu">eventReactive</span>(input<span class="sc">$</span>valor1, {</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  input<span class="sc">$</span>valor1 <span class="sc">+</span> input<span class="sc">$</span>valor2 <span class="sc">+</span> input<span class="sc">$</span>valor3</span>
@@ -604,7 +604,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Veja que o valor reativo <code>input$botao</code>, especificado no primeiro argumento da funcão <code>eventReactive()</code>, funciona como o gatilho do fluxo de reatividade. Isso significa que a expressão reativa <code>amostra</code> será recalculada apenas quando apertarmos o botão <em>Gerar gráfico</em>. Mudanças no slider não resultarão em qualquer mudança no app (estamos impedindo que <code>input$tamanho</code> inicie o fluxo de reatividade). Repare também que o código que gera a amostra é passado no segundo argumento da funcão <code>eventReactive()</code>.</p>
+<p>Veja que o valor reativo <code>input$botao</code>, especificado no primeiro argumento da função <code>eventReactive()</code>, funciona como o gatilho do fluxo de reatividade. Isso significa que a expressão reativa <code>amostra</code> será recalculada apenas quando apertarmos o botão <em>Gerar gráfico</em>. Mudanças no slider não resultarão em qualquer mudança no app (estamos impedindo que <code>input$tamanho</code> inicie o fluxo de reatividade). Repare também que o código que gera a amostra é passado no segundo argumento da função <code>eventReactive()</code>.</p>
 <p>O diagrama reativo desse app pode ser representado pelo esquema a seguir. A linha pontilhada indica que o <code>input$tamanho</code> não dispara reatividade.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -620,8 +620,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="contexto-reativo" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="contexto-reativo"><span class="header-section-number">3.4</span> Contexto reativo</h2>
-<p>Vimos na introdução do capítulo que a nossa segunda tentativa — colocar a criação da amostra diretamente na função <code>server</code> — retorna um erro. Isso acontece porque <strong>valores e expressões reativas só podem ser lidas dentro de um contexto reativo</strong>. Essa é outra regra do Shiny, e precisamos segui-la para que ele consiga montar o diagra de reatividade.</p>
-<p><em>Contexto reativo</em> remete a qualquer função que observe mudanças em valores reativos, como expressões reativas ou funções observadoras. Basicamente, o processo do Shiny que interpreta a função <code>server</code> e cria o driagrama de reatividade não sabe o que fazer quando valores e expressões reativas estão fora de contexto reativo. Então recebemos um erro.</p>
+<p>Vimos na introdução do capítulo que a nossa segunda tentativa — colocar a criação da amostra diretamente na função <code>server</code> — retorna um erro. Isso acontece porque <strong>valores e expressões reativas só podem ser lidas dentro de um contexto reativo</strong>. Essa é outra regra do Shiny, e precisamos segui-la para que ele consiga montar o diagrama de reatividade.</p>
+<p><em>Contexto reativo</em> remete a qualquer função que observe mudanças em valores reativos, como expressões reativas ou funções observadoras. Basicamente, o processo do Shiny que interpreta a função <code>server</code> e cria o diagrama de reatividade não sabe o que fazer quando valores e expressões reativas estão fora de contexto reativo. Então recebemos um erro.</p>
 <p>No exemplo abaixo, a função <code>renderPlot()</code> cria um contexto reativo e, por isso, podemos utilizar o valor reativo <code>input$variavel</code> dentro dela.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
@@ -648,7 +648,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Um app que aparentemente funciona do jeito que gostaríamos pode esconder problemas de reatividade que o deixam mais lento ou com comportamentos estranhos, atrapalhando a experiência na hora do uso.</p>
 </blockquote>
 <p>Para evitar esses problemas, que discutiremos com mais detalhes no <a href="reatividade-mais-pecas.html">Capítulo&nbsp;<span>7</span></a> e no [Capítulo -sec-reatividade3], podemos imaginar ou desenhar o diagrama de reatividade para investigar onde está a falha. Essa é uma tarefa simples em apps com poucos inputs e outputs, mas extremamente difícil ou inviável em apps complexos.</p>
-<p>Nesses casos (ou mesmo nos casos simples), podemos utilizar o pacote <code>reactlog</code>. Com ele, conseguimos visualizar facilmente o diagrama de dependências reativas de qualquer Shiny app e olhar o que acontece por trás das curtinas da reatividade quando executamos o aplicativo.</p>
+<p>Nesses casos (ou mesmo nos casos simples), podemos utilizar o pacote <code>reactlog</code>. Com ele, conseguimos visualizar facilmente o diagrama de dependências reativas de qualquer Shiny app e olhar o que acontece por trás das cortinas da reatividade quando executamos o aplicativo.</p>
 <p>Antes de mais nada, instale o pacote <code>reactlog</code>.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"reactlog"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -658,7 +658,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">shiny.reactlog =</span> <span class="cn">TRUE</span>) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Por fim, rode o seu app e utilize o comando <code>CTRL + F3</code> (no Mac, <code>command + F3</code>). O seu navegador abrirá uma nova aba com o diagrama de reatividade.</p>
-<p>No exemplo a seguir, temos a UI de um aplicativo que gera o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado pelo sliderInput. Sempre qua o tamanho da amostra muda, o gráfico é recalculado.</p>
+<p>No exemplo a seguir, temos a UI de um aplicativo que gera o histograma de uma amostra com distribuição normal. O tamanho da amostra é determinado pelo sliderInput. Sempre que o tamanho da amostra muda, o gráfico é recalculado.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -696,9 +696,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><p>ver os inputs dos quais cada output depende e não depende;</p></li>
 <li><p>investigar por que o código de um output não é rodado ou roda duas vezes quando acionamos um input do qual ele deveria depender;</p></li>
-<li><p>ter uma visão menos abstrada do fluxo de reatividade e entender melhor o que acontece quando executamos cada parte do nosso app.</p></li>
+<li><p>ter uma visão menos abstrata do fluxo de reatividade e entender melhor o que acontece quando executamos cada parte do nosso app.</p></li>
 </ul>
-<p>Utilize o código a seguir para reproduzir o app mostrado nesta seção. Mexa algumas vezes no <em>slider</em> e gere o driagrama de reatividade. Use os controles de navegação para visualizar cada etapa do ciclo reativo.</p>
+<p>Utilize o código a seguir para reproduzir o app mostrado nesta seção. Mexa algumas vezes no <em>slider</em> e gere o diagrama de reatividade. Use os controles de navegação para visualizar cada etapa do ciclo reativo.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -728,6 +728,76 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Como descrito na <a href="https://shiny.rstudio.com/reference/shiny/0.14/showReactLog.html">documentação da ferramenta</a>, por razões de segurança e performance, nunca habilite o <code>reactlog</code> em ambientes de produção. Quando ele está habilitado, qualquer pessoal utilizando o seu app pode ver pelo menos parte do seu código fonte (que eventualmente pode conter informações sensíveis).</p>
 <p>Você pode aprender mais sobre o funcionamento do <code>reactlog</code> <a href="https://rstudio.github.io/reactlog/articles/reactlog.html">clicando aqui</a>.</p>
 <p>Na sequência deste livro, sugerimos utilizar o <code>reactlog</code> sempre que ficar com dúvida sobre o diagrama de reatividade de um app.</p>
+</section>
+<section id="exercícios" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">3.6</span> Exercícios</h2>
+<p>1 - Qual a diferença entre programação imperativa e programação declarativa?</p>
+<hr>
+<p>2 - O que é reatividade?</p>
+<hr>
+<p>3 - Qual o papel da função <code>server</code> no contexto da reatividade de um aplicativo Shiny?</p>
+<hr>
+<p>4 - O que são valores reativos? E funções observadoras?</p>
+<hr>
+<p>5 - Para que servem as expressões reativas?</p>
+<hr>
+<p>6 - Qual a diferença entre as funções <code>reactive()</code> e <code>eventReactive()</code>?</p>
+<hr>
+<p>7 - Selecione a opção <strong>verdadeira</strong>.</p>
+<ol type="a">
+<li><p>Sempre que mudarmos o valor de um <code>input</code> na UI de um app, todo o código na função <code>server</code> será rodado novamente.</p></li>
+<li><p>Expressões reativas são o ponto de partida do diagrama de reatividade.</p></li>
+<li><p>Podemos criar valores reativos com a função <code>reactive()</code>.</p></li>
+<li><p>As funções da família <code>render*</code> são um exemplo de função observadora.</p></li>
+</ol>
+<hr>
+<p>8 - Faça um shiny app para visualizarmos boxplots da base <code>ggplot2::diamonds</code>.</p>
+<p>O seu app deve ter dois inputs e um output:</p>
+<ul>
+<li><p>o primeiro input deve ser uma caixa de seleção das variáveis numéricas da base (será o eixo y do gráfico).</p></li>
+<li><p>o segundo input deve ser uma caixa de seleção das variáveis categóricas da base (será o eixo x do gráfico).</p></li>
+<li><p>o output deve ser um gráfico com os boxplots da variável escolhida em (1) para cada categoria da variável escolhida em (2).</p></li>
+</ul>
+<p>Para acessar a base <code>diamonds</code>, carregue o pacote ggplot2:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplto2)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>diamonds</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ou rode</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span>diamonds</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p>9 - Selecionando várias opções em um <code>selectInput</code>.</p>
+<ol type="a">
+<li><p>Reproduza o seguinte Shiny app: https://cursodashboards.shinyapps.io/select-multiple/</p></li>
+<li><p>Troque o selectInput pelo checkboxGroupInput().</p></li>
+</ol>
+<p>Para acessar a base utilizada, rode o código abaixo:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"nycflights13"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>nycflights13<span class="sc">::</span>flights</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Pacote com versão em português da base</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dados"</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>dados<span class="sc">::</span>voos</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p>10 - Faça um Shiny app para explorar a base de filmes da Pixar.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instale o pacote com a versão original da base (em inglês)</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"pixarfilms"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Instale pacote com versão em português da base</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dados"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Sugestões:</p>
+<ul>
+<li><p><strong>Input</strong>: data de lançamento (<code>dateRangeInput</code>). <strong>Output</strong>: tabela de filmes.</p></li>
+<li><p><strong>Input</strong>: filme. <strong>Outputs</strong>: orçamento, bilheteria, gênero, prêmios e notas.</p></li>
+<li><p><strong>Input</strong>: caixa de texto para escrever um nome. <strong>Outputs</strong>: tabela com filmes que essa pessoa participou e qual papel ela exerceu no filme (direção, roteiro, produção etc)</p></li>
+</ul>
+<p><strong>Dica</strong>: você precisará fazer join das bases do pacote para juntar as informações.</p>
 
 
 </section>
@@ -739,9 +809,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 
 </main> <!-- /main -->
-<script>
-  remover_target_blank();
-</script>
+
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const disableStylesheet = (stylesheets) => {

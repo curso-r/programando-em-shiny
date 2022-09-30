@@ -120,7 +120,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Enviar"
   }
 }</script>
-<base target="_blank">
 <script src="script.js"></script>
 
 
@@ -311,6 +310,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#a-função-req" id="toc-a-função-req" class="nav-link" data-scroll-target="#a-função-req"> <span class="header-section-number">7.3.1</span> A função <code>req()</code></a></li>
   <li><a href="#mensagens-de-erro-personalizadas" id="toc-mensagens-de-erro-personalizadas" class="nav-link" data-scroll-target="#mensagens-de-erro-personalizadas"> <span class="header-section-number">7.3.2</span> Mensagens de erro personalizadas</a></li>
   </ul></li>
+  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"> <span class="header-section-number">7.4</span> Exercícios</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/reatividade-mais-pecas.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
     </div>
@@ -341,7 +341,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="mais-funções-observadoras" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="mais-funções-observadoras"><span class="header-section-number">7.1</span> Mais funções observadoras</h2>
 <p>As funções observadoras são o ponto final do diagrama de reatividade e sem eles o fluxo reativo não acontece. As funções <code>render*()</code>, que geram os nossos outputs, são o tipo mais comum de funções observadoras, mas não são o único.</p>
-<p>Muitas vezes queremos usar a reatividade para disparar ações que não estão ligadas à geração de outputs, como o registro de informações em bases de dados, o envio de e-mails ou a atualização de informações nos inputs<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Nesses casos, precisamos utilizar as funções <code>observe()</code> e <code>oberveEvent()</code>.</p>
+<p>Muitas vezes queremos usar a reatividade para disparar ações que não estão ligadas à geração de outputs, como o registro de informações em bases de dados, o envio de e-mails ou a atualização de informações nos inputs<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Nesses casos, precisamos utilizar as funções <code>observe()</code> e <code>observeEvent()</code>.</p>
 <p>A função <code>observe()</code> monitora os valores e expressões reativas que estão dentro dela e roda seu código quando algum desses valores são modificados. Ao contrário da função <code>reactive()</code>, ela não cria um novo valor reativo. O código atribuído a ela é o ponto chegada de um fluxo reativo, isto é, a ação que a função <code>observe()</code> executa é o objetivo final do fluxo.</p>
 <p>Essa função é muito utilizada com as funções da família <code>update*()</code>, que servem para atualizar valores de um input na UI. Na segunda caixa de seleção do exemplo a seguir, queremos selecionar apenas os filmes do diretor ou diretora que selecionamos na primeira caixa. Veja que usamos o texto <code>Carregando...</code> como um <em>placeholder</em> para o segundo <code>selectInput()</code>.</p>
 <div class="cell" data-layout-align="center">
@@ -392,7 +392,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  })</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>As funções <code>observe()</code> e <code>oberveEvent()</code> aumentam bastante o leque de opções dos nossos aplicativos. Agora conseguimos criar fluxos reativos que não estão associados necessariamente a um output.</p>
+<p>As funções <code>observe()</code> e <code>observeEvent()</code> aumentam bastante o leque de opções dos nossos aplicativos. Agora conseguimos criar fluxos reativos que não estão associados necessariamente a um output.</p>
 </section>
 <section id="mais-valores-reativos" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="mais-valores-reativos"><span class="header-section-number">7.2</span> Mais valores reativos</h2>
@@ -426,7 +426,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>rv<span class="sc">$</span>a <span class="ot">&lt;-</span> <span class="dv">3</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>rv<span class="sc">$</span>b <span class="ot">&lt;-</span> <span class="dv">4</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Um caso em que criar valores reativos no servidor se torna útil aparece quando precisamos modificar a base de dados que alimenta os outputs a patir de alguma ação na UI, como a possibilidade de adicionar ou remover uma linha. Veja o exemplo abaixo.</p>
+<p>Um caso em que criar valores reativos no servidor se torna útil aparece quando precisamos modificar a base de dados que alimenta os outputs a partir de alguma ação na UI, como a possibilidade de adicionar ou remover uma linha. Veja o exemplo abaixo.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -536,9 +536,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-
-
 </section>
+</section>
+<section id="exercícios" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">7.4</span> Exercícios</h2>
+<p>1 - Por que precisamos das funções <code>observe()</code> e <code>observeEvent()</code>? Qual a diferença entre elas?</p>
+<hr>
+<p>2 - Para que serve a função <code>reactiveVal()</code>?</p>
+<hr>
+<p>3 - Qual a diferença entre as funções <code>reactiveVal()</code> e <code>reactiveValues()</code>?</p>
+<hr>
+<p>4 - Quais valores retornam <code>FALSE</code> na função <code>isTruth()</code>?</p>
+<hr>
+<p>5 - Para que serve a função <code>req()</code>?</p>
+<hr>
+<p>6 - Utilizando a base <code>dados::dados_gapminder</code>, construa um app que tenha um filtro de <code>continente</code> e outro de <code>pais</code>. Escolhido um <code>continente</code>, apenas países do continente escolhido devem permanecer no filtro de <code>pais</code>. Como output, seu app deve apresentar as séries de <code>populacao</code>, <code>expectativa_de_vida</code> e <code>pib_per_capita</code> ao longo dos anos disponíveis.</p>
+<hr>
+<p>7 - Faça um app que contenha um formulário de cadastro com os campos “nome”, “e-mail”, “idade” e “cidade” e um botão de salvar dados que faça o app salvar as informações em uma planilha no computador. O app também deve mostrar a tabela mais atualizada de pessoas cadastradas.</p>
+
+
 </section>
 <section class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
@@ -551,9 +567,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 
 </main> <!-- /main -->
-<script>
-  remover_target_blank();
-</script>
+
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const disableStylesheet = (stylesheets) => {

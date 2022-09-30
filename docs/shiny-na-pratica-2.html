@@ -120,7 +120,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Enviar"
   }
 }</script>
-<base target="_blank">
 <script src="script.js"></script>
 <script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="site_libs/tippyjs-3.2.0/themes/google.css" rel="stylesheet">
@@ -341,12 +340,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="tooltips" class="level2" data-number="13.2">
 <h2 data-number="13.2" class="anchored" data-anchor-id="tooltips"><span class="header-section-number">13.2</span> Tooltips</h2>
-<p><em>Tooltips</em> são uma ótima maneira de se comunicar com a pessoa utilizando o seu app. Elas permitem passar todo tipo de informação extra e não oculpam espaço da UI.</p>
+<p><em>Tooltips</em> são uma ótima maneira de se comunicar com a pessoa utilizando o seu app. Elas permitem passar todo tipo de informação extra e não ocupam espaço da UI.</p>
 <p>Essencialmente, elas são textos que só aparecem quando passamos o ponteiro do mouse em algum elemento da tela. Por exemplo, passe o mouse em cima da frase a seguir:</p>
 <div class="cell">
 <div class="cell-output-display">
-<span id="htmlwidget-fbcf8b9d314914c5b75b" class="tippy html-widget" width="100%" height="464px"></span>
-<script type="application/json" data-for="htmlwidget-fbcf8b9d314914c5b75b">{"x":{"opts":{"content":"Olá! Eu sou uma tooptip!"},"text":"Passe o mouse aqui!"},"evals":[],"jsHooks":[]}</script>
+<span id="htmlwidget-f15e782ad6fa2366c90e" class="tippy html-widget" width="100%" height="464px"></span>
+<script type="application/json" data-for="htmlwidget-f15e782ad6fa2366c90e">{"x":{"opts":{"content":"Olá! Eu sou uma tooptip!"},"text":"Passe o mouse aqui!"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><br></p>
@@ -536,7 +535,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">selected =</span> <span class="st">"barras"</span></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Agora, precisamos construir a lógina do Output, tanto na UI como no server. Como a nossa visualização pode gerar gráficos ou uma tabela, precisaremos de funções <code>*Output()</code> e <code>render*()</code> diferentes. Dessa forma, vamos utilizar na nossa UI um <code>OutputUI()</code>.</p>
+<p>Agora, precisamos construir a lógica do Output, tanto na UI como no server. Como a nossa visualização pode gerar gráficos ou uma tabela, precisaremos de funções <code>*Output()</code> e <code>render*()</code> diferentes. Dessa forma, vamos utilizar na nossa UI um <code>OutputUI()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A nossa UI ficará assim</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
@@ -758,9 +757,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 
 </main> <!-- /main -->
-<script>
-  remover_target_blank();
-</script>
+
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const disableStylesheet = (stylesheets) => {
