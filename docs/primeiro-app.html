@@ -344,8 +344,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="o-que-é-um-aplicativo-shiny" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="o-que-é-um-aplicativo-shiny"><span class="header-section-number">1.1</span> O que é um aplicativo Shiny?</h2>
 <p>Na tentativa de explicar o que é um aplicativo Shiny, podemos reduzi-lo a diversos elementos.</p>
-<p>Um aplicativo Shiny é um site, uma página na web. Ele terá um endereço (URL) que, quando acessado, exibirá informações em forma de texto e imagens<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Ser uma página web também significa que ele será constituído de HTML, CSS e JavaScript. Se você não conhece essas linguagens, uma boa maneira de entender o papel de cada uma delas na construção de um site é pensar em uma casa.</p>
-<p>Podemos pensar o HTML como a estrutura física da casa: chão, paredes, colunas, teto, encanamento, fiação etc; o CSS é o responsável pela aparência: pintura, pisos, azulejos, decoração em geral; e o JavaScript traz funcionalidades a cada cômodo: pia, vaso sanitário, geladeira, cama, televisão e por aí vai.</p>
+<p>Um aplicativo Shiny é um site, uma página na web. Ele terá um endereço (URL) que, quando acessado, exibirá informações em forma de texto e imagens<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Ser uma página web também significa que ele será constituído de HTML, CSS e JavaScript. Se você não conhece essas linguagens, uma boa maneira de entender o papel de cada uma delas no desenvolvimento de um site é pensar na construção de um prédio.</p>
+<p>Podemos pensar o HTML como a estrutura física do prédio: chão, paredes, colunas, teto, encanamento, fiação etc; o CSS é o responsável pela aparência: pintura, pisos, azulejos, decoração em geral; e o JavaScript traz elementos de funcionalidade ao prédio: portas, janelas, interruptores, elevadores etc.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -355,7 +355,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>Com o Shiny, construiremos essa casa utilizando funções de R.</p>
+<p>Com o Shiny, construiremos esse prédio utilizando funções de R.</p>
 <p>Um aplicativo Shiny também é uma aplicação web. Isso significa que, além de exibir informações, o nosso site/aplicativo também permitirá que a gente interaja com ele enviando dados que serão processados para criar novas informações. Essa interação gera um componente fundamental de um Shiny app: o servidor. Todo aplicativo Shiny será hospedado em um servidor com uma sessão de R rodando.</p>
 <p>Por fim, um aplicativo Shiny também é um código (ou uma coleção de códigos) em linguagem R. O pacote <code>shiny</code>, ao lado de muitos outros pacotes criados pela RStudio e pela comunidade, possui funções que (1) criam a estrutura e o visual do site/aplicativo, (2) montam a lógica de comunicação entre a pessoa que está utilizando o app e o servidor e (3) permite a construção da lógica interna do aplicativo, onde criamos as visualizações que serão exibidas na página a partir de código R puro. Esse último item significa que podemos utilizar todo arsenal de manipulação, visualização e modelagem do R em nossos aplicativos Shiny!</p>
 <p>Além dessas definições, ainda há diversos pontos sobre implantação e hospedagem dos aplicativos para completar a discussão sobre o framework Shiny. Esses tópicos serão tratados mais a frente neste livro, no <a href="deploy.html">Capítulo&nbsp;<span>9</span></a>.</p>
@@ -365,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="1.2" class="anchored" data-anchor-id="os-componentes-básicos"><span class="header-section-number">1.2</span> Os componentes básicos</h2>
 <p>Um aplicativo Shiny tem dois componentes básicos: a <strong>interface de usuário</strong> e o <strong>servidor</strong>.</p>
 <p>O primeiro componente se refere à(s) tela(s) do aplicativo, àquilo que veremos quando estivermos usando o app. Já o segundo componente se refere ao que não veremos: a lógica interna do app.</p>
-<p>Desenvolver a interface de usuário ou <strong>UI</strong> (sigla para o termo <em>user interface</em>, em inglês) significa construir o código HTML que compõe o app. Retomando a analogia da casa, você precisa determinar explicitamente quais são e onde ficam <em>as paredes</em> do seu aplicativo. Isso é feito a partir de funções do pacote Shiny que geram HTML.</p>
+<p>Desenvolver a interface de usuário ou <strong>UI</strong> (sigla para o termo <em>user interface</em>, em inglês) significa construir o código HTML que compõe o app. Retomando a analogia do prédio, você precisa determinar explicitamente quais são e onde ficam <em>as paredes</em> do seu aplicativo. Isso é feito a partir de funções do pacote Shiny que geram HTML.</p>
 <p>A princípio, você não precisará se preocupar com CSS, pois a aparência padrão do Shiny<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> é bem razoável. O mesmo vale para o JavaScript: quando você programa em Shiny, todo o JavaScript necessário para o seu app funcionar corretamente já está pronto e será utilizado automaticamente.</p>
 <p>A figura a seguir mostra a UI de um app bem simples, que permite a escolha de duas variáveis e apresenta o gráfico de dispersão delas:</p>
 <div class="cell" data-layout-align="center">
