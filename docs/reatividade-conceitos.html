@@ -478,7 +478,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>O diagrama mostra que a reatividade desse aplicativo possui dois caminhos independentes, um começando com o input <code>variavel_A</code> e terminando no output <code>histograma_A</code> e o outro começando com o <code>variavel_B</code> e terminando no output <code>histograma_B</code>. A ausência de conexão entre o <code>histograma_A</code> e a <code>variavel_B</code> indica que, ao mudarmos a <code>variavel_B</code>, o <code>histograma_A</code> não será recalculado. A mesma ausência de conexão existe entre o <code>histograma_B</code> e a <code>variavel_A</code>.</p>
 <p>A ligação direta de um único input com um único output é o esquema reativo mais simples que um app pode apresentar. Na prática, vamos precisar construir interações mais complexas entre inputs e outputs, o que ainda não é possível com as peças que temos disponíveis. Para isso, precisaremos de funções que manipulem o caminho da reatividade.</p>
-<p>No restante deste capítulo, aprenderemos alguns conceitos e funções que nos permitirão ter um controle maior sobre a reatividade no Shiny. Não esgotaremos o assunto reatividade aqui, ele será retomado no <a href="reatividade-mais-pecas.html">Capítulo&nbsp;<span>7</span></a> e no [Capítulo -sec-reatividade3], mas já sairemos capazes de construir diversos tipos de interação entre inputs e outputs em nossos apps.</p>
+<p>No restante deste capítulo, aprenderemos alguns conceitos e funções que nos permitirão ter um controle maior sobre a reatividade no Shiny. Não esgotaremos o assunto reatividade aqui, ele será retomado no <a href="reatividade-mais-pecas.html">Capítulo&nbsp;<span>7</span></a> e no <a href="reatividade-problemas-complexos.html">Capítulo&nbsp;<span>14</span></a>, mas já sairemos capazes de construir diversos tipos de interação entre inputs e outputs em nossos apps.</p>
 <p>Começaremos aprendendo as estruturas básicas do diagrama de reatividade: valores reativos, observers e expressões reativas.</p>
 </section>
 <section id="valores-reativos-e-funções-observadoras" class="level2" data-number="3.2">
@@ -495,7 +495,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>o novo histograma é gerado e enviado para a UI, encerrando o processo reativo.</p></li>
 </ul>
 <p>Esse processo, que podemos chamar de <em>fluxo reativo</em>, só é disparado por mudanças em valores reativos e só acontece quando o ponto final é uma função observadora.</p>
-<p>Os valores da lista <code>input</code> não são o único tipo de valores reativos, assim como as funções <code>render*()</code> não são o único tipo de funções observadoras. Falaremos mais de outros valores reativos e observers no [Capítulo -sec-reatividade2].</p>
+<p>Os valores da lista <code>input</code> não são o único tipo de valores reativos, assim como as funções <code>render*()</code> não são o único tipo de funções observadoras. Falaremos mais de outros valores reativos e observers no <a href="reatividade-mais-pecas.html">Capítulo&nbsp;<span>7</span></a>.</p>
 </section>
 <section id="expressões-reativas" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="expressões-reativas"><span class="header-section-number">3.3</span> Expressões reativas</h2>
@@ -558,7 +558,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="a-função-eventreactive" class="level3" data-number="3.3.2">
 <h3 data-number="3.3.2" class="anchored" data-anchor-id="a-função-eventreactive"><span class="header-section-number">3.3.2</span> A função <code>eventReactive()</code></h3>
-<p>Enquanto a função <code>reactive()</code> observa mudanças em todos os valores reativos presentes em seu código, a função <code>eventReactive()</code> observa mudanças em apenas um valor reativo, especificado na chamada da própria função. No código a seguir, a soma só recalculada quando o valor <code>input$valor1</code> mudar. Alterar os valores de <code>input$valor2</code> ou <code>input$valor3</code> não vai fazer a expressão reativa <code>soma</code> disparar reatividade.</p>
+<p>Enquanto a função <code>reactive()</code> observa mudanças em todos os valores reativos presentes no código dela, a função <code>eventReactive()</code> observa mudanças em apenas um valor reativo, especificado na chamada da própria função. No código a seguir, a soma só recalculada quando o valor <code>input$valor1</code> mudar. Alterar os valores de <code>input$valor2</code> ou <code>input$valor3</code> não vai fazer a expressão reativa <code>soma</code> disparar reatividade.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>soma <span class="ot">&lt;-</span> <span class="fu">eventReactive</span>(input<span class="sc">$</span>valor1, {</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  input<span class="sc">$</span>valor1 <span class="sc">+</span> input<span class="sc">$</span>valor2 <span class="sc">+</span> input<span class="sc">$</span>valor3</span>
@@ -647,7 +647,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote class="blockquote">
 <p>Um app que aparentemente funciona do jeito que gostaríamos pode esconder problemas de reatividade que o deixam mais lento ou com comportamentos estranhos, atrapalhando a experiência na hora do uso.</p>
 </blockquote>
-<p>Para evitar esses problemas, que discutiremos com mais detalhes no <a href="reatividade-mais-pecas.html">Capítulo&nbsp;<span>7</span></a> e no [Capítulo -sec-reatividade3], podemos imaginar ou desenhar o diagrama de reatividade para investigar onde está a falha. Essa é uma tarefa simples em apps com poucos inputs e outputs, mas extremamente difícil ou inviável em apps complexos.</p>
+<p>Para evitar esses problemas, que discutiremos com mais detalhes no <a href="reatividade-mais-pecas.html">Capítulo&nbsp;<span>7</span></a> e no <a href="reatividade-problemas-complexos.html">Capítulo&nbsp;<span>14</span></a>, podemos imaginar ou desenhar o diagrama de reatividade para investigar onde está a falha. Essa é uma tarefa simples em apps com poucos inputs e outputs, mas extremamente difícil ou inviável em apps complexos.</p>
 <p>Nesses casos (ou mesmo nos casos simples), podemos utilizar o pacote <code>reactlog</code>. Com ele, conseguimos visualizar facilmente o diagrama de dependências reativas de qualquer Shiny app e olhar o que acontece por trás das cortinas da reatividade quando executamos o aplicativo.</p>
 <p>Antes de mais nada, instale o pacote <code>reactlog</code>.</p>
 <div class="cell" data-layout-align="center">
