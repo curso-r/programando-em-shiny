@@ -6,6 +6,10 @@ p > img {
   margin-bottom: 25px !important;
 }
 
+.Reactable {
+  background-color: transparent;
+}
+
 .sidebar-title {
   text-align: center;
 }
