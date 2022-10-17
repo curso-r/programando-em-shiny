@@ -269,7 +269,7 @@ knitr::include_graphics("img/diagrama_reatividade_2.svg")
 
 ### A função `eventReactive()`
 
-Enquanto a função `reactive()` observa mudanças em todos os valores reativos presentes em seu código, a função `eventReactive()` observa mudanças em apenas um valor reativo, especificado na chamada da própria função. No código a seguir, a soma só recalculada quando o valor `input$valor1` mudar. Alterar os valores de `input$valor2` ou `input$valor3` não vai fazer a expressão reativa `soma` disparar reatividade.
+Enquanto a função `reactive()` observa mudanças em todos os valores reativos presentes no código dela, a função `eventReactive()` observa mudanças em apenas um valor reativo, especificado na chamada da própria função. No código a seguir, a soma só recalculada quando o valor `input$valor1` mudar. Alterar os valores de `input$valor2` ou `input$valor3` não vai fazer a expressão reativa `soma` disparar reatividade.
 
 ```{r, eval = FALSE}
 soma <- eventReactive(input$valor1, {
