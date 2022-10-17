@@ -23,31 +23,36 @@ Essa função é muito utilizada com as funções da família `update*()`, que s
 ```{r, eval = FALSE}
 library(shiny)
 
+# install.packages("dados")
+carros <- dados::comuns
+
 ui <- fluidPage(
   selectInput(
-    "direcao",
-    "Selecione um(a) diretor(a)",
-    choices = sort(unique(imdb$diretor))
+    "marca",
+    "Selecione uma marca",
+    choices = sort(unique(carros$marca))
   ),
   selectInput(
-    "filme",
-    "Selecione um filme",
+    "modelo",
+    "Selecione um modelo",
     choices = "Carregando..."
   )
 )
 
 server <- function(input, output, session) {
   observe({
-    opcoes <- imdb |> 
-      dplyr::filter(diretor == input$direcao) |> 
-      dplyr::pull(titulo)
+    opcoes <- carros |> 
+      dplyr::filter(marca == input$marca) |> 
+      dplyr::pull(modelo)
     updateSelectInput(
       session,
-      inputId = "filme",
+      inputId = "modelo",
       choices = opcoes
     )
   })
 }
+
+shiny::shinyApp(ui, server)
 ```
 
 Na função `server`, atualizamos as escolhas da segunda caixa de seleção com a função `updateSelectInput()`. Veja que, como essa função está dentro de um `observe`, esse código será rodado novamente sempre que o valor de `input$direcao` mudar.
