@@ -341,7 +341,7 @@ No exemplo abaixo, a função `renderPlot()` cria um contexto reativo e, por iss
 ```{r, echo=TRUE, eval= FALSE}
 server <- function(input, output, session) {
   output$hist <- renderPlot({
-    hist(input$variavel))
+    hist(input$variavel)
   }) 
 }
 ```
@@ -350,7 +350,7 @@ Sempre que tentamos usar um valor ou expressão reativa fora de um contexto reat
 
 ```{r, echo = TRUE, eval=FALSE}
 server <- function(input, output, session) {
-  output$hist <- hist(input$variavel))
+  output$hist <- hist(input$variavel)
 }
 #> Error : Can't access reactive value 'variavel' outside of
 # reactive consumer.
