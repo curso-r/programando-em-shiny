@@ -15,6 +15,69 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -240,9 +303,10 @@ ul.task-list{list-style: none;}
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#o-que-são-módulos" id="toc-o-que-são-módulos" class="nav-link active" data-scroll-target="#o-que-são-módulos"> <span class="header-section-number">10.1</span> O que são módulos?</a></li>
-  <li><a href="#quando-e-onde-usar-módulos" id="toc-quando-e-onde-usar-módulos" class="nav-link" data-scroll-target="#quando-e-onde-usar-módulos"> <span class="header-section-number">10.2</span> Quando e onde usar módulos?</a></li>
-  <li><a href="#criando-um-app-modularizado" id="toc-criando-um-app-modularizado" class="nav-link" data-scroll-target="#criando-um-app-modularizado"> <span class="header-section-number">10.3</span> Criando um app modularizado</a></li>
+  <li><a href="#o-problema" id="toc-o-problema" class="nav-link active" data-scroll-target="#o-problema"> <span class="header-section-number">10.1</span> O problema</a></li>
+  <li><a href="#como-construir-um-módulo" id="toc-como-construir-um-módulo" class="nav-link" data-scroll-target="#como-construir-um-módulo"> <span class="header-section-number">10.2</span> Como construir um módulo</a></li>
+  <li><a href="#passando-e-retornando-parâmetros-para-um-módulo" id="toc-passando-e-retornando-parâmetros-para-um-módulo" class="nav-link" data-scroll-target="#passando-e-retornando-parâmetros-para-um-módulo"> <span class="header-section-number">10.3</span> Passando e retornando parâmetros para um módulo</a></li>
+  <li><a href="#módulos-dentro-de-módulos" id="toc-módulos-dentro-de-módulos" class="nav-link" data-scroll-target="#módulos-dentro-de-módulos"> <span class="header-section-number">10.4</span> Módulos dentro de módulos</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/modulos.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
     </div>
@@ -268,16 +332,114 @@ ul.task-list{list-style: none;}
 <div class="cell">
 
 </div>
-<section id="o-que-são-módulos" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="o-que-são-módulos"><span class="header-section-number">10.1</span> O que são módulos?</h2>
+<p>Neste capítulo, falaremos de módulos, um framework essencial para organizarmos o código dos nossos aplicativos em arquivos diferentes de maneira eficiente e coesa.</p>
+<section id="o-problema" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="o-problema"><span class="header-section-number">10.1</span> O problema</h2>
+<p>O código de aplicativos Shiny são naturalmente grandes, pois precisamos construir nele a UI, a lógica reativa do servidor e todas as visualizações, que muitas vezes dependem de arrumação da base de dados.</p>
+<p>Conforme o nosso aplicativo cresce, fica cada vez mais difícil manter o código em um único arquivo. Imagine corrigir um errinho de digitação no título de um gráfico em um arquivo com 10 outputs diferentes e mais de 5000 linhas… Cada alteração nesse arquivo vai exigir um <code>CTRL+F</code> ou vários segundos procurando onde precisamos mexer. Além disso, conforme cresce o número de inputs e outputs, garantir que seus IDs são únicos se torna uma tarefa morosa e muito fácil de gerar erros.</p>
+<p>Utilizar módulos resolve exatamente esses problemas. Com eles, vamos dividir o app em vários pequenos pedaços independentes, com o código de cada pedaço podendo ficar em arquivos separados.</p>
+<p>A nossa experiência com programação em R nos diria para separar o código do app em vários arquivos, transformando partes da UI e do server em objetos ou funções. Assim, bastaria fazer <code>source("arquivo_auxiliar.R)</code> para cada arquivo auxiliar no início do código.</p>
+<p>O problema é que essa solução resolve o problema do tamanho do script, mas não o da unicidade dos IDs dos inputs e outputs. Veremos a seguir que módulos são de fato apenas funções, mas com uma característica especial que garante uma maior liberdade na definição dos IDs.</p>
 </section>
-<section id="quando-e-onde-usar-módulos" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="quando-e-onde-usar-módulos"><span class="header-section-number">10.2</span> Quando e onde usar módulos?</h2>
+<section id="como-construir-um-módulo" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="como-construir-um-módulo"><span class="header-section-number">10.2</span> Como construir um módulo</h2>
+<p>Módulos são um framework para gerenciar a complexidade de aplicativos Shiny muito grandes, que resolve o problema do tamanho dos scripts e da unicidade dos IDs.</p>
+<p>O primeiro conceito que precisamos guardar é que <strong>módulos são funções</strong>. Então, todas as regras válidas para a criação de uma função, valem para a criação de módulos.</p>
+<p>O segundo conceito fala sobre como enxergamos os módulos na prática. Cada módulo será um pedaço do nosso aplicativo, com sua própria UI e seu próprio <code>server</code>. No entanto, um módulo não funciona sozinho, não podemos rodar um módulo como se fosse um app isolado. Cada módulo será <em>encaixado</em> no app, funcinando apenas em conjunto.</p>
+<p>O terceiro conceito diz respeito à unicidade dos IDs. Cada módulo terá o seu próprio ID, sendo que dois módulos não devem ter IDs iguais. Esse ID será utilizado para modificar os IDs dos inputs e outputs dentro do módulo, de tal forma que poderemos ter dois <code>outputId = "grafico"</code> se estiverem em módulos diferentes. Dentro de um módulo, continuamos mantendo a unicidade dos <code>inputId</code> e <code>outputId</code>.</p>
+<p>Para modificar os IDs dentro do módulo, utilizamos a função <code>ns()</code>, que é definida no início da UI de todo módulo da seguinte maneira:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ns <span class="ot">&lt;-</span> <span class="fu">NS</span>(id)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A função <code>NS()</code> é uma função do Shiny que basicamente cria uma função <code>paste()</code> que cola o valor de <code>id</code> no início de qualquer texto. Nesse caso, <code>id</code> será o ID do módulo. Assim, teríamos</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ns <span class="ot">&lt;-</span> <span class="fu">NS</span>(<span class="st">"id-do-modulo"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ns</span>(<span class="st">"grafico"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "id-do-modulo-grafico"</code></pre>
+</div>
+</div>
+<p>Assim, utilizaremos essa função <code>ns()</code> para embrulhar os <code>inputId</code> e <code>outputId</code> dentro de um módulo.</p>
+<p>Com esses conceitos em mente, o código de um módulo que gera um gráfico de dispersão a partir da escolha das variáveis dos eixos x e y seria:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Módulo dispersao</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dispersao_ui <span class="ot">&lt;-</span> <span class="cf">function</span>(id) {</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  ns <span class="ot">&lt;-</span> <span class="fu">NS</span>(id)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tagList</span>(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">selectInput</span>(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">inputId =</span> <span class="fu">ns</span>(<span class="st">"variavel_x"</span>),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="st">"Selecione uma variável"</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">choices =</span> <span class="fu">names</span>(mtcars)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">selectInput</span>(</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">inputId =</span> <span class="fu">ns</span>(<span class="st">"variavel_y"</span>),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="st">"Selecione uma variável"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">choices =</span> <span class="fu">names</span>(mtcars)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">br</span>(),</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plotOutput</span>(<span class="fu">ns</span>(<span class="st">"grafico"</span>))</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>dispersao_server <span class="ot">&lt;-</span> <span class="cf">function</span>(id) {</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">moduleServer</span>(id, <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>grafico <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plot</span>(<span class="at">x =</span> mtcars[[input<span class="sc">$</span>variavel_x]], <span class="at">y =</span> mtcars[[input<span class="sc">$</span>variavel_y]])</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Repare que:</p>
+<ul>
+<li><p>Um módulo é composto por duas funções: <code>nome_do_modulo_ui</code> e <code>nome_do_modulo_server</code>. Essa nomenclatura não é obrigatória, mas é uma boa prática.</p></li>
+<li><p>A UI é apenas uma função que recebe um <code>id</code> e devolve código HTML (um objeto com classe <code>shiny.tag.list</code>).</p></li>
+<li><p>Definimos a função <code>ns()</code> no início da UI e a utilizamos para embrulhar todos os <code>inputId</code> e <code>outputId</code> do módulo..</p></li>
+<li><p>Como estamos construindo a UI dentro de uma função agora, precisamos embrulhar o código com a função <code>tagList()</code>.</p></li>
+<li><p>Assim como a UI, o servidor também é uma função que recebe um <code>id</code>. A diferença é que essa função deve retornar a chamada da função <code>moduleServer()</code>.</p></li>
+<li><p>A função <code>moduleServer()</code> recebe como primeiro argumento o <code>id</code> e como segundo a nossa função <code>server</code> habitual, isto é, a declaração de uma função com os argumentos <code>input</code>, <code>output</code> e <code>session</code> e que possui toda a lógica do servidor.</p></li>
+<li><p>Na função <code>server</code>, graças à função <code>moduleServer()</code>, não preciamos nos preocupar com o <code>ns()</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, isto é, podemos usar diretamente os IDs que definimos na UI do módulo (<code>input$variavel_x</code>, <code>input$variavel_y</code>, <code>output$grafico</code>).</p></li>
+</ul>
+<p>Para chamar o módulo <code>dispersao</code> construído dentro de um app, basta salvar o código dentro de uma pasta chamada <code>/R</code> e chamar as funções no <code>app.R</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># O arquivo app.R</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dispersao_ui</span>(<span class="st">"mod_dispersao"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dispersao_server</span>(<span class="st">"mod_dispersao"</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>No código acima, utilizamos <code>mod_dispersao</code> como ID do módulo. Esse mesmo ID deve ser utilizado tanto na chamada da função referente à UI quanto na função referente ao <code>server</code> do módulo.</p>
+<p>Idealmente salvamos o código dos nossos módulos dentro de uma pasta chamada <code>/R</code> pois o Shiny roda automaticamente todos os scripts dentro dessa pasta quando rodamos o app. Se estamos desenvolvendo nosso app dentro de uma pasta chamada <code>projeto/</code>, a estrutura de arquivos deve seguir o esquema a seguir:</p>
+<pre><code>projeto/
+├── R
+│   └── mod_dispersao.R
+└── app.R</code></pre>
 </section>
-<section id="criando-um-app-modularizado" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="criando-um-app-modularizado"><span class="header-section-number">10.3</span> Criando um app modularizado</h2>
+<section id="passando-e-retornando-parâmetros-para-um-módulo" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="passando-e-retornando-parâmetros-para-um-módulo"><span class="header-section-number">10.3</span> Passando e retornando parâmetros para um módulo</h2>
+<p>Módulos são parametrizáveis e podem ser utilizados diversas vezes dentro de um mesmo app. Você pode passar quantos parâmetros quiser (além do parâmetro <code>id</code>) para a UI e server de um módulo.</p>
+<p>A UI e o servidor de um módulo não consegue acessar objetos, inputs, outputs ou valores reativos de outros módulos. Para acessar valores da <code>ui</code> ou da função <code>server</code>, cada valor deve ser passado explicitamente aos módulos como argumentos das funções.</p>
+</section>
+<section id="módulos-dentro-de-módulos" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="módulos-dentro-de-módulos"><span class="header-section-number">10.4</span> Módulos dentro de módulos</h2>
+<p>Um módulo grande o suficiente pode (e deve) ser dividido em módulos menores, isto é, você pode criar módulos dentro de módulos.</p>
 
 
+</section>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p>No entanto, podemos precisar da função <code>ns()</code> se estivermos criando parte da UI dentro do servidor, usando <code>uiOutput()</code> e <code>renderUI()</code><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
