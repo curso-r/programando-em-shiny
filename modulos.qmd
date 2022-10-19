@@ -126,9 +126,153 @@ projeto/
 
 ## Passando e retornando parâmetros para um módulo
 
-Módulos são parametrizáveis e podem ser utilizados diversas vezes dentro de um mesmo app. Você pode passar quantos parâmetros quiser (além do parâmetro `id`) para a UI e server de um módulo.
+Como módulos são apenas funções, podemos passar qualquer número de parâmetros para elas, além do `id`.
 
-A UI e o servidor de um módulo não consegue acessar objetos, inputs, outputs ou valores reativos de outros módulos. Para acessar valores da `ui` ou da função `server`, cada valor deve ser passado explicitamente aos módulos como argumentos das funções.
+Vamos supor que uma base de dados é carregada dentro do servidor e queremos passá-la para todos os módulos que a utilizam. Faríamos algo como no exemplo abaixo:
+
+```{r, eval = FALSE}
+# NÃO É POSSÍVEL RODAR ESTE EXEMPLO
+
+# server do módulo A
+
+mod_A_server <- function(id, dados) {
+  moduleServer(id, function(input, output, session) {
+    
+    # código do server que precisa dos dados
+    
+  })
+}
+
+# server do módulo B
+
+mod_B_server <- function(id, dados) {
+  moduleServer(id, function(input, output, session) {
+    
+    # código do server que precisa dos dados
+    
+  })
+}
+
+# server do módulo C
+
+mod_C_server <- function(id) {
+  moduleServer(id, function(input, output, session) {
+    
+    # código do server que NÃO precisa dos dados
+    
+  })
+}
+
+# server do app
+
+server <- function(input, output, session) {
+  
+  dados <- importar_dados() # código para importar os dados
+  
+  mod_A_server("mod_A", dados)
+  mod_B_server("mod_B", dados)
+  mod_C_server("mod_C")
+  
+}
+
+```
+
+Os parâmetros adicionais do módulo são colocados dentro da função que cria o módulo (a função de fora) e não na função dentro da `moduleServer()` (a função de dentro).
+
+Vamos supor agora que gostaríamos que um módulo retornasse um valor para a função `server` do app. Normalmente, esse valor é reativo, o que significa que devemos devolver uma expressão reativa.
+
+No exemplo abaixo, simulamos o caso em que o papel do módulo é filtrar uma base.
+
+```{r}
+# Código do módulo
+mod_filtro_ui <- function(id) {
+  ns <- NS(id)
+  fluidRow(
+    column(
+      width = 4,
+      selectInput(
+        inputId = ns("cyl"),
+        label = "Número de cilindros",
+        choices = sort(unique(mtcars$cyl)),
+        multiple = TRUE,
+        selected = unique(mtcars$cyl)
+      )
+    ),
+    column(
+      width = 4,
+      selectInput(
+        inputId = ns("am"),
+        label = "Transmissão",
+        choices = c("Automática" = 0, "Manual" = 1),
+        multiple = TRUE,
+        selected = c(0, 1)
+      )
+    ),
+    column(
+      width = 4,
+      selectInput(
+        inputId = ns("gear"),
+        label = "Número de marchas",
+        choices = sort(unique(mtcars$gear)),
+        multiple = TRUE,
+        selected = unique(mtcars$gear)
+      )
+    )
+  )
+}
+
+mod_filtro_server <- function(id, dados) {
+  moduleServer(id, function(input, output, session) {
+
+    mtcars_filtrada <- reactive({
+      mtcars |>
+        dplyr::filter(
+          cyl %in% input$cyl,
+          am %in% input$am,
+          gear %in% input$gear,
+        )
+    })
+
+    return(mtcars_filtrada)
+
+  })
+}
+```
+
+Para filtrar a base, criamos uma expressão reativa chamada `mtcars_filtrada`. Essa expressão é retornada utilizando o código `return(mtcars_filtrada)`. Isso é feito dentro da função `server` do módulo (a função de dentro).
+
+Veja agora como ficaria o código de um app que utiliza esse módulo.
+
+```{r}
+# Código do app
+library(shiny)
+
+ui <- fluidPage(
+  h2("Filtros"),
+  mod_filtro_ui("mod_filtro"),
+  hr(),
+  tableOutput("tabela")
+)
+
+server <- function(input, output, session) {
+
+  dados <- mod_filtro_server("mod_filtro")
+
+  output$tabela <- renderTable({
+    dados() |>
+      tibble::rownames_to_column(var = "modelo")
+  })
+
+}
+
+shinyApp(ui, server)
+```
+
+Salvamos o valor devolvido pela função `mod_filtro_server` em um objeto chamado `dados`. Com esse valor é uma expressão reativa, utilizamos a notação `dados()` na hora de acessar o seu valor.
+
+É importante ressaltar que um módulo só pode acessar os valores que estão no server de um app se você explicitamente enviar este valor como parâmetro (como fizemos no primeiro exemplo desta seção). O inverso também vale: o server do app só consegue acessar um valor criado dentro do server de um módulo se você retorná-lo explicitamente (como fizemos no exemplo anterior).
+
+Por fim, também é possível passar argumentos a para UI de um módulo, de maneira análoga ao que fizemos com o `server`.
 
 ## Módulos dentro de módulos
 
