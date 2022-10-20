@@ -363,8 +363,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 
-<div id="htmlwidget-682f54f6cb02ace654f9" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-682f54f6cb02ace654f9">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"função":["a()","hr()","br()","h1(), ..., h6()","img()","p()","em()","strong()"],"para que serve":["cria um hiperlink","cria uma linha horizontal","insere uma quebra de linha","cria títulos","insere uma imagem","cria um parágrafo","formata o texto em itálico","formata o texto em negrito"]},"columns":[{"accessor":"função","name":"função","type":"character"},{"accessor":"para que serve","name":"para que serve","type":"character"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"0db6023337cd0a471d22ed87e8a351e1"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d56ec3a8c1d58ecda88e" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-d56ec3a8c1d58ecda88e">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"função":["a()","hr()","br()","h1(), ..., h6()","img()","p()","em()","strong()"],"para que serve":["cria um hiperlink","cria uma linha horizontal","insere uma quebra de linha","cria títulos","insere uma imagem","cria um parágrafo","formata o texto em itálico","formata o texto em negrito"]},"columns":[{"accessor":"função","name":"função","type":"character"},{"accessor":"para que serve","name":"para que serve","type":"character"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"0db6023337cd0a471d22ed87e8a351e1"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Podemos utilizar essas funções à vontade na UI para construirmos o layout do nosso app. O código abaixo, por exemplo, gera o código HTML a seguir.</p>
@@ -420,7 +420,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <p><br> <br></p>
 <p>Repare que algumas tags, como a <code>h1</code> e a <code>img</code> possuem parâmetros (ou atributos, como são chamados no HTML). O parâmetro <code>align</code> na tag <code>h1</code> faz com que o texto fique alinhado no centro da página. Esse parâmetro é típico das tags de título (<code>h1</code>, …, <code>h6</code>). Outras tags de texto não possuem necessariamente esse argumento.</p>
 <p>Já o argumento <code>src</code> da tag <code>img</code> é utilizado para definirmos o caminho para a imagem que queremos mostrar. O argumento <code>width</code> especifica o comprimento da imagem com relação ao espaço disponível para ela. No exemplo, o logo da Curso-R ocupa 50% do comprimento da página deste livro. O argumento <code>style</code> nos permite formatar ainda mais a imagem a partir de atributos CSS, centralizando a imagem horizontalmente na tela nesse caso.</p>
-<p>Conforme aprendemos e utilizamos o Shiny, inevitavelmente aprendemos bastante sobre HTML. Isso aumenta bastante a nossa capacidade de personalizar a UI dos nossos aplicativos e nos ajuda a entender como o Shiny funciona. Por enquanto, vamos manter o foco em explorar as principais ferramentas do Shiny, mas no <a href="#sec-html-css-js">Capítulo&nbsp;<span class="quarto-unresolved-ref ref-noprefix">sec-html-css-js</span></a> faremos uma breve introdução formal tanto de HTML quanto de CSS.</p>
+<p>Conforme aprendemos e utilizamos o Shiny, inevitavelmente aprendemos bastante sobre HTML. Isso aumenta bastante a nossa capacidade de personalizar a UI dos nossos aplicativos e nos ajuda a entender como o Shiny funciona. Por enquanto, vamos manter o foco em explorar as principais ferramentas do Shiny, mas no <a href="html-css-js.html">Capítulo&nbsp;<span>12</span></a> faremos uma breve introdução formal tanto de HTML quanto de CSS.</p>
 </section>
 <section id="bootstrap" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="bootstrap"><span class="header-section-number">5.2</span> Bootstrap</h2>
@@ -510,7 +510,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="img/app_bootstrap.png" class="img-fluid figure-img"></p>
+<p><img src="img/app_bootstrap.png" class="img-fluid figure-img" width="1427"></p>
 </figure>
 </div>
 </div>
@@ -915,7 +915,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 </section>
 <section id="adicionando-css" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="adicionando-css"><span class="header-section-number">5.4</span> Adicionando CSS</h2>
-<p>Você pode customizar o visual do seu aplicativo utilizando CSS. Nesta seção, falaremos apenas como adicionar CSS ao Shiny. Uma introdução formal ao CSS será feita no Capítulo <a href="#sec-html-css-js">Capítulo&nbsp;<span class="quarto-unresolved-ref ref-noprefix">sec-html-css-js</span></a>.</p>
+<p>Você pode customizar o visual do seu aplicativo utilizando CSS. Nesta seção, falaremos apenas como adicionar CSS ao Shiny. Uma introdução formal ao CSS será feita no Capítulo <a href="html-css-js.html">Capítulo&nbsp;<span>12</span></a>.</p>
 <p>A melhor maneira de adicionar CSS a elementos HTML de um aplicativo Shiny é escrever o código em um arquivo <code>.css</code> e referenciá-lo na seção <code>&lt;head&gt;</code>.</p>
 <p>Para fazer isso, primeiro crie um arquivo de texto com extensão <code>.css</code> e salve dentro da pasta <code>/www</code>. A pasta <code>/www</code> deve estar na mesma pasta que o <code>.R</code> que gera o aplicativo e é nela que colocamos os arquivos que o navegador poderá ter acesso enquanto roda o app.</p>
 <p>Nesse arquivo, coloque a seguinte regra CSS:</p>
