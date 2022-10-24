@@ -6,15 +6,17 @@ knitr::opts_chunk$set(
 
 # Módulos {#sec-modulos}
 
-Neste capítulo, falaremos de módulos, um framework essencial para organizarmos o código dos nossos aplicativos em arquivos diferentes de maneira eficiente e coesa. 
+Neste capítulo, falaremos de módulos, um framework essencial para separarmos o código dos nossos aplicativos em arquivos diferentes de maneira eficiente e coesa.
+
+Iniciaremos discutindo por que precisamos desse framework. Em seguida, falaremos como construir módulos. Por fim, apresentaremos exemplos de como passar e receber valores de módulos e como usar módulos dentro de um módulo.
 
 ## O problema
 
-O código de aplicativos Shiny são naturalmente grandes, pois precisamos construir nele a UI, a lógica reativa do servidor e todas as visualizações, que muitas vezes dependem de arrumação da base de dados.
+O código de aplicativos Shiny são naturalmente grandes, pois precisamos construir nele a UI, a lógica reativa do servidor e as visualizações, que muitas vezes dependem de alguma arrumação dos dados.
 
-Conforme o nosso aplicativo cresce, fica cada vez mais difícil manter o código em um único arquivo. Imagine corrigir um errinho de digitação no título de um gráfico em um arquivo com 10 outputs diferentes e mais de 5000 linhas... Cada alteração nesse arquivo vai exigir um `CTRL+F` ou vários segundos procurando onde precisamos mexer. Além disso, conforme cresce o número de inputs e outputs, garantir que seus IDs são únicos se torna uma tarefa morosa e muito fácil de gerar erros.
+Conforme o nosso aplicativo cresce, fica cada vez mais difícil manter o código em um único arquivo. Imagine corrigir um errinho simples de digitação no título de um gráfico em um arquivo com mais de 5000 linhas... Cada alteração nesse arquivo vai exigir um `CTRL+F` ou vários segundos procurando onde precisamos mexer. Além disso, conforme cresce o número de inputs e outputs, garantir que seus IDs são únicos se torna uma tarefa morosa e muito fácil de gerar erros.
 
-Utilizar módulos resolve exatamente esses problemas. Com eles, vamos dividir o app em vários pequenos pedaços independentes, com o código de cada pedaço podendo ficar em arquivos separados.
+Utilizar módulos resolve exatamente esses problemas. Com eles, vamos dividir o app em pedaços independentes e colocar o código de cada pedaço em arquivos diferentes.
 
 A nossa experiência com programação em R nos diria para separar o código do app em vários arquivos, transformando partes da UI e do server em objetos ou funções. Assim, bastaria fazer `source("arquivo_auxiliar.R)` para cada arquivo auxiliar no início do código.
 
@@ -24,7 +26,7 @@ O problema é que essa solução resolve o problema do tamanho do script, mas n�
 
 Módulos são um framework para gerenciar a complexidade de aplicativos Shiny muito grandes, que resolve o problema do tamanho dos scripts e da unicidade dos IDs. 
 
-O primeiro conceito que precisamos guardar é que **módulos são funções**. Então, todas as regras válidas para a criação de uma função, valem para a criação de módulos.
+O primeiro conceito que precisamos guardar é que **módulos são funções**. Então, todas as regras válidas para a criação de uma função valem para a criação de módulos.
 
 O segundo conceito fala sobre como enxergamos os módulos na prática. Cada módulo será um pedaço do nosso aplicativo, com sua própria UI e seu próprio `server`. No entanto, um módulo não funciona sozinho, não podemos rodar um módulo como se fosse um app isolado. Cada módulo será *encaixado* no app, funcinando apenas em conjunto.
 
@@ -36,15 +38,13 @@ Para modificar os IDs dentro do módulo, utilizamos a função `ns()`, que é de
 ns <- NS(id)
 ```
 
-A função `NS()` é uma função do Shiny que basicamente cria uma função `paste()` que cola o valor de `id` no início de qualquer texto. Nesse caso, `id` será o ID do módulo. Assim, teríamos
+A função `NS(id)` é uma função do Shiny que basicamente cria uma função `paste()` que cola o valor de `id` no início de qualquer texto. Nesse caso, `id` será o ID do módulo. Assim, utilizaremos essa função `ns()` para embrulhar os `inputId` e `outputId`, fazendo que eles tenham como prefixo o id do módulo onde estão.
 
 ```{r}
 library(shiny)
 ns <- NS("id-do-modulo")
 ns("grafico")
 ```
-
-Assim, utilizaremos essa função `ns()` para embrulhar os `inputId` e `outputId` dentro de um módulo.
 
 Com esses conceitos em mente, o código de um módulo que gera um gráfico de dispersão a partir da escolha das variáveis dos eixos x e y seria:
 
@@ -80,21 +80,21 @@ dispersao_server <- function(id) {
 
 Repare que:
 
-- Um módulo é composto por duas funções: `nome_do_modulo_ui` e `nome_do_modulo_server`. Essa nomenclatura não é obrigatória, mas é uma boa prática.
+- Um módulo é composto por duas funções: `nome_do_modulo_ui` e `nome_do_modulo_server`. Essa nomenclatura não é obrigatória, mas é uma boa prática. No exemplo: `dispersao_ui` e `dispersao_server`.
 
 - A UI é apenas uma função que recebe um `id` e devolve código HTML (um objeto com classe `shiny.tag.list`).
 
-- Definimos a função `ns()` no início da UI e a utilizamos para embrulhar todos os `inputId` e `outputId` do módulo..
+- Definimos a função `ns()` no início da UI e a utilizamos para embrulhar todos os `inputId` e `outputId` do módulo.
 
-- Como estamos construindo a UI dentro de uma função agora, precisamos embrulhar o código com a função  `tagList()`.
+- Como agora estamos construindo a UI dentro de uma função, precisamos embrulhá-la com a função `tagList()` para retornar todas as tags juntas.
 
 - Assim como a UI, o servidor também é uma função que recebe um `id`. A diferença é que essa função deve retornar a chamada da função `moduleServer()`.
 
-- A função `moduleServer()` recebe como primeiro argumento o `id` e como segundo a nossa função `server` habitual, isto é, a declaração de uma função com os argumentos `input`, `output` e `session` e que possui toda a lógica do servidor.
+- A função `moduleServer()` recebe como primeiro argumento o `id` e como segundo a nossa função `server` habitual, isto é, a declaração de uma função com os argumentos `input`, `output` e `session` e que possui a lógica do servidor do módulo.
 
-- Na função `server`, graças à função `moduleServer()`, não preciamos nos preocupar com o `ns()`^[No entanto, podemos precisar da função `ns()` se estivermos criando parte da UI dentro do servidor, usando `uiOutput()` e `renderUI()`], isto é, podemos usar diretamente os IDs que definimos na UI do módulo (`input$variavel_x`, `input$variavel_y`, `output$grafico`).
+- Na função `server`, graças à função `moduleServer()`, não preciamos nos preocupar com o `ns()`^[No entanto, podemos precisar da função `ns()` se estivermos criando parte da UI dentro do servidor, usando `uiOutput()` e `renderUI()`. Nesse caso, basta acrescentar um `ns <- NS(id)` no começo da função `server`.], isto é, podemos usar diretamente os IDs que definimos na UI do módulo (`input$variavel_x`, `input$variavel_y`, `output$grafico`).
 
-Para chamar o módulo `dispersao` construído dentro de um app, basta salvar o código dentro de uma pasta chamada `/R` e chamar as funções no `app.R`:
+Para chamar dentro de um app o módulo `dispersao` construído, basta salvar o código dentro de uma pasta chamada `/R` e chamar as funções no `app.R`:
 
 ```{r, eval = FALSE}
 # O arquivo app.R
@@ -112,9 +112,9 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-No código acima, utilizamos `mod_dispersao` como ID do módulo. Esse mesmo ID deve ser utilizado tanto na chamada da função referente à UI quanto na função referente ao `server` do módulo.
+No código acima, utilizamos `mod_dispersao` como ID do módulo. Esse mesmo ID deve ser utilizado na chamada da UI e do server do módulo. Junte os códigos anteriores para ver o módulo dispersão em funcionamento.
 
-Idealmente salvamos o código dos nossos módulos dentro de uma pasta chamada `/R` pois o Shiny roda automaticamente todos os scripts dentro dessa pasta quando rodamos o app. Se estamos desenvolvendo nosso app dentro de uma pasta chamada `projeto/`, a estrutura de arquivos deve seguir o esquema a seguir:
+Salvamos o código dos nossos módulos dentro de uma pasta chamada `/R` pois o Shiny roda automaticamente todos os scripts dentro dessa pasta quando rodamos o app. Se estamos desenvolvendo nosso app dentro de uma pasta chamada `projeto/`, a estrutura de arquivos deve seguir o esquema a seguir:
 
 ```
 projeto/
@@ -123,6 +123,11 @@ projeto/
 └── app.R
 ```
 
+Uma pergunta comum para quem está começando a usar módulos é: quais partes do app devo transformar em um módulo? Não existe uma regra para isso. Tudo depende de como você acha que o código vai ficar melhor organizado. Dito isso, algumas dicas são:
+
+- Transformar em módulo uma parte do app que será utilizada várias vezes.
+
+- Em um app com várias páginas (`navbarPage`, `shinydashobard`), cada página pode ser um módulo.
 
 ## Passando e retornando parâmetros para um módulo
 
@@ -131,7 +136,7 @@ Como módulos são apenas funções, podemos passar qualquer número de parâmet
 Vamos supor que uma base de dados é carregada dentro do servidor e queremos passá-la para todos os módulos que a utilizam. Faríamos algo como no exemplo abaixo:
 
 ```{r, eval = FALSE}
-# NÃO É POSSÍVEL RODAR ESTE EXEMPLO
+# ESSE EXEMPLO NÃO É REPRODUTÍVEL
 
 # server do módulo A
 
@@ -183,7 +188,7 @@ Vamos supor agora que gostaríamos que um módulo retornasse um valor para a fun
 
 No exemplo abaixo, simulamos o caso em que o papel do módulo é filtrar uma base.
 
-```{r}
+```{r, eval = FALSE}
 # Código do módulo
 mod_filtro_ui <- function(id) {
   ns <- NS(id)
@@ -243,7 +248,7 @@ Para filtrar a base, criamos uma expressão reativa chamada `mtcars_filtrada`. E
 
 Veja agora como ficaria o código de um app que utiliza esse módulo.
 
-```{r}
+```{r, eval = FALSE}
 # Código do app
 library(shiny)
 
@@ -268,16 +273,91 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-Salvamos o valor devolvido pela função `mod_filtro_server` em um objeto chamado `dados`. Com esse valor é uma expressão reativa, utilizamos a notação `dados()` na hora de acessar o seu valor.
+Salvamos o valor devolvido pela função `mod_filtro_server` em um objeto chamado `dados`. Com esse valor é uma expressão reativa, utilizamos a notação `dados()` na hora de acessar o seu valor. Tente juntar os códigos acima para ver esse app em funcionamento.
 
-É importante ressaltar que um módulo só pode acessar os valores que estão no server de um app se você explicitamente enviar este valor como parâmetro (como fizemos no primeiro exemplo desta seção). O inverso também vale: o server do app só consegue acessar um valor criado dentro do server de um módulo se você retorná-lo explicitamente (como fizemos no exemplo anterior).
+É importante ressaltar que um módulo só pode acessar os valores que estão no server de um app se você explicitamente enviar este valor como parâmetro (como fizemos no primeiro exemplo desta seção). O inverso também vale: o server do app só consegue acessar um valor criado dentro de um módulo se você retorná-lo explicitamente (como fizemos no exemplo anterior).
 
-Por fim, também é possível passar argumentos a para UI de um módulo, de maneira análoga ao que fizemos com o `server`.
+Por fim, também é possível passar argumentos para UI de um módulo. Isso é feito de maneira análoga ao que fizemos com o `server`.
 
 ## Módulos dentro de módulos
 
-Um módulo grande o suficiente pode (e deve) ser dividido em módulos menores, isto é, você pode criar módulos dentro de módulos.
+Como módulos são apenas funções, nada nos impede de utilizar um módulo dentro de um outro módulo.
 
+Imagine que estamos construindo um app com várias páginas (com o layout `navbarPage()` ou `shinydashboard`, por exemplo). Podemos fazer cada página desse app ser um módulo. Além disso, imagine que um mesmo conjunto de filtros deverá ser colocado em todas as páginas, mas agindo independentemente em cada uma delas. Nesse caso, podemos transformar esses filtros em um módulo e repeti-lo em cada página. Veja o exemplo abaixo:
 
+```{r, eval = FALSE}
+# ESSE EXEMPLO NÃO É REPRODUTÍVEL
 
+# O código do módulo de uma das páginas
+
+mod_pagina1_ui <- function(id) {
+  ns <- NS(id)
+  tagList(
+    titlePanel("Página 1"),
+    mod_filtros_ui(ns("mod_filtros")),
+    # ui da página 1
+  )
+}
+
+mod_pagina1_server <- function(id) {
+  moduleServer(id, function(input, output, session) {
+    
+    dados_filtrados <- mod_filtros_server("mod_filtros")
+    
+    # server da página 1
+    
+  })
+}
+
+# O código do módulo dos filtros
+
+mod_filtros_ui <- function(id) {
+  ns <- NS(id)
+  tagList(
+    fluidRow(
+      shinydashboard::box(
+        title = "Filtros",
+        # UI dos filtros
+      )
+    )
+  )
+}
+
+mod_filtros_server <- function(id) {
+  moduleServer(id, function(input, output, session) {
+
+    base_filtrada <- reactive({
+      # filtro da base conforme as opções escolhidas na UI
+    })
+
+    return(base_filtrada)
+
+  })
+}
+
+```
+
+Repare que, como estamos chamando o módulo dos filtros dentro do módulo da "Página 1", precisamos colocar o id da função `mod_filtros_ui` dentro de um `ns()`.
+
+Como exercício, com base no exemplo acima, tente construir um app com algumas páginas, sendo cada uma delas um módulo e com um mesmo conjunto de filtros sendo utilizado dentro delas em forma de módulo.
+
+## Exercícios
+
+1. O que são módulos?
+
+___
+
+2. Para que serve a função `NS()`?
+
+___
+
+3. O que acontece quando colocamos um `inputId` ou `outputId` dentro da função `ns()` em um módulo?
+
+___
+
+4. Para que serve a função `moduleServer()`?
+
+___
+
+5. Por que salvamos os arquivos com o código dos múdulos dentro de uma pasta `/R`? Onde essa pasta deve ficar?
 
