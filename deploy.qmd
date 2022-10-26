@@ -75,10 +75,126 @@ Caso o seu app não abra devido a algum erro, você pode acessar a os logs de ut
 knitr::include_graphics("img/shinyapps-log.png")
 ```
 
+## Autenticação
+
+Quando subimos um app para o shinyapps.io, nosso app passa a ficar disponível em uma URL pública (i.e. qualquer pessoa pode acessar.). O serviço permite autenticação apenas a partir da conta Standard, cujo alto custo mensal pode ser um impedimento.
+
+Nesta seção abordaremos algumas soluções gratuitas^[Ou gratuitas até uma certa quantidade de uso.] para criar uma etapa de autenticação no acesso ao seu app. Começaremos com o pacote `auth0`.
+
+### Autenticação com o pacote `auth0`
+
+O `{auth0}` é um pacote desenvolvido pela equipe da Curso-R que permite a implementação de um esquema de autenticação no Shiny usando o serviço [Auth0](https://auth0.com).
+
+Você pode instalar o pacote diretamente do CRAN:
+
+```{r, eval = FALSE}
+install.packages("auth0")
+```
+
+A seguir, apresentaremos um passo-a-passo para criar um app com autenticação usando o `auth0`. Para mais informações sobre o pacote, [clique aqui](https://github.com/curso-r/auth0).
+
+#### Passo 1: criar uma conta no serviço Auth0 {-}
+
+- Entre no site [auth0.com](https://auth0.com).
+- Clique em "Sign Up".
+  - Você pode criar uma conta a partir de um nome de usário e senha ou a partir de uma conta do GitHub ou do Google.
+
+#### Passo 2: crie uma aplicação Auth0 {-}
+
+- Faça login no no site [auth0.com](https://auth0.com) usando a criada no passo 1. Você deverá ver uma página como a abaixo:
+
+```{r, echo=FALSE}
+knitr::include_graphics("img/auth0_tela_inicial.png")
+```
+
+- No menu à esquerda, clique em Applications > applications e então no botão "Create Application".
+- Dê um nome para o seu app.
+- Selecione "Regular Web Applications" e clique em "Create".
+
+#### Passo 3: configure a sua aplicação {-}
+
+- Na página da sua aplicação, clique em "Settings".
+
+```{r, echo=FALSE}
+knitr::include_graphics("img/auth0_app_settings.png")
+```
+
+- Para usar o `auth0` quando estiver rodando o seu app localmente:
+  - Adicione `http://localhost:8080` aos campos "Allowed Callback URLs", "Allowed Logout URLs" e "Allowed Web Origins". 
+  - Você pode mudar a porta `8080` para qualquer outra que estiver utilizando.
+- Para usar o `auth0` em seu app hospedado no shinyapps.io:
+  - Adicione a URL completa do seu app (i.e., `https://suaconta.shinyapps.io/seu_app`) aos campos "Allowed Callback URLs" e "Allowed Logout URLs". 
+  - Adicione a parte inicial da URL do seu app (i.e., `https://suaconta.shinyapps.io`) ao campo "Allowed Web Origins". 
+- Para usar o `auth0` em seu app hospedado em um servidor remoto qualquer:
+  - Adicione a URL do seu app aos campos "Allowed Callback URLs", "Allowed Logout URLs" e "Allowed Web Origins". 
+  - Se o seu app estiver dentro de uma pasta, isto é, se a URL dele for algo como `https://meuservidor.com/meuapp`, no campo  "Allowed Web Origins" acrescente apenas `https://meuservidor.com`.
+- Clique em `Save Changes`.
+
+#### Passo 4: configurando o seu Shiny app {-}
+
+- Crie um arquivo de configuração para o seu app rodando a função `auth0::use_auth0()`
+  - Esse arquivo deve estar na mesma pasta que o script do seu app.
+  - Você pode escolher o diretório onde o arquivo será criado usando o argumento `path`. Para mais detalhes, veja a documentão da função.  
+
+```{r, eval = FALSE}
+auth0::use_auth0()
+```
+
+- O arquivo `_auth0.yml` gerado deve conter o seguinte:
+
+```{yml}
+name: myApp
+remote_url: ""
+auth0_config:
+  api_url: !expr paste0("https://", Sys.getenv("AUTH0_USER"), ".auth0.com")
+  credentials:
+    key: !expr Sys.getenv("AUTH0_KEY")
+    secret: !expr Sys.getenv("AUTH0_SECRET")
+```
+
+- Na linha `remote_url: ""`, coloque a URL do seu app dentro das aspas. 
+
+- Rode `usethis::edit_r_environ(scope = "project")` e acrescente as seguintes variáveis de ambiente^[Saiba mais sobre variáveis de ambiente [aqui](https://csgillespie.github.io/efficientR/set-up.html#renviron)]:
+
+```{yml}
+AUTH0_USER=...
+AUTH0_KEY=...
+AUTH0_SECRET=...
+```
+
+- Substitua os `...` pelos valores encontrados na opção `Settings` da sua aplicação no Auth0, conforme a imagem abaixo:
+
+```{r, echo=FALSE}
+knitr::include_graphics("img/auth0_app_variaveis.png")
+```
+
+- Salve o arquivo e reinicie a sua sessão.
+- No seu aplicativo Shiny, substitua `shiny::shinyApp(ui, server))` pelo código abaixo. 
+
+```{r, eval = FALSE}
+auth0::shinyAppAuth0(ui, server, options = list(port = 8080))
+```
+  
+- Para rodar localmente, a porta `8080` em `options = list(port = 8080)` deve ser a mesma definida em `http://localhost:8080` no Passo 3.
+- Para o RStudio continuar reconhecendo o seu script como um Shiny app, você deve nomeá-lo `app.R`. Caso contrário, você não terá acesso aos botões "Run App" ou "Publish".
+  
+#### Passo 5: rode o seu app {-}
+
+- Rode o seu app.
+  - Se toda a configuração tiver sido feita corretamente, você será redirecionado para uma página de login antes de ter acesso ao seu app.
+  
+#### Passo 6 (opcional): configurando o acesso {-}
+
+- Para desabilitar "Sign ups":
+  - No Auth0, acesse pelo menu à esquerda Authentication > Database e clique em "Username-Password-Authentication".
+  - Habilite a opção "Disable Sign Ups" se você não quiser que qualquer pessoa consiga se inscrever para usar seu app.
+- Para criar logins:
+  - No Auth0, acesse pelo menu à esquerda User Management > Users e clique em "Create User".
+  - Preencha os campos "Email" e "Password" e clique em "Create".
 
 ## Configurando um Shiny Server
 
-## Autenticação com o pacote `auth0`
+
 
 
 

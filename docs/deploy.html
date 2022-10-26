@@ -308,8 +308,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#conectando-a-sua-conta-com-o-rstudio" id="toc-conectando-a-sua-conta-com-o-rstudio" class="nav-link" data-scroll-target="#conectando-a-sua-conta-com-o-rstudio"> <span class="header-section-number">9.1.1</span> Conectando a sua conta com o RStudio</a></li>
   <li><a href="#subindo-o-seu-app" id="toc-subindo-o-seu-app" class="nav-link" data-scroll-target="#subindo-o-seu-app"> <span class="header-section-number">9.1.2</span> Subindo o seu app</a></li>
   </ul></li>
-  <li><a href="#configurando-um-shiny-server" id="toc-configurando-um-shiny-server" class="nav-link" data-scroll-target="#configurando-um-shiny-server"> <span class="header-section-number">9.2</span> Configurando um Shiny Server</a></li>
-  <li><a href="#autenticação-com-o-pacote-auth0" id="toc-autenticação-com-o-pacote-auth0" class="nav-link" data-scroll-target="#autenticação-com-o-pacote-auth0"> <span class="header-section-number">9.3</span> Autenticação com o pacote <code>auth0</code></a></li>
+  <li><a href="#autenticação" id="toc-autenticação" class="nav-link" data-scroll-target="#autenticação"> <span class="header-section-number">9.2</span> Autenticação</a>
+  <ul class="collapse">
+  <li><a href="#autenticação-com-o-pacote-auth0" id="toc-autenticação-com-o-pacote-auth0" class="nav-link" data-scroll-target="#autenticação-com-o-pacote-auth0"> <span class="header-section-number">9.2.1</span> Autenticação com o pacote <code>auth0</code></a></li>
+  </ul></li>
+  <li><a href="#configurando-um-shiny-server" id="toc-configurando-um-shiny-server" class="nav-link" data-scroll-target="#configurando-um-shiny-server"> <span class="header-section-number">9.3</span> Configurando um Shiny Server</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/deploy.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
     </div>
@@ -420,13 +423,175 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 </section>
-<section id="configurando-um-shiny-server" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="configurando-um-shiny-server"><span class="header-section-number">9.2</span> Configurando um Shiny Server</h2>
+<section id="autenticação" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="autenticação"><span class="header-section-number">9.2</span> Autenticação</h2>
+<p>Quando subimos um app para o shinyapps.io, nosso app passa a ficar disponível em uma URL pública (i.e.&nbsp;qualquer pessoa pode acessar.). O serviço permite autenticação apenas a partir da conta Standard, cujo alto custo mensal pode ser um impedimento.</p>
+<p>Nesta seção abordaremos algumas soluções gratuitas<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> para criar uma etapa de autenticação no acesso ao seu app. Começaremos com o pacote <code>auth0</code>.</p>
+<section id="autenticação-com-o-pacote-auth0" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="autenticação-com-o-pacote-auth0"><span class="header-section-number">9.2.1</span> Autenticação com o pacote <code>auth0</code></h3>
+<p>O <code>{auth0}</code> é um pacote desenvolvido pela equipe da Curso-R que permite a implementação de um esquema de autenticação no Shiny usando o serviço <a href="https://auth0.com">Auth0</a>.</p>
+<p>Você pode instalar o pacote diretamente do CRAN:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"auth0"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A seguir, apresentaremos um passo-a-passo para criar um app com autenticação usando o <code>auth0</code>. Para mais informações sobre o pacote, <a href="https://github.com/curso-r/auth0">clique aqui</a>.</p>
+<section id="passo-1-criar-uma-conta-no-serviço-auth0" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="passo-1-criar-uma-conta-no-serviço-auth0">Passo 1: criar uma conta no serviço Auth0</h4>
+<ul>
+<li>Entre no site <a href="https://auth0.com">auth0.com</a>.</li>
+<li>Clique em “Sign Up”.
+<ul>
+<li>Você pode criar uma conta a partir de um nome de usário e senha ou a partir de uma conta do GitHub ou do Google.</li>
+</ul></li>
+</ul>
 </section>
-<section id="autenticação-com-o-pacote-auth0" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="autenticação-com-o-pacote-auth0"><span class="header-section-number">9.3</span> Autenticação com o pacote <code>auth0</code></h2>
+<section id="passo-2-crie-uma-aplicação-auth0" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="passo-2-crie-uma-aplicação-auth0">Passo 2: crie uma aplicação Auth0</h4>
+<ul>
+<li>Faça login no no site <a href="https://auth0.com">auth0.com</a> usando a criada no passo 1. Você deverá ver uma página como a abaixo:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/auth0_tela_inicial.png" class="img-fluid figure-img" width="1368"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>No menu à esquerda, clique em Applications &gt; applications e então no botão “Create Application”.</li>
+<li>Dê um nome para o seu app.</li>
+<li>Selecione “Regular Web Applications” e clique em “Create”.</li>
+</ul>
+</section>
+<section id="passo-3-configure-a-sua-aplicação" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="passo-3-configure-a-sua-aplicação">Passo 3: configure a sua aplicação</h4>
+<ul>
+<li>Na página da sua aplicação, clique em “Settings”.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/auth0_app_settings.png" class="img-fluid figure-img" width="1368"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Para usar o <code>auth0</code> quando estiver rodando o seu app localmente:
+<ul>
+<li>Adicione <code>http://localhost:8080</code> aos campos “Allowed Callback URLs”, “Allowed Logout URLs” e “Allowed Web Origins”.</li>
+<li>Você pode mudar a porta <code>8080</code> para qualquer outra que estiver utilizando.</li>
+</ul></li>
+<li>Para usar o <code>auth0</code> em seu app hospedado no shinyapps.io:
+<ul>
+<li>Adicione a URL completa do seu app (i.e., <code>https://suaconta.shinyapps.io/seu_app</code>) aos campos “Allowed Callback URLs” e “Allowed Logout URLs”.</li>
+<li>Adicione a parte inicial da URL do seu app (i.e., <code>https://suaconta.shinyapps.io</code>) ao campo “Allowed Web Origins”.</li>
+</ul></li>
+<li>Para usar o <code>auth0</code> em seu app hospedado em um servidor remoto qualquer:
+<ul>
+<li>Adicione a URL do seu app aos campos “Allowed Callback URLs”, “Allowed Logout URLs” e “Allowed Web Origins”.</li>
+<li>Se o seu app estiver dentro de uma pasta, isto é, se a URL dele for algo como <code>https://meuservidor.com/meuapp</code>, no campo “Allowed Web Origins” acrescente apenas <code>https://meuservidor.com</code>.</li>
+</ul></li>
+<li>Clique em <code>Save Changes</code>.</li>
+</ul>
+</section>
+<section id="passo-4-configurando-o-seu-shiny-app" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="passo-4-configurando-o-seu-shiny-app">Passo 4: configurando o seu Shiny app</h4>
+<ul>
+<li>Crie um arquivo de configuração para o seu app rodando a função <code>auth0::use_auth0()</code>
+<ul>
+<li>Esse arquivo deve estar na mesma pasta que o script do seu app.</li>
+<li>Você pode escolher o diretório onde o arquivo será criado usando o argumento <code>path</code>. Para mais detalhes, veja a documentão da função.</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>auth0<span class="sc">::</span><span class="fu">use_auth0</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>O arquivo <code>_auth0.yml</code> gerado deve conter o seguinte:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> myApp</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">remote_url</span><span class="kw">:</span><span class="at"> </span><span class="st">""</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">auth0_config</span><span class="kw">:</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">api_url</span><span class="kw">:</span><span class="at"> !expr paste0("https://", Sys.getenv("AUTH0_USER"), ".auth0.com")</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">credentials</span><span class="kw">:</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">key</span><span class="kw">:</span><span class="at"> !expr Sys.getenv("AUTH0_KEY")</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">secret</span><span class="kw">:</span><span class="at"> !expr Sys.getenv("AUTH0_SECRET")</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>Na linha <code>remote_url: ""</code>, coloque a URL do seu app dentro das aspas.</p></li>
+<li><p>Rode <code>usethis::edit_r_environ(scope = "project")</code> e acrescente as seguintes variáveis de ambiente<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>:</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="at">AUTH0_USER=...</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">AUTH0_KEY=...</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">AUTH0_SECRET=...</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Substitua os <code>...</code> pelos valores encontrados na opção <code>Settings</code> da sua aplicação no Auth0, conforme a imagem abaixo:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/auth0_app_variaveis.png" class="img-fluid figure-img" width="1368"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Salve o arquivo e reinicie a sua sessão.</li>
+<li>No seu aplicativo Shiny, substitua <code>shiny::shinyApp(ui, server))</code> pelo código abaixo.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>auth0<span class="sc">::</span><span class="fu">shinyAppAuth0</span>(ui, server, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">port =</span> <span class="dv">8080</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Para rodar localmente, a porta <code>8080</code> em <code>options = list(port = 8080)</code> deve ser a mesma definida em <code>http://localhost:8080</code> no Passo 3.</li>
+<li>Para o RStudio continuar reconhecendo o seu script como um Shiny app, você deve nomeá-lo <code>app.R</code>. Caso contrário, você não terá acesso aos botões “Run App” ou “Publish”.</li>
+</ul>
+</section>
+<section id="passo-5-rode-o-seu-app" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="passo-5-rode-o-seu-app">Passo 5: rode o seu app</h4>
+<ul>
+<li>Rode o seu app.
+<ul>
+<li>Se toda a configuração tiver sido feita corretamente, você será redirecionado para uma página de login antes de ter acesso ao seu app.</li>
+</ul></li>
+</ul>
+</section>
+<section id="passo-6-opcional-configurando-o-acesso" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="passo-6-opcional-configurando-o-acesso">Passo 6 (opcional): configurando o acesso</h4>
+<ul>
+<li>Para desabilitar “Sign ups”:
+<ul>
+<li>No Auth0, acesse pelo menu à esquerda Authentication &gt; Database e clique em “Username-Password-Authentication”.</li>
+<li>Habilite a opção “Disable Sign Ups” se você não quiser que qualquer pessoa consiga se inscrever para usar seu app.</li>
+</ul></li>
+<li>Para criar logins:
+<ul>
+<li>No Auth0, acesse pelo menu à esquerda User Management &gt; Users e clique em “Create User”.</li>
+<li>Preencha os campos “Email” e “Password” e clique em “Create”.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="configurando-um-shiny-server" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="configurando-um-shiny-server"><span class="header-section-number">9.3</span> Configurando um Shiny Server</h2>
 
 
+</section>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p>Ou gratuitas até uma certa quantidade de uso.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Saiba mais sobre variáveis de ambiente <a href="https://csgillespie.github.io/efficientR/set-up.html#renviron">aqui</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
