@@ -4,9 +4,7 @@
 # Boas-vindas!
 
 Este é um livro em desenvolvimento. Toda contribuição, seja correção de
-erros ortográficos ou sugestões de novos conteúdos, será bem-vinda. Você
-pode contribuir criando *issues* [nesse
-repositório](https://github.com/curso-r/livro-shiny).
+erros ortográficos ou sugestões de novos conteúdos, será bem-vinda.
 
 O conteúdo aqui presente se destina a:
 
@@ -25,8 +23,6 @@ Shiny é um framework em linguagem R para a criação de aplicativos web.
 Por não exigir conhecimento prévio de HTML, CSS e JavaScript, ele
 democratiza o acesso a essa área de desenvolvimento, permitindo a
 criação de aplicativos bonitos e complexos a partir de um script R.
-
-<img src="img/hex-shiny.png" alt="Hex sticker do pacote Shiny: um hexágono de cor azul clara com a palavra Shiny escrita no meio." width="40%" style="display: block; margin: auto;" />
 
 ## Por que aprender Shiny?
 
