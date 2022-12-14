@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.612">
+<meta name="generator" content="quarto-1.1.189">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -53,7 +58,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -66,7 +71,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -99,8 +104,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -127,7 +132,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/react-17.0.0/react-dom.min.js"></script>
 <script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
 <script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="site_libs/reactable-binding-0.3.0/reactable.js"></script>
+<link href="site_libs/reactable-0.4.1/reactable.css" rel="stylesheet">
+<script src="site_libs/reactable-binding-0.4.1/reactable.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery.min.js"></script>
 
 
@@ -208,94 +214,94 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-    <div class="sidebar-item-container"> 
-        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Parte 1</a>
-      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
-        <i class="bi bi-chevron-right ms-2"></i>
-      </a>
-    </div>
-    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Parte 1</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./primeiro-app.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Seu primeiro aplicativo Shiny</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./add-interatividade.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Adicionando interatividade</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reatividade-conceitos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reatividade: conceitos básicos</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./debug.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Debug</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./layouts.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Layouts</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./shiny-na-pratica-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Shiny na prática I</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reatividade-mais-pecas.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reatividade: mais peças</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./htmlwidgets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">htmlwidgets</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./deploy.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Deploy</span></a>
   </div>
 </li>
-    </ul>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-    <div class="sidebar-item-container"> 
-        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Parte 2</a>
-      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
-        <i class="bi bi-chevron-right ms-2"></i>
-      </a>
-    </div>
-    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Parte 2</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modulos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Módulos</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./golem.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Golem</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./html-css-js.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">HTML, CSS e JavaScript</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./shiny-na-pratica-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Shiny na prática II</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reatividade-problemas-complexos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reatividade: problemas complexos</span></a>
   </div>
 </li>
-    </ul>
+      </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -307,26 +313,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#um-pouco-sobre-html" id="toc-um-pouco-sobre-html" class="nav-link active" data-scroll-target="#um-pouco-sobre-html"> <span class="header-section-number">5.1</span> Um pouco sobre HTML</a></li>
-  <li><a href="#bootstrap" id="toc-bootstrap" class="nav-link" data-scroll-target="#bootstrap"> <span class="header-section-number">5.2</span> Bootstrap</a>
+  <li><a href="#um-pouco-sobre-html" id="toc-um-pouco-sobre-html" class="nav-link active" data-scroll-target="#um-pouco-sobre-html"><span class="toc-section-number">5.1</span>  Um pouco sobre HTML</a></li>
+  <li><a href="#bootstrap" id="toc-bootstrap" class="nav-link" data-scroll-target="#bootstrap"><span class="toc-section-number">5.2</span>  Bootstrap</a>
   <ul class="collapse">
-  <li><a href="#grid-system" id="toc-grid-system" class="nav-link" data-scroll-target="#grid-system"> <span class="header-section-number">5.2.1</span> Grid system</a></li>
-  <li><a href="#fluid-grid-vs-fixed-grid" id="toc-fluid-grid-vs-fixed-grid" class="nav-link" data-scroll-target="#fluid-grid-vs-fixed-grid"> <span class="header-section-number">5.2.2</span> Fluid grid vs Fixed grid</a></li>
+  <li><a href="#grid-system" id="toc-grid-system" class="nav-link" data-scroll-target="#grid-system"><span class="toc-section-number">5.2.1</span>  Grid system</a></li>
+  <li><a href="#fluid-grid-vs-fixed-grid" id="toc-fluid-grid-vs-fixed-grid" class="nav-link" data-scroll-target="#fluid-grid-vs-fixed-grid"><span class="toc-section-number">5.2.2</span>  Fluid grid vs Fixed grid</a></li>
   </ul></li>
-  <li><a href="#layouts-prontos" id="toc-layouts-prontos" class="nav-link" data-scroll-target="#layouts-prontos"> <span class="header-section-number">5.3</span> Layouts prontos</a>
+  <li><a href="#layouts-prontos" id="toc-layouts-prontos" class="nav-link" data-scroll-target="#layouts-prontos"><span class="toc-section-number">5.3</span>  Layouts prontos</a>
   <ul class="collapse">
-  <li><a href="#sidebarlayout" id="toc-sidebarlayout" class="nav-link" data-scroll-target="#sidebarlayout"> <span class="header-section-number">5.3.1</span> <code>sidebarLayout</code></a></li>
-  <li><a href="#navbarpage" id="toc-navbarpage" class="nav-link" data-scroll-target="#navbarpage"> <span class="header-section-number">5.3.2</span> <code>navbarPage</code></a></li>
-  <li><a href="#navlistpanel" id="toc-navlistpanel" class="nav-link" data-scroll-target="#navlistpanel"> <span class="header-section-number">5.3.3</span> <code>navlistPanel</code></a></li>
-  <li><a href="#shinydashboard" id="toc-shinydashboard" class="nav-link" data-scroll-target="#shinydashboard"> <span class="header-section-number">5.3.4</span> <code>shinydashboard</code></a></li>
-  <li><a href="#bs4dash" id="toc-bs4dash" class="nav-link" data-scroll-target="#bs4dash"> <span class="header-section-number">5.3.5</span> <code>bs4Dash</code></a></li>
+  <li><a href="#sidebarlayout" id="toc-sidebarlayout" class="nav-link" data-scroll-target="#sidebarlayout"><span class="toc-section-number">5.3.1</span>  <code>sidebarLayout</code></a></li>
+  <li><a href="#navbarpage" id="toc-navbarpage" class="nav-link" data-scroll-target="#navbarpage"><span class="toc-section-number">5.3.2</span>  <code>navbarPage</code></a></li>
+  <li><a href="#navlistpanel" id="toc-navlistpanel" class="nav-link" data-scroll-target="#navlistpanel"><span class="toc-section-number">5.3.3</span>  <code>navlistPanel</code></a></li>
+  <li><a href="#shinydashboard" id="toc-shinydashboard" class="nav-link" data-scroll-target="#shinydashboard"><span class="toc-section-number">5.3.4</span>  <code>shinydashboard</code></a></li>
+  <li><a href="#bs4dash" id="toc-bs4dash" class="nav-link" data-scroll-target="#bs4dash"><span class="toc-section-number">5.3.5</span>  <code>bs4Dash</code></a></li>
   </ul></li>
-  <li><a href="#adicionando-css" id="toc-adicionando-css" class="nav-link" data-scroll-target="#adicionando-css"> <span class="header-section-number">5.4</span> Adicionando CSS</a></li>
-  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"> <span class="header-section-number">5.5</span> Exercícios</a></li>
+  <li><a href="#adicionando-css" id="toc-adicionando-css" class="nav-link" data-scroll-target="#adicionando-css"><span class="toc-section-number">5.4</span>  Adicionando CSS</a></li>
+  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="toc-section-number">5.5</span>  Exercícios</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/layouts.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
     </div>
@@ -363,8 +369,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 
-<div id="htmlwidget-4c59b63e9b5616ac28eb" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-4c59b63e9b5616ac28eb">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"função":["a()","hr()","br()","h1(), ..., h6()","img()","p()","em()","strong()"],"para que serve":["cria um hiperlink","cria uma linha horizontal","insere uma quebra de linha","cria títulos","insere uma imagem","cria um parágrafo","formata o texto em itálico","formata o texto em negrito"]},"columns":[{"accessor":"função","name":"função","type":"character"},{"accessor":"para que serve","name":"para que serve","type":"character"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"0db6023337cd0a471d22ed87e8a351e1"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-e5a73090829bd1f2caa3" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-e5a73090829bd1f2caa3">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"função":["a()","hr()","br()","h1(), ..., h6()","img()","p()","em()","strong()"],"para que serve":["cria um hiperlink","cria uma linha horizontal","insere uma quebra de linha","cria títulos","insere uma imagem","cria um parágrafo","formata o texto em itálico","formata o texto em negrito"]},"columns":[{"id":"função","name":"função","type":"character"},{"id":"para que serve","name":"para que serve","type":"character"}],"sortable":false,"dataKey":"43ae932de20709ab4137977dfe1e4a4e"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Podemos utilizar essas funções à vontade na UI para construirmos o layout do nosso app. O código abaixo, por exemplo, gera o código HTML a seguir.</p>
@@ -443,8 +449,8 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="img/gridsystem.jpg" class="img-fluid figure-img" alt="Esquema exemplificando layouts que podem ser criados com o grid system. Primeiro uma linha dividida em 12 colunas de tamanho 1. Abaixo, uma linha dividida em 4 colunas de tamanho 4. Abaixo, uma linha dividida em uma coluna de tamanho 4 e outra de tamanho 8. Abaixo, uma linha dividida em duas colunas de tamanho 6. Por fim, uma linha composta por uma única coluna de tamanho 12." style="width:100.0%"></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">Exemplos de layouts que podem ser criados com o grid system.</figcaption><p></p>
+<p><img src="img/gridsystem.jpg" class="img-fluid figure-img" style="width:100.0%" alt="Esquema exemplificando layouts que podem ser criados com o grid system. Primeiro uma linha dividida em 12 colunas de tamanho 1. Abaixo, uma linha dividida em 4 colunas de tamanho 4. Abaixo, uma linha dividida em uma coluna de tamanho 4 e outra de tamanho 8. Abaixo, uma linha dividida em duas colunas de tamanho 6. Por fim, uma linha composta por uma única coluna de tamanho 12."></p>
+<p></p><figcaption class="figure-caption">Exemplos de layouts que podem ser criados com o grid system.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -457,7 +463,7 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/gridsystem2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">Exemplos de layouts que podem ser criados com as funções <code>fluidRow()</code> e <code>column()</code>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Exemplos de layouts que podem ser criados com as funções <code>fluidRow()</code> e <code>column()</code>.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -970,10 +976,10 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 
 
 </section>
-<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1" role="doc-endnote"><p>Você pode conferir os tamanhos limites na documentação do Bootstrap: https://getbootstrap.com.br/docs/4.1/getting-started/introduction/)<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Você pode conferir os tamanhos limites na documentação do Bootstrap: https://getbootstrap.com.br/docs/4.1/getting-started/introduction/)<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -981,6 +987,24 @@ sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor
 
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
   const disableStylesheet = (stylesheets) => {
     for (let i=0; i < stylesheets.length; i++) {
       const stylesheet = stylesheets[i];
@@ -1010,8 +1034,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     manageTransitions('#quarto-margin-sidebar .nav-link', false);
     if (alternate) {
       enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
     } else {
       disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
     }
     manageTransitions('#quarto-margin-sidebar .nav-link', true);
     // Switch the toggles
@@ -1025,6 +1055,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
           toggle.classList.remove("alternate");
         }
       }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
     }
   }
   const isFileUrl = () => { 
@@ -1127,7 +1167,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
