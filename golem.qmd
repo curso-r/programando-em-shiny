@@ -5,3 +5,113 @@ knitr::opts_chunk$set(
 ```
 
 # Golem {#sec-golem}
+
+Neste capítulo, vamos apresentar o framework Golem.
+
+## Motivação
+
+O destino final de aplicativos Shiny costuma ser um ambiente de produção diferente do ambiente de desenvolvimento. Seja um servidor próprio, uma máquina na nuvem ou o [shinyapps.io](https://shinyapps.io/), o nosso app precisa funcionar nesses ambientes, não apenas na nossa máquina.
+
+Uma vez no ambiente de produção, aplicativos Shiny costumam ficar lá por um bom tempo, gerando a necessidade de manutenção períodica e/ou atualizações . 
+
+A depender de como o app foi desenvolvido, essas tarefas podem ficar muito mais trabalhosas. Nesse sentido, seria interessante ter um framework de desenvolvimento que facilitasse a organização e documentação do código e o controle das dependências.
+
+O Golem é um *framework* para desenvolvimento de aplicativos Shiny prontos para serem colocados em produção. As vantagens são:
+
+- padroniza a organização dos scripts e demais arquivos do seu app;
+
+- integra com pacotes que aceleram o desenvolvimento do código;
+
+- motiva e facilita a documentação do código;
+
+- e facilita o compartilhamento e a reutilização de códigos em outros projetos e com outras pessoas.
+
+Na próxima seção, abordaremos como usar o pacote `golem` para obter essas vantagens.
+
+## Como usar?
+
+Usar o pacote `golem` diz muito mais respeito a seguir uma filosofia do que a aprender uma ferramenta. Para tirarmos o máximo desse framework, devemos seguir as seguintes premissas:
+
+- um aplicativo Golem é construído como um pacote R;
+
+- sempre que conveniente, devemos dividir o nosso app em módulos;
+
+- e devemos documentar funções importantes do aplicativo.
+
+Para criar um app dentro do framework Golem, basta rodar o seguinte código:
+
+```{r, eval=FALSE}
+golem::create_golem("~/Documents/meuapp")
+```
+
+Esse código vai criar uma pasta chamada `meuapp/` dentro da pasta `~/Documents/` (você pode especificar qualquer outra pasta no seu computador). 
+
+A pasta `meuapp/` vai conter diversos arquivos que lhe permitirão iniciar o desenvolvimento do seu app dentro do Golem. Em tese, bastaria seguir as premissas descritas há pouco e você já estaria utilizando o framework. No entanto, para darmos mais detalhes sobre a estrutura criada, precisamos falar um pouco de pacotes.
+
+## Pacotes
+
+Se você nunca construiu um pacote de R, recomendamos fortemente a leitura do livro [R Packages](https://r-pkgs.org/), em especial os 12 primeiros capítulos. Também recomendamos que treine construindo alguns pacotes simples fora do Shiny/Golem`  antes de continuar (veja os exercícios deste capítulo). Esse passo atrás é importante para que você saiba diferenciar o que é um pacote de R, o que é o Shiny e o que é o Golem.
+
+Dito isso, para aqueles que por imprudência ou falta de tempo continuarão este texto sem  uma base sobre o tema "pacotes", vamos apresentar os pontos necessários para o entendimento do Golem.
+
+### O que é um pacote?
+
+Um pacote de R é uma forma específica de organizar código, seguindo o protocolo descrito pela R Foundation.
+
+> _Pacotes são a unidade fundamental de código R reprodutível._
+> 
+> — Wickham & Bryan
+
+Um pacote inclue funções em R, documentação sobre como usá-las, testes e dados de exemplo. 
+
+De maneira geral, as funções de um pacote tentam resolver bem um problema em específico. O pacote `dplyr`, por exemplo, possui funções especializadas em manipular bases de dados, já o pacote `ggplot2` possui funções para a construção de gráficos.
+
+### Estrutura básica do pacote
+
+A seguir, apresentaremos a estrutura básica (arquivos e pastas) de qualquer pacote R.
+
+- `DESCRIPTION`: define o nome, descrição, versão, licença, dependências e outras caracaterísticas do pacote. É um arquivo de metadados.
+
+- `LICENSE`: especifica os termos de uso e distribuição do seu pacote.
+
+- `.Rbuildignore`:  lista arquivos que não devem ser incluídos ao compilar o pacote R a partir do código-fonte, isto é, arquivos que são úteis apenas no desenvolvimento e não serão enviados para quem for instalar o pacote.
+
+- `NAMESPACE`: este arquivo declara as funções que o pacote exporta (que ficam disponível quando alguém usa `library()`) e as funções que seu pacote importa de outros pacotes. Não devemos editar este arquivo manualmente. 
+
+- `R/`: pasta onde fica o código R das funções do pacote.
+
+### Criando pacotes
+
+Uma maneira fácil de criarmos a estrutura básica de um pacote é usamos a função `usethis::create_package()`. Você deve passar um caminho como `~/Documents/meupacote` e uma nova pasta chamada `meupacote` será criada dentro da pasta `Documents`. Essa pasta será tanto um projeto do RStudio quanto um pacote, ambos chamados `meupacote`.
+
+> Não adicione acentos, caracteres especiais e espaços no nome do pacote, assim como nos arquivos que você criar dentro dele.
+
+```{r eval=FALSE}
+usethis::create_package("~/Documents/meupacote")
+```
+
+### A pasta `R/`
+
+Dentro de um pacote, a pasta `R/` só pode ter scripts R com funções. 
+
+Na pasta `R/` guardaremos todas as funções que farão parte do nosso pacote, mesmo que elas sejam apenas funções usadas internamente. As funções colocadas dentro dessa pasta nunca devem ser rodadas diretamente. Se você quiser testá-las, deve fazer isso "carregando as funções", isto é, usando a função `devtools::load_all()`. Isso fará com que todas as funções dentro da pasta `R/` fiquem disponíveis na sua sessão, algo equivalente a fazer `library(meupacote)`, mas com a diferença de também carregar as funções não exportadas.
+
+Podemos usar `usethis::use_r("nome-do-arquivo")` para que um arquivo seja criado antes começarmos a escrever uma função.
+
+### Dependências
+
+Sem os inúmeros pacotes criados pela comunidade, o R provavelmente já estaria no porão da Ciência de Dados. Por isso, é a primeira coisa que escrevemos nos nossos *scripts* quase sempre é `library(algumPacoteLegal)`. Quando estamos construindo um pacote, é comum querermos utilizar dentro dele outros pacotes que não aqueles do R base. Esses pacotes são chamados de **dependências**.
+
+Ao desenvolver um pacote, a função `library()` **nunca deve ser utilizada**^[Imagine se ao usar uma função de um pacote, ele carregasse um novo pacote na sua sessão, possivelmente mascarando funções que você está usando. Isso seria uma péssima prática.], e todas as funções externas devem ter seus pacotes de origem explicitamente referenciados pelo operador `::`. Embora seja chato especificar todos os pacotes, isso traz uma vantagem: as dependências do código estarão sempre atualizadas, pois elas estarão sempre atreladas às próprias funções sendo utilizadas.
+
+Sempre que você utilizar um pacote dentro do pacote que está desenvolvendo, você deve especificá-lo como dependência no arquivo `DESCRIPTION`. Você pode fazer isso facilmente utilizando `usethis::use_package()`. O código abaixo, registra o pacote `dplyr` como dependência do pacote que estamos construindo.
+
+```{r, eval=FALSE}
+usethis::use_package("dplyr")
+```
+
+
+
+
+
+
