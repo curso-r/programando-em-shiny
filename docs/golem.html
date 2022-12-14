@@ -317,7 +317,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#criando-pacotes" id="toc-criando-pacotes" class="nav-link" data-scroll-target="#criando-pacotes"><span class="toc-section-number">11.3.3</span>  Criando pacotes</a></li>
   <li><a href="#a-pasta-r" id="toc-a-pasta-r" class="nav-link" data-scroll-target="#a-pasta-r"><span class="toc-section-number">11.3.4</span>  A pasta <code>R/</code></a></li>
   <li><a href="#dependências" id="toc-dependências" class="nav-link" data-scroll-target="#dependências"><span class="toc-section-number">11.3.5</span>  Dependências</a></li>
+  <li><a href="#dados" id="toc-dados" class="nav-link" data-scroll-target="#dados"><span class="toc-section-number">11.3.6</span>  Dados</a></li>
   </ul></li>
+  <li><a href="#estrutura-de-um-golem-app" id="toc-estrutura-de-um-golem-app" class="nav-link" data-scroll-target="#estrutura-de-um-golem-app"><span class="toc-section-number">11.4</span>  Estrutura de um Golem app</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/golem.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
     </div>
@@ -360,18 +362,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="como-usar" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="como-usar"><span class="header-section-number">11.2</span> Como usar?</h2>
-<p>Usar o pacote <code>golem</code> diz muito mais respeito a seguir uma filosofia do que a aprender uma ferramenta. Para tirarmos o máximo desse framework, devemos seguir as seguintes premissas:</p>
+<p>Antes de mais nada, precisamos instalar o pacote.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"golem"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para criar um app dentro do framework Golem, basta rodar o seguinte código:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>golem<span class="sc">::</span><span class="fu">create_golem</span>(<span class="st">"~/Documents/meuapp"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Esse código vai criar uma pasta chamada <code>meuapp/</code> dentro de <code>~/Documents/</code> (você pode especificar qualquer outra pasta no seu computador). Essa pasta vai conter diversos arquivos que lhe permitirão iniciar o desenvolvimento do seu app dentro do Golem.</p>
+<p>Antes de falarmos dos arquivos dessa pasta, precisamos ter em mente que usar o pacote <code>golem</code> diz muito mais respeito a seguir uma filosofia do que a aprender uma ferramenta. Você poderia continuar o desenvolvimento do app dentro desse framework sem utilizar nenhuma outra função do <code>golem</code>. O que realmente precisamos fazer é seguir as seguintes premissas:</p>
 <ul>
-<li><p>um aplicativo Golem é construído como um pacote R;</p></li>
+<li><p>um aplicativo Golem é construído como um <strong>pacote R</strong>;</p></li>
 <li><p>sempre que conveniente, devemos dividir o nosso app em módulos;</p></li>
 <li><p>e devemos documentar funções importantes do aplicativo.</p></li>
 </ul>
-<p>Para criar um app dentro do framework Golem, basta rodar o seguinte código:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>golem<span class="sc">::</span><span class="fu">create_golem</span>(<span class="st">"~/Documents/meuapp"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Esse código vai criar uma pasta chamada <code>meuapp/</code> dentro da pasta <code>~/Documents/</code> (você pode especificar qualquer outra pasta no seu computador).</p>
-<p>A pasta <code>meuapp/</code> vai conter diversos arquivos que lhe permitirão iniciar o desenvolvimento do seu app dentro do Golem. Em tese, bastaria seguir as premissas descritas há pouco e você já estaria utilizando o framework. No entanto, para darmos mais detalhes sobre a estrutura criada, precisamos falar um pouco de pacotes.</p>
+<p>Assim, como já falamos de módulos no capítulo anterior, para darmos mais detalhes sobre a estrutura de arquivos criada e o uso do <code>golem</code>, precisamos falar um pouco de pacotes.</p>
 </section>
 <section id="pacotes" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="pacotes"><span class="header-section-number">11.3</span> Pacotes</h2>
@@ -405,7 +411,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Não adicione acentos, caracteres especiais e espaços no nome do pacote, assim como nos arquivos que você criar dentro dele.</p>
 </blockquote>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">create_package</span>(<span class="st">"~/Documents/meupacote"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">create_package</span>(<span class="st">"~/Documents/meupacote"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="a-pasta-r" class="level3" data-number="11.3.4">
@@ -420,16 +426,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Ao desenvolver um pacote, a função <code>library()</code> <strong>nunca deve ser utilizada</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, e todas as funções externas devem ter seus pacotes de origem explicitamente referenciados pelo operador <code>::</code>. Embora seja chato especificar todos os pacotes, isso traz uma vantagem: as dependências do código estarão sempre atualizadas, pois elas estarão sempre atreladas às próprias funções sendo utilizadas.</p>
 <p>Sempre que você utilizar um pacote dentro do pacote que está desenvolvendo, você deve especificá-lo como dependência no arquivo <code>DESCRIPTION</code>. Você pode fazer isso facilmente utilizando <code>usethis::use_package()</code>. O código abaixo, registra o pacote <code>dplyr</code> como dependência do pacote que estamos construindo.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_package</span>(<span class="st">"dplyr"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_package</span>(<span class="st">"dplyr"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-
-
 </section>
+<section id="dados" class="level3" data-number="11.3.6">
+<h3 data-number="11.3.6" class="anchored" data-anchor-id="dados"><span class="header-section-number">11.3.6</span> Dados</h3>
+<p>Se o seu pacote possuir bases de dados, como a <code>dplyr::starwars</code>, ou qualquer outro tipo de objeto do R, como <code>pi</code> ou <code>letters</code>, você deve colocá-los dentro de uma pasta chamada <code>data/</code>, na raiz do projeto, com a extensão <code>.rda</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Isso pode ser feito facilmente a partir da função <code>usethis::use_data()</code>. Por exemplo, ao rodar o código abaixo, vamos criar uma pasta <code>data/</code> na raiz do pacote, caso ela não exista ainda, e salvar nela o vetor base <code>nomes</code> no arquivo <code>nomes.rda</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>nomes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Athos"</span>, <span class="st">"Bruna"</span>, <span class="st">"Caio"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_data</span>(nomes)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Fazendo isso, quando alguém carregar esse pacote, o objeto <code>nomes</code> ficará disponível para ser utilizado (igual a base <code>starwars</code> fica disponível quando carregamos o <code>dplyr</code>).</p>
+</section>
+</section>
+<section id="estrutura-de-um-golem-app" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="estrutura-de-um-golem-app"><span class="header-section-number">11.4</span> Estrutura de um Golem app</h2>
+
+
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn1"><p>Imagine se ao usar uma função de um pacote, ele carregasse um novo pacote na sua sessão, possivelmente mascarando funções que você está usando. Isso seria uma péssima prática.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Arquivos <code>.rda</code> são extremamente estáveis, compactos e podem ser carregados rapidamente pelo R, tornando este formato o principal meio de guardar dados de um pacote.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

@@ -30,13 +30,11 @@ Na próxima seção, abordaremos como usar o pacote `golem` para obter essas van
 
 ## Como usar?
 
-Usar o pacote `golem` diz muito mais respeito a seguir uma filosofia do que a aprender uma ferramenta. Para tirarmos o máximo desse framework, devemos seguir as seguintes premissas:
+Antes de mais nada, precisamos instalar o pacote.
 
-- um aplicativo Golem é construído como um pacote R;
-
-- sempre que conveniente, devemos dividir o nosso app em módulos;
-
-- e devemos documentar funções importantes do aplicativo.
+```{r, eval = FALSE}
+install.packages("golem")
+```
 
 Para criar um app dentro do framework Golem, basta rodar o seguinte código:
 
@@ -44,9 +42,17 @@ Para criar um app dentro do framework Golem, basta rodar o seguinte código:
 golem::create_golem("~/Documents/meuapp")
 ```
 
-Esse código vai criar uma pasta chamada `meuapp/` dentro da pasta `~/Documents/` (você pode especificar qualquer outra pasta no seu computador). 
+Esse código vai criar uma pasta chamada `meuapp/` dentro de `~/Documents/` (você pode especificar qualquer outra pasta no seu computador). Essa pasta vai conter diversos arquivos que lhe permitirão iniciar o desenvolvimento do seu app dentro do Golem. 
 
-A pasta `meuapp/` vai conter diversos arquivos que lhe permitirão iniciar o desenvolvimento do seu app dentro do Golem. Em tese, bastaria seguir as premissas descritas há pouco e você já estaria utilizando o framework. No entanto, para darmos mais detalhes sobre a estrutura criada, precisamos falar um pouco de pacotes.
+Antes de falarmos dos arquivos dessa pasta, precisamos ter em mente que usar o pacote `golem` diz muito mais respeito a seguir uma filosofia do que a aprender uma ferramenta. Você poderia continuar o desenvolvimento do app dentro desse framework sem utilizar nenhuma outra função do `golem`. O que realmente precisamos fazer é seguir as seguintes premissas:
+
+- um aplicativo Golem é construído como um **pacote R**;
+
+- sempre que conveniente, devemos dividir o nosso app em módulos;
+
+- e devemos documentar funções importantes do aplicativo.
+
+Assim, como já falamos de módulos no capítulo anterior, para darmos mais detalhes sobre a estrutura de arquivos criada e o uso do `golem`, precisamos falar um pouco de pacotes.
 
 ## Pacotes
 
@@ -110,8 +116,95 @@ Sempre que você utilizar um pacote dentro do pacote que está desenvolvendo, vo
 usethis::use_package("dplyr")
 ```
 
+### Dados
+
+Se o seu pacote possuir bases de dados, como a `dplyr::starwars`, ou qualquer outro tipo de objeto do R, como `pi` ou `letters`, você deve colocá-los dentro de uma pasta chamada `data/`, na raiz do projeto, com a extensão `.rda`^[Arquivos `.rda` são extremamente estáveis, compactos e podem ser carregados rapidamente pelo R, tornando este formato o principal meio de guardar dados de um pacote.]. Isso pode ser feito facilmente a partir da função `usethis::use_data()`. Por exemplo, ao rodar o código abaixo, vamos criar uma pasta `data/` na raiz do pacote, caso ela não exista ainda, e salvar nela o vetor base `nomes` no arquivo `nomes.rda`.
+
+```{r, eval=FALSE}
+nomes <- c("Athos", "Bruna", "Caio")
+usethis::use_data(nomes)
+```
+
+Fazendo isso, quando alguém carregar esse pacote, o objeto `nomes` ficará disponível para ser utilizado (igual a base `starwars` fica disponível quando carregamos o `dplyr`).
+
+### Documentação de funções
+
+Se quisermos adicionar documentação ao nosso pacote (as instruções que aparecem quando vamos usar uma função ou o documento mostrado quando rodamos `?função()`) precisamos usar um comentário especial: `#'`
+
+```{r eval=FALSE}
+#' Título da função
+#'
+#' Descrição da função
+#'
+#' @param a primeiro parâmetro
+#' @param b segundo parâmetro
+#'
+#' @return descrição do resultado
+#'
+#' @export
+fun <- function(a, b) {
+  a + b
+}
+```
+
+- O parâmetro `@export` indica que a função ficará disponível quando rodarmos `library(meupacote)`. Não se esqueça de exportar todas (e somente) as funções públicas!
+
+- O RStudio disponibiliza um atalho para criar a estrutura da documentação de uma função. No menu superior, clique em `Code` ->  `Insert Roxygen Skeleton`.
+
+- Para deixar a documentação das suas funções acessível (no help do R), use a função `devtools::document()` (**CTRL + SHIFT + D**).
+
+- Ao executar `devtools::check()`, a documentação já é atualizada e disponibilizada de brinde
+
+## Estrutura de um Golem app
+
+A pasta criada terá a seguinte estrutura:
+
+```{r}
+#> ├── DESCRIPTION 
+#> ├── NAMESPACE 
+#> ├── R 
+#> │   ├── app_config.R 
+#> │   ├── app_server.R 
+#> │   ├── app_ui.R 
+#> │   └── run_app.R 
+#> ├── dev 
+#> │   ├── 01_start.R 
+#> │   ├── 02_dev.R 
+#> │   ├── 03_deploy.R 
+#> │   └── run_dev.R 
+#> ├── inst 
+#> │   ├── app 
+#> │   │   └── www 
+#> │   │       └── favicon.ico 
+#> │   └── golem-config.yml 
+#> └── man 
+#>     └── run_app.Rd
+```
 
 
+- Arquivos `DESCRIPTION` e `NAMESPACE`: metadados do pacote.
+
+- `R/app_config.R`: usado para ler o arquivo de configuração do `golem` localizado em `inst/golem-config.yml`.
+
+- `R/app_server.R` e `R/app_ui.R`: arquivos onde vamos desenvolver a UI e o servidor do app.
+
+- `R/run_app.R`: função para configurar e rodar o app.
+
+- `dev/`: scripts do `golem` que podem ser utilizados ao longo do desenvolvimento do app. Eles contêm uma lista de funções úteis que ajudam a configurar diversos aspectos do aplicativo.
+
+- `inst/app/www`: pasta onde adicionaremos os recursos externos do aplicativo (imagens, arquivos CSS, fontes etc).
+
+- `man`: documentação do pacote, a ser gerado pelo R e pelo `roxygen2`.
 
 
+## Exercícios
 
+Aplique o framework Golem no app disponibilizado [neste link](https://curso-r.github.io/main-dashboards-2/exercicios/03-golem/app.R). Ele utiliza a base de dados Pokemon, que pode ser baixada [clicando aqui](https://curso-r.github.io/main-dashboards-2/dados/pkmn.rds).
+
+- Transforme o shinydashboard em Bs4Dash: construa ao menos a UI do zero.
+
+- Modularize o app (cada página do dashboard deve ser um módulo diferente).
+
+- Refaça os gráficos utilizando alguma biblioteca javascript (plotly, echarts, highcharts etc)
+
+- Faça o deploy do app para o shinyapps.io
