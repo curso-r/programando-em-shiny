@@ -6,7 +6,7 @@ knitr::opts_chunk$set(
 
 # Golem {#sec-golem}
 
-Neste capítulo, vamos apresentar o framework Golem.
+Neste capítulo, vamos apresentar o [framework Golem](https://golemverse.org/) para a construção de aplicativos Shiny.
 
 ## Motivação
 
@@ -44,7 +44,7 @@ golem::create_golem("~/Documents/meuapp")
 
 Esse código vai criar uma pasta chamada `meuapp/` dentro de `~/Documents/` (você pode especificar qualquer outra pasta no seu computador). Essa pasta vai conter diversos arquivos que lhe permitirão iniciar o desenvolvimento do seu app dentro do Golem. 
 
-Antes de falarmos dos arquivos dessa pasta, precisamos ter em mente que usar o pacote `golem` diz muito mais respeito a seguir uma filosofia do que a aprender uma ferramenta. Você poderia continuar o desenvolvimento do app dentro desse framework sem utilizar nenhuma outra função do `golem`. O que realmente precisamos fazer é seguir as seguintes premissas:
+Antes de falarmos dos arquivos dessa pasta, precisamos ter em mente que usar o pacote `golem` diz muito mais respeito a seguir uma filosofia do que a aprender uma ferramenta. Como os próprios autores descrevem, *Golem is an __opinionated__ framework for building production-grade shiny applications*, isto é, para usar o Golem precisamos construir nosso app de um jeito específico, que os autores consideram o melhor. Com relação ao pacote, em si, criada a estrutura inicial a função `golem::create_golem()`, você poderia continuar o desenvolvimento do app dentro desse framework sem utilizar nenhuma outra função do `golem`^[Na prática, poderíamos construir essa estrutura nós mesmos e usar o framework Golem sem usar o pacote `golem`.]. O que realmente importa é seguir as seguintes premissas:
 
 - um aplicativo Golem é construído como um **pacote R**;
 
@@ -52,7 +52,7 @@ Antes de falarmos dos arquivos dessa pasta, precisamos ter em mente que usar o p
 
 - e devemos documentar funções importantes do aplicativo.
 
-Assim, como já falamos de módulos no capítulo anterior, para darmos mais detalhes sobre a estrutura de arquivos criada e o uso do `golem`, precisamos falar um pouco de pacotes.
+Assim, como já falamos de módulos no capítulo anterior, para entender melhor o Golem, precisamos falar um pouco de pacotes.
 
 ## Pacotes
 
@@ -84,7 +84,7 @@ A seguir, apresentaremos a estrutura básica (arquivos e pastas) de qualquer pac
 
 - `NAMESPACE`: este arquivo declara as funções que o pacote exporta (que ficam disponível quando alguém usa `library()`) e as funções que seu pacote importa de outros pacotes. Não devemos editar este arquivo manualmente. 
 
-- `R/`: pasta onde fica o código R das funções do pacote.
+- `R/`: pasta onde fica o código R das funções do pacote. Essa pasta não deve conter subdiretórios.
 
 ### Criando pacotes
 
@@ -129,7 +129,7 @@ Fazendo isso, quando alguém carregar esse pacote, o objeto `nomes` ficará disp
 
 ### Documentação de funções
 
-Se quisermos adicionar documentação ao nosso pacote (as instruções que aparecem quando vamos usar uma função ou o documento mostrado quando rodamos `?função()`) precisamos usar um comentário especial: `#'`
+Para documentar as funções do seu pacote (gerar aquele documento mostrado quando rodamos `?mean`, por exemplo), escrevemos comentários antes da definição da função, nos scripts da pasta `R/`. Fazemos isso usando um tipo de comentários especial, o `#'`, e marcadores que indicam qual parte da documentação estamos escrevendo. A estrutura dos comentários deve ser a seguinte:
 
 ```{r eval=FALSE}
 #' Título da função
@@ -147,17 +147,27 @@ fun <- function(a, b) {
 }
 ```
 
-- O parâmetro `@export` indica que a função ficará disponível quando rodarmos `library(meupacote)`. Não se esqueça de exportar todas (e somente) as funções públicas!
+O parâmetro `@export` indica que a função ficará disponível quando rodarmos `library(meupacote)`. Se você não quer que a função fique disponível, basta não colocar esse marcador. 
 
-- O RStudio disponibiliza um atalho para criar a estrutura da documentação de uma função. No menu superior, clique em `Code` ->  `Insert Roxygen Skeleton`.
+Após escrever a documentação das suas funções dessa maneira, você deve rodar `devtools::document()` para que ela seja compilada e fique disponível no seu pacote (acessível pelo *Help* do R). Isso é feito por trás das cortinas pelo pacote `roxygen2`.
 
-- Para deixar a documentação das suas funções acessível (no help do R), use a função `devtools::document()` (**CTRL + SHIFT + D**).
+**Dica**: o RStudio disponibiliza um atalho para criar a estrutura da documentação de uma função. No menu superior, clique em `Code` ->  `Insert Roxygen Skeleton`.
 
-- Ao executar `devtools::check()`, a documentação já é atualizada e disponibilizada de brinde
+Para saber mais sobre documentação de pacotes, leia [este capítulo do R Packages](https://r-pkgs.org/man.html).
+
+### Instalando e compartilhando o seu pacote
+
+Para verificar se você não feriu nenhuma regra de desenvolvimento de pacotes R, você pode usar a função `devtools::check()`. Essa função devolverá uma relatório com possíveis problemas que o seu pacote pode ter, como erros de sintaxe, arquivos com extensões não permitidos, dependências não declaradas ou erros de documentação.
+
+Para instalar o seu pacote localmente durante o desenvolvimento, rode a função `devtools::install()`. Isso é equivalente a ter o pacote instalado via `install.packages()`.
+
+O jeito mais fácil de disponibilizar o seu pacote na internet é subi-lo para um repositório público no Github. Dessa maneira, qualquer pessoa pode instalá-lo com a função `remotes::install_github()`.
+
+Para subir um pacote para o CRAN, o processo é (bem) mais burocrático. Se você quiser saber mais, leia [este capítulo do R Packages](https://r-pkgs.org/release.html).
 
 ## Estrutura de um Golem app
 
-A pasta criada terá a seguinte estrutura:
+Uma pasta criada pela função `golem::create_golem()` terá a seguinte estrutura:
 
 ```{r}
 #> ├── DESCRIPTION 
@@ -181,21 +191,43 @@ A pasta criada terá a seguinte estrutura:
 #>     └── run_app.Rd
 ```
 
+Veja que ela possui, entre outras coisas, a estrutura básica de um pacote. Vamos descrever cada arquivo mais detalhadamente e discutir a importância dele no contexto do desenvolvimento de um Shiny app:
 
-- Arquivos `DESCRIPTION` e `NAMESPACE`: metadados do pacote.
+- O arquivo `DESCRIPTION`: guarda os metadados do pacote. No desenvolvimento de um aplicativo Shiny, ele vai guardar o nome do aplicativo, o que ele faz, as dependências dele, a versão (importante em projetos em produção que recebem atualizações periódicas) e quem contatar quando alguma coisa der errada.
 
-- `R/app_config.R`: usado para ler o arquivo de configuração do `golem` localizado em `inst/golem-config.yml`.
+- O arquivo `NAMESPACE`: guarda metadados do pacote. Com esse arquivo, podemos carregar apenas funções específicas de um pacote dentro do nosso app^[Isso é feito automaticamente pelo `roxygen2` a partir da documentação das funções. Não edite esse arquivo na mão.]. O Golem faz isso com funções do `shiny` e do próprio `golem` para não precisarmos colocar `shiny::` no início de cada função.
 
-- `R/app_server.R` e `R/app_ui.R`: arquivos onde vamos desenvolver a UI e o servidor do app.
+- A pasta `R/`: guarda as funções do pacote. Como o app será feito dentro de um pacote R, todo o seu código será escrito em funções nessa pasta. O Golem já cria os arquivos para construirmos a UI e o servidor. Os scripts contendo os módulos do aplicativo também devem ser colocados nessa pasta, assim como scripts com funções úteis utilizadas em vários lugares do app.
 
-- `R/run_app.R`: função para configurar e rodar o app.
+- O arquivo `R/app_config.R`: usado especificar alguns mecanismos do Golem, como ler o arquivo de configuração localizado em `inst/golem-config.yml`.
 
-- `dev/`: scripts do `golem` que podem ser utilizados ao longo do desenvolvimento do app. Eles contêm uma lista de funções úteis que ajudam a configurar diversos aspectos do aplicativo.
+- O arquivo `R/app_server.R`: script com a função `app_server()`, onde você vai desenvolver o servidor do seu aplicativo.
 
-- `inst/app/www`: pasta onde adicionaremos os recursos externos do aplicativo (imagens, arquivos CSS, fontes etc).
+- O arquivo `R/app_ui.R`: script com a função `app_ui()`, onde você vai desenvolver a UI do seu aplicativo, e a função `golem_add_external_resources()`, utilizada para dizer ao Shiny que a pasta `inst/app/www` será utilizada como uma fonte de recursos externos, acessada pelo caminho `www/nome_do_arquivo`^[Isto é, você não precisa incluir `inst/app/` no caminho do arquivo. Por exemplo, se você quiser colocar a imagem `inst/app/www/imagem.png` no seu app, basta usar o caminho `www/imagem.png`.]. Além disso, o Golem inclui no HTML do seu app todo arquivo CSS e JS que você coloca nessa pasta, então não precisamos fazer isso manualmente.
+
+- O arquivo `R/run_app.R`: script que contém a função `run_app()`, utilizada para rodar o app. Ela chama a função `shiny::shinyApp()`, que inicia o app localmente. A funcão `shiny::shinyApp()` está dentro da função `golem::with_golem_options()`, que recebe parâmetros passados para a `run_app()`. Esses parâmetros podem ser recuperados dentro do app com a função `golem::get_golem_options()`, deixando a parametrização de um aplicativo Shiny muito mais simples^[Podemos criar versões diferentes do app que serão executadas a depender dos parâmetros passados na função `run_app()`.].
+
+- `dev/`: pasta com scripts do `golem` que podem ser utilizados ao longo do desenvolvimento do app. Eles contêm uma lista de funções úteis que ajudam a configurar diversos aspectos do aplicativo.
+
+- `inst/app/www`: pasta onde adicionaremos os recursos externos do aplicativo (imagens, arquivos CSS, fontes etc) que serão compartilhados com o navegador de quem estiver usando o app.
 
 - `man`: documentação do pacote, a ser gerado pelo R e pelo `roxygen2`.
 
+## Rodando o app
+
+Quando quisermos rodar o app durante o desenvolvimento, utilizamos a função `devtools::load_all()` para carregar a versão mais recente de todas as funções do pacote e a função `run_app()` para efetivamente rodar o aplicativo (ela chama a função `shiny::shinyApp()`, com as funções `app_ui()` e `app_server()` como argumentos).
+
+## Principais funções
+
+Além da função `golem::create_golem()` que utilizamos para criar o nosso projeto com a estrutura do framework Golem, o pacote `golem` possui diversas funções úteis para usarmos durante o desenvolvimento do pacote. Vamos listar a seguir algumas delas:
+
+- `golem::set_golem_name()`: usada para mudar o nome do seu aplicativo. A mudança precisa ser feita tanto no arquivo `DESCRIPTION` quanto dentro da função `app_sys()` contida no arquivo `R/app_config.R` e essa função realiza essa tarefa.
+
+- `golem::add_module()`: cria um arquivo na pasta `R/` com o template de um módulo do Shiny. O nome do módulo (utilizado também no nome do arquivo) é passado pelo argumento `name`.
+
+- `golem::add_css_file()`: cria um arquivo vazio com extensão `.css` dentro da pasta `inst/app/www` do app. O nome desse arquivo pode ser passado pelo argumento `name`.
+
+## Deploy
 
 ## Exercícios
 
