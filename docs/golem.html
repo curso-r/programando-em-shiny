@@ -322,10 +322,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#instalando-e-compartilhando-o-seu-pacote" id="toc-instalando-e-compartilhando-o-seu-pacote" class="nav-link" data-scroll-target="#instalando-e-compartilhando-o-seu-pacote"><span class="toc-section-number">11.3.8</span>  Instalando e compartilhando o seu pacote</a></li>
   </ul></li>
   <li><a href="#estrutura-de-um-golem-app" id="toc-estrutura-de-um-golem-app" class="nav-link" data-scroll-target="#estrutura-de-um-golem-app"><span class="toc-section-number">11.4</span>  Estrutura de um Golem app</a></li>
-  <li><a href="#rodando-o-app" id="toc-rodando-o-app" class="nav-link" data-scroll-target="#rodando-o-app"><span class="toc-section-number">11.5</span>  Rodando o app</a></li>
-  <li><a href="#principais-funções" id="toc-principais-funções" class="nav-link" data-scroll-target="#principais-funções"><span class="toc-section-number">11.6</span>  Principais funções</a></li>
-  <li><a href="#deploy" id="toc-deploy" class="nav-link" data-scroll-target="#deploy"><span class="toc-section-number">11.7</span>  Deploy</a></li>
-  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="toc-section-number">11.8</span>  Exercícios</a></li>
+  <li><a href="#principais-funções" id="toc-principais-funções" class="nav-link" data-scroll-target="#principais-funções"><span class="toc-section-number">11.5</span>  Principais funções</a></li>
+  <li><a href="#deploy" id="toc-deploy" class="nav-link" data-scroll-target="#deploy"><span class="toc-section-number">11.6</span>  Deploy</a></li>
+  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="toc-section-number">11.7</span>  Exercícios</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/golem.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
     </div>
@@ -351,7 +350,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 
 </div>
-<p>Neste capítulo, vamos apresentar o <a href="https://golemverse.org/">framework Golem</a> para a construção de aplicativos Shiny.</p>
+<p>Neste capítulo, vamos apresentar o <a href="https://golemverse.org/">framework Golem</a> para a construção de aplicativos Shiny prontos para serem colocados em produção.</p>
 <section id="motivação" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="motivação"><span class="header-section-number">11.1</span> Motivação</h2>
 <p>O destino final de aplicativos Shiny costuma ser um ambiente de produção diferente do ambiente de desenvolvimento. Seja um servidor próprio, uma máquina na nuvem ou o <a href="https://shinyapps.io/">shinyapps.io</a>, o nosso app precisa funcionar nesses ambientes, não apenas na nossa máquina.</p>
@@ -509,28 +508,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>O arquivo <code>R/app_ui.R</code>: script com a função <code>app_ui()</code>, onde você vai desenvolver a UI do seu aplicativo, e a função <code>golem_add_external_resources()</code>, utilizada para dizer ao Shiny que a pasta <code>inst/app/www</code> será utilizada como uma fonte de recursos externos, acessada pelo caminho <code>www/nome_do_arquivo</code><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. Além disso, o Golem inclui no HTML do seu app todo arquivo CSS e JS que você coloca nessa pasta, então não precisamos fazer isso manualmente.</p></li>
 <li><p>O arquivo <code>R/run_app.R</code>: script que contém a função <code>run_app()</code>, utilizada para rodar o app. Ela chama a função <code>shiny::shinyApp()</code>, que inicia o app localmente. A funcão <code>shiny::shinyApp()</code> está dentro da função <code>golem::with_golem_options()</code>, que recebe parâmetros passados para a <code>run_app()</code>. Esses parâmetros podem ser recuperados dentro do app com a função <code>golem::get_golem_options()</code>, deixando a parametrização de um aplicativo Shiny muito mais simples<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</p></li>
 <li><p><code>dev/</code>: pasta com scripts do <code>golem</code> que podem ser utilizados ao longo do desenvolvimento do app. Eles contêm uma lista de funções úteis que ajudam a configurar diversos aspectos do aplicativo.</p></li>
-<li><p><code>inst/app/www</code>: pasta onde adicionaremos os recursos externos do aplicativo (imagens, arquivos CSS, fontes etc) que serão compartilhados com o navegador de quem estiver usando o app.</p></li>
-<li><p><code>man</code>: documentação do pacote, a ser gerado pelo R e pelo <code>roxygen2</code>.</p></li>
+<li><p>A pasta <code>inst/app/www</code>: local onde adicionaremos os recursos externos do aplicativo (imagens, arquivos CSS, fontes etc) que serão compartilhados com o navegador de quem estiver usando o app. A pasta <code>inst</code> é uma pasta especial no desenvolvimento de pacotes. Ela serve para adicionarmos arquivos que gostaríamos que fossem instalados com o pacote, como arquivos de teste, imagens etc. No contexto do Shiny, ela será utilizada para guardarmos arquivos auxiliares, como a própria pasta <code>app/www</code>, templates <code>.Rmd</code> de relatórios que o app gera, arquivos <code>.md</code> com textos que serão colocados no app etc.</p></li>
+<li><p>A pasta <code>man/</code>: contém a documentação do pacote, a ser gerada pelo <code>roxygen2</code>. É muito importante documentarmos todas as funções do nosso app, pois é muito comum que o código precise de ajustes ou atualizações no futuro. Uma breve descrição do que a função espera e o que ela devolve pode ser suficiente para ajudar a pessoa que for mexer no app no futuro (que pode ser você mesma) a esconomizar horas de debug.</p></li>
 </ul>
 </section>
-<section id="rodando-o-app" class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="rodando-o-app"><span class="header-section-number">11.5</span> Rodando o app</h2>
-<p>Quando quisermos rodar o app durante o desenvolvimento, utilizamos a função <code>devtools::load_all()</code> para carregar a versão mais recente de todas as funções do pacote e a função <code>run_app()</code> para efetivamente rodar o aplicativo (ela chama a função <code>shiny::shinyApp()</code>, com as funções <code>app_ui()</code> e <code>app_server()</code> como argumentos).</p>
-</section>
-<section id="principais-funções" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="principais-funções"><span class="header-section-number">11.6</span> Principais funções</h2>
+<section id="principais-funções" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="principais-funções"><span class="header-section-number">11.5</span> Principais funções</h2>
 <p>Além da função <code>golem::create_golem()</code> que utilizamos para criar o nosso projeto com a estrutura do framework Golem, o pacote <code>golem</code> possui diversas funções úteis para usarmos durante o desenvolvimento do pacote. Vamos listar a seguir algumas delas:</p>
 <ul>
 <li><p><code>golem::set_golem_name()</code>: usada para mudar o nome do seu aplicativo. A mudança precisa ser feita tanto no arquivo <code>DESCRIPTION</code> quanto dentro da função <code>app_sys()</code> contida no arquivo <code>R/app_config.R</code> e essa função realiza essa tarefa.</p></li>
 <li><p><code>golem::add_module()</code>: cria um arquivo na pasta <code>R/</code> com o template de um módulo do Shiny. O nome do módulo (utilizado também no nome do arquivo) é passado pelo argumento <code>name</code>.</p></li>
-<li><p><code>golem::add_css_file()</code>: cria um arquivo vazio com extensão <code>.css</code> dentro da pasta <code>inst/app/www</code> do app. O nome desse arquivo pode ser passado pelo argumento <code>name</code>.</p></li>
+<li><p><code>golem::add_css_file()</code> e <code>golem::add_js_file()</code>: cria um arquivo vazio com extensão <code>.css</code> ou <code>.js</code> dentro da pasta <code>inst/app/www</code> do app. O nome desse arquivo pode ser passado pelo argumento <code>name</code>.</p></li>
+<li><p><code>golem::use_utils_ui()</code>: cria um arquivo chamado <code>golem_utils_ui.R</code> na pasta <code>R/</code> com diversas funções úteis para serem utilizadas na UI de um Shiny app.</p></li>
+<li><p><code>golem::use_utils_server()</code>: cria um arquivo chamado <code>golem_utils_server.R</code> na pasta <code>R/</code> com diversas funções úteis para serem utilizadas no servidor de um Shiny app.</p></li>
+<li><p><code>golem::add_shinyappsio_file()</code>: cria um arquivo <code>app.R</code> que pode ser utilizado para fazer o deploy do app para o <a href="https://shinyapps.io">shinyapps.io</a>.</p></li>
 </ul>
 </section>
-<section id="deploy" class="level2" data-number="11.7">
-<h2 data-number="11.7" class="anchored" data-anchor-id="deploy"><span class="header-section-number">11.7</span> Deploy</h2>
+<section id="deploy" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="deploy"><span class="header-section-number">11.6</span> Deploy</h2>
 </section>
-<section id="exercícios" class="level2" data-number="11.8">
-<h2 data-number="11.8" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">11.8</span> Exercícios</h2>
+<section id="exercícios" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">11.7</span> Exercícios</h2>
 <p>Aplique o framework Golem no app disponibilizado <a href="https://curso-r.github.io/main-dashboards-2/exercicios/03-golem/app.R">neste link</a>. Ele utiliza a base de dados Pokemon, que pode ser baixada <a href="https://curso-r.github.io/main-dashboards-2/dados/pkmn.rds">clicando aqui</a>.</p>
 <ul>
 <li><p>Transforme o shinydashboard em Bs4Dash: construa ao menos a UI do zero.</p></li>

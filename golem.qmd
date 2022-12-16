@@ -6,7 +6,7 @@ knitr::opts_chunk$set(
 
 # Golem {#sec-golem}
 
-Neste capítulo, vamos apresentar o [framework Golem](https://golemverse.org/) para a construção de aplicativos Shiny.
+Neste capítulo, vamos apresentar o [framework Golem](https://golemverse.org/) para a construção de aplicativos Shiny prontos para serem colocados em produção.
 
 ## Motivação
 
@@ -209,13 +209,9 @@ Veja que ela possui, entre outras coisas, a estrutura básica de um pacote. Vamo
 
 - `dev/`: pasta com scripts do `golem` que podem ser utilizados ao longo do desenvolvimento do app. Eles contêm uma lista de funções úteis que ajudam a configurar diversos aspectos do aplicativo.
 
-- `inst/app/www`: pasta onde adicionaremos os recursos externos do aplicativo (imagens, arquivos CSS, fontes etc) que serão compartilhados com o navegador de quem estiver usando o app.
+- A pasta `inst/app/www`: local onde adicionaremos os recursos externos do aplicativo (imagens, arquivos CSS, fontes etc) que serão compartilhados com o navegador de quem estiver usando o app. A pasta `inst` é uma pasta especial no desenvolvimento de pacotes. Ela serve para adicionarmos arquivos que gostaríamos que fossem instalados com o pacote, como arquivos de teste, imagens etc. No contexto do Shiny, ela será utilizada para guardarmos arquivos auxiliares, como a própria pasta `app/www`, templates `.Rmd` de relatórios que o app gera, arquivos `.md` com textos que serão colocados no app etc.
 
-- `man`: documentação do pacote, a ser gerado pelo R e pelo `roxygen2`.
-
-## Rodando o app
-
-Quando quisermos rodar o app durante o desenvolvimento, utilizamos a função `devtools::load_all()` para carregar a versão mais recente de todas as funções do pacote e a função `run_app()` para efetivamente rodar o aplicativo (ela chama a função `shiny::shinyApp()`, com as funções `app_ui()` e `app_server()` como argumentos).
+- A pasta `man/`: contém a documentação do pacote, a ser gerada pelo `roxygen2`. É muito importante documentarmos todas as funções do nosso app, pois é muito comum que o código precise de ajustes ou atualizações no futuro. Uma breve descrição do que a função espera e o que ela devolve pode ser suficiente para ajudar a pessoa que for mexer no app no futuro (que pode ser você mesma) a esconomizar horas de debug.
 
 ## Principais funções
 
@@ -225,7 +221,13 @@ Além da função `golem::create_golem()` que utilizamos para criar o nosso proj
 
 - `golem::add_module()`: cria um arquivo na pasta `R/` com o template de um módulo do Shiny. O nome do módulo (utilizado também no nome do arquivo) é passado pelo argumento `name`.
 
-- `golem::add_css_file()`: cria um arquivo vazio com extensão `.css` dentro da pasta `inst/app/www` do app. O nome desse arquivo pode ser passado pelo argumento `name`.
+- `golem::add_css_file()` e `golem::add_js_file()`: cria um arquivo vazio com extensão `.css` ou `.js` dentro da pasta `inst/app/www` do app. O nome desse arquivo pode ser passado pelo argumento `name`.
+
+- `golem::use_utils_ui()`: cria um arquivo chamado `golem_utils_ui.R` na pasta `R/` com diversas funções úteis para serem utilizadas na UI de um Shiny app.
+
+- `golem::use_utils_server()`: cria um arquivo chamado `golem_utils_server.R` na pasta `R/` com diversas funções úteis para serem utilizadas no servidor de um Shiny app.
+
+- `golem::add_shinyappsio_file()`: cria um arquivo `app.R` que pode ser utilizado para fazer o deploy do app para o [shinyapps.io](https://shinyapps.io).
 
 ## Deploy
 
