@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.189">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -323,7 +323,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   <li><a href="#estrutura-de-um-golem-app" id="toc-estrutura-de-um-golem-app" class="nav-link" data-scroll-target="#estrutura-de-um-golem-app"><span class="toc-section-number">11.4</span>  Estrutura de um Golem app</a></li>
   <li><a href="#principais-funções" id="toc-principais-funções" class="nav-link" data-scroll-target="#principais-funções"><span class="toc-section-number">11.5</span>  Principais funções</a></li>
-  <li><a href="#deploy" id="toc-deploy" class="nav-link" data-scroll-target="#deploy"><span class="toc-section-number">11.6</span>  Deploy</a></li>
+  <li><a href="#deploy" id="toc-deploy" class="nav-link" data-scroll-target="#deploy"><span class="toc-section-number">11.6</span>  Deploy</a>
+  <ul class="collapse">
+  <li><a href="#deploy-com-shinyapps.io" id="toc-deploy-com-shinyapps.io" class="nav-link" data-scroll-target="#deploy-com-shinyapps.io"><span class="toc-section-number">11.6.1</span>  Deploy com shinyapps.io</a></li>
+  <li><a href="#deploy-com-docker" id="toc-deploy-com-docker" class="nav-link" data-scroll-target="#deploy-com-docker"><span class="toc-section-number">11.6.2</span>  Deploy com Docker</a></li>
+  </ul></li>
   <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="toc-section-number">11.7</span>  Exercícios</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/golem.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
@@ -341,6 +345,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
@@ -429,17 +434,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 data-number="11.3.5" class="anchored" data-anchor-id="dependências"><span class="header-section-number">11.3.5</span> Dependências</h3>
 <p>Sem os inúmeros pacotes criados pela comunidade, o R provavelmente já estaria no porão da Ciência de Dados. Por isso, é a primeira coisa que escrevemos nos nossos <em>scripts</em> quase sempre é <code>library(algumPacoteLegal)</code>. Quando estamos construindo um pacote, é comum querermos utilizar dentro dele outros pacotes que não aqueles do R base. Esses pacotes são chamados de <strong>dependências</strong>.</p>
 <p>Ao desenvolver um pacote, a função <code>library()</code> <strong>nunca deve ser utilizada</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, e todas as funções externas devem ter seus pacotes de origem explicitamente referenciados pelo operador <code>::</code>. Embora seja chato especificar todos os pacotes, isso traz uma vantagem: as dependências do código estarão sempre atualizadas, pois elas estarão sempre atreladas às próprias funções sendo utilizadas.</p>
-<p>Sempre que você utilizar um pacote dentro do pacote que está desenvolvendo, você deve especificá-lo como dependência no arquivo <code>DESCRIPTION</code>. Você pode fazer isso facilmente utilizando <code>usethis::use_package()</code>. O código abaixo, registra o pacote <code>dplyr</code> como dependência do pacote que estamos construindo.</p>
+<p>Sempre que você utilizar um pacote dentro do pacote que está desenvolvendo, você deve especificá-lo como dependência no arquivo <code>DESCRIPTION</code>. Isso dirá ao R que, ao instalar o seu pacote, ele também precisa instalar todos os pacotes listados como dependência nesse arquivo. Você pode fazer isso facilmente utilizando <code>usethis::use_package()</code>. O código abaixo, registra o pacote <code>dplyr</code> como dependência do pacote que estamos construindo.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_package</span>(<span class="st">"dplyr"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Se você está usando um pacote em desenvolvimento a partir de um repositório do GitHub, por exemplo, você pode usar a função <code>usethis::use_dev_package()</code> para adicioná-lo como dependência.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_dev_package</span>(<span class="st">"dplyr"</span>, <span class="at">remote =</span> <span class="st">"tidyverse/dplyr"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Leia a documentação dessas funções para mais informações sobre como adicionar dependências ao arquivo <code>DESCRIPTION</code>.</p>
 </section>
 <section id="dados" class="level3" data-number="11.3.6">
 <h3 data-number="11.3.6" class="anchored" data-anchor-id="dados"><span class="header-section-number">11.3.6</span> Dados</h3>
 <p>Se o seu pacote possuir bases de dados, como a <code>dplyr::starwars</code>, ou qualquer outro tipo de objeto do R, como <code>pi</code> ou <code>letters</code>, você deve colocá-los dentro de uma pasta chamada <code>data/</code>, na raiz do projeto, com a extensão <code>.rda</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Isso pode ser feito facilmente a partir da função <code>usethis::use_data()</code>. Por exemplo, ao rodar o código abaixo, vamos criar uma pasta <code>data/</code> na raiz do pacote, caso ela não exista ainda, e salvar nela o vetor base <code>nomes</code> no arquivo <code>nomes.rda</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>nomes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Athos"</span>, <span class="st">"Bruna"</span>, <span class="st">"Caio"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_data</span>(nomes)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>nomes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Athos"</span>, <span class="st">"Bruna"</span>, <span class="st">"Caio"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_data</span>(nomes)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Fazendo isso, quando alguém carregar esse pacote, o objeto <code>nomes</code> ficará disponível para ser utilizado (igual a base <code>starwars</code> fica disponível quando carregamos o <code>dplyr</code>).</p>
 </section>
@@ -447,19 +457,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 data-number="11.3.7" class="anchored" data-anchor-id="documentação-de-funções"><span class="header-section-number">11.3.7</span> Documentação de funções</h3>
 <p>Para documentar as funções do seu pacote (gerar aquele documento mostrado quando rodamos <code>?mean</code>, por exemplo), escrevemos comentários antes da definição da função, nos scripts da pasta <code>R/</code>. Fazemos isso usando um tipo de comentários especial, o <code>#'</code>, e marcadores que indicam qual parte da documentação estamos escrevendo. A estrutura dos comentários deve ser a seguinte:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Título da função</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' Descrição da função</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param a primeiro parâmetro</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param b segundo parâmetro</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#' @return descrição do resultado</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#' @export</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>fun <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b) {</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  a <span class="sc">+</span> b</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Título da função</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' Descrição da função</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param a primeiro parâmetro</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param b segundo parâmetro</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#' @return descrição do resultado</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#' @export</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>fun <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b) {</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  a <span class="sc">+</span> b</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>O parâmetro <code>@export</code> indica que a função ficará disponível quando rodarmos <code>library(meupacote)</code>. Se você não quer que a função fique disponível, basta não colocar esse marcador.</p>
 <p>Após escrever a documentação das suas funções dessa maneira, você deve rodar <code>devtools::document()</code> para que ela seja compilada e fique disponível no seu pacote (acessível pelo <em>Help</em> do R). Isso é feito por trás das cortinas pelo pacote <code>roxygen2</code>.</p>
@@ -478,29 +488,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="11.4" class="anchored" data-anchor-id="estrutura-de-um-golem-app"><span class="header-section-number">11.4</span> Estrutura de um Golem app</h2>
 <p>Uma pasta criada pela função <code>golem::create_golem()</code> terá a seguinte estrutura:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── DESCRIPTION </span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── NAMESPACE </span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── R </span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── app_config.R </span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── app_server.R </span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── app_ui.R </span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   └── run_app.R </span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── dev </span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── 01_start.R </span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── 02_dev.R </span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── 03_deploy.R </span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   └── run_dev.R </span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── inst </span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── app </span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   │   └── www </span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   │       └── favicon.ico </span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   └── golem-config.yml </span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; └── man </span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     └── run_app.Rd</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── DESCRIPTION </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── NAMESPACE </span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── R </span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── app_config.R </span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── app_server.R </span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── app_ui.R </span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   └── run_app.R </span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── dev </span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── 01_start.R </span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── 02_dev.R </span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── 03_deploy.R </span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   └── run_dev.R </span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── inst </span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── app </span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   │   └── www </span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   │       └── favicon.ico </span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   └── golem-config.yml </span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; └── man </span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     └── run_app.Rd</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Veja que ela possui, entre outras coisas, a estrutura básica de um pacote. Vamos descrever cada arquivo mais detalhadamente e discutir a importância dele no contexto do desenvolvimento de um Shiny app:</p>
 <ul>
-<li><p>O arquivo <code>DESCRIPTION</code>: guarda os metadados do pacote. No desenvolvimento de um aplicativo Shiny, ele vai guardar o nome do aplicativo, o que ele faz, as dependências dele, a versão (importante em projetos em produção que recebem atualizações periódicas) e quem contatar quando alguma coisa der errada.</p></li>
+<li><p>O arquivo <code>DESCRIPTION</code>: guarda os metadados do pacote. No desenvolvimento de um aplicativo Shiny, ele vai guardar o nome do aplicativo, o que ele faz, as dependências dele, a versão (importante em projetos em produção que recebem atualizações periódicas) e quem contatar quando alguma coisa der errada. Com relação às dependências, isso quer dizer que, para rodar o seu app, o R precisará instalar todos os pacotes listados nesse arquivo.</p></li>
 <li><p>O arquivo <code>NAMESPACE</code>: guarda metadados do pacote. Com esse arquivo, podemos carregar apenas funções específicas de um pacote dentro do nosso app<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. O Golem faz isso com funções do <code>shiny</code> e do próprio <code>golem</code> para não precisarmos colocar <code>shiny::</code> no início de cada função.</p></li>
 <li><p>A pasta <code>R/</code>: guarda as funções do pacote. Como o app será feito dentro de um pacote R, todo o seu código será escrito em funções nessa pasta. O Golem já cria os arquivos para construirmos a UI e o servidor. Os scripts contendo os módulos do aplicativo também devem ser colocados nessa pasta, assim como scripts com funções úteis utilizadas em vários lugares do app.</p></li>
 <li><p>O arquivo <code>R/app_config.R</code>: usado especificar alguns mecanismos do Golem, como ler o arquivo de configuração localizado em <code>inst/golem-config.yml</code>.</p></li>
@@ -526,6 +536,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="deploy" class="level2" data-number="11.6">
 <h2 data-number="11.6" class="anchored" data-anchor-id="deploy"><span class="header-section-number">11.6</span> Deploy</h2>
+<p>Neste capítulo, vamos falar sobre como fazer o deploy do seu app feito em Golem em dois ambientes diferentes: no <a href="https://shinyapps.io">shinyapps.io</a> e em um servidor qualquer usando Docker.</p>
+<section id="deploy-com-shinyapps.io" class="level3" data-number="11.6.1">
+<h3 data-number="11.6.1" class="anchored" data-anchor-id="deploy-com-shinyapps.io"><span class="header-section-number">11.6.1</span> Deploy com shinyapps.io</h3>
+<p>Para subir um Shiny app para o shinyapps.io (veja a <a href="deploy.html#sec-deploy-shinyapps">Seção&nbsp;<span>9.1</span></a>), precisamos enviar o nosso arquivo <code>app.R</code></p>
+</section>
+<section id="deploy-com-docker" class="level3" data-number="11.6.2">
+<h3 data-number="11.6.2" class="anchored" data-anchor-id="deploy-com-docker"><span class="header-section-number">11.6.2</span> Deploy com Docker</h3>
+</section>
 </section>
 <section id="exercícios" class="level2" data-number="11.7">
 <h2 data-number="11.7" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">11.7</span> Exercícios</h2>
@@ -685,7 +703,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   // Switch to dark mode if need be
   if (hasAlternateSentinel()) {
     toggleColorMode(true);
-  } 
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -707,7 +727,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -743,24 +780,42 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
