@@ -110,11 +110,19 @@ Sem os inúmeros pacotes criados pela comunidade, o R provavelmente já estaria 
 
 Ao desenvolver um pacote, a função `library()` **nunca deve ser utilizada**^[Imagine se ao usar uma função de um pacote, ele carregasse um novo pacote na sua sessão, possivelmente mascarando funções que você está usando. Isso seria uma péssima prática.], e todas as funções externas devem ter seus pacotes de origem explicitamente referenciados pelo operador `::`. Embora seja chato especificar todos os pacotes, isso traz uma vantagem: as dependências do código estarão sempre atualizadas, pois elas estarão sempre atreladas às próprias funções sendo utilizadas.
 
-Sempre que você utilizar um pacote dentro do pacote que está desenvolvendo, você deve especificá-lo como dependência no arquivo `DESCRIPTION`. Você pode fazer isso facilmente utilizando `usethis::use_package()`. O código abaixo, registra o pacote `dplyr` como dependência do pacote que estamos construindo.
+Sempre que você utilizar um pacote dentro do pacote que está desenvolvendo, você deve especificá-lo como dependência no arquivo `DESCRIPTION`. Isso dirá ao R que, ao instalar o seu pacote, ele também precisa instalar todos os pacotes listados como dependência nesse arquivo. Você pode fazer isso facilmente utilizando `usethis::use_package()`. O código abaixo, registra o pacote `dplyr` como dependência do pacote que estamos construindo.
 
 ```{r, eval=FALSE}
 usethis::use_package("dplyr")
 ```
+
+Se você está usando um pacote em desenvolvimento a partir de um repositório do GitHub, por exemplo, você pode usar a função `usethis::use_dev_package()` para adicioná-lo como dependência.
+
+```{r, eval=FALSE}
+usethis::use_dev_package("dplyr", remote = "tidyverse/dplyr")
+```
+
+Leia a documentação dessas funções para mais informações sobre como adicionar dependências ao arquivo `DESCRIPTION`.
 
 ### Dados
 
@@ -193,7 +201,7 @@ Uma pasta criada pela função `golem::create_golem()` terá a seguinte estrutur
 
 Veja que ela possui, entre outras coisas, a estrutura básica de um pacote. Vamos descrever cada arquivo mais detalhadamente e discutir a importância dele no contexto do desenvolvimento de um Shiny app:
 
-- O arquivo `DESCRIPTION`: guarda os metadados do pacote. No desenvolvimento de um aplicativo Shiny, ele vai guardar o nome do aplicativo, o que ele faz, as dependências dele, a versão (importante em projetos em produção que recebem atualizações periódicas) e quem contatar quando alguma coisa der errada.
+- O arquivo `DESCRIPTION`: guarda os metadados do pacote. No desenvolvimento de um aplicativo Shiny, ele vai guardar o nome do aplicativo, o que ele faz, as dependências dele, a versão (importante em projetos em produção que recebem atualizações periódicas) e quem contatar quando alguma coisa der errada. Com relação às dependências, isso quer dizer que, para rodar o seu app, o R precisará instalar todos os pacotes listados nesse arquivo.
 
 - O arquivo `NAMESPACE`: guarda metadados do pacote. Com esse arquivo, podemos carregar apenas funções específicas de um pacote dentro do nosso app^[Isso é feito automaticamente pelo `roxygen2` a partir da documentação das funções. Não edite esse arquivo na mão.]. O Golem faz isso com funções do `shiny` e do próprio `golem` para não precisarmos colocar `shiny::` no início de cada função.
 
@@ -230,6 +238,36 @@ Além da função `golem::create_golem()` que utilizamos para criar o nosso proj
 - `golem::add_shinyappsio_file()`: cria um arquivo `app.R` que pode ser utilizado para fazer o deploy do app para o [shinyapps.io](https://shinyapps.io).
 
 ## Deploy
+
+Neste capítulo, vamos falar sobre como fazer o deploy do seu app feito em Golem em dois ambientes diferentes: no [shinyapps.io](https://shinyapps.io) e em um servidor qualquer usando Docker.
+
+
+### Deploy com shinyapps.io
+
+Para subir um Shiny app para o shinyapps.io (veja a [Seção -@sec-deploy-shinyapps] para mais detalhes), precisamos enviar o script primário do nosso app^[O arquivo com a chamada da função `shiny::shinyApp()` no final.], normalmente chamado de  `app.R`, junto de todos os arquivos dos quais ele depende (outros scripts, bases de dados, imagens etc). A partir do RStudio, podemos fazer isso com alguns cliques a partir do botão Publish, disponível quando abrimos o arquivo `app.R`, ou a partir da função `rsconnect::rsconnect::deployApp()`, que consegue identificar esse script primário caso você não especifique para ela no argumento `appPrimaryDoc`.
+
+No entanto, dentro da estrutura do Golem não temos esse arquivo a princípio, já que todas as partes do app são construídas dentro de funções na pasta `R/`. O script `run_app.R` não pode ser considerado esse script primário pois a chamada da função `shiny::shinyApp()` está dentro da definição da função `run_app()`. O que fazer nesse caso?
+
+A solução é criar um arqruivo `app.R`. Podemos fazer isso usando a função `golem::add_shinyappsio_file()`. O arquivo será criado na pasta raiz do seu projeto e poderá ser utilizado como script primário do seu app, isto é, a partir dele você poderá usar o botão `Publish` e deverá subir para o shinyapps.io todos arquivos que constituem o seu app/pacote.
+
+Esse arquivo `app.R` vai conter a chamada das seguintes funções:
+
+```{r, eval=FALSE}
+pkgload::load_all()
+options("golem.app.prod" = TRUE)
+run_app()
+```
+
+
+- `pkgload::load_all()` vai carregar o as funções definidas na pasta `R/`.
+
+- `options("golem.app.prod" = TRUE)` vai definir a variável de sistema `golem.app.prod` como `TRUE`. Isso é opcional e pode ser utilizado para criar versões diferentes de homologação ou produção para o seu app.
+
+- `run_app()`: roda o seu app, isto é, executa a função `shiny::shinyApp()`.
+
+Com esse arquivo criado, você também poderá utilizar normalmente a função `rsconnect::rsconnect::deployApp()` para fazer o deploy.
+
+### Deploy com Docker
 
 ## Exercícios
 
