@@ -10,7 +10,7 @@ Neste capítulo (e neste livro como um todo), falaremos de deploy apenas no cont
 
 Não falaremos neste livro sobre a utilização de computação em nuvem pois existem muitos serviços disponíveis (AWS, Google Cloud Plataform, Azure etc) e é um tema em constante atualização.
 
-## ShinyApps.io
+## ShinyApps.io {#sec-deploy-shinyapps}
 
 O [ShinyApps.io](https://www.shinyapps.io/) é um serviço da [RStudio](https://rstudio.com/) para hospedagem de aplicativos Shiny.
 

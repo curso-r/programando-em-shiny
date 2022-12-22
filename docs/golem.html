@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.612">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,78 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -36,8 +104,8 @@ ul.task-list{list-style: none;}
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -137,94 +205,94 @@ ul.task-list{list-style: none;}
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-    <div class="sidebar-item-container"> 
-        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Parte 1</a>
-      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
-        <i class="bi bi-chevron-right ms-2"></i>
-      </a>
-    </div>
-    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Parte 1</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./primeiro-app.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Seu primeiro aplicativo Shiny</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./add-interatividade.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Adicionando interatividade</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reatividade-conceitos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reatividade: conceitos básicos</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./debug.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Debug</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./layouts.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Layouts</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./shiny-na-pratica-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Shiny na prática I</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reatividade-mais-pecas.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reatividade: mais peças</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./htmlwidgets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">htmlwidgets</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./deploy.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Deploy</span></a>
   </div>
 </li>
-    </ul>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-    <div class="sidebar-item-container"> 
-        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Parte 2</a>
-      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
-        <i class="bi bi-chevron-right ms-2"></i>
-      </a>
-    </div>
-    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Parte 2</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modulos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Módulos</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./golem.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Golem</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./html-css-js.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">HTML, CSS e JavaScript</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./shiny-na-pratica-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Shiny na prática II</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reatividade-problemas-complexos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reatividade: problemas complexos</span></a>
   </div>
 </li>
-    </ul>
+      </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -236,7 +304,33 @@ ul.task-list{list-style: none;}
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#motivação" id="toc-motivação" class="nav-link active" data-scroll-target="#motivação"><span class="toc-section-number">11.1</span>  Motivação</a></li>
+  <li><a href="#como-usar" id="toc-como-usar" class="nav-link" data-scroll-target="#como-usar"><span class="toc-section-number">11.2</span>  Como usar?</a></li>
+  <li><a href="#pacotes" id="toc-pacotes" class="nav-link" data-scroll-target="#pacotes"><span class="toc-section-number">11.3</span>  Pacotes</a>
+  <ul class="collapse">
+  <li><a href="#o-que-é-um-pacote" id="toc-o-que-é-um-pacote" class="nav-link" data-scroll-target="#o-que-é-um-pacote"><span class="toc-section-number">11.3.1</span>  O que é um pacote?</a></li>
+  <li><a href="#estrutura-básica-do-pacote" id="toc-estrutura-básica-do-pacote" class="nav-link" data-scroll-target="#estrutura-básica-do-pacote"><span class="toc-section-number">11.3.2</span>  Estrutura básica do pacote</a></li>
+  <li><a href="#criando-pacotes" id="toc-criando-pacotes" class="nav-link" data-scroll-target="#criando-pacotes"><span class="toc-section-number">11.3.3</span>  Criando pacotes</a></li>
+  <li><a href="#a-pasta-r" id="toc-a-pasta-r" class="nav-link" data-scroll-target="#a-pasta-r"><span class="toc-section-number">11.3.4</span>  A pasta <code>R/</code></a></li>
+  <li><a href="#dependências" id="toc-dependências" class="nav-link" data-scroll-target="#dependências"><span class="toc-section-number">11.3.5</span>  Dependências</a></li>
+  <li><a href="#dados" id="toc-dados" class="nav-link" data-scroll-target="#dados"><span class="toc-section-number">11.3.6</span>  Dados</a></li>
+  <li><a href="#documentação-de-funções" id="toc-documentação-de-funções" class="nav-link" data-scroll-target="#documentação-de-funções"><span class="toc-section-number">11.3.7</span>  Documentação de funções</a></li>
+  <li><a href="#instalando-e-compartilhando-o-seu-pacote" id="toc-instalando-e-compartilhando-o-seu-pacote" class="nav-link" data-scroll-target="#instalando-e-compartilhando-o-seu-pacote"><span class="toc-section-number">11.3.8</span>  Instalando e compartilhando o seu pacote</a></li>
+  </ul></li>
+  <li><a href="#estrutura-de-um-golem-app" id="toc-estrutura-de-um-golem-app" class="nav-link" data-scroll-target="#estrutura-de-um-golem-app"><span class="toc-section-number">11.4</span>  Estrutura de um Golem app</a></li>
+  <li><a href="#principais-funções" id="toc-principais-funções" class="nav-link" data-scroll-target="#principais-funções"><span class="toc-section-number">11.5</span>  Principais funções</a></li>
+  <li><a href="#deploy" id="toc-deploy" class="nav-link" data-scroll-target="#deploy"><span class="toc-section-number">11.6</span>  Deploy</a>
+  <ul class="collapse">
+  <li><a href="#deploy-para-o-shinyapps.io" id="toc-deploy-para-o-shinyapps.io" class="nav-link" data-scroll-target="#deploy-para-o-shinyapps.io"><span class="toc-section-number">11.6.1</span>  Deploy para o shinyapps.io</a></li>
+  <li><a href="#deploy-com-docker" id="toc-deploy-com-docker" class="nav-link" data-scroll-target="#deploy-com-docker"><span class="toc-section-number">11.6.2</span>  Deploy com Docker</a></li>
+  </ul></li>
+  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="toc-section-number">11.7</span>  Exercícios</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/golem.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -251,6 +345,7 @@ ul.task-list{list-style: none;}
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
@@ -260,13 +355,307 @@ ul.task-list{list-style: none;}
 <div class="cell">
 
 </div>
+<p>Neste capítulo, vamos apresentar o <a href="https://golemverse.org/">framework Golem</a> para a construção de aplicativos Shiny prontos para serem colocados em produção.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/golem.png" class="img-fluid figure-img" style="width:25.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="motivação" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="motivação"><span class="header-section-number">11.1</span> Motivação</h2>
+<p>O destino final de aplicativos Shiny costuma ser um ambiente de produção diferente do ambiente de desenvolvimento. Seja um servidor próprio, uma máquina na nuvem ou o <a href="https://shinyapps.io/">shinyapps.io</a>, o nosso app precisa funcionar nesses ambientes, não apenas na nossa máquina.</p>
+<p>Uma vez no ambiente de produção, aplicativos Shiny costumam ficar lá por um bom tempo, gerando a necessidade de manutenção períodica e/ou atualizações. A depender de como o app foi desenvolvido, essas tarefas podem ficar muito mais trabalhosas. Seria interessante, nesse sentido, ter um framework de desenvolvimento que facilitasse a organização e documentação do código e o controle das dependências. É para isso que o Golem foi criado.</p>
+<p>O Golem é um <em>framework</em> para desenvolvimento de aplicativos Shiny prontos para serem colocados em produção. As vantagens são:</p>
+<ul>
+<li><p>padroniza a organização dos scripts e demais arquivos do seu app;</p></li>
+<li><p>integra com pacotes que aceleram o desenvolvimento do código;</p></li>
+<li><p>motiva a documentação do código;</p></li>
+<li><p>e facilita o compartilhamento e a reutilização de códigos em outros projetos e com outras pessoas.</p></li>
+</ul>
+<p>Na próxima seção, abordaremos como usar o pacote <code>golem</code> para obter essas vantagens.</p>
+</section>
+<section id="como-usar" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="como-usar"><span class="header-section-number">11.2</span> Como usar?</h2>
+<p>Antes de mais nada, precisamos instalar o pacote.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"golem"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para criar um app dentro do framework Golem, basta rodar o seguinte código:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>golem<span class="sc">::</span><span class="fu">create_golem</span>(<span class="st">"~/Documents/meuapp"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Esse código vai criar uma pasta chamada <code>meuapp/</code> dentro de <code>~/Documents/</code> (você pode especificar qualquer outra pasta no seu computador). Essa pasta vai conter diversos arquivos que lhe permitirão iniciar o desenvolvimento do seu app dentro do Golem.</p>
+<p>Antes de falarmos dos arquivos dessa pasta, precisamos ter em mente que usar o pacote <code>golem</code> diz muito mais respeito a seguir uma filosofia do que a aprender uma ferramenta. Como os próprios autores descrevem</p>
+<blockquote class="blockquote">
+<p><em>Golem is an <strong>opinionated</strong> framework for building production-grade shiny applications</em>.</p>
+</blockquote>
+<p>Isto é, para usar o Golem precisamos construir nosso app de um jeito específico, que os autores consideram ser o melhor. Com relação ao pacote em si, criada a estrutura inicial com a função <code>golem::create_golem()</code>, você poderia continuar o desenvolvimento do app dentro desse framework sem utilizar nenhuma outra função do <code>golem</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. O que realmente importa é seguir as seguintes premissas:</p>
+<ul>
+<li><p>um aplicativo Golem é construído como um <strong>pacote R</strong>;</p></li>
+<li><p>sempre que conveniente, devemos dividir o nosso app em módulos;</p></li>
+<li><p>e devemos documentar as funções que compõem o aplicativo.</p></li>
+</ul>
+<p>Assim, como já falamos de módulos no capítulo anterior, para entender melhor o Golem, precisamos falar um pouco de pacotes.</p>
+</section>
+<section id="pacotes" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="pacotes"><span class="header-section-number">11.3</span> Pacotes</h2>
+<p>Se você nunca construiu um pacote de R, recomendamos fortemente a leitura do livro <a href="https://r-pkgs.org/">R Packages</a>, em especial os 12 primeiros capítulos. Também recomendamos que treine construindo alguns pacotes simples fora do Shiny/Golem antes de continuar (veja os exercícios deste capítulo). Esse passo atrás é importante para que você saiba diferenciar o que é um pacote de R, o que é o Shiny e o que é o Golem.</p>
+<p>Dito isso, para aqueles que por imprudência ou falta de tempo continuarão este texto sem uma base sobre o tema “pacotes”, vamos apresentar os pontos necessários para o entendimento do Golem.</p>
+<section id="o-que-é-um-pacote" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="o-que-é-um-pacote"><span class="header-section-number">11.3.1</span> O que é um pacote?</h3>
+<p>Um pacote de R é uma forma específica de organizar código, seguindo o protocolo descrito pela R Foundation.</p>
+<blockquote class="blockquote">
+<p><em>Pacotes são a unidade fundamental de código R reprodutível.</em></p>
+<p>— Wickham &amp; Bryan</p>
+</blockquote>
+<p>Um pacote inclue funções em R, documentação sobre como usá-las, testes e dados de exemplo.</p>
+<p>De maneira geral, as funções de um pacote tentam resolver bem um problema em específico. O pacote <code>dplyr</code>, por exemplo, possui funções especializadas em manipular bases de dados, já o pacote <code>ggplot2</code> possui funções para a construção de gráficos.</p>
+</section>
+<section id="estrutura-básica-do-pacote" class="level3" data-number="11.3.2">
+<h3 data-number="11.3.2" class="anchored" data-anchor-id="estrutura-básica-do-pacote"><span class="header-section-number">11.3.2</span> Estrutura básica do pacote</h3>
+<p>A seguir, apresentaremos a estrutura básica (arquivos e pastas) de qualquer pacote R.</p>
+<ul>
+<li><p><code>DESCRIPTION</code>: define o nome, descrição, versão, licença, dependências e outras caracaterísticas do pacote. É um arquivo de metadados.</p></li>
+<li><p><code>LICENSE</code>: especifica os termos de uso e distribuição do seu pacote.</p></li>
+<li><p><code>.Rbuildignore</code>: lista arquivos que não devem ser incluídos ao compilar o pacote R a partir do código-fonte, isto é, arquivos que são úteis apenas no desenvolvimento e não serão enviados para quem instalar o pacote.</p></li>
+<li><p><code>NAMESPACE</code>: este arquivo declara as funções que o pacote exporta (que ficam disponível quando alguém usa <code>library()</code>) e as funções que seu pacote importa de outros pacotes. Ele é criado automaticamente a partir da documentação das funções do pacote. Não devemos editar este arquivo manualmente.</p></li>
+<li><p><code>R/</code>: pasta onde fica o código R das funções do pacote. Essa pasta não deve conter subdiretórios.</p></li>
+</ul>
+</section>
+<section id="criando-pacotes" class="level3" data-number="11.3.3">
+<h3 data-number="11.3.3" class="anchored" data-anchor-id="criando-pacotes"><span class="header-section-number">11.3.3</span> Criando pacotes</h3>
+<p>Uma maneira fácil de criarmos a estrutura básica de um pacote é usamos a função <code>usethis::create_package()</code>. Você deve passar um caminho como <code>~/Documents/meupacote</code> e uma nova pasta chamada <code>meupacote</code> será criada dentro da pasta <code>Documents</code>. Essa pasta será tanto um projeto do RStudio quanto um pacote, ambos chamados <code>meupacote</code>.</p>
+<blockquote class="blockquote">
+<p>Não adicione acentos, caracteres especiais e espaços no nome do pacote, assim como nos arquivos que você criar dentro dele.</p>
+</blockquote>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">create_package</span>(<span class="st">"~/Documents/meupacote"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="a-pasta-r" class="level3" data-number="11.3.4">
+<h3 data-number="11.3.4" class="anchored" data-anchor-id="a-pasta-r"><span class="header-section-number">11.3.4</span> A pasta <code>R/</code></h3>
+<p>Dentro de um pacote, a pasta <code>R/</code> só pode ter scripts R com funções. Guardaremos nela todas as funções que farão parte do nosso pacote, mesmo que elas sejam apenas funções usadas internamente.</p>
+<p>As funções colocadas dentro dessa pasta nunca devem ser rodadas diretamente. Se você quiser testá-las, deve fazer isso “carregando as funções”, isto é, usando a função <code>devtools::load_all()</code>. Isso fará com que todas as funções dentro da pasta <code>R/</code> fiquem disponíveis na sua sessão, algo equivalente a fazer <code>library(meupacote)</code>, mas com a diferença de também carregar as funções não exportadas.</p>
+<p>Podemos usar <code>usethis::use_r("nome-do-arquivo")</code> para criar um arquivo script R dentro da pasta <code>R/</code>.</p>
+</section>
+<section id="dependências" class="level3" data-number="11.3.5">
+<h3 data-number="11.3.5" class="anchored" data-anchor-id="dependências"><span class="header-section-number">11.3.5</span> Dependências</h3>
+<p>Sem os inúmeros pacotes criados pela comunidade, o R provavelmente já estaria no porão da Ciência de Dados. Por isso, a primeira coisa que escrevemos nos nossos <em>scripts</em> quase sempre é <code>library(algumPacoteLegal)</code>. Quando estamos construindo um pacote, é comum querermos utilizar dentro dele outros pacotes que não apenas o R base. Esses pacotes são chamados de <strong>dependências</strong>.</p>
+<p>Ao desenvolver um pacote, a função <code>library()</code> <strong>nunca deve ser utilizada</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, e todas as funções externas devem ter seus pacotes de origem explicitamente referenciados pelo operador <code>::</code>. Embora seja chato especificar todos os pacotes, isso traz uma vantagem: as dependências do código estarão sempre atualizadas, pois elas estarão sempre atreladas às próprias funções sendo utilizadas.</p>
+<p>Sempre que você utilizar um pacote dentro do pacote que está desenvolvendo, você deve especificá-lo como dependência no arquivo <code>DESCRIPTION</code>. Isso dirá ao R que, ao instalar o seu pacote, ele também precisa instalar todos os pacotes listados como dependência nesse arquivo. Você pode fazer isso facilmente utilizando <code>usethis::use_package()</code>. O código abaixo registra o pacote <code>dplyr</code> como dependência de um pacote sendo construído.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_package</span>(<span class="st">"dplyr"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Se você está usando um pacote em desenvolvimento a partir de um repositório do GitHub, por exemplo, você pode usar a função <code>usethis::use_dev_package()</code> para adicioná-lo como dependência.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_dev_package</span>(<span class="st">"dplyr"</span>, <span class="at">remote =</span> <span class="st">"tidyverse/dplyr"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Leia a documentação dessas funções para mais informações sobre como adicionar dependências ao arquivo <code>DESCRIPTION</code>.</p>
+</section>
+<section id="dados" class="level3" data-number="11.3.6">
+<h3 data-number="11.3.6" class="anchored" data-anchor-id="dados"><span class="header-section-number">11.3.6</span> Dados</h3>
+<p>Se o seu pacote possuir bases de dados, como a <code>dplyr::starwars</code>, ou qualquer outro tipo de objeto do R, como <code>pi</code> ou <code>letters</code>, você deve colocá-los dentro de uma pasta chamada <code>data/</code>, na raiz do projeto, com a extensão <code>.rda</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Isso pode ser feito facilmente a partir da função <code>usethis::use_data()</code>.</p>
+<p>Ao rodar o código abaixo, por exemplo, vamos criar uma pasta <code>data/</code> na raiz do pacote, caso ela não exista ainda, e salvar nela o vetor base <code>nomes</code> no arquivo <code>nomes.rda</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>nomes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Athos"</span>, <span class="st">"Bruna"</span>, <span class="st">"Caio"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_data</span>(nomes)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Fazendo isso, quando alguém carregar esse pacote, o objeto <code>nomes</code> ficará disponível para ser utilizado (igual a base <code>starwars</code> fica disponível quando carregamos o <code>dplyr</code>).</p>
+</section>
+<section id="documentação-de-funções" class="level3" data-number="11.3.7">
+<h3 data-number="11.3.7" class="anchored" data-anchor-id="documentação-de-funções"><span class="header-section-number">11.3.7</span> Documentação de funções</h3>
+<p>Para documentar as funções do seu pacote (i.e., gerar aquele documento mostrado quando rodamos <code>?mean</code>, por exemplo), escrevemos comentários antes da definição da função nos scripts da pasta <code>R/</code>. Fazemos isso usando um tipo de comentários especial, o <code>#'</code>, e marcadores que indicam qual parte da documentação estamos escrevendo. A estrutura dos comentários deve ser a seguinte:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Título da função</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' Descrição da função</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param a Descrição do primeiro parâmetro.</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param b Descrição do segundo parâmetro.</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#' @return Descrição do resultado (valor que sai da função).</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#' @export</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>fun <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b) {</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  a <span class="sc">+</span> b</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>O marcador <code>@export</code> indica que a função ficará disponível quando rodarmos <code>library(meupacote)</code>. Se você não quer que a função fique disponível, basta não colocar esse marcador.</p>
+<p>Após escrever a documentação das suas funções dessa maneira, você deve rodar <code>devtools::document()</code> para que ela seja compilada e fique disponível no seu pacote (acessível pelo <em>Help</em> do R). Isso é feito por trás das cortinas pelo pacote <code>roxygen2</code>.</p>
+<p><strong>Dica</strong>: o RStudio disponibiliza um atalho para criar a estrutura da documentação de uma função. No menu superior, clique em <code>Code</code> -&gt; <code>Insert Roxygen Skeleton</code>.</p>
+<p>Para saber mais sobre documentação de pacotes, leia <a href="https://r-pkgs.org/man.html">este capítulo do R Packages</a>.</p>
+</section>
+<section id="instalando-e-compartilhando-o-seu-pacote" class="level3" data-number="11.3.8">
+<h3 data-number="11.3.8" class="anchored" data-anchor-id="instalando-e-compartilhando-o-seu-pacote"><span class="header-section-number">11.3.8</span> Instalando e compartilhando o seu pacote</h3>
+<p>Para verificar se você não feriu alguma regra de desenvolvimento de pacotes R, você pode usar a função <code>devtools::check()</code>. Essa função devolverá uma relatório com possíveis problemas que o seu pacote pode ter, como erros de sintaxe, arquivos com extensões não permitidos, dependências não declaradas ou erros de documentação.</p>
+<p>Para instalar o seu pacote localmente durante o desenvolvimento, rode a função <code>devtools::install()</code>. Isso é equivalente a ter o pacote instalado via <code>install.packages()</code>.</p>
+<p>O jeito mais fácil de disponibilizar o seu pacote na internet é subi-lo para um repositório público no Github. Dessa maneira, qualquer pessoa pode instalá-lo com a função <code>remotes::install_github()</code>.</p>
+<p>Para subir um pacote para o CRAN, o processo é (bem) mais burocrático. Se você quiser saber mais, leia <a href="https://r-pkgs.org/release.html">este capítulo do R Packages</a>.</p>
+</section>
+</section>
+<section id="estrutura-de-um-golem-app" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="estrutura-de-um-golem-app"><span class="header-section-number">11.4</span> Estrutura de um Golem app</h2>
+<p>Agora que já sabemos o básico sobre pacotes R, podemos voltar a falar do Golem.</p>
+<p>Uma pasta criada pela função <code>golem::create_golem()</code> terá a seguinte estrutura:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── DESCRIPTION </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── NAMESPACE </span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── R </span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── app_config.R </span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── app_server.R </span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── app_ui.R </span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   └── run_app.R </span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── dev </span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── 01_start.R </span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── 02_dev.R </span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── 03_deploy.R </span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   └── run_dev.R </span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├── inst </span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   ├── app </span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   │   └── www </span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   │       └── favicon.ico </span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; │   └── golem-config.yml </span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; └── man </span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     └── run_app.Rd</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Veja que ela possui, entre outras coisas, a estrutura básica de um pacote. Vamos descrever cada arquivo mais detalhadamente e discutir a importância dele no contexto do desenvolvimento de um Shiny app:</p>
+<ul>
+<li><p>O arquivo <code>DESCRIPTION</code>: guarda os metadados do pacote. No desenvolvimento de um aplicativo Shiny, ele vai guardar o nome do aplicativo, o que ele faz, as dependências dele, a versão (importante em projetos em produção que recebem atualizações periódicas) e quem contatar quando alguma coisa der errada. Com relação às dependências, isso quer dizer que, para rodar o seu app, o R precisará instalar todos os pacotes listados nesse arquivo.</p></li>
+<li><p>O arquivo <code>NAMESPACE</code>: guarda metadados do pacote. Com esse arquivo, podemos carregar apenas funções específicas de um pacote dentro do nosso app<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. O Golem faz isso com o pacote <code>shiny</code> nas funções <code>app_ui()</code> e <code>app_server()</code> para não precisarmos colocar <code>shiny::</code> no início de cada função.</p></li>
+<li><p>A pasta <code>R/</code>: guarda as funções do pacote. Como o app será feito dentro de um pacote R, todo o seu código será escrito em funções nessa pasta. O Golem já cria os arquivos para construirmos a UI e o servidor. Os scripts contendo os módulos do aplicativo também devem ser colocados nessa pasta, assim como scripts com funções úteis utilizadas em vários lugares do app.</p></li>
+<li><p>O arquivo <code>R/app_config.R</code>: usado especificar alguns mecanismos do Golem, como ler o arquivo de configuração localizado em <code>inst/golem-config.yml</code>.</p></li>
+<li><p>O arquivo <code>R/app_server.R</code>: script com a função <code>app_server()</code>, onde você vai desenvolver o servidor do seu aplicativo.</p></li>
+<li><p>O arquivo <code>R/app_ui.R</code>: script com a função <code>app_ui()</code>, onde você vai desenvolver a UI do seu aplicativo, e a função <code>golem_add_external_resources()</code>, utilizada para dizer ao Shiny que a pasta <code>inst/app/www</code> será utilizada como uma fonte de recursos externos, acessada pelo caminho <code>www/nome_do_arquivo</code><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. Além disso, o Golem inclui no HTML do seu app a conexão com todo arquivo CSS e JS que você coloca nessa pasta, então não precisamos fazer isso manualmente.</p></li>
+<li><p>O arquivo <code>R/run_app.R</code>: script que contém a função <code>run_app()</code>, utilizada para rodar o app. Ela chama a função <code>shiny::shinyApp()</code>, que inicia o app localmente. A funcão <code>shiny::shinyApp()</code> está dentro da função <code>golem::with_golem_options()</code>, que recebe parâmetros passados para a <code>run_app()</code>. Esses parâmetros podem ser recuperados dentro do app com a função <code>golem::get_golem_options()</code>, deixando a parametrização de um aplicativo Shiny muito mais simples<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</p></li>
+<li><p><code>dev/</code>: pasta com scripts do <code>golem</code> que podem ser utilizados ao longo do desenvolvimento do app. Eles contêm uma lista de funções úteis que ajudam a configurar diversos aspectos do aplicativo. O uso desses scripts é opcional.</p></li>
+<li><p>A pasta <code>inst/app/www</code>: local onde adicionaremos os recursos externos do aplicativo (imagens, arquivos CSS, fontes etc) que serão compartilhados com o navegador de quem estiver usando o app. A pasta <code>inst</code> é uma pasta especial no desenvolvimento de pacotes. Ela serve para adicionarmos arquivos que gostaríamos que fossem instalados com o pacote, como arquivos de teste, imagens etc. No contexto do Shiny, ela será utilizada para guardarmos arquivos auxiliares, como a própria pasta <code>app/www</code>, templates <code>.Rmd</code> de relatórios que o app gera, arquivos <code>.md</code> com textos que serão colocados no app, entre outros.</p></li>
+<li><p>A pasta <code>man/</code>: contém a documentação do pacote, a ser gerada pelo <code>roxygen2</code>. É muito importante documentarmos todas as funções do nosso app, pois é muito comum que o código precise de ajustes ou atualizações no futuro. Uma breve descrição do que a função espera e o que ela devolve pode ser suficiente para ajudar a pessoa que for mexer no app no futuro (que pode ser você mesma) a esconomizar horas de debug.</p></li>
+</ul>
+</section>
+<section id="principais-funções" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="principais-funções"><span class="header-section-number">11.5</span> Principais funções</h2>
+<p>Além da função <code>golem::create_golem()</code> que utilizamos para criar o nosso projeto com a estrutura do framework Golem, o pacote <code>golem</code> possui diversas funções úteis para usarmos durante o desenvolvimento do pacote. Vamos listar a seguir algumas delas:</p>
+<ul>
+<li><p><code>golem::set_golem_name()</code>: usada para mudar o nome do seu aplicativo. A mudança precisa ser feita tanto no arquivo <code>DESCRIPTION</code> quanto dentro da função <code>app_sys()</code> contida no arquivo <code>R/app_config.R</code>, e essa função realiza essas tarefas.</p></li>
+<li><p><code>golem::add_module()</code>: cria um arquivo na pasta <code>R/</code> com o template de um módulo do Shiny. O nome do módulo (utilizado também como nome do arquivo) é passado pelo argumento <code>name</code>.</p></li>
+<li><p><code>golem::add_css_file()</code> e <code>golem::add_js_file()</code>: cria um arquivo vazio com extensão <code>.css</code> ou <code>.js</code> dentro da pasta <code>inst/app/www</code> do app. O nome desse arquivo pode ser passado pelo argumento <code>name</code>.</p></li>
+<li><p><code>golem::use_utils_ui()</code>: cria um arquivo chamado <code>golem_utils_ui.R</code> na pasta <code>R/</code> com diversas funções úteis para serem utilizadas na UI de um Shiny app.</p></li>
+<li><p><code>golem::use_utils_server()</code>: cria um arquivo chamado <code>golem_utils_server.R</code> na pasta <code>R/</code> com diversas funções úteis para serem utilizadas no servidor de um Shiny app.</p></li>
+<li><p><code>golem::add_shinyappsio_file()</code>: cria um arquivo <code>app.R</code> que pode ser utilizado para fazer o deploy do app para o <a href="https://shinyapps.io">shinyapps.io</a>.</p></li>
+</ul>
+</section>
+<section id="deploy" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="deploy"><span class="header-section-number">11.6</span> Deploy</h2>
+<p>Neste capítulo, vamos falar sobre como fazer o deploy do seu app feito em Golem em dois ambientes diferentes: no <a href="https://shinyapps.io">shinyapps.io</a> e em qualquer máquina ou serviço que rode containers Docker.</p>
+<section id="deploy-para-o-shinyapps.io" class="level3" data-number="11.6.1">
+<h3 data-number="11.6.1" class="anchored" data-anchor-id="deploy-para-o-shinyapps.io"><span class="header-section-number">11.6.1</span> Deploy para o shinyapps.io</h3>
+<p>Para subir um Shiny app para o shinyapps.io (veja a <a href="deploy.html#sec-deploy-shinyapps">Seção&nbsp;<span>9.1</span></a> para mais detalhes), precisamos enviar o script primário do nosso app<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, normalmente chamado de <code>app.R</code>, junto de todos os arquivos dos quais ele depende (outros scripts, bases de dados, imagens etc). A partir do RStudio, podemos fazer isso com alguns cliques a partir do botão Publish, disponível quando abrimos o arquivo <code>app.R</code>, ou a partir da função <code>rsconnect::rsconnect::deployApp()</code>, que consegue identificar esse script primário caso você não especifique para ela no argumento <code>appPrimaryDoc</code>.</p>
+<p>No entanto, na estrutura do Golem que vimos até o momento não temos esse arquivo, já que todas as partes do app são construídas dentro de funções na pasta <code>R/</code>. O script <code>run_app.R</code> não pode ser considerado esse script primário pois a chamada da função <code>shiny::shinyApp()</code> está dentro da definição da função <code>run_app()</code>. O que fazer nesse caso?</p>
+<p>A solução é criar um arquivo <code>app.R</code> dentro dessa estrutura. Podemos fazer isso usando a função <code>golem::add_shinyappsio_file()</code>. O arquivo será criado na pasta raiz do seu projeto e poderá ser utilizado como script primário do seu app, isto é, a partir dele você poderá usar o botão <code>Publish</code>. Além do <code>app.R</code>, você deverá subir para o shinyapps.io todos arquivos que constituem o seu app/pacote.</p>
+<p>O arquivo <code>app.R</code> criado vai conter a chamada das seguintes funções:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pkgload<span class="sc">::</span><span class="fu">load_all</span>()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">"golem.app.prod"</span> <span class="ot">=</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">run_app</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p><code>pkgload::load_all()</code> vai carregar o as funções definidas na pasta <code>R/</code>.</p></li>
+<li><p><code>options("golem.app.prod" = TRUE)</code> vai definir a variável de sistema <code>golem.app.prod</code> como <code>TRUE</code>. Isso é opcional e pode ser utilizado para criar versões diferentes de homologação ou produção para o seu app.</p></li>
+<li><p><code>run_app()</code>: roda o seu app, isto é, executa a função <code>shiny::shinyApp()</code>.</p></li>
+</ul>
+<p>Com esse arquivo criado, você também poderá utilizar normalmente a função <code>rsconnect::rsconnect::deployApp()</code> para fazer o deploy.</p>
+</section>
+<section id="deploy-com-docker" class="level3" data-number="11.6.2">
+<h3 data-number="11.6.2" class="anchored" data-anchor-id="deploy-com-docker"><span class="header-section-number">11.6.2</span> Deploy com Docker</h3>
+<p>O <a href="https://www.docker.com/">Docker</a> é um software código aberto para o desenvolvimento e a implantação de aplicações embrulhadas em containers<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>. Ao colocar o seu app em um container, você garante que o ambiente onde ele ficará hospedado, seja ele qual for, terá todas as dependências que ele precisa para funcionar e estará devidamente configurado para que as pessoas possam acessá-lo por meio de uma URL.</p>
+<p>Para <em>dockerizar</em> um app, precisamos criar um <code>Dockerfile</code>. Esse arquivo conterá todas as instruções necessárias para criar um container possuindo todas as dependências e configurações para hospedar o seu app (incluindo o Shiny Server). O pacote <code>golem</code> possui algumas funções para a criação desse arquivo:</p>
+<ul>
+<li><code>golem::add_dockerfile()</code>: adiciona um <code>Dockerfile</code> genérico, sem configurações para ambientes específicos.</li>
+<li><code>golem::add_dockerfile_shinyproxy()</code>: adiciona um <code>Dockerfile</code> com configurações específicas para o <a href="https://www.shinyproxy.io/">ShinyProxy</a>, uma solução código aberto para o deploy de aplicativos Shiny.</li>
+<li><code>golem::add_dockerfile_heroku()</code>: adiciona um <code>Dockerfile</code> com configurações específicas para o <a href="https://www.heroku.com/">Heroku</a>, um serviço para hospedagem de qualquer tipo de aplicação dockerizada.</li>
+</ul>
+<p>O <code>Dockerfile</code> será criado na pasta raiz do seu projeto. Para testá-lo localmente, caso você tenha o Docker instalado na sua máquina, basta rodar no <strong>Terminal</strong>:</p>
+<pre><code>docker build -t meuApp .
+docker run -p 8080:80 meuApp</code></pre>
+<p>Se você precisar trocar a configuração padrão do Shiny Server, crie um novo <code>shiny-server.conf</code> na pasta <code>inst/app</code> e insira a seguinte linha no <code>Dockerfile</code> antes da linha <code>EXPOSE 80</code>:</p>
+<pre><code>COPY ./inst/app/shiny-server.conf /etc/shiny-server/shiny-server.conf</code></pre>
+<p>Além do ShinyProxy e do Heroku, você também pode subir o seu app dockerizado para plataformas como a AWS e o Google Cloud Engine.</p>
+</section>
+</section>
+<section id="exercícios" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">11.7</span> Exercícios</h2>
+<ol type="1">
+<li><p>Quais são as vantagens de se usar o Golem?</p></li>
+<li><p>Qual a diferença entre usar Golem e usar apenas módulos?</p></li>
+<li><p>Podemos seguir o framework Golem sem usar o pacote <code>golem</code>. Verdadeiro ou falso?</p></li>
+<li><p>Em qual arquivo na estrutura de um pacote R definimos as suas dependências?</p></li>
+<li><p>Construa um pacote R que tenha as seguintes funções:</p></li>
+</ol>
+<ul>
+<li><p><code>soma(x, y)</code>: realiza a soma <code>x + y</code>;</p></li>
+<li><p><code>subtração(x, y)</code>: realiza a subtração <code>x - y</code>;</p></li>
+<li><p><code>mult(x, y)</code>: realiza a multiplicação <code>x * y</code>;</p></li>
+<li><p><code>divisao(x, y)</code>: realiza a divisão <code>x / y</code>.</p></li>
+</ul>
+<ol start="6" type="1">
+<li>Construa um pacote R que tenha as seguintes funções:</li>
+</ol>
+<ul>
+<li><p><code>read_csvs(arquivos, empilhar = FALSE)</code>: ela recebe um vetor com caminhos de arquivos <code>.csv</code> contendo bases de dados e devolve uma lista de tibbles com cada uma das bases se <code>empilhar = FALSE</code> e uma tibble com todas as bases empilhadas se <code>empilhar = TRUE</code>.</p></li>
+<li><p><code>read_excels(arquivos, empilhar = FALSE)</code>: a mesma ideia, mas para arquivos <code>.xlsx</code>.</p></li>
+</ul>
+<ol start="7" type="1">
+<li>Aplique o framework Golem no app disponibilizado <a href="https://curso-r.github.io/main-dashboards-2/exercicios/03-golem/app.R">neste link</a>. Ele utiliza a base de dados Pokemon, que pode ser baixada <a href="https://curso-r.github.io/main-dashboards-2/dados/pkmn.rds">clicando aqui</a>. Além disso,</li>
+</ol>
+<ol type="a">
+<li><p>Transforme o shinydashboard em Bs4Dash: construa ao menos a UI do zero.</p></li>
+<li><p>Modularize o app (cada página do dashboard deve ser um módulo diferente).</p></li>
+<li><p>Refaça os gráficos utilizando alguma biblioteca javascript (plotly, echarts, highcharts etc).</p></li>
+<li><p>Faça o deploy do app para o shinyapps.io.</p></li>
+</ol>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Na prática, poderíamos construir essa estrutura nós mesmos e usar o framework Golem sem usar o pacote <code>golem</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Imagine se, ao usarmos uma função de um pacote, ele carregasse um novo pacote na nossa sessão, possivelmente mascarando funções que estamos usando. Isso seria uma péssima prática.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Arquivos <code>.rda</code> são extremamente estáveis, compactos e podem ser carregados rapidamente pelo R, tornando este formato o principal meio de guardar dados de um pacote.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Isso é feito automaticamente pelo <code>roxygen2</code> a partir da documentação das funções. Não edite esse arquivo na mão.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Isto é, você não precisa incluir <code>inst/app/</code> no caminho do arquivo. Por exemplo, se você quiser colocar a imagem <code>inst/app/www/imagem.png</code> no seu app, basta usar o caminho <code>www/imagem.png</code>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Podemos criar versões diferentes do app que serão executadas a depender dos parâmetros passados na função <code>run_app()</code>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>O arquivo com a chamada da função <code>shiny::shinyApp()</code> no final.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Containers são uma unidade padrão de software que empacota um código e suas dependências de tal forma que a aplicação possa rodar de maneira confiável independentemente do ambiente computacional. Leia mais <a href="https://www.docker.com/resources/what-container/">aqui</a>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
   const disableStylesheet = (stylesheets) => {
     for (let i=0; i < stylesheets.length; i++) {
       const stylesheet = stylesheets[i];
@@ -296,8 +685,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     manageTransitions('#quarto-margin-sidebar .nav-link', false);
     if (alternate) {
       enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
     } else {
       disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
     }
     manageTransitions('#quarto-margin-sidebar .nav-link', true);
     // Switch the toggles
@@ -311,6 +706,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
           toggle.classList.remove("alternate");
         }
       }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
     }
   }
   const isFileUrl = () => { 
@@ -363,7 +768,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   // Switch to dark mode if need be
   if (hasAlternateSentinel()) {
     toggleColorMode(true);
-  } 
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -385,7 +792,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -413,31 +837,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
