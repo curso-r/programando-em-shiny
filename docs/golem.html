@@ -539,21 +539,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Neste capítulo, vamos falar sobre como fazer o deploy do seu app feito em Golem em dois ambientes diferentes: no <a href="https://shinyapps.io">shinyapps.io</a> e em um servidor qualquer usando Docker.</p>
 <section id="deploy-com-shinyapps.io" class="level3" data-number="11.6.1">
 <h3 data-number="11.6.1" class="anchored" data-anchor-id="deploy-com-shinyapps.io"><span class="header-section-number">11.6.1</span> Deploy com shinyapps.io</h3>
-<p>Para subir um Shiny app para o shinyapps.io (veja a <a href="deploy.html#sec-deploy-shinyapps">Seção&nbsp;<span>9.1</span></a>), precisamos enviar o nosso arquivo <code>app.R</code></p>
+<p>Para subir um Shiny app para o shinyapps.io (veja a <a href="deploy.html#sec-deploy-shinyapps">Seção&nbsp;<span>9.1</span></a> para mais detalhes), precisamos enviar o script primário do nosso app<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, normalmente chamado de <code>app.R</code>, junto de todos os arquivos dos quais ele depende (outros scripts, bases de dados, imagens etc). A partir do RStudio, podemos fazer isso com alguns cliques a partir do botão Publish, disponível quando abrimos o arquivo <code>app.R</code>, ou a partir da função <code>rsconnect::rsconnect::deployApp()</code>, que consegue identificar esse script primário caso você não especifique para ela no argumento <code>appPrimaryDoc</code>.</p>
+<p>No entanto, dentro da estrutura do Golem não temos esse arquivo a princípio, já que todas as partes do app são construídas dentro de funções na pasta <code>R/</code>. O script <code>run_app.R</code> não pode ser considerado esse script primário pois a chamada da função <code>shiny::shinyApp()</code> está dentro da definição da função <code>run_app()</code>. O que fazer nesse caso?</p>
+<p>A solução é criar um arqruivo <code>app.R</code>. Podemos fazer isso usando a função <code>golem::add_shinyappsio_file()</code>. O arquivo será criado na pasta raiz do seu projeto e poderá ser utilizado como script primário do seu app, isto é, a partir dele você poderá usar o botão <code>Publish</code> e deverá subir para o shinyapps.io todos arquivos que constituem o seu app/pacote.</p>
+<p>Esse arquivo <code>app.R</code> vai conter a chamada das seguintes funções:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pkgload<span class="sc">::</span><span class="fu">load_all</span>()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">"golem.app.prod"</span> <span class="ot">=</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">run_app</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p><code>pkgload::load_all()</code> vai carregar o as funções definidas na pasta <code>R/</code>.</p></li>
+<li><p><code>options("golem.app.prod" = TRUE)</code> vai definir a variável de sistema <code>golem.app.prod</code> como <code>TRUE</code>. Isso é opcional e pode ser utilizado para criar versões diferentes de homologação ou produção para o seu app.</p></li>
+<li><p><code>run_app()</code>: roda o seu app, isto é, executa a função <code>shiny::shinyApp()</code>.</p></li>
+</ul>
+<p>Com esse arquivo criado, você também poderá utilizar normalmente a função <code>rsconnect::rsconnect::deployApp()</code> para fazer o deploy.</p>
 </section>
 <section id="deploy-com-docker" class="level3" data-number="11.6.2">
 <h3 data-number="11.6.2" class="anchored" data-anchor-id="deploy-com-docker"><span class="header-section-number">11.6.2</span> Deploy com Docker</h3>
+<p>O <a href="https://www.docker.com/">Docker</a> é um software código aberto para o desenvolvimento e a implantação de aplicações em containers<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>. Ao colocar o seu app em um container, você garante que o ambiente onde ele ficará hospedado, seja ele qual for, terá todas as dependências que ele precisa para funcionar e estará devidamente configurado para que as pessoas possam acessá-lo por meio de uma URL.</p>
+<p>Para <em>dockerizar</em> um app, precisamos criar um <code>Dockerfile</code>. Esse arquivo conterá todas as instruções necessárias para criar um container possuindo todas as dependências e configurações para hospedar o seu app. O pacote <code>golem</code> possui algumas funções para a criação desse arquivo:</p>
+<ul>
+<li><code>golem::add_dockerfile()</code>: adiciona um <code>Dockerfile</code> genérico, sem configurações para ambientes específicos.</li>
+<li><code>golem::add_dockerfile_shinyproxy()</code>: adiciona um <code>Dockerfile</code> com configurações específicas para o <a href="https://www.shinyproxy.io/">ShinyProxy</a>, uma solução código aberto para o deploy de aplicativos Shiny.</li>
+<li><code>golem::add_dockerfile_heroku()</code>: adiciona um <code>Dockerfile</code> com configurações específicas para o <a href="https://www.heroku.com/">Heroku</a>, um serviço para hospedagem de qualquer tipo de aplicação dockerizada.</li>
+</ul>
+<p>O <code>Dockerfile</code> será criado na pasta raiz do seu projeto. Para testá-lo localmente, caso você tenha o Docker instalado na sua máquina, basta rodar no <strong>Terminal</strong>:</p>
+<pre><code>docker build -t meuApp .
+docker run -p 8080:80 meuApp</code></pre>
+<p>Se você precisar trocar a configuração padrão do Shiny Server, crie um novo <code>shiny-server.conf</code> na pasta <code>inst/app</code> e insira a seguinte linha no <code>Dockerfile</code></p>
+<pre><code>COPY ./inst/app/shiny-server.conf /etc/shiny-server/shiny-server.conf</code></pre>
+<p>Além do ShinyProxy e do Heroku, você também pode subir o seu app dockerizado para plataformas como a AWS e o Google Cloud Engine.</p>
 </section>
 </section>
 <section id="exercícios" class="level2" data-number="11.7">
 <h2 data-number="11.7" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">11.7</span> Exercícios</h2>
-<p>Aplique o framework Golem no app disponibilizado <a href="https://curso-r.github.io/main-dashboards-2/exercicios/03-golem/app.R">neste link</a>. Ele utiliza a base de dados Pokemon, que pode ser baixada <a href="https://curso-r.github.io/main-dashboards-2/dados/pkmn.rds">clicando aqui</a>.</p>
-<ul>
+<ol type="1">
+<li><p>Quais são as vantagens de se usar o Golem?</p></li>
+<li><p>Qual a diferença entre usar Golem e usar apenas módulos?</p></li>
+<li><p>Podemos seguir o framework Golem sem usar o pacote <code>golem</code>. Verdadeiro ou falso?</p></li>
+<li><p>Em qual arquivo na estrutura de um pacote R definimos as suas dependências?</p></li>
+<li><p>Aplique o framework Golem no app disponibilizado <a href="https://curso-r.github.io/main-dashboards-2/exercicios/03-golem/app.R">neste link</a>. Ele utiliza a base de dados Pokemon, que pode ser baixada <a href="https://curso-r.github.io/main-dashboards-2/dados/pkmn.rds">clicando aqui</a>. Além disso,</p></li>
+</ol>
+<ol type="a">
 <li><p>Transforme o shinydashboard em Bs4Dash: construa ao menos a UI do zero.</p></li>
 <li><p>Modularize o app (cada página do dashboard deve ser um módulo diferente).</p></li>
 <li><p>Refaça os gráficos utilizando alguma biblioteca javascript (plotly, echarts, highcharts etc)</p></li>
 <li><p>Faça o deploy do app para o shinyapps.io</p></li>
-</ul>
+</ol>
 
 
 </section>
@@ -566,6 +599,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li id="fn4"><p>Isso é feito automaticamente pelo <code>roxygen2</code> a partir da documentação das funções. Não edite esse arquivo na mão.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>Isto é, você não precisa incluir <code>inst/app/</code> no caminho do arquivo. Por exemplo, se você quiser colocar a imagem <code>inst/app/www/imagem.png</code> no seu app, basta usar o caminho <code>www/imagem.png</code>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>Podemos criar versões diferentes do app que serão executadas a depender dos parâmetros passados na função <code>run_app()</code>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>O arquivo com a chamada da função <code>shiny::shinyApp()</code> no final.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Containers são uma unidade padrão de software que empacota um código e suas dependências de tal forma que a aplicação possa rodar de maneira confiável independentemente do ambiente computacional. Leia mais <a href="https://www.docker.com/resources/what-container/">aqui</a>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

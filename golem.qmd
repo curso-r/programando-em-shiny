@@ -269,14 +269,45 @@ Com esse arquivo criado, você também poderá utilizar normalmente a função `
 
 ### Deploy com Docker
 
+O [Docker](https://www.docker.com/) é um software código aberto para o desenvolvimento e a implantação de aplicações em containers^[Containers são uma unidade padrão de software que empacota um código e suas dependências de tal forma que a aplicação possa rodar de maneira confiável independentemente do ambiente computacional. Leia mais [aqui](https://www.docker.com/resources/what-container/).]. Ao colocar o seu app em um container, você garante que o ambiente onde ele ficará hospedado, seja ele qual for, terá todas as dependências que ele precisa para funcionar e estará devidamente configurado para que as pessoas possam acessá-lo por meio de uma URL.
+
+Para *dockerizar* um app, precisamos criar um `Dockerfile`. Esse arquivo conterá todas as instruções necessárias para criar um container possuindo todas as dependências e configurações para hospedar o seu app. O pacote `golem` possui algumas funções para a criação desse arquivo:
+
+- `golem::add_dockerfile()`: adiciona um `Dockerfile` genérico, sem configurações para ambientes específicos.
+- `golem::add_dockerfile_shinyproxy()`: adiciona um `Dockerfile` com configurações específicas para o [ShinyProxy](https://www.shinyproxy.io/), uma solução código aberto para o deploy de aplicativos Shiny.
+- `golem::add_dockerfile_heroku()`: adiciona um `Dockerfile` com configurações específicas para o [Heroku](https://www.heroku.com/), um serviço para hospedagem de qualquer tipo de aplicação dockerizada.
+
+O `Dockerfile` será criado na pasta raiz do seu projeto. Para testá-lo localmente, caso você tenha o Docker instalado na sua máquina, basta rodar no **Terminal**:
+
+```
+docker build -t meuApp .
+docker run -p 8080:80 meuApp
+```
+
+Se você precisar trocar a configuração padrão do Shiny Server, crie um novo `shiny-server.conf` na pasta `inst/app` e insira a seguinte linha no `Dockerfile`
+
+```
+COPY ./inst/app/shiny-server.conf /etc/shiny-server/shiny-server.conf
+```
+
+Além do ShinyProxy e do Heroku, você também pode subir o seu app dockerizado para plataformas como a AWS e o Google Cloud Engine.
+
 ## Exercícios
 
-Aplique o framework Golem no app disponibilizado [neste link](https://curso-r.github.io/main-dashboards-2/exercicios/03-golem/app.R). Ele utiliza a base de dados Pokemon, que pode ser baixada [clicando aqui](https://curso-r.github.io/main-dashboards-2/dados/pkmn.rds).
+1. Quais são as vantagens de se usar o Golem?
 
-- Transforme o shinydashboard em Bs4Dash: construa ao menos a UI do zero.
+2. Qual a diferença entre usar Golem e usar apenas módulos?
 
-- Modularize o app (cada página do dashboard deve ser um módulo diferente).
+3. Podemos seguir o framework Golem sem usar o pacote `golem`. Verdadeiro ou falso?
 
-- Refaça os gráficos utilizando alguma biblioteca javascript (plotly, echarts, highcharts etc)
+4. Em qual arquivo na estrutura de um pacote R definimos as suas dependências?
 
-- Faça o deploy do app para o shinyapps.io
+5. Aplique o framework Golem no app disponibilizado [neste link](https://curso-r.github.io/main-dashboards-2/exercicios/03-golem/app.R). Ele utiliza a base de dados Pokemon, que pode ser baixada [clicando aqui](https://curso-r.github.io/main-dashboards-2/dados/pkmn.rds). Além disso,
+
+a) Transforme o shinydashboard em Bs4Dash: construa ao menos a UI do zero.
+
+b) Modularize o app (cada página do dashboard deve ser um módulo diferente).
+
+c) Refaça os gráficos utilizando alguma biblioteca javascript (plotly, echarts, highcharts etc)
+
+d) Faça o deploy do app para o shinyapps.io
