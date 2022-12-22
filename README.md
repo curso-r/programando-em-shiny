@@ -141,7 +141,7 @@ Você também precisará:
 
 [^2]: Infelizmente seria muito trabalhoso e caro fazer isso com todos.
 
-[^3]: *Você nunca andará sozinho*, lema do Liverpool Football Club, um
+[^3]: *Você nunca andará sozinha/sozinho*, lema do Liverpool Football Club, um
     dos times mais populares da Inglaterra. A frase teve origem na
     música de mesmo nome composta por Richard Rodgers e Oscar
     Hammerstein em 1945, considerada hino do clube inglês.
