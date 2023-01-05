@@ -252,5 +252,373 @@ Normalmente aplicamos a ela atributos que vão definir o estilo de parte ou de t
 
 ## CSS {#alemCSS}
 
+CSS (*Cascading Style Sheets*) é uma **linguagem de folha de estilo** utilizada para formatar páginas Web. Com CSS, podemos controlar a cor, fonte, tamanho do texto, espaçamento entre elementos, cores e imagens de fundo, a maneira como os elementos são mostrados na página a depender dos diferentes tamanhos de tela e muito mais!
+
+O objetivo de uma linguagens de folha de estilo é separar a formatação e a estrutura de um documento, permitindo que sejam construídos isoladamente, mas os unindo a partir de algum tipo de **ligação**. Veremos adiante como isso se dá no HTML.
+
+> A palavra *Cascading* (cascata)  significa que um estilo aplicado a um elemento pai também é aplicado a todos os elementos filhos, o que é uma característica importante devido à hierarquia de elementos do HTML.
+
+A seguir, apresentaremos os conceitos básicos para aplicar CSS a um documento HTML.
+
+### Regras CSS
+
+Para aplicar estilo a um elemento HTML usando CSS, devemos escrever uma **regra**. A seguir, temos uma **regra** CSS que define a cor dos parágrafos (o conteúdo dos elementos `<p>`) como azul e o tamanho da fonte como 12px.
+
+```{html}
+p {
+  color: blue;
+  font-size: 12px
+}
+```
+
+No código:
+
+- `p` é chamado de **seletor**, isto é, a definição dos elementos aos quais o estilo será aplicado
+
+- `color: blue;` e `font-size: 12px` são chamadas de **declarações**, que define o estilo a ser aplicado
+
+- `color` e `font-size` dentro de cada declaração são chamados de **propriedades**, isto é, a característica de cada elemento que será alterada.
+
+- já `blue` e `12px` são os **valores** atribuídos a cada propriedade.
+
+Para aplicar essa regra, podemos inserir esse código em um documento HTML de 3 maneiras:
+
+- em linha (*inline*), dentro do elemento HTML, usando o atributo `style`;
+
+- interno (*internal*), dentro do documento HTML, mas fora dos elementos, usando a tag `<style>` dentro da seção `<head>`;
+
+- externo (*external*), em um arquivo externo, usando a tag `<link>` na seção `<head>` para apontar para um arquivo CSS.
+
+O jeito mais comum de adicionar CSS ao HTML é utilizando um arquivo CSS externo, mas veremos aqui como utilizar as três formas.
+
+### CSS inline
+
+O CSS inline é utilizado para aplicar estilo a um único elemento HTML. Fazemos isso usando o atributo `style` do elemento.
+
+```{html}
+<p style = "color: blue;"> Esse texto terá a cor azul. </p>
+```
+
+Veja que neste caso não precisamos declarar um seletor.
+
+### CSS interno
+
+Um CSS interno é utilizado para definir estilo para os elementos de uma única página HTML. Ele é definido na seção `<head>`, dentro de uma tag `<style>`.
+
+```{html}
+<html>
+  <head>
+    <style>
+        h1 {
+          color: red;
+        }
+        p {
+          color: blue;
+        }
+    </style>
+  </head>
+  <body>
+    <h1> Esse título terá a cor vermelha </h1>
+    <p> Esse texto terá a cor azul </p>
+  </body>
+</html>
+```
+
+
+### CSS externo
+
+Um arquivo CSS externo é utilizado para definir o estilo de várias páginas HTML. Para associar um arquivo CSS a uma página HTML, usamos a tag `<link>` na seção `<head>`. 
+
+A tag `<link>` é utilizada para estabelecer uma relação entre o arquivo HTML e um arquivo externo. O atributo `href` recebe o caminho para o arquivo externo (nosso arquivo CSS) e o atributo `rel` estabele qual o tipo de relação entre os arquivos.
+
+```{html}
+<!--Arquivo CSS-->
+h1 {
+  color: red;
+}
+
+<!--Arquivo HTML-->>
+<html>
+  <head>
+    <link rel="stylesheet" href="custom.css">
+  </head>
+</html>
+```
+
+### Cores
+
+Para alterar cores, utilizamos as propriedades `color` e `background-color`.
+
+```{html}
+p {
+  color: white;
+}
+
+h1, h2 {
+  color: blue;
+}
+
+body {
+  background-color: black
+}
+```
+
+**Nota**: repare que você pode selecionar um grupo de elementos separando cada seletor por uma vírgula (`h1, h2`).
+
+### Tamanho da fonte
+
+Para alterar o tamanho da fonte, utilizamos a propriedade `font-size`.
+
+```{html}
+p {
+  font-size: 10px;
+}
+
+h1 {
+  font-size: 12pt;
+}
+```
+
+
+### Fontes
+
+Para alterar a fonte do texto, utilizamos a propriedade `font-family`.
+
+```{html}
+p {
+  font-family: "Times New Roman", Times, serif;
+}
+
+p {
+  font-family: Arial, Helvetica, sans-serif;
+}
+```
+
+**Nota**:  você pode especificar mais de uma fonte em uma declaração, o que é útil para garantir que pelo menos uma das fontes especificadas esteja instalada no navegador de quem acessar a página HTML. A preferência é da esquerda para a direita.
+
+**Recomendação**: leia as [seções sobre fonte do W3Schools](https://www.w3schools.com/css/css_font.asp).
+
+Para importar uma fonte do Google fontes, basta utilizar o elemento `<link rel = "stylesheet">` passando o link da fonte no atributo `href`. 
+
+```{html}
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+  <style>
+  body {
+    font-family: "Sofia", sans-serif;
+  }
+  </style>
+</head>
+```
+
+Link para a fonte Sofia: https://fonts.google.com/specimen/Sofia?query=sofia
+
+### Bordas
+
+Para definir uma borda a um elemento, utilizamos a propriedade `border`.
+
+```{htlm}
+h1 {
+  border: 1px solid black;
+}
+```
+
+- O valor `1px` se refere à espessura da borda.
+
+- O valor `solid` se refere ao estilo da borda.
+
+- O valor `black` se refere à cor da borda.
+
+**Nota**: você pode definir uma borda para quase todos os elementos HTML.
+
+### Classes
+
+Elementos HTML possuem um atributo `class` que pode ser utilizado como seletor em declarações CSS.
+
+```{html}
+<!-- HTML -->
+<p class = "azul">Este parágrafo ficará azul</p>
+<p>Este parágrafo não ficará azul</p>
+
+<!-- CSS -->
+.azul {
+  color: blue;
+}
+
+```
+
+Repare que para usar uma classe como seletor, colocamos um `.` antes do nome da classe.
+
+**Nota**: elementos HTML podem ter mais de uma classe. Múltiplas classes são separadas por um espaço. Uma mesma classe pode ser utilizada em mais de um elemento HTML.
+
+### Ids
+
+Elementos HTML possuem um atributo `id` que pode ser utilizado como seletor em declarações CSS. Ao contrário das classes, o id deve ser único dentro do documento HTML, isto é, dois elementos HTML não devem ter o mesmo id.
+
+```{html}
+<!-- HTML -->
+<p id = "paragrafoAzul">Este parágrafo ficará azul</p>
+<p>Este parágrafo não ficará azul</p>
+
+<!-- CSS -->
+#paragrafoAzul {
+  color: blue;
+}
+
+```
+
+Repare que para usar um id como seletor, colocamos um `#` antes do nome do id.
+
+### Especificidade
+
+Quando mais de uma declaração afeta um elemento HTML, utilizaremos as regras a seguir para definir a especificidade de um seletor:
+
+1. Se o estilo é inline (+1000)
+2. Se o seletor é um id (+100)
+3. Se o seletor é uma classe (+10)
+4. Se o seletor é um elemento (+1)
+
+**Nota**: saiba mais sobre **especificidade** [neste artigo da W3Schools](https://www.w3schools.com/css/css_specificity.asp) em inglês ou [neste artigo](https://tipscode.com.br/especificidade-css-5-coisas-que-voce-precisa) em português.
+
+### Margem
+
+Margens são utilizadas para criar espaço em branco entre elementos HTML.
+
+```{html}
+p {
+  margin: 1px 2px 4px 3px;
+}
+
+p {
+  margin-top: 1px;
+  margin-right: 2px;
+  margin-bottom: 4px;
+  margin-left: 3px;
+}
+```
+
+As duas regras CSS acima são equivalentes.
+
+### Padding
+
+A propriedade `padding` é utilizada para criar espaço ao redor do conteúdo de um elemento, dentro de qualquer borda definida.
+
+```{html}
+p {
+  padding: 1px 2px 4px 3px;
+}
+
+p {
+  padding-top: 1px;
+  padding-right: 2px;
+  padding-bottom: 4px;
+  padding-left: 3px;
+}
+```
+
+As duas regras CSS acima são equivalentes.
+
+### Box model
+
+O *box model* do CSS é essencialmente uma caixa que envolve todos os elementos HTML. Ele consiste de uma margem, uma borda, *padding* e o próprio conteúdo do elemento.
+
+A imagem abaixo ilustra o *box model*:
+
+```{r, out.width="84%", echo = FALSE}
+knitr::include_graphics("img/box_model.png")
+```
+
+### Display
+
+A propriedade `display` especifica se e como um elemento HTML é exibido na tela.
+
+Todo elemento HTML tem um valor padrão para essa propriedade. O valor padrão do `display` para a maioria dos elementos é `block` (em bloco) ou `inline` (em linha). Utilizando essa propriedade, podemos fazer uma `<div>` em linha ou um `<img>` em bloco.
+
+```{html}
+#divInline {
+  display: inline
+}
+
+#imgBlock {
+  display: block;
+}
+```
+
+
+**Nota**: também é possível atribuir o valor `none` a essa proprieda, fazendo com que o elemento não seja mostrado na tela. Isso é utilizado com JavaScript para mostrar/esconder elementos.
+
+### Posicionamento
+
+A propriedade `position` define que tipo de posicionamento será usado em um elemento HTML.
+
+As principais opções são:
+
+- `static`, elementos são renderizados na ordem que eles aparecem no documento HTML (valor padrão)
+
+- `relative`, os elementos são posicionados relativamente a sua posição normal, permitindo o ajuste do elemento a partir de `offsets`
+
+- `absolute`, os elementos são posicionados relativamente ao seu primeiro elemento ancestral com `position` diferente de `static`
+
+- `fixed`, os elementos são posicionados relativamente à janela do navegador
+
 ## JavaScript
+
+### Inserindo JavaScript em seu app
+
+### Acessando inputs via JavaScript
+
+## Exercícios
+
+1 - O que são elementos HTML?
+
+___
+
+2 - Para que serve a seção `<head>` de um código HTML?
+
+___
+
+3 - Conserte o erro do código HTML abaixo:
+
+```{html}
+<p> Para acessar a loja, basta clicar <a href = "https://loja.curso-r.com">neste link</p></a>
+```
+
+___
+
+4 - Qual a diferença entre as tags `<div>` e `<span>`?
+
+___
+
+5 - Ao que se refere o termo *cascading* da sigla CSS?
+
+___
+
+6 - Qual a ordem de precedência com relação ao local onde CSS pode ser colocado (inline, interno, externo)?
+
+___
+
+7 - O que é o *box model* no CSS?
+
+___
+
+8 - Segundo o código CSS abaixo, a caixa azul vai aparecer sobre o fundo amarelo ou rosa? E a caixa laranja?
+
+```{html}
+<div style = "position: relative;">
+  <div style = "height: 100px; background-color: yellow;"></div>
+  <div style = "height: 100px; background-color: pink;">
+    <div style = "height: 40px; width: 10%; background-color: blue;">
+      Caixa azul
+    </div>
+    <div style = "height: 40px; width: 10%; background-color: orange; position: absolute; top: 0px;">
+      Caixa laranja
+    </div>
+  </div>
+</div>
+```
+
+___
+
+9 - Reproduza a página HTML contida [neste link](https://curso-r.github.io/main-dashboards-2/exercicios/04-html-css/harry_potter/index.html). Sinta-se livre para deixar o visual da página da sua maneira.
+
 
