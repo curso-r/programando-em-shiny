@@ -345,7 +345,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#display" id="toc-display" class="nav-link" data-scroll-target="#display"><span class="toc-section-number">12.2.15</span>  Display</a></li>
   <li><a href="#posicionamento" id="toc-posicionamento" class="nav-link" data-scroll-target="#posicionamento"><span class="toc-section-number">12.2.16</span>  Posicionamento</a></li>
   </ul></li>
-  <li><a href="#javascript" id="toc-javascript" class="nav-link" data-scroll-target="#javascript"><span class="toc-section-number">12.3</span>  JavaScript</a></li>
+  <li><a href="#javascript" id="toc-javascript" class="nav-link" data-scroll-target="#javascript"><span class="toc-section-number">12.3</span>  JavaScript</a>
+  <ul class="collapse">
+  <li><a href="#inserindo-javascript-em-seu-app" id="toc-inserindo-javascript-em-seu-app" class="nav-link" data-scroll-target="#inserindo-javascript-em-seu-app"><span class="toc-section-number">12.3.1</span>  Inserindo JavaScript em seu app</a></li>
+  <li><a href="#acessando-inputs-via-javascript" id="toc-acessando-inputs-via-javascript" class="nav-link" data-scroll-target="#acessando-inputs-via-javascript"><span class="toc-section-number">12.3.2</span>  Acessando inputs via JavaScript</a></li>
+  </ul></li>
   <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="toc-section-number">12.4</span>  Exercícios</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/html-css-js.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
@@ -848,6 +852,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="javascript" class="level2" data-number="12.3">
 <h2 data-number="12.3" class="anchored" data-anchor-id="javascript"><span class="header-section-number">12.3</span> JavaScript</h2>
+<p>O JavaScript (JS) é uma linguagem de programação criada para a Web. Ele foi criado em apenas 10 dias, em 1995, por uma única pessoa, Brendan Eich. Ele foi inicialmente chamado LiveScript, mas como a linguagem Java era popular na época, o nome mudou para JavaScript, embora as duas linguagens não tenham nenhuma relação uma com a outra.</p>
+<p>O papel do JavaScript é possibilitar interatividade em páginas Web. Enquanto o HTML e o CSS apenas ditam como esse conteúdo será apresentada na tela, códigos JavaScript geram comportamentos disparados por ações da pessoa acessando a pagina.</p>
+<p>O código JS é colocado junto ao HTML e interpretado pelo navegador. Todo navegador moderno possui um interpretador de JavaScript, você pode testar isso acessando as “Ferramentas de desenvolvedor” do seu navegador e clicando na aba “Console”. O terminal apresentado será um interpretador JavaScript.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/console_js.png" class="img-fluid figure-img" width="1511"></p>
+<p></p><figcaption class="figure-caption">Interpretador JavaScript no Google Chrome.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Nesta seção, não faremos uma introdução formal ao JavaScript, pois qualquer tentativa seria incompleta ou muito extensa para o escopo desse livro. Além disso, existe bastante conteúdo introdutório e gratuito sobre JavaScript disponível na internet. O que abordaremos aqui será, dado algum conhecimento prévio da linguagem, como utilizar o JavaScript dentro do Shiny. Começaremos mostrando como inserir um código feito em JS no seu Shiny app e, em seguida, como acessar valores dos inputs do app dentro de um código JavaScript.</p>
+<section id="inserindo-javascript-em-seu-app" class="level3" data-number="12.3.1">
+<h3 data-number="12.3.1" class="anchored" data-anchor-id="inserindo-javascript-em-seu-app"><span class="header-section-number">12.3.1</span> Inserindo JavaScript em seu app</h3>
+</section>
+<section id="acessando-inputs-via-javascript" class="level3" data-number="12.3.2">
+<h3 data-number="12.3.2" class="anchored" data-anchor-id="acessando-inputs-via-javascript"><span class="header-section-number">12.3.2</span> Acessando inputs via JavaScript</h3>
+</section>
 </section>
 <section id="exercícios" class="level2" data-number="12.4">
 <h2 data-number="12.4" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">12.4</span> Exercícios</h2>
