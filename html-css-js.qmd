@@ -577,6 +577,161 @@ Nesta seção, não faremos uma introdução formal ao JavaScript, pois qualquer
 
 ### Inserindo JavaScript em seu app
 
+Para inserir um código JavaScript em um arquivo HTML, utilizamos o elemento `<script></script>`. Podemos escrever diretamente o código JavaScript dentro desse elemento ou ler o código de um arquivo externo definido pelo atributo `src`. Os dois exemplos abaixo são equivalentes e mudam para vermelho a cor do primeiro parágrafo.
+
+```{html}
+# Definindo o código diretamente no HTML
+<!DOCTYPE html>
+<html>
+  <body>
+    <p id = "alvo">
+      Parágrafo 1
+    </p>
+    <p>
+      Parágrafo 2
+    </p>
+    <button onClick = "deixarVermelho()">
+      Deixar vermelho
+    </button>
+    <script>
+      deixarVermelho = function() {
+        document.getElementById("alvo").style = "color: red";
+      }
+    </script>
+  </body>
+</html>
+
+  
+# Importanto o código de um arquivo JS
+
+# HTML
+<!DOCTYPE html>
+<html>
+  <body>
+    <p id = "alvo">
+      Parágrafo 1
+    </p>
+    <p>
+      Parágrafo 2
+    </p>
+    <button onClick = "deixarVermelho()">
+      Deixar vermelho
+    </button>
+    <script src = "script.js"></script>
+  </body>
+</html>
+
+# JS (script.js)
+deixarVermelho = function() {
+  document.getElementById("alvo").style = "color: red";
+}
+
+```
+
+
+O código JS nesse exemplo define uma função que muda o atributo `style` do elemento com id `alvo`. Essa função é chamada sempre que o botão é clicado. Isso acontece porque associamos a função ao evento `onClick` do botão.
+
+Em um aplicativo Shiny, o procedimento é equivalente. A grande diferença é que o arquivo `script.js` deve estar dentro da pasta `www/` para ser acessado pelo navegador.
+
+```{r, eval = FALSE}
+
+# Definiindo o código JS diretamente na UI
+library(shiny)
+
+ui <- fluidPage(
+  tags$p("Parágrafo 1", id = "alvo"),
+  tags$p("Parágrafo 2"),
+  tags$button(onClick = "deixarVermelho()", "Deixar vermelho"),
+  tags$script(
+    'deixarVermelho = function() {
+      document.getElementById("alvo").style = "color: red";
+    }'
+  )
+)
+
+server <- function(input, output, session) {
+
+}
+
+shinyApp(ui, server)
+
+
+# Definindo o código JS em um arquivo externo (www/script.js)
+library(shiny)
+
+ui <- fluidPage(
+  tags$p("Parágrafo 1", id = "alvo"),
+  tags$p("Parágrafo 2"),
+  tags$button(onClick = "deixarVermelho()", "Deixar vermelho"),
+  tags$script(src = "script.js")
+)
+
+server <- function(input, output, session) {
+
+}
+
+shinyApp(ui, server)
+```
+
+Um ponto de atenção sobre a utilização de códigos JS em documentos HTML é a posição onde eles são definidos dentro do documento. Como o HTML é interpretado pelo navegador na ordem em que o código foi escrito, se um elemento `<script>` utilziar elementos que ainda não foram criados, o código JS não vai funcionar. 
+
+No exemplo anterior, poderíamos definir o código JavaScript em qualquer lugar do script pois ele define uma função que só será usada quando o botão for clicado. No exemplo a seguir, o código JavaScript pinta de vermelho todos os parágrafos com classe `vermelho`. Para que isso seja possível, o elemento `script` deve vir após a criação dos elementos `p`. Se estivesse definido antes dos elementos `p`, nenhum parágrafo ficaria vermelho.
+
+
+```{r, eval = FALSE}
+# Os parágrafos 1, 3 e 5 ficam com cor vermelha
+library(shiny)
+
+ui <- fluidPage(
+  tags$p("Parágrafo 1", class = "vermelho"),
+  tags$p("Parágrafo 2"),
+  tags$p("Parágrafo 3", class = "vermelho"),
+  tags$p("Parágrafo 4"),
+  tags$p("Parágrafo 5", class = "vermelho"),
+  tags$script(
+    'document.getElementsByClassName("vermelho").forEach(
+      function(paragrafo) {
+        paragrafo.style = "color: red"
+      }
+    )'
+  )
+)
+
+server <- function(input, output, session) {
+
+}
+
+shinyApp(ui, server)
+
+
+# Nenhum parágrafo fica vermelho pois o código JS
+# vem antes da criação do parágrafo
+library(shiny)
+
+ui <- fluidPage(
+   tags$script(
+    'document.getElementsByClassName("vermelho").forEach(
+      function(paragrafo) {
+        paragrafo.style = "color: red"
+      }
+    )'
+  ),
+  tags$p("Parágrafo 1", class = "vermelho"),
+  tags$p("Parágrafo 2"),
+  tags$p("Parágrafo 3", class = "vermelho"),
+  tags$p("Parágrafo 4"),
+  tags$p("Parágrafo 5", class = "vermelho")
+)
+
+server <- function(input, output, session) {
+
+}
+
+shinyApp(ui, server)
+```
+
+
+
 ### Acessando inputs via JavaScript
 
 ## Exercícios
