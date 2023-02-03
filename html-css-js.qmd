@@ -732,7 +732,69 @@ shinyApp(ui, server)
 
 
 
-### Acessando inputs via JavaScript
+### Interagindo com inputs via JavaScript
+
+Nesta seção, vamos discutir como interagir os inputs do Shiny a partir do JavaScript. Vamos fazer isso de duas maneiras: acessando o valor de inputs criados pela UI e criar novos inputs via JavaScript.
+
+Para acessar o valor de um input criado na UI do Shiny a partir do JavaScript precisamos primeiro saber qual elemento HTML representa esse input. No caso de um `selectInput` com `inputId = seletor`, por exemplo, estamos criando no HTML um elemento `<select id = "seletor">`. Então, se quisermos acessar o valor desse input via JS, basta buscarmos por esse elemento e extrair o seu valor.
+
+No exemplo a seguir, constuimos um app que permite trocar a cor do texto apresentado a partir de um `selectInput`. Essa troca é feita apenas no navegador, a partir de um código JavaScript. Tente rodar o app para testar testar esse comportamento.
+
+```{r, eval = FALSE}
+# app.R
+library(shiny)
+
+ui <- fluidPage(
+  h1("JavaScript", align = "center"),
+  hr(),
+  selectInput(
+    inputId = "cor_do_texto",
+    label = "Selecione a cor do texto",
+    choices = c("black", "red", "orange", "purple", "blue", "green")
+  ),
+  br(),
+  p("JavaScript (frequentemente abreviado como JS) é uma linguagem de
+    programação interpretada estruturada, de script em alto nível com tipagem
+    dinâmica fraca e multiparadigma (protótipos, orientado a objeto,
+    imperativo e funcional). Juntamente com HTML e CSS, o JavaScript é
+    uma das três principais tecnologias da World Wide Web. JavaScript
+    permite páginas da Web interativas e, portanto, é uma parte essencial
+    dos aplicativos da web. A grande maioria dos sites usa, e todos os
+    principais navegadores têm um mecanismo JavaScript dedicado para
+    executá-lo."),
+  p("É atualmente a principal linguagem para programação client-side em
+    navegadores web. É também bastante utilizada do lado do servidor através
+    de ambientes como o node.js."),
+  tags$script(src = "script.js")
+)
+
+server <- function(input, output, session) {
+
+}
+
+shinyApp(ui, server)
+```
+
+
+```{js}
+# www/script.js
+var select = document.getElementById("cor_do_texto");
+
+select.onchange = function() {
+  var paragrafos = document.getElementsByTagName("p");
+  for (var i = 0; i < paragrafos.length; i++) {
+    paragrafos[i].style = "color: " + select.value + ";";
+  }
+}
+```
+
+O código JavaScript utilizado busca no HTML o elemento que representa o `selectInput` a partir do seu Id e atribui a ele uma função que será executada sempre que o valor desse `select` mudar. A função busca por todas as tags `p` do HTML e utiliza o valor do `select` para alterar a cor do texto. Esse valor é acessado via a propriedade `value` do objeto `select`.
+
+Como exercício, tente refazer esse exemplo sem usar o JavaScript, usando no lugar um `renderUI` na função `server`.
+
+A partir do JavaScript, também podemos criar novos inputs e acessá-los no servidor.
+
+
 
 ## Exercícios
 
