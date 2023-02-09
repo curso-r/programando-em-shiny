@@ -18,7 +18,6 @@ function getBrowserName() {
 }
 
 $(document).on("shiny:sessioninitialized", function() {
-  console.log(Shiny.setInputValue);
   Shiny.setInputValue("browser", getBrowserName());
 });
 

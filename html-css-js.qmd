@@ -731,7 +731,6 @@ shinyApp(ui, server)
 ```
 
 
-
 ### Interagindo com inputs via JavaScript
 
 Nesta seção, vamos discutir como interagir os inputs do Shiny a partir do JavaScript. Vamos fazer isso de duas maneiras: acessando o valor de inputs criados pela UI e criar novos inputs via JavaScript.
@@ -792,9 +791,65 @@ O código JavaScript utilizado busca no HTML o elemento que representa o `select
 
 Como exercício, tente refazer esse exemplo sem usar o JavaScript, usando no lugar um `renderUI` na função `server`.
 
-A partir do JavaScript, também podemos criar novos inputs e acessá-los no servidor.
+A partir do JavaScript, também podemos criar novos inputs e acessá-los no servidor. Para isso, usamos o método `Shiny.setInputValue(idName, value)` em nosso código JavaScript. O app abaixo apresenta uma mensagem na tela informando qual navegador está sendo usado para acessá-lo. Veja que o `input$browser` não é definido na UI, mas sim dentro do código JavaScript.
 
 
+```{r, eval = FALSE}
+# app.R
+library(shiny)
+
+ui <- fluidPage(
+  tags$script(src = "script.js"),
+  textOutput("mensagem")
+)
+
+server <- function(input, output, session) {
+
+  output$mensagem <- renderText({
+    print(input$browser)
+    glue::glue("Olá! Você está usando o navegador {input$browser}!")
+  })
+
+}
+
+shinyApp(ui, server)
+```
+
+```{js}
+// www/script.js
+function getBrowserName() {
+  let browserInfo = navigator.userAgent;
+  let browser;
+  if (browserInfo.includes('Opera') || browserInfo.includes('Opr')) {
+    browser = 'Opera';
+  } else if (browserInfo.includes('Edg')) {
+    browser = 'Edge';
+  } else if (browserInfo.includes('Chrome')) {
+    browser = 'Chrome';
+  } else if (browserInfo.includes('Safari')) {
+    browser = 'Safari';
+  } else if (browserInfo.includes('Firefox')) {
+    browser = 'Firefox';
+  } else {
+    browser = 'unknown';
+  }
+    return browser;
+}
+
+$(document).on("shiny:sessioninitialized", function() {
+  Shiny.setInputValue("browser", getBrowserName());
+});
+
+
+```
+
+A primeira parte do código JavaScript define uma função chamada `getBrowserName()`, que identifica qual o navegador está sendo utilizado. A segunda parte define uma função anônima que será executada assim que a sessão do Shiny for inicializada. Essa função cria o input `browser` com o valor retornado pela função `getBrowserName()`.
+
+O objeto `Shiny` possui vários outros métodos para interagirmos com a sessão do Shiny via JavaScript. Recomendamos a leitura dos artigos a seguir para mais informações de como utilizá-lo:
+
+- [Comunicando-se com o Shiny via JS](https://shiny.rstudio.com/articles/communicating-with-js.html)
+
+- [Eventos JS no Shiny](https://shiny.rstudio.com/articles/js-events.html)
 
 ## Exercícios
 
@@ -849,5 +904,9 @@ ___
 ___
 
 9 - Reproduza a página HTML contida [neste link](https://curso-r.github.io/main-dashboards-2/exercicios/04-html-css/harry_potter/index.html). Sinta-se livre para deixar o visual da página da sua maneira.
+
+___
+
+10 - Em um app Shiny, para que serve o método JS `Shiny.setInputValue(idName, value)`?
 
 
