@@ -6,11 +6,11 @@ knitr::opts_chunk$set(
 
 # HTML, CSS e JavaScript {#sec-html-css-js}
 
-Um dos pontos fortes do Shiny é nos permitir construir aplicações web sem precisarmos saber programar em HTML, CSS e JavaScript. Com as funções disponíveis no pacote `shiny` e nos diversos pacotes feitos pela comunidade Shiny, já conseguimos produzir aplicativos bonitos e complexos.
+Um dos pontos fortes do Shiny é nos permitir construir aplicações web sem precisarmos saber programar em HTML, CSS e JavaScript. Com as funções disponíveis no pacote `shiny` e nos diversos pacotes feitos pela comunidade Shiny, já conseguimos produzir aplicativos complexos e bonitos.
 
-No entanto, conhecer ao menos o básico dessas linguagens nos permite ir além do que existe nos pacotes disponíveis e construir as nossas próprias ferramentas ou customizar nossos apps da maneira que quisermos. Também nos permite entender melhor como o Shiny funciona, o que facilita a tarefa de programar os nossos apps.
+No entanto, conhecer mesmo o básico dessas linguagens nos permite ir além do que existe nos pacotes disponíveis e customizar nossos apps da maneira que quisermos. Também nos permite entender melhor como o Shiny funciona, o que facilita a tarefa de programar os nossos apps.
 
-Neste capítulo, vamos apresentar os conceitos básicos de HTML e CSS com o objetivo de ter uma boa base para continuar aprendendo essas linguagens. Também mostraremos como inserir códigos JavaScript em nossos apps a partir de alguns exemplos. Não faremos uma introdução formal dessa linguagem aqui.
+Neste capítulo, vamos apresentar os conceitos básicos de HTML e CSS mais importantes para o Shiny, criando uma boa base para continuar aprendendo essas linguagens posteriormente. Também mostraremos como inserir códigos JavaScript em nossos apps a partir de alguns exemplos, mas não faremos uma introdução formal dessa linguagem aqui.
 
 ## HTML
 
@@ -26,16 +26,16 @@ Nas seções a seguir, apresentamos os conceitos básicos da linguagem. São tr�
 
 - e conhecer a nomenclatura da linguagem, o que vai facilitar bastante quando for preciso pesquisar por algo na internet.
 
-### Tags
+### Tags {-}
 
-A maior parte do esforço em aprender uma linguagem de marcação está em aprender quais são e como utilizar as instruções de formatação, os seus **marcadores**. Os marcadores no caso do HTML são as **tags**. As tags podem ser de abertura ou de fechamento, tendo a seguinte sintaxe
+A maior parte do esforço em aprender uma linguagem de marcação está em aprender quais são e como utilizar as instruções de formatação, os seus **marcadores**. Os marcadores no HTML são as **tags**. Elas podem ser de abertura ou de fechamento e possuem a seguinte sintaxe:
 
-```
-<nome_da_tag>
-</nome_da_tag>
-```
 
-### Elemento HTML
+**Tag de abertura**: `<nome_da_tag>`
+
+**Tag de fechamento**: `</nome_da_tag>`
+
+### Elemento HTML {-}
 
 As tags no HTML definem os chamados **elementos HTML**. Um elemento HTML é composto por uma **tag de abertura**, algum **conteúdo** e uma **tag de fechamento**.
 
@@ -45,7 +45,7 @@ As tags no HTML definem os chamados **elementos HTML**. Um elemento HTML é comp
 
 > Alguns elementos podem aparecer corretamente sem a tag de fechamento, mas não conte sempre com isso. Resultados inexperados e erros podem acontecer se você esquercar a tag de fechamento.
 
-### Documento HTML
+### Documento HTML {-}
 
 Um documento HTML é um arquivo de texto com extensão `.html` que possui um código HTML válido dentro. Todo HTML precisa começar com uma declaração de tipo
 
@@ -71,11 +71,11 @@ A parte visível do documento fica entre as tags `<body>` e `</body>`.
 
 **Importante**: só pode haver apenas um `<body>` em um documento HTML.
 
-### A tag `<head>`
+### A tag `<head>` {-}
 
 A tag `<head>` cria uma seção de metadados para a nossa página HTML.
 
-O elemento `<title>`, por exemplo, pode ser utilizado para definir um título para a página, usado pelo navegador (na barra de ferramentas ou quando a página é adicionada aos favoritos) e por sites de busca.
+O elemento `<title>`, por exemplo, pode ser utilizado para definir um título para a página, usado pelo navegador (na aba da página ou na barra de favoritos) e por algoritmos de busca (Google).
 
 ```{html}
 <html>
@@ -88,9 +88,9 @@ O elemento `<title>`, por exemplo, pode ser utilizado para definir um título pa
 </html>
 ```
 
-Veremos adiante outros metadados que podemos definir na seção `<head>`.
+Veremos ainda neste capítulo outros metadados que podemos definir na seção `<head>`.
 
-### Cabeçalhos
+### Cabeçalhos {-}
 
 Você pode construir títulos e subtítulos com as tags `<h1>` a `<h6>`
 
@@ -107,7 +107,7 @@ Você pode construir títulos e subtítulos com as tags `<h1>` a `<h6>`
 
 > É uma boa prática colocar apenas um `<h1>` por página HTML.
 
-### Parágrafos
+### Parágrafos {-}
 
 Parágrafos são definidos pela tag `<p>`. Eles sempre iniciam em uma nova linha. Os navegadores automaticamente criam um espaço em branco (margem) antes e depois do parágrafo.
 
@@ -120,9 +120,9 @@ Parágrafos são definidos pela tag `<p>`. Eles sempre iniciam em uma nova linha
 </p>
 ```
 
-> O HTML não é sensível à caixa das palavras, isto é, `<P>` e `<p>` são equivalentes. No entanto, é uma boa prática utilizar a caixa baixa.
+> O HTML não é sensível à caixa das palavras, isto é, `<P>` e `<p>` são equivalentes. No entanto, é uma boa prática utilizar sempre a caixa baixa.
 
-### Elementos aninhados
+### Elementos aninhados {-}
 
 Elementos HTML se organizam de maneira hierárquica, isto é, os elementos são aninhados dentro de outros.
 
@@ -140,11 +140,11 @@ Elementos HTML se organizam de maneira hierárquica, isto é, os elementos são 
 
 No código acima
 
-- o elemento `<body>` reside dentro do elemento `html`
-- os elementos `<h1>` e `<p>` residem dentro do elemento `body`
-- o elemento `<b>`, que deixa o texto em negrito, reside dentro do elemento p.
+- o elemento `<body>` reside dentro do elemento `html`;
+- os elementos `<h1>` e `<p>` residem dentro do elemento `body`;
+- e o elemento `<b>`, que deixa o texto em negrito, reside dentro do elemento p.
 
-### Atributos
+### Atributos {-}
 
 Todos os elementos HTML podem ter atributos, que provêm informação adicional sobre os elementos.
 
@@ -161,7 +161,7 @@ Atributos são sempre especificados na tag de abertura. Eles geralmente possuem 
 
 O atributo `lang` no elemento `<html>`, por exemplo, declara qual será o idioma utilizado na página^[É uma boa prática declarar o idioma da página, pois isso é utilizado pelos algorítmos de busca e pelos navegadores.].
 
-### Links
+### Links {-}
 
 Links no HTML são chamados de **hiperlinks** (ou hiperligação). Eles são criados com a tag `<a>`.
 
@@ -173,13 +173,13 @@ Links no HTML são chamados de **hiperlinks** (ou hiperligação). Eles são cri
 
 Veja que este elemento possui o atributo `href`, que define o destino do link. O conteúdo deste elemento será o texto visível na tela para ser clicado.
 
-### Comentários
+### Comentários {-}
 
-Podemos adicionar comentários ao nosso código HTML a partir da seguinte sintaxe
+Podemos adicionar comentários ao nosso código HTML a partir da seguinte sintaxe:
 
-- use `<!--` para iniciar o comentário
+- use `<!--` para iniciar o comentário;
 
-- use `-->` para encerrar o comentário
+- use `-->` para encerrar o comentário.
 
 ```{html}
 <p>Isto é um parágrafo</p>
@@ -187,7 +187,7 @@ Podemos adicionar comentários ao nosso código HTML a partir da seguinte sintax
 <p>Isto é um outro parágrafo</p>
 ```
 
-### Elementos vazios
+### Elementos vazios {-}
 
 Alguns elementos HTML não possuem conteúdo e, portanto, não precisam de uma tag de fechamento. Esses elementos são chamados de **elementos vazios**.
 
@@ -201,7 +201,7 @@ A tag `<br>`, que gera uma quebra de linha na página, é um exemplo de elemento
 
 Veja que não precisamos fechar a tag `<br>` com uma tag `</br>`
 
-### Imagens
+### Imagens {-}
 
 Imagens podem ser inseridas em uma página HTML a partir da tag `<img>`.
 
@@ -217,17 +217,19 @@ No elemento acima:
 
 - especificar o comprimento e altura é importante pois o navegador reserva o espaço da imagem na tela, mantendo o layout da página, caso ela demore para ser carregada;
 
-- podemos usar o argumento `alt` para atribuir uma descrição à imagem, o que é utilizado por leitores de tela para descrever a imagem para pessoas com deficiências visuais.
+- podemos usar o argumento `alt` para atribuir uma descrição à imagem, o que é utilizado por leitores de tela para descrever a imagem para pessoas com deficiência visual.
 
-### Elementos em bloco e em linha
+### Elementos em bloco e em linha {-}
 
-**Elementos em bloco** sempre começam em uma nova linha e ocupam todo o comprimento da tela ou todo o comprimento que tiverem a disposão. Os navegadores automaticamente adicionam algum espaço (margem) antes e depois desses elementos.
+Os elementos HTML podem ser divididos em dois tipos: **elementos em bloco** e **elementos em linha**.
 
-**Elementos em linha** não iniciam uma nova linha. Esses elementos só ocupam o comprimento necessário para apresentar seu conteúdo na tela.
+Elementos em bloco sempre começam em uma nova linha e ocupam todo o comprimento da tela ou todo o comprimento que tiverem a disposão. Os navegadores automaticamente adicionam algum espaço (margem) antes e depois desses elementos.
 
-### A tag `<div>`
+Elementos em linha não iniciam uma nova linha. Esses elementos só ocupam o comprimento necessário para apresentar seu conteúdo na tela.
 
-A tag `<div>` é um elemento em bloco normalmente é utilizado como um *container* para outros elementos HTML. Se você não atribuir nenhum atributo a ela, como comprimento ou altura, ela não gera nenhum efeito na página.
+### A tag `<div>` {-}
+
+A tag `<div>` é um elemento em bloco normalmente utilizada como um *container* para outros elementos HTML. Se você não atribuir nenhum atributo a ela, como comprimento ou altura, ela não gera nenhum efeito na página.
 
 Normalmente aplicamos a ela atributos que vão definir o estilo de parte ou de todos os elementos que a `<div>` contém.
 
@@ -238,7 +240,7 @@ Normalmente aplicamos a ela atributos que vão definir o estilo de parte ou de t
 </div>
 ```
 
-### A tag `<span>`
+### A tag `<span>` {-}
 
 A tag `<span>` é um elemento em linha utilizada como um *container* para outros elementos HTML. Se você não atribuir nenhum atributo a ela, como comprimento ou altura, ela não gera nenhum efeito na página.
 
