@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -245,9 +308,49 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#html" id="toc-html" class="nav-link active" data-scroll-target="#html"><span class="toc-section-number">12.1</span>  HTML</a></li>
-  <li><a href="#alemCSS" id="toc-alemCSS" class="nav-link" data-scroll-target="#alemCSS"><span class="toc-section-number">12.2</span>  CSS</a></li>
-  <li><a href="#javascript" id="toc-javascript" class="nav-link" data-scroll-target="#javascript"><span class="toc-section-number">12.3</span>  JavaScript</a></li>
+  <li><a href="#html" id="toc-html" class="nav-link active" data-scroll-target="#html"><span class="toc-section-number">12.1</span>  HTML</a>
+  <ul class="collapse">
+  <li><a href="#tags" id="toc-tags" class="nav-link" data-scroll-target="#tags">Tags</a></li>
+  <li><a href="#elemento-html" id="toc-elemento-html" class="nav-link" data-scroll-target="#elemento-html">Elemento HTML</a></li>
+  <li><a href="#documento-html" id="toc-documento-html" class="nav-link" data-scroll-target="#documento-html">Documento HTML</a></li>
+  <li><a href="#a-tag-head" id="toc-a-tag-head" class="nav-link" data-scroll-target="#a-tag-head">A tag <code>&lt;head&gt;</code></a></li>
+  <li><a href="#cabeçalhos" id="toc-cabeçalhos" class="nav-link" data-scroll-target="#cabeçalhos">Cabeçalhos</a></li>
+  <li><a href="#parágrafos" id="toc-parágrafos" class="nav-link" data-scroll-target="#parágrafos">Parágrafos</a></li>
+  <li><a href="#elementos-aninhados" id="toc-elementos-aninhados" class="nav-link" data-scroll-target="#elementos-aninhados">Elementos aninhados</a></li>
+  <li><a href="#atributos" id="toc-atributos" class="nav-link" data-scroll-target="#atributos">Atributos</a></li>
+  <li><a href="#links" id="toc-links" class="nav-link" data-scroll-target="#links">Links</a></li>
+  <li><a href="#comentários" id="toc-comentários" class="nav-link" data-scroll-target="#comentários">Comentários</a></li>
+  <li><a href="#elementos-vazios" id="toc-elementos-vazios" class="nav-link" data-scroll-target="#elementos-vazios">Elementos vazios</a></li>
+  <li><a href="#imagens" id="toc-imagens" class="nav-link" data-scroll-target="#imagens">Imagens</a></li>
+  <li><a href="#elementos-em-bloco-e-em-linha" id="toc-elementos-em-bloco-e-em-linha" class="nav-link" data-scroll-target="#elementos-em-bloco-e-em-linha">Elementos em bloco e em linha</a></li>
+  <li><a href="#a-tag-div" id="toc-a-tag-div" class="nav-link" data-scroll-target="#a-tag-div">A tag <code>&lt;div&gt;</code></a></li>
+  <li><a href="#a-tag-span" id="toc-a-tag-span" class="nav-link" data-scroll-target="#a-tag-span">A tag <code>&lt;span&gt;</code></a></li>
+  </ul></li>
+  <li><a href="#alemCSS" id="toc-alemCSS" class="nav-link" data-scroll-target="#alemCSS"><span class="toc-section-number">12.2</span>  CSS</a>
+  <ul class="collapse">
+  <li><a href="#regras-css" id="toc-regras-css" class="nav-link" data-scroll-target="#regras-css">Regras CSS</a></li>
+  <li><a href="#css-inline" id="toc-css-inline" class="nav-link" data-scroll-target="#css-inline">CSS inline</a></li>
+  <li><a href="#css-interno" id="toc-css-interno" class="nav-link" data-scroll-target="#css-interno">CSS interno</a></li>
+  <li><a href="#css-externo" id="toc-css-externo" class="nav-link" data-scroll-target="#css-externo">CSS externo</a></li>
+  <li><a href="#cores" id="toc-cores" class="nav-link" data-scroll-target="#cores">Cores</a></li>
+  <li><a href="#tamanho-da-fonte" id="toc-tamanho-da-fonte" class="nav-link" data-scroll-target="#tamanho-da-fonte">Tamanho da fonte</a></li>
+  <li><a href="#fontes" id="toc-fontes" class="nav-link" data-scroll-target="#fontes">Fontes</a></li>
+  <li><a href="#bordas" id="toc-bordas" class="nav-link" data-scroll-target="#bordas">Bordas</a></li>
+  <li><a href="#classes" id="toc-classes" class="nav-link" data-scroll-target="#classes">Classes</a></li>
+  <li><a href="#ids" id="toc-ids" class="nav-link" data-scroll-target="#ids">Ids</a></li>
+  <li><a href="#especificidade" id="toc-especificidade" class="nav-link" data-scroll-target="#especificidade">Especificidade</a></li>
+  <li><a href="#box-model" id="toc-box-model" class="nav-link" data-scroll-target="#box-model">Box model</a></li>
+  <li><a href="#margem" id="toc-margem" class="nav-link" data-scroll-target="#margem">Margem</a></li>
+  <li><a href="#padding" id="toc-padding" class="nav-link" data-scroll-target="#padding">Padding</a></li>
+  <li><a href="#display" id="toc-display" class="nav-link" data-scroll-target="#display">Display</a></li>
+  <li><a href="#posicionamento" id="toc-posicionamento" class="nav-link" data-scroll-target="#posicionamento">Posicionamento</a></li>
+  </ul></li>
+  <li><a href="#javascript" id="toc-javascript" class="nav-link" data-scroll-target="#javascript"><span class="toc-section-number">12.3</span>  JavaScript</a>
+  <ul class="collapse">
+  <li><a href="#inserindo-javascript-em-seu-app" id="toc-inserindo-javascript-em-seu-app" class="nav-link" data-scroll-target="#inserindo-javascript-em-seu-app"><span class="toc-section-number">12.3.1</span>  Inserindo JavaScript em seu app</a></li>
+  <li><a href="#interagindo-com-inputs-via-javascript" id="toc-interagindo-com-inputs-via-javascript" class="nav-link" data-scroll-target="#interagindo-com-inputs-via-javascript"><span class="toc-section-number">12.3.2</span>  Interagindo com inputs via JavaScript</a></li>
+  </ul></li>
+  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="toc-section-number">12.4</span>  Exercícios</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/curso-r/programando-em-shiny/edit/main/html-css-js.qmd" class="toc-action">Editar essa página</a></p><p><a href="https://github.com/curso-r/programando-em-shiny/issues/new" class="toc-action">Criar uma issue</a></p></div></div></nav>
     </div>
@@ -274,16 +377,854 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell">
 
 </div>
+<p>Um dos pontos fortes do Shiny é nos permitir construir aplicações web sem precisarmos saber programar em HTML, CSS e JavaScript. Com as funções disponíveis no pacote <code>shiny</code> e nos diversos pacotes feitos pela comunidade Shiny, já conseguimos produzir aplicativos complexos e bonitos.</p>
+<p>No entanto, conhecer mesmo o básico dessas linguagens nos permite ir além do que existe nos pacotes disponíveis e customizar nossos apps da maneira que quisermos. Também nos permite entender melhor como o Shiny funciona, o que facilita a tarefa de programar os nossos apps.</p>
+<p>Neste capítulo, vamos apresentar os conceitos básicos de HTML e CSS mais importantes para o Shiny, criando uma boa base para continuar aprendendo essas linguagens posteriormente. Também mostraremos como inserir códigos JavaScript em nossos apps a partir de alguns exemplos, mas não faremos uma introdução formal dessa linguagem aqui.</p>
 <section id="html" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="html"><span class="header-section-number">12.1</span> HTML</h2>
+<p>O HTML é uma <a href="https://pt.wikipedia.org/wiki/Linguagem_de_marca%C3%A7%C3%A3o">linguagem de marcação</a> para construir páginas web. Uma linguagem de marcação é apenas um tipo de documento que contem texto simples (como em um bloco de notas) e um conjunto de instruções para formatar (anotar, marcar) parte específicas do conteúdo. Além do HTML, o LaTeX e o (R) Markdown são outros exemplos comuns de linguagem de marcação.</p>
+<p>Nas seções a seguir, apresentamos os conceitos básicos da linguagem. São três os objetivos aqui:</p>
+<ul>
+<li><p>entender como um documento HTML é estruturado;</p></li>
+<li><p>ganhar um pouco de vocabulário, isto é, conhecer as principais tags;</p></li>
+<li><p>e conhecer a nomenclatura da linguagem, o que vai facilitar bastante quando for preciso pesquisar por algo na internet.</p></li>
+</ul>
+<section id="tags" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="tags">Tags</h3>
+<p>A maior parte do esforço em aprender uma linguagem de marcação está em aprender quais são e como utilizar as instruções de formatação, os seus <strong>marcadores</strong>. Os marcadores no HTML são as <strong>tags</strong>. Elas podem ser de abertura ou de fechamento e possuem a seguinte sintaxe:</p>
+<p><strong>Tag de abertura</strong>: <code>&lt;nome_da_tag&gt;</code></p>
+<p><strong>Tag de fechamento</strong>: <code>&lt;/nome_da_tag&gt;</code></p>
+</section>
+<section id="elemento-html" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="elemento-html">Elemento HTML</h3>
+<p>As tags no HTML definem os chamados <strong>elementos HTML</strong>. Um elemento HTML é composto por uma <strong>tag de abertura</strong>, algum <strong>conteúdo</strong> e uma <strong>tag de fechamento</strong>.</p>
+<pre><code>&lt;nome_da_tag&gt; conteúdo &lt;/nome_da_tag&gt;</code></pre>
+<blockquote class="blockquote">
+<p>Alguns elementos podem aparecer corretamente sem a tag de fechamento, mas não conte sempre com isso. Resultados inexperados e erros podem acontecer se você esquercar a tag de fechamento.</p>
+</blockquote>
+</section>
+<section id="documento-html" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="documento-html">Documento HTML</h3>
+<p>Um documento HTML é um arquivo de texto com extensão <code>.html</code> que possui um código HTML válido dentro. Todo HTML precisa começar com uma declaração de tipo</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ela representa o tipo de documento, o que ajuda os navegarores a mostrar as páginas corretamente. Ela deve aparecer apenas uma vez, no topo da página.</p>
+<p>O código HTML em si começa com a tag <code>&lt;html&gt;</code> e deve terminar com <code>&lt;/html&gt;</code>.</p>
+<p>A parte visível do documento fica entre as tags <code>&lt;body&gt;</code> e <code>&lt;/body&gt;</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;body&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    O conteúdo da página fica aqui.</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/body&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Importante</strong>: só pode haver apenas um <code>&lt;body&gt;</code> em um documento HTML.</p>
+</section>
+<section id="a-tag-head" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="a-tag-head">A tag <code>&lt;head&gt;</code></h3>
+<p>A tag <code>&lt;head&gt;</code> cria uma seção de metadados para a nossa página HTML.</p>
+<p>O elemento <code>&lt;title&gt;</code>, por exemplo, pode ser utilizado para definir um título para a página, usado pelo navegador (na aba da página ou na barra de favoritos) e por algoritmos de busca (Google).</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;head&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;title&gt;</span>Esse é o título da página<span class="kw">&lt;/title&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/head&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;body&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    O conteúdo da página fica aqui.</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/body&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Veremos ainda neste capítulo outros metadados que podemos definir na seção <code>&lt;head&gt;</code>.</p>
+</section>
+<section id="cabeçalhos" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="cabeçalhos">Cabeçalhos</h3>
+<p>Você pode construir títulos e subtítulos com as tags <code>&lt;h1&gt;</code> a <code>&lt;h6&gt;</code></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;h1&gt;</span>Título 1<span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;h2&gt;</span>Título 2<span class="kw">&lt;/h2&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;h3&gt;</span>Título 3<span class="kw">&lt;/h3&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;h4&gt;</span>Título 4<span class="kw">&lt;/h4&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;h5&gt;</span>Título 5<span class="kw">&lt;/h5&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;h6&gt;</span>Título 6<span class="kw">&lt;/h6&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>&lt;h1&gt;</code> define o título mais importante, enquanto <code>&lt;h6&gt;</code> o menos importante.</p>
+<blockquote class="blockquote">
+<p>É uma boa prática colocar apenas um <code>&lt;h1&gt;</code> por página HTML.</p>
+</blockquote>
+</section>
+<section id="parágrafos" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="parágrafos">Parágrafos</h3>
+<p>Parágrafos são definidos pela tag <code>&lt;p&gt;</code>. Eles sempre iniciam em uma nova linha. Os navegadores automaticamente criam um espaço em branco (margem) antes e depois do parágrafo.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  Isto é um parágrafo.</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/p&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  E aqui um outro parágrafo.</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/p&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>O HTML não é sensível à caixa das palavras, isto é, <code>&lt;P&gt;</code> e <code>&lt;p&gt;</code> são equivalentes. No entanto, é uma boa prática utilizar sempre a caixa baixa.</p>
+</blockquote>
+</section>
+<section id="elementos-aninhados" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="elementos-aninhados">Elementos aninhados</h3>
+<p>Elementos HTML se organizam de maneira hierárquica, isto é, os elementos são aninhados dentro de outros.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;body&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;h1&gt;</span>Título da página<span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;p&gt;</span>Este é o primeiro <span class="kw">&lt;b&gt;</span>parágrafo<span class="kw">&lt;/b&gt;</span> desta página HTML.<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/body&gt;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>No código acima</p>
+<ul>
+<li>o elemento <code>&lt;body&gt;</code> reside dentro do elemento <code>html</code>;</li>
+<li>os elementos <code>&lt;h1&gt;</code> e <code>&lt;p&gt;</code> residem dentro do elemento <code>body</code>;</li>
+<li>e o elemento <code>&lt;b&gt;</code>, que deixa o texto em negrito, reside dentro do elemento p.</li>
+</ul>
+</section>
+<section id="atributos" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="atributos">Atributos</h3>
+<p>Todos os elementos HTML podem ter atributos, que provêm informação adicional sobre os elementos.</p>
+<p>Atributos são sempre especificados na tag de abertura. Eles geralmente possuem a seguinte sintaxe <code>nome="valor"</code>. Dois argumentos diferentes são separados por um espaço vazio.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;html</span> <span class="er">lang</span><span class="ot">=</span><span class="st">"pt-BR"</span><span class="kw">&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;body&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>      "Conteúdo da página"</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/body&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>O atributo <code>lang</code> no elemento <code>&lt;html&gt;</code>, por exemplo, declara qual será o idioma utilizado na página<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+</section>
+<section id="links" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="links">Links</h3>
+<p>Links no HTML são chamados de <strong>hiperlinks</strong> (ou hiperligação). Eles são criados com a tag <code>&lt;a&gt;</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">"https://curso-r.com"</span><span class="kw">&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  Clique aqui para acessar o site da curso-r</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/a&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Veja que este elemento possui o atributo <code>href</code>, que define o destino do link. O conteúdo deste elemento será o texto visível na tela para ser clicado.</p>
+</section>
+<section id="comentários" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="comentários">Comentários</h3>
+<p>Podemos adicionar comentários ao nosso código HTML a partir da seguinte sintaxe:</p>
+<ul>
+<li><p>use <code>&lt;!--</code> para iniciar o comentário;</p></li>
+<li><p>use <code>--&gt;</code> para encerrar o comentário.</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>Isto é um parágrafo<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Isto é um comentário e vai ser ignorado pelo navegador. --&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>Isto é um outro parágrafo<span class="kw">&lt;/p&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="elementos-vazios" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="elementos-vazios">Elementos vazios</h3>
+<p>Alguns elementos HTML não possuem conteúdo e, portanto, não precisam de uma tag de fechamento. Esses elementos são chamados de <strong>elementos vazios</strong>.</p>
+<p>A tag <code>&lt;br&gt;</code>, que gera uma quebra de linha na página, é um exemplo de elemento vazio.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>Parágrafo 1<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>Parágrafo 2<span class="kw">&lt;/p&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Veja que não precisamos fechar a tag <code>&lt;br&gt;</code> com uma tag <code>&lt;/br&gt;</code></p>
+</section>
+<section id="imagens" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="imagens">Imagens</h3>
+<p>Imagens podem ser inseridas em uma página HTML a partir da tag <code>&lt;img&gt;</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;img</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">"caminho_ou_url_da_imagem"</span> <span class="er">width</span> <span class="ot">=</span> <span class="st">"100px"</span> <span class="er">height</span> <span class="ot">=</span> <span class="st">"100px"</span> <span class="er">alt</span> <span class="ot">=</span> <span class="st">"Essa é uma boa descrição da imagem"</span><span class="kw">&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>No elemento acima:</p>
+<ul>
+<li><p>o argumento <code>src</code> é utilizado para especificar o caminho ou URL da imagem</p></li>
+<li><p>os argumentos <code>width</code> e <code>height</code> são utilizados para especificar o comprimento e altura da imagem;</p></li>
+<li><p>especificar o comprimento e altura é importante pois o navegador reserva o espaço da imagem na tela, mantendo o layout da página, caso ela demore para ser carregada;</p></li>
+<li><p>podemos usar o argumento <code>alt</code> para atribuir uma descrição à imagem, o que é utilizado por leitores de tela para descrever a imagem para pessoas com deficiência visual.</p></li>
+</ul>
+</section>
+<section id="elementos-em-bloco-e-em-linha" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="elementos-em-bloco-e-em-linha">Elementos em bloco e em linha</h3>
+<p>Os elementos HTML podem ser divididos em dois tipos: <strong>elementos em bloco</strong> e <strong>elementos em linha</strong>.</p>
+<p>Elementos em bloco sempre começam em uma nova linha e ocupam todo o comprimento da tela ou todo o comprimento que tiverem a disposão. Os navegadores automaticamente adicionam algum espaço (margem) antes e depois desses elementos.</p>
+<p>Elementos em linha não iniciam uma nova linha. Esses elementos só ocupam o comprimento necessário para apresentar seu conteúdo na tela.</p>
+</section>
+<section id="a-tag-div" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="a-tag-div">A tag <code>&lt;div&gt;</code></h3>
+<p>A tag <code>&lt;div&gt;</code> é um elemento em bloco normalmente utilizada como um <em>container</em> para outros elementos HTML. Se você não atribuir nenhum atributo a ela, como comprimento ou altura, ela não gera nenhum efeito na página.</p>
+<p>Normalmente aplicamos a ela atributos que vão definir o estilo de parte ou de todos os elementos que a <code>&lt;div&gt;</code> contém.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span>Um parágrafo<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">"https://curso-r.com"</span><span class="kw">&gt;</span>Um link<span class="kw">&lt;/a&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="a-tag-span" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="a-tag-span">A tag <code>&lt;span&gt;</code></h3>
+<p>A tag <code>&lt;span&gt;</code> é um elemento em linha utilizada como um <em>container</em> para outros elementos HTML. Se você não atribuir nenhum atributo a ela, como comprimento ou altura, ela não gera nenhum efeito na página.</p>
+<p>Normalmente aplicamos a ela atributos que vão definir o estilo de parte ou de todos os elementos que a <code>&lt;div&gt;</code> contém.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  Como formatar uma única <span class="kw">&lt;span&gt;</span>palavra<span class="kw">&lt;/span&gt;</span>?</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/p&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 </section>
 <section id="alemCSS" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="alemCSS"><span class="header-section-number">12.2</span> CSS</h2>
+<p>CSS (<em>Cascading Style Sheets</em>) é uma <strong>linguagem de folha de estilo</strong> utilizada para formatar páginas Web. Com CSS, podemos controlar a cor, fonte, tamanho do texto, espaçamento entre elementos, cores e imagens de fundo, a maneira como os elementos são mostrados na página a depender dos diferentes tamanhos de tela e muito mais!</p>
+<p>O objetivo de uma linguagens de folha de estilo é separar a formatação e a estrutura de um documento, permitindo que sejam construídos isoladamente, mas os unindo a partir de algum tipo de <strong>ligação</strong>. Veremos adiante como isso se dá no HTML.</p>
+<blockquote class="blockquote">
+<p>A palavra <em>Cascading</em> (cascata) significa que um estilo aplicado a um elemento pai também é aplicado a todos os elementos filhos, o que é uma característica importante devido à hierarquia de elementos do HTML.</p>
+</blockquote>
+<p>A seguir, apresentaremos os conceitos básicos para aplicar CSS a um documento HTML.</p>
+<section id="regras-css" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="regras-css">Regras CSS</h3>
+<p>Para aplicar estilo a um elemento HTML usando CSS, devemos escrever uma <strong>regra</strong>. A seguir, temos uma <strong>regra</strong> CSS que define a cor dos parágrafos (o conteúdo dos elementos <code>&lt;p&gt;</code>) como azul e o tamanho da fonte como 12px.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>p {</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  color: blue;</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  font-size: 12px</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>No código:</p>
+<ul>
+<li><p><code>p</code> é chamado de <strong>seletor</strong> e define quais elementos receberão a regra CSS;</p></li>
+<li><p><code>color: blue;</code> e <code>font-size: 12px</code> são chamadas de <strong>declarações</strong> e definem o estilo a ser aplicado;</p></li>
+<li><p><code>color</code> e <code>font-size</code> dentro de cada declaração são chamados de <strong>propriedades</strong>, isto é, a característica de cada elemento que será alterada;</p></li>
+<li><p>já <code>blue</code> e <code>12px</code> são os <strong>valores</strong> atribuídos a cada propriedade.</p></li>
+</ul>
+<p>Para aplicar essa regra, podemos inserir esse código em um documento HTML de 3 maneiras:</p>
+<ul>
+<li><p>em linha (<em>inline</em>), dentro do elemento HTML, usando o atributo <code>style</code>;</p></li>
+<li><p>interno (<em>internal</em>), dentro do documento HTML, mas fora dos elementos, usando a tag <code>&lt;style&gt;</code> dentro da seção <code>&lt;head&gt;</code>;</p></li>
+<li><p>externo (<em>external</em>), em um arquivo externo, usando a tag <code>&lt;link&gt;</code> na seção <code>&lt;head&gt;</code> para apontar para um arquivo CSS.</p></li>
+</ul>
+<p>O jeito mais comum de adicionar CSS ao HTML é utilizando um arquivo CSS externo, mas veremos aqui como utilizar as três formas.</p>
+</section>
+<section id="css-inline" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="css-inline">CSS inline</h3>
+<p>O CSS inline é utilizado para aplicar estilo a um único elemento HTML. Fazemos isso usando o atributo <code>style</code> dentro da tag de abertura do elemento.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p</span> <span class="er">style</span> <span class="ot">=</span> <span class="st">"color: blue;"</span><span class="kw">&gt;</span> Esse texto terá a cor azul. <span class="kw">&lt;/p&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Veja que nesse caso não precisamos declarar um seletor.</p>
+</section>
+<section id="css-interno" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="css-interno">CSS interno</h3>
+<p>Um CSS interno é utilizado para definir estilo para os elementos de uma única página HTML. Ele é definido na seção <code>&lt;head&gt;</code>, dentro de uma tag <code>&lt;style&gt;</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;head&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;style&gt;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        h1 {</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>          <span class="kw">color</span>: <span class="cn">red</span><span class="op">;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        p {</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>          <span class="kw">color</span>: <span class="cn">blue</span><span class="op">;</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/style&gt;</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/head&gt;</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;body&gt;</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;h1&gt;</span> Esse título terá a cor vermelha <span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;p&gt;</span> Esse texto terá a cor azul <span class="kw">&lt;/p&gt;</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/body&gt;</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="css-externo" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="css-externo">CSS externo</h3>
+<p>Um arquivo CSS externo é utilizado para definir o estilo de várias páginas HTML. Para associar um arquivo CSS a uma página HTML, usamos a tag <code>&lt;link&gt;</code> na seção <code>&lt;head&gt;</code>.</p>
+<p>A tag <code>&lt;link&gt;</code> é utilizada para estabelecer uma relação entre o arquivo HTML e um arquivo externo. O atributo <code>href</code> recebe o caminho para o arquivo externo (nosso arquivo CSS) e o atributo <code>rel</code> estabele qual o tipo de relação entre os arquivos. No caso de um arquivo CSS, <code>rel</code> deve receber o valor <code>stylesheet</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--Arquivo CSS--&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>h1 {</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  color: red;</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--Arquivo HTML--&gt;</span>&gt;</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;head&gt;</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">"stylesheet"</span> <span class="er">href</span><span class="ot">=</span><span class="st">"custom.css"</span><span class="kw">&gt;</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/head&gt;</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cores" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="cores">Cores</h3>
+<p>Para alterar cores, utilizamos as propriedades <code>color</code> e <code>background-color</code>. Você pode passar como valor tanto o nome da cor em inglês quanto um código hexadecimal.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>p {</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  color: white;</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>h1, h2 {</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  color: #1222bb;</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>body {</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  background-color: black;</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Repare que você pode selecionar um grupo de elementos separando cada seletor por uma vírgula (<code>h1, h2</code>).</p>
+</section>
+<section id="tamanho-da-fonte" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="tamanho-da-fonte">Tamanho da fonte</h3>
+<p>Para alterar o tamanho da fonte, utilizamos a propriedade <code>font-size</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>p {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  font-size: 10px;</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>h1 {</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  font-size: 12pt;</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fontes" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="fontes">Fontes</h3>
+<p>Para alterar a fonte do texto, utilizamos a propriedade <code>font-family</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>p {</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  font-family: "Times New Roman", Times, serif;</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>p {</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  font-family: Arial, Helvetica, sans-serif;</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Você pode especificar mais de uma fonte em uma declaração, o que é útil para garantir que pelo menos uma das fontes especificadas esteja instalada no navegador de quem acessar a página HTML. A preferência é da esquerda para a direita. Na primeira regra do exemplo acima, o navegador tentará aplicar a fonte “Times New Roman” preferencialmente. Se ela não estiver disponível, ela vai aplicar qualquer versão da fonte “Times” e, caso ainda não seja possível, será utilizada qualquer fonte serifada que o navegador usar como padrão. Leia as <a href="https://www.w3schools.com/css/css_font.asp">seções sobre fonte do W3Schools</a> para saber mais.</p>
+<p>Para importar uma fonte do Google fontes, basta utilizar o elemento <code>&lt;link rel = "stylesheet"&gt;</code> passando o link da fonte no atributo <code>href</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;head&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">"stylesheet"</span> <span class="er">href</span><span class="ot">=</span><span class="st">"https://fonts.googleapis.com/css?family=Sofia"</span><span class="kw">&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;style&gt;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  body {</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">font-family</span>: <span class="st">"Sofia"</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/style&gt;</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/head&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Link para a fonte Sofia: https://fonts.google.com/specimen/Sofia?query=sofia</p>
+</section>
+<section id="bordas" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="bordas">Bordas</h3>
+<p>Para definir uma borda a um elemento, utilizamos a propriedade <code>border</code>.</p>
+<div class="cell" data-layout-align="center">
+<pre class="htlm cell-code"><code>h1 {
+  border: 1px solid black;
+}</code></pre>
+</div>
+<ul>
+<li><p>O valor <code>1px</code> se refere à espessura da borda.</p></li>
+<li><p>O valor <code>solid</code> se refere ao estilo da borda.</p></li>
+<li><p>O valor <code>black</code> se refere à cor da borda.</p></li>
+</ul>
+<blockquote class="blockquote">
+<p>Você pode definir uma borda para quase todos os elementos HTML.</p>
+</blockquote>
+</section>
+<section id="classes" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="classes">Classes</h3>
+<p>Elementos HTML possuem um atributo <code>class</code> que pode ser utilizado como seletor em declarações CSS.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- HTML --&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p</span> <span class="er">class</span> <span class="ot">=</span> <span class="st">"azul"</span><span class="kw">&gt;</span>Este parágrafo ficará azul<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>Este parágrafo não ficará azul<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- CSS --&gt;</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>.azul {</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  color: blue;</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Repare que para usar uma classe como seletor, colocamos um <code>.</code> antes do nome da classe.</p>
+<blockquote class="blockquote">
+<p>Elementos HTML podem ter mais de uma classe. Múltiplas classes são separadas por um espaço. Uma mesma classe pode ser utilizada em mais de um elemento HTML.</p>
+</blockquote>
+</section>
+<section id="ids" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ids">Ids</h3>
+<p>Elementos HTML possuem um atributo <code>id</code> que pode ser utilizado como seletor em declarações CSS. Ao contrário das classes, o id deve ser único dentro do documento HTML, isto é, dois elementos HTML não devem ter o mesmo id.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- HTML --&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">"paragrafoAzul"</span><span class="kw">&gt;</span>Este parágrafo ficará azul<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>Este parágrafo não ficará azul<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- CSS --&gt;</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>#paragrafoAzul {</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  color: blue;</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Repare que para usar um id como seletor, colocamos um <code>#</code> antes do nome do id.</p>
+</section>
+<section id="especificidade" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="especificidade">Especificidade</h3>
+<p>Quando mais de uma declaração afeta uma mesma propriedade um elemento HTML, o navegador precisa decidir qual delas será aplicada. Para isso, ele vai se basear nos seguintes valores:</p>
+<ol type="1">
+<li>Se o estilo é inline: +1000</li>
+<li>Se o seletor é um id: +100</li>
+<li>Se o seletor é uma classe: +10</li>
+<li>Se o seletor é um elemento: +1</li>
+</ol>
+<p>A soma desses valores para uma regra é chamada de <strong>especificidade</strong>. A regra com maior especificidade será aplicada. Se duas declarações possuirem a mesma especificidade, a última declaração definida no CSS será priorizada.</p>
+<p>A regra a seguir, que seleciona todos os elementos <code>p</code> com classe <code>azul</code> tem especificidade 11, pois o seletor possui uma classe e um elemento.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>p.azul {</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  color: blue;</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Já a seguinte regra tem especificidade de 10, pois só possui um elemento, e seria preterida com relação à anterior.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>p {</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  color: blue;</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Abaixo, temos duas declarações com a mesma especificidade. Nesse caso, a declaração <code>color: yellow;</code> será aplicada por ter sido definido por último.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>p {</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  color: red;</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>p {</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  color: yellow;</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Saiba mais sobre <strong>especificidade</strong> <a href="https://www.w3schools.com/css/css_specificity.asp">neste artigo da W3Schools</a> em inglês ou <a href="https://tipscode.com.br/especificidade-css-5-coisas-que-voce-precisa">neste artigo</a> em português.</p>
+</section>
+<section id="box-model" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="box-model">Box model</h3>
+<p>O <em>box model</em> do CSS é essencialmente uma caixa que envolve todos os elementos HTML. Ele consiste de uma margem, uma borda, <em>padding</em> e o próprio conteúdo do elemento.</p>
+<p>A imagem abaixo ilustra o <em>box model</em>:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/box_model.png" class="img-fluid figure-img" style="width:84.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="margem" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="margem">Margem</h3>
+<p>Margens são utilizadas para criar espaço em branco entre elementos HTML. As duas regras CSS a seguir são equivalentes.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>p {</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  margin: 1px 2px 4px 3px;</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>p {</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  margin-top: 1px;</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  margin-right: 2px;</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  margin-bottom: 4px;</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  margin-left: 3px;</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="padding" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="padding">Padding</h3>
+<p>A propriedade <code>padding</code> é utilizada para criar espaço ao redor do conteúdo de um elemento, dentro de qualquer borda definida. As duas regras CSS a seguir são equivalentes.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>p {</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  padding: 1px 2px 4px 3px;</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>p {</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  padding-top: 1px;</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  padding-right: 2px;</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  padding-bottom: 4px;</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  padding-left: 3px;</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="display" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="display">Display</h3>
+<p>A propriedade <code>display</code> especifica se e como um elemento HTML é exibido na tela.</p>
+<p>Todo elemento HTML tem um valor padrão para essa propriedade. O valor padrão do <code>display</code> para a maioria dos elementos é <code>block</code> (em bloco) ou <code>inline</code> (em linha). Utilizando essa propriedade, podemos fazer uma <code>&lt;div&gt;</code> em linha ou um <code>&lt;img&gt;</code> em bloco.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>#divInline {</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  display: inline</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>#imgBlock {</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  display: block;</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Também é possível atribuir o valor <code>none</code> a essa proprieda, fazendo com que o elemento não seja mostrado na tela. Isso é utilizado com JavaScript para mostrar/esconder elementos.</p>
+</section>
+<section id="posicionamento" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="posicionamento">Posicionamento</h3>
+<p>A propriedade <code>position</code> define que tipo de posicionamento será utilizado para exibir um elemento na página.</p>
+<p>Os principais valores dessa propriedade são:</p>
+<ul>
+<li><p><code>static</code> — os elementos são renderizados na ordem que eles aparecem no documento HTML (valor padrão);</p></li>
+<li><p><code>relative</code> — os elementos são posicionados relativamente a sua posição normal, permitindo o ajuste do elemento a partir de <code>offsets</code> (propriedades <code>top</code>, <code>bottom</code>, <code>left</code> e <code>right</code>);</p></li>
+<li><p><code>absolute</code> — os elementos são posicionados relativamente ao seu primeiro elemento ancestral com <code>position</code> diferente de <code>static</code>;</p></li>
+<li><p><code>fixed</code> — os elementos são posicionados relativamente à janela do navegador.</p></li>
+</ul>
+<p>Leia <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position">este artigo</a> para saber mais sobre posicionamento.</p>
+</section>
 </section>
 <section id="javascript" class="level2" data-number="12.3">
 <h2 data-number="12.3" class="anchored" data-anchor-id="javascript"><span class="header-section-number">12.3</span> JavaScript</h2>
+<p>O JavaScript (JS) é uma linguagem de programação criada para a Web. Ele foi criado em apenas 10 dias, em 1995, por uma única pessoa, Brendan Eich. Ele foi inicialmente chamado LiveScript, mas como a linguagem Java era popular na época, o nome mudou para JavaScript, embora as duas linguagens não tenham nenhuma relação uma com a outra.</p>
+<p>O papel do JavaScript é possibilitar interatividade em páginas Web. Enquanto o HTML e o CSS apenas ditam como esse conteúdo será apresentada na tela, códigos JavaScript geram comportamentos disparados por ações da pessoa acessando a pagina.</p>
+<p>O código JS é colocado junto ao HTML e interpretado pelo navegador. Todo navegador moderno possui um interpretador de JavaScript: você pode testar isso acessando as “Ferramentas de desenvolvedor” do seu navegador e clicando na aba “Console”. O terminal apresentado será um interpretador JavaScript.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/console_js.png" class="img-fluid figure-img" width="1511"></p>
+<p></p><figcaption class="figure-caption">Interpretador JavaScript no Google Chrome.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Nesta seção, não faremos uma introdução formal ao JavaScript, pois qualquer tentativa seria incompleta ou muito extensa para o escopo desse livro. Além disso, existe bastante conteúdo introdutório e gratuito sobre JavaScript disponível na internet. O que abordaremos aqui será, dado algum conhecimento prévio da linguagem, como utilizar o JavaScript dentro do Shiny. Começaremos mostrando como inserir um código feito em JS no seu Shiny app e, em seguida, como acessar valores dos inputs do app dentro de um código JavaScript.</p>
+<section id="inserindo-javascript-em-seu-app" class="level3" data-number="12.3.1">
+<h3 data-number="12.3.1" class="anchored" data-anchor-id="inserindo-javascript-em-seu-app"><span class="header-section-number">12.3.1</span> Inserindo JavaScript em seu app</h3>
+<p>Para inserir um código JavaScript em um arquivo HTML, utilizamos o elemento <code>&lt;script&gt;&lt;/script&gt;</code>. Podemos escrever diretamente o código JavaScript dentro desse elemento ou ler o código de um arquivo externo definido pelo atributo <code>src</code>. Os dois exemplos abaixo são equivalentes e mudam para vermelho a cor do primeiro parágrafo quando clicamos no botão.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a># Definindo o código diretamente no HTML</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;body&gt;</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;p</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">"alvo"</span><span class="kw">&gt;</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>      Parágrafo 1</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/p&gt;</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;p&gt;</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>      Parágrafo 2</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/p&gt;</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;button</span> <span class="er">onClick</span> <span class="ot">=</span> <span class="st">"deixarVermelho()"</span><span class="kw">&gt;</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>      Deixar vermelho</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/button&gt;</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;script&gt;</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>      deixarVermelho <span class="op">=</span> <span class="kw">function</span>() {</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"alvo"</span>)<span class="op">.</span><span class="at">style</span> <span class="op">=</span> <span class="st">"color: red"</span><span class="op">;</span></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/script&gt;</span></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/body&gt;</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a># Importanto o código de um arquivo JS</span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a># HTML</span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;body&gt;</span></span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;p</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">"alvo"</span><span class="kw">&gt;</span></span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>      Parágrafo 1</span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/p&gt;</span></span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;p&gt;</span></span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>      Parágrafo 2</span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/p&gt;</span></span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;button</span> <span class="er">onClick</span> <span class="ot">=</span> <span class="st">"deixarVermelho()"</span><span class="kw">&gt;</span></span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>      Deixar vermelho</span>
+<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/button&gt;</span></span>
+<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;script</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">"script.js"</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/body&gt;</span></span>
+<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span>
+<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a># JS (script.js)</span>
+<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a>deixarVermelho = function() {</span>
+<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a>  document.getElementById("alvo").style = "color: red";</span>
+<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>O código JS nesse exemplo define uma função que muda o atributo <code>style</code> do elemento com id <code>alvo</code>. Essa função é chamada sempre que o botão é clicado. Isso acontece porque associamos a função ao evento <code>onClick</code> do botão.</p>
+<p>Em um aplicativo Shiny, o procedimento é equivalente. A grande diferença é que o arquivo <code>script.js</code> deve estar dentro da pasta <code>www/</code> para ser acessado pelo navegador.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definiindo o código JS diretamente na UI</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">p</span>(<span class="st">"Parágrafo 1"</span>, <span class="at">id =</span> <span class="st">"alvo"</span>),</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">p</span>(<span class="st">"Parágrafo 2"</span>),</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">button</span>(<span class="at">onClick =</span> <span class="st">"deixarVermelho()"</span>, <span class="st">"Deixar vermelho"</span>),</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">script</span>(</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'deixarVermelho = function() {</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="st">      document.getElementById("alvo").style = "color: red";</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="st">    }'</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Definindo o código JS em um arquivo externo (www/script.js)</span></span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">p</span>(<span class="st">"Parágrafo 1"</span>, <span class="at">id =</span> <span class="st">"alvo"</span>),</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">p</span>(<span class="st">"Parágrafo 2"</span>),</span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">button</span>(<span class="at">onClick =</span> <span class="st">"deixarVermelho()"</span>, <span class="st">"Deixar vermelho"</span>),</span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">script</span>(<span class="at">src =</span> <span class="st">"script.js"</span>)</span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Um ponto de atenção sobre a utilização de códigos JS em documentos HTML é a posição onde eles são definidos dentro do documento. Como o HTML é interpretado pelo navegador na ordem em que o código foi escrito, se um elemento <code>&lt;script&gt;</code> utilziar elementos que ainda não foram criados, o código JS não vai funcionar.</p>
+<p>No exemplo anterior, poderíamos definir o código JavaScript em qualquer lugar do script pois ele define uma função que só será usada quando o botão for clicado. No exemplo a seguir, o código JavaScript pinta de vermelho todos os parágrafos com classe <code>vermelho</code>. Para que isso seja possível, o elemento <code>script</code> deve vir após a criação dos elementos <code>p</code>. Se estivesse definido antes dos elementos <code>p</code>, nenhum parágrafo ficaria vermelho.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Os parágrafos 1, 3 e 5 ficam com cor vermelha</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">p</span>(<span class="st">"Parágrafo 1"</span>, <span class="at">class =</span> <span class="st">"vermelho"</span>),</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">p</span>(<span class="st">"Parágrafo 2"</span>),</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">p</span>(<span class="st">"Parágrafo 3"</span>, <span class="at">class =</span> <span class="st">"vermelho"</span>),</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">p</span>(<span class="st">"Parágrafo 4"</span>),</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">p</span>(<span class="st">"Parágrafo 5"</span>, <span class="at">class =</span> <span class="st">"vermelho"</span>),</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">script</span>(</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'document.getElementsByClassName("vermelho").forEach(</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="st">      function(paragrafo) {</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a><span class="st">        paragrafo.style = "color: red"</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="st">      }</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="st">    )'</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Nenhum parágrafo fica vermelho pois o código JS</span></span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a><span class="co"># vem antes da criação do parágrafo</span></span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>   tags<span class="sc">$</span><span class="fu">script</span>(</span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">'document.getElementsByClassName("vermelho").forEach(</span></span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a><span class="st">      function(paragrafo) {</span></span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a><span class="st">        paragrafo.style = "color: red"</span></span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a><span class="st">      }</span></span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a><span class="st">    )'</span></span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">p</span>(<span class="st">"Parágrafo 1"</span>, <span class="at">class =</span> <span class="st">"vermelho"</span>),</span>
+<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">p</span>(<span class="st">"Parágrafo 2"</span>),</span>
+<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">p</span>(<span class="st">"Parágrafo 3"</span>, <span class="at">class =</span> <span class="st">"vermelho"</span>),</span>
+<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">p</span>(<span class="st">"Parágrafo 4"</span>),</span>
+<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">p</span>(<span class="st">"Parágrafo 5"</span>, <span class="at">class =</span> <span class="st">"vermelho"</span>)</span>
+<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-45"><a href="#cb34-45" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb34-46"><a href="#cb34-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb34-48"><a href="#cb34-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="interagindo-com-inputs-via-javascript" class="level3" data-number="12.3.2">
+<h3 data-number="12.3.2" class="anchored" data-anchor-id="interagindo-com-inputs-via-javascript"><span class="header-section-number">12.3.2</span> Interagindo com inputs via JavaScript</h3>
+<p>Nesta seção, vamos discutir como interagir com os inputs do Shiny a partir do JavaScript. Vamos fazer isso de duas maneiras: acessando o valor de inputs criados pela UI e criar novos inputs via JavaScript.</p>
+<p>Para acessar o valor de um input criado na UI do Shiny a partir do JavaScript precisamos primeiro saber qual elemento HTML representa esse input. No caso de um <code>selectInput</code> com <code>inputId = seletor</code>, por exemplo, estamos criando no HTML um elemento <code>&lt;select id = "seletor"&gt;</code>. Então, se quisermos acessar o valor desse input via JS, basta buscarmos por esse elemento e extrair o seu valor.</p>
+<p>No exemplo a seguir, constuimos um app que permite trocar a cor do texto apresentado a partir de um <code>selectInput</code>. Essa troca é feita apenas no navegador, a partir de um código JavaScript. Tente rodar o app para testar testar esse comportamento.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># app.R</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">h1</span>(<span class="st">"JavaScript"</span>, <span class="at">align =</span> <span class="st">"center"</span>),</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hr</span>(),</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selectInput</span>(</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">inputId =</span> <span class="st">"cor_do_texto"</span>,</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Selecione a cor do texto"</span>,</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"red"</span>, <span class="st">"orange"</span>, <span class="st">"purple"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>)</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">br</span>(),</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">p</span>(<span class="st">"JavaScript (frequentemente abreviado como JS) é uma linguagem de</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="st">    programação interpretada estruturada, de script em alto nível com tipagem</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="st">    dinâmica fraca e multiparadigma (protótipos, orientado a objeto,</span></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="st">    imperativo e funcional). Juntamente com HTML e CSS, o JavaScript é</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="st">    uma das três principais tecnologias da World Wide Web. JavaScript</span></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a><span class="st">    permite páginas da Web interativas e, portanto, é uma parte essencial</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a><span class="st">    dos aplicativos da web. A grande maioria dos sites usa, e todos os</span></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a><span class="st">    principais navegadores têm um mecanismo JavaScript dedicado para</span></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a><span class="st">    executá-lo."</span>),</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">p</span>(<span class="st">"É atualmente a principal linguagem para programação client-side em</span></span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a><span class="st">    navegadores web. É também bastante utilizada do lado do servidor através</span></span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a><span class="st">    de ambientes como o node.js."</span>),</span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">script</span>(<span class="at">src =</span> <span class="st">"script.js"</span>)</span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a># www<span class="op">/</span>script<span class="op">.</span><span class="at">js</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> select <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"cor_do_texto"</span>)<span class="op">;</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>select<span class="op">.</span><span class="at">onchange</span> <span class="op">=</span> <span class="kw">function</span>() {</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> paragrafos <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementsByTagName</span>(<span class="st">"p"</span>)<span class="op">;</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> paragrafos<span class="op">.</span><span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) {</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    paragrafos[i]<span class="op">.</span><span class="at">style</span> <span class="op">=</span> <span class="st">"color: "</span> <span class="op">+</span> select<span class="op">.</span><span class="at">value</span> <span class="op">+</span> <span class="st">";"</span><span class="op">;</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<script type="text/javascript">
+# www/script.js
+var select = document.getElementById("cor_do_texto");
+
+select.onchange = function() {
+  var paragrafos = document.getElementsByTagName("p");
+  for (var i = 0; i < paragrafos.length; i++) {
+    paragrafos[i].style = "color: " + select.value + ";";
+  }
+}
+</script>
+</div>
+<p>O código JavaScript utilizado busca no HTML o elemento que representa o <code>selectInput</code> a partir do seu Id e atribui a ele uma função que será executada sempre que o valor desse <code>select</code> mudar. A função busca por todas as tags <code>p</code> do HTML e utiliza o valor do <code>select</code> para alterar a cor do texto. Esse valor é acessado via a propriedade <code>value</code> do objeto <code>select</code>.</p>
+<p>Como exercício, tente refazer esse exemplo sem usar o JavaScript, usando no lugar um <code>renderUI</code> na função <code>server</code>.</p>
+<p>A partir do JavaScript, também podemos criar novos inputs e acessá-los no servidor. Para isso, usamos o método <code>Shiny.setInputValue(idName, value)</code> em nosso código JavaScript. O app abaixo apresenta uma mensagem na tela informando qual navegador está sendo usado para acessá-lo. Veja que o <code>input$browser</code> não é definido na UI, mas sim dentro do código JavaScript.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># app.R</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  tags<span class="sc">$</span><span class="fu">script</span>(<span class="at">src =</span> <span class="st">"script.js"</span>),</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textOutput</span>(<span class="st">"mensagem"</span>)</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>mensagem <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(input<span class="sc">$</span>browser)</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>    glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"Olá! Você está usando o navegador {input$browser}!"</span>)</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">// www/script.js</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">getBrowserName</span>() {</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> browserInfo <span class="op">=</span> <span class="bu">navigator</span><span class="op">.</span><span class="at">userAgent</span><span class="op">;</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> browser<span class="op">;</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (browserInfo<span class="op">.</span><span class="fu">includes</span>(<span class="st">'Opera'</span>) <span class="op">||</span> browserInfo<span class="op">.</span><span class="fu">includes</span>(<span class="st">'Opr'</span>)) {</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    browser <span class="op">=</span> <span class="st">'Opera'</span><span class="op">;</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (browserInfo<span class="op">.</span><span class="fu">includes</span>(<span class="st">'Edg'</span>)) {</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    browser <span class="op">=</span> <span class="st">'Edge'</span><span class="op">;</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (browserInfo<span class="op">.</span><span class="fu">includes</span>(<span class="st">'Chrome'</span>)) {</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    browser <span class="op">=</span> <span class="st">'Chrome'</span><span class="op">;</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (browserInfo<span class="op">.</span><span class="fu">includes</span>(<span class="st">'Safari'</span>)) {</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>    browser <span class="op">=</span> <span class="st">'Safari'</span><span class="op">;</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (browserInfo<span class="op">.</span><span class="fu">includes</span>(<span class="st">'Firefox'</span>)) {</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>    browser <span class="op">=</span> <span class="st">'Firefox'</span><span class="op">;</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>    browser <span class="op">=</span> <span class="st">'unknown'</span><span class="op">;</span></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> browser<span class="op">;</span></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a><span class="fu">$</span>(<span class="bu">document</span>)<span class="op">.</span><span class="fu">on</span>(<span class="st">"shiny:sessioninitialized"</span><span class="op">,</span> <span class="kw">function</span>() {</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>  Shiny<span class="op">.</span><span class="fu">setInputValue</span>(<span class="st">"browser"</span><span class="op">,</span> <span class="fu">getBrowserName</span>())<span class="op">;</span></span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<script type="text/javascript">
+// www/script.js
+function getBrowserName() {
+  let browserInfo = navigator.userAgent;
+  let browser;
+  if (browserInfo.includes('Opera') || browserInfo.includes('Opr')) {
+    browser = 'Opera';
+  } else if (browserInfo.includes('Edg')) {
+    browser = 'Edge';
+  } else if (browserInfo.includes('Chrome')) {
+    browser = 'Chrome';
+  } else if (browserInfo.includes('Safari')) {
+    browser = 'Safari';
+  } else if (browserInfo.includes('Firefox')) {
+    browser = 'Firefox';
+  } else {
+    browser = 'unknown';
+  }
+    return browser;
+}
+
+$(document).on("shiny:sessioninitialized", function() {
+  Shiny.setInputValue("browser", getBrowserName());
+});
 
 
+</script>
+</div>
+<p>A primeira parte do código JavaScript define uma função chamada <code>getBrowserName()</code>, que identifica qual o navegador está sendo utilizado. A segunda parte define uma função anônima que será executada assim que a sessão do Shiny for inicializada. Essa função cria o input <code>browser</code> com o valor retornado pela função <code>getBrowserName()</code>.</p>
+<p>O objeto <code>Shiny</code> possui vários outros métodos para interagirmos com a sessão do Shiny via JavaScript. Recomendamos a leitura dos artigos a seguir para mais informações de como utilizá-lo:</p>
+<ul>
+<li><p><a href="https://shiny.rstudio.com/articles/communicating-with-js.html">Comunicando-se com o Shiny via JS</a></p></li>
+<li><p><a href="https://shiny.rstudio.com/articles/js-events.html">Eventos JS no Shiny</a></p></li>
+</ul>
+</section>
+</section>
+<section id="exercícios" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">12.4</span> Exercícios</h2>
+<p>1 - O que são elementos HTML?</p>
+<hr>
+<p>2 - Para que serve a seção <code>&lt;head&gt;</code> de um código HTML?</p>
+<hr>
+<p>3 - Conserte o erro do código HTML abaixo:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span> Para acessar a loja, basta clicar <span class="kw">&lt;a</span> <span class="er">href</span> <span class="ot">=</span> <span class="st">"https://loja.curso-r.com"</span><span class="kw">&gt;</span>neste link<span class="kw">&lt;/p&gt;&lt;/a&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p>4 - Qual a diferença entre as tags <code>&lt;div&gt;</code> e <code>&lt;span&gt;</code>?</p>
+<hr>
+<p>5 - Ao que se refere o termo <em>cascading</em> da sigla CSS?</p>
+<hr>
+<p>6 - Qual a ordem de precedência com relação ao local onde CSS pode ser colocado (inline, interno, externo)?</p>
+<hr>
+<p>7 - O que é o <em>box model</em> no CSS?</p>
+<hr>
+<p>8 - Segundo o código CSS abaixo, a caixa azul vai aparecer sobre o fundo amarelo ou rosa? E a caixa laranja?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">style</span> <span class="ot">=</span> <span class="st">"position: relative;"</span><span class="kw">&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;div</span> <span class="er">style</span> <span class="ot">=</span> <span class="st">"height: 100px; background-color: yellow;"</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;div</span> <span class="er">style</span> <span class="ot">=</span> <span class="st">"height: 100px; background-color: pink;"</span><span class="kw">&gt;</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span> <span class="er">style</span> <span class="ot">=</span> <span class="st">"height: 40px; width: 10%; background-color: blue;"</span><span class="kw">&gt;</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>      Caixa azul</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span> <span class="er">style</span> <span class="ot">=</span> <span class="st">"height: 40px; width: 10%; background-color: orange; position: absolute; top: 0px;"</span><span class="kw">&gt;</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>      Caixa laranja</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p>9 - Reproduza a página HTML contida <a href="https://curso-r.github.io/main-dashboards-2/exercicios/04-html-css/harry_potter/index.html">neste link</a>. Sinta-se livre para deixar o visual da página da sua maneira.</p>
+<hr>
+<p>10 - Em um app Shiny, para que serve o método JS <code>Shiny.setInputValue(idName, value)</code>?</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>É uma boa prática declarar o idioma da página, pois isso é utilizado pelos algorítmos de busca e pelos navegadores.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
