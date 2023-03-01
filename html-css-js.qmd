@@ -596,7 +596,7 @@ O JavaScript (JS) é uma linguagem de programação criada para a Web. Ele foi c
 
 O papel do JavaScript é possibilitar interatividade em páginas Web. Enquanto o HTML e o CSS apenas ditam como esse conteúdo será apresentada na tela, códigos JavaScript geram comportamentos disparados por ações da pessoa acessando a pagina.
 
-O código JS é colocado junto ao HTML e interpretado pelo navegador. Todo navegador moderno possui um interpretador de JavaScript, você pode testar isso acessando as "Ferramentas de desenvolvedor" do seu navegador e clicando na aba "Console". O terminal apresentado será um interpretador JavaScript.
+O código JS é colocado junto ao HTML e interpretado pelo navegador. Todo navegador moderno possui um interpretador de JavaScript: você pode testar isso acessando as "Ferramentas de desenvolvedor" do seu navegador e clicando na aba "Console". O terminal apresentado será um interpretador JavaScript.
 
 ```{r, fig.cap="Interpretador JavaScript no Google Chrome.", echo = FALSE}
 knitr::include_graphics("img/console_js.png")
@@ -606,7 +606,7 @@ Nesta seção, não faremos uma introdução formal ao JavaScript, pois qualquer
 
 ### Inserindo JavaScript em seu app
 
-Para inserir um código JavaScript em um arquivo HTML, utilizamos o elemento `<script></script>`. Podemos escrever diretamente o código JavaScript dentro desse elemento ou ler o código de um arquivo externo definido pelo atributo `src`. Os dois exemplos abaixo são equivalentes e mudam para vermelho a cor do primeiro parágrafo.
+Para inserir um código JavaScript em um arquivo HTML, utilizamos o elemento `<script></script>`. Podemos escrever diretamente o código JavaScript dentro desse elemento ou ler o código de um arquivo externo definido pelo atributo `src`. Os dois exemplos abaixo são equivalentes e mudam para vermelho a cor do primeiro parágrafo quando clicamos no botão.
 
 ```{html}
 # Definindo o código diretamente no HTML
@@ -762,7 +762,7 @@ shinyApp(ui, server)
 
 ### Interagindo com inputs via JavaScript
 
-Nesta seção, vamos discutir como interagir os inputs do Shiny a partir do JavaScript. Vamos fazer isso de duas maneiras: acessando o valor de inputs criados pela UI e criar novos inputs via JavaScript.
+Nesta seção, vamos discutir como interagir com os inputs do Shiny a partir do JavaScript. Vamos fazer isso de duas maneiras: acessando o valor de inputs criados pela UI e criar novos inputs via JavaScript.
 
 Para acessar o valor de um input criado na UI do Shiny a partir do JavaScript precisamos primeiro saber qual elemento HTML representa esse input. No caso de um `selectInput` com `inputId = seletor`, por exemplo, estamos criando no HTML um elemento `<select id = "seletor">`. Então, se quisermos acessar o valor desse input via JS, basta buscarmos por esse elemento e extrair o seu valor.
 
