@@ -16,8 +16,6 @@ Neste capítulo, vamos apresentar os conceitos básicos de HTML e CSS mais impor
 
 O HTML é uma [linguagem de marcação](https://pt.wikipedia.org/wiki/Linguagem_de_marca%C3%A7%C3%A3o) para construir páginas web. Uma linguagem de marcação é apenas um tipo de documento que contem texto simples (como em um bloco de notas) e um conjunto de instruções para formatar (anotar, marcar) parte específicas do conteúdo. Além do HTML, o LaTeX e o (R) Markdown são outros exemplos comuns de linguagem de marcação.
 
-
-
 Nas seções a seguir, apresentamos os conceitos básicos da linguagem. São três os objetivos aqui:
 
 - entender como um documento HTML é estruturado;
@@ -262,7 +260,7 @@ O objetivo de uma linguagens de folha de estilo é separar a formatação e a es
 
 A seguir, apresentaremos os conceitos básicos para aplicar CSS a um documento HTML.
 
-### Regras CSS
+### Regras CSS {-}
 
 Para aplicar estilo a um elemento HTML usando CSS, devemos escrever uma **regra**. A seguir, temos uma **regra** CSS que define a cor dos parágrafos (o conteúdo dos elementos `<p>`) como azul e o tamanho da fonte como 12px.
 
@@ -275,11 +273,11 @@ p {
 
 No código:
 
-- `p` é chamado de **seletor**, isto é, a definição dos elementos aos quais o estilo será aplicado
+- `p` é chamado de **seletor** e define quais elementos receberão a regra CSS;
 
-- `color: blue;` e `font-size: 12px` são chamadas de **declarações**, que define o estilo a ser aplicado
+- `color: blue;` e `font-size: 12px` são chamadas de **declarações** e definem o estilo a ser aplicado;
 
-- `color` e `font-size` dentro de cada declaração são chamados de **propriedades**, isto é, a característica de cada elemento que será alterada.
+- `color` e `font-size` dentro de cada declaração são chamados de **propriedades**, isto é, a característica de cada elemento que será alterada;
 
 - já `blue` e `12px` são os **valores** atribuídos a cada propriedade.
 
@@ -293,17 +291,17 @@ Para aplicar essa regra, podemos inserir esse código em um documento HTML de 3 
 
 O jeito mais comum de adicionar CSS ao HTML é utilizando um arquivo CSS externo, mas veremos aqui como utilizar as três formas.
 
-### CSS inline
+### CSS inline {-}
 
-O CSS inline é utilizado para aplicar estilo a um único elemento HTML. Fazemos isso usando o atributo `style` do elemento.
+O CSS inline é utilizado para aplicar estilo a um único elemento HTML. Fazemos isso usando o atributo `style` dentro da tag de abertura do elemento.
 
 ```{html}
 <p style = "color: blue;"> Esse texto terá a cor azul. </p>
 ```
 
-Veja que neste caso não precisamos declarar um seletor.
+Veja que nesse caso não precisamos declarar um seletor.
 
-### CSS interno
+### CSS interno {-}
 
 Um CSS interno é utilizado para definir estilo para os elementos de uma única página HTML. Ele é definido na seção `<head>`, dentro de uma tag `<style>`.
 
@@ -327,11 +325,11 @@ Um CSS interno é utilizado para definir estilo para os elementos de uma única 
 ```
 
 
-### CSS externo
+### CSS externo {-}
 
 Um arquivo CSS externo é utilizado para definir o estilo de várias páginas HTML. Para associar um arquivo CSS a uma página HTML, usamos a tag `<link>` na seção `<head>`. 
 
-A tag `<link>` é utilizada para estabelecer uma relação entre o arquivo HTML e um arquivo externo. O atributo `href` recebe o caminho para o arquivo externo (nosso arquivo CSS) e o atributo `rel` estabele qual o tipo de relação entre os arquivos.
+A tag `<link>` é utilizada para estabelecer uma relação entre o arquivo HTML e um arquivo externo. O atributo `href` recebe o caminho para o arquivo externo (nosso arquivo CSS) e o atributo `rel` estabele qual o tipo de relação entre os arquivos. No caso de um arquivo CSS, `rel` deve receber o valor `stylesheet`.
 
 ```{html}
 <!--Arquivo CSS-->
@@ -347,9 +345,9 @@ h1 {
 </html>
 ```
 
-### Cores
+### Cores {-}
 
-Para alterar cores, utilizamos as propriedades `color` e `background-color`.
+Para alterar cores, utilizamos as propriedades `color` e `background-color`. Você pode passar como valor tanto o nome da cor em inglês quanto um código hexadecimal.
 
 ```{html}
 p {
@@ -357,17 +355,17 @@ p {
 }
 
 h1, h2 {
-  color: blue;
+  color: #1222bb;
 }
 
 body {
-  background-color: black
+  background-color: black;
 }
 ```
 
-**Nota**: repare que você pode selecionar um grupo de elementos separando cada seletor por uma vírgula (`h1, h2`).
+Repare que você pode selecionar um grupo de elementos separando cada seletor por uma vírgula (`h1, h2`).
 
-### Tamanho da fonte
+### Tamanho da fonte {-}
 
 Para alterar o tamanho da fonte, utilizamos a propriedade `font-size`.
 
@@ -382,7 +380,7 @@ h1 {
 ```
 
 
-### Fontes
+### Fontes {-}
 
 Para alterar a fonte do texto, utilizamos a propriedade `font-family`.
 
@@ -396,9 +394,7 @@ p {
 }
 ```
 
-**Nota**:  você pode especificar mais de uma fonte em uma declaração, o que é útil para garantir que pelo menos uma das fontes especificadas esteja instalada no navegador de quem acessar a página HTML. A preferência é da esquerda para a direita.
-
-**Recomendação**: leia as [seções sobre fonte do W3Schools](https://www.w3schools.com/css/css_font.asp).
+Você pode especificar mais de uma fonte em uma declaração, o que é útil para garantir que pelo menos uma das fontes especificadas esteja instalada no navegador de quem acessar a página HTML.  A preferência é da esquerda para a direita.  Na primeira regra do exemplo acima, o navegador tentará aplicar a fonte "Times New Roman" preferencialmente. Se ela não estiver disponível, ela vai aplicar qualquer versão da fonte "Times" e, caso ainda não seja possível, será utilizada qualquer fonte serifada que o navegador usar como padrão. Leia as [seções sobre fonte do W3Schools](https://www.w3schools.com/css/css_font.asp) para saber mais.
 
 Para importar uma fonte do Google fontes, basta utilizar o elemento `<link rel = "stylesheet">` passando o link da fonte no atributo `href`. 
 
@@ -415,7 +411,7 @@ Para importar uma fonte do Google fontes, basta utilizar o elemento `<link rel =
 
 Link para a fonte Sofia: https://fonts.google.com/specimen/Sofia?query=sofia
 
-### Bordas
+### Bordas {-}
 
 Para definir uma borda a um elemento, utilizamos a propriedade `border`.
 
@@ -431,9 +427,9 @@ h1 {
 
 - O valor `black` se refere à cor da borda.
 
-**Nota**: você pode definir uma borda para quase todos os elementos HTML.
+> Você pode definir uma borda para quase todos os elementos HTML.
 
-### Classes
+### Classes  {-}
 
 Elementos HTML possuem um atributo `class` que pode ser utilizado como seletor em declarações CSS.
 
@@ -451,9 +447,9 @@ Elementos HTML possuem um atributo `class` que pode ser utilizado como seletor e
 
 Repare que para usar uma classe como seletor, colocamos um `.` antes do nome da classe.
 
-**Nota**: elementos HTML podem ter mais de uma classe. Múltiplas classes são separadas por um espaço. Uma mesma classe pode ser utilizada em mais de um elemento HTML.
+> Elementos HTML podem ter mais de uma classe. Múltiplas classes são separadas por um espaço. Uma mesma classe pode ser utilizada em mais de um elemento HTML.
 
-### Ids
+### Ids {-}
 
 Elementos HTML possuem um atributo `id` que pode ser utilizado como seletor em declarações CSS. Ao contrário das classes, o id deve ser único dentro do documento HTML, isto é, dois elementos HTML não devem ter o mesmo id.
 
@@ -471,20 +467,61 @@ Elementos HTML possuem um atributo `id` que pode ser utilizado como seletor em d
 
 Repare que para usar um id como seletor, colocamos um `#` antes do nome do id.
 
-### Especificidade
+### Especificidade {-}
 
-Quando mais de uma declaração afeta um elemento HTML, utilizaremos as regras a seguir para definir a especificidade de um seletor:
+Quando mais de uma declaração afeta uma mesma propriedade um elemento HTML, o navegador precisa decidir qual delas será aplicada. Para isso, ele vai se basear nos seguintes valores:
 
-1. Se o estilo é inline (+1000)
-2. Se o seletor é um id (+100)
-3. Se o seletor é uma classe (+10)
-4. Se o seletor é um elemento (+1)
+1. Se o estilo é inline: +1000
+2. Se o seletor é um id: +100
+3. Se o seletor é uma classe: +10
+4. Se o seletor é um elemento: +1
 
-**Nota**: saiba mais sobre **especificidade** [neste artigo da W3Schools](https://www.w3schools.com/css/css_specificity.asp) em inglês ou [neste artigo](https://tipscode.com.br/especificidade-css-5-coisas-que-voce-precisa) em português.
+A soma desses valores para uma regra é chamada de **especificidade**. A regra com maior especificidade será aplicada. Se duas declarações possuirem a mesma especificidade, a última declaração definida no CSS será priorizada.
 
-### Margem
+A regra a seguir, que seleciona todos os elementos `p` com classe `azul` tem especificidade 11, pois o seletor possui uma classe e um elemento.
 
-Margens são utilizadas para criar espaço em branco entre elementos HTML.
+```{html}
+p.azul {
+  color: blue;
+}
+```
+
+Já a seguinte regra tem especificidade de 10, pois só possui um elemento, e seria preterida com relação à anterior.
+
+```{html}
+p {
+  color: blue;
+}
+```
+
+Abaixo, temos duas declarações com a mesma especificidade. Nesse caso, a declaração `color: yellow;` será aplicada por ter sido definido por último.
+
+```{html}
+p {
+  color: red;
+}
+
+p {
+  color: yellow;
+}
+```
+
+
+Saiba mais sobre **especificidade** [neste artigo da W3Schools](https://www.w3schools.com/css/css_specificity.asp) em inglês ou [neste artigo](https://tipscode.com.br/especificidade-css-5-coisas-que-voce-precisa) em português.
+
+### Box model {-}
+
+O *box model* do CSS é essencialmente uma caixa que envolve todos os elementos HTML. Ele consiste de uma margem, uma borda, *padding* e o próprio conteúdo do elemento.
+
+A imagem abaixo ilustra o *box model*:
+
+```{r, out.width="84%", echo = FALSE}
+knitr::include_graphics("img/box_model.png")
+```
+
+### Margem {-}
+
+Margens são utilizadas para criar espaço em branco entre elementos HTML. As duas regras CSS a seguir são equivalentes.
 
 ```{html}
 p {
@@ -499,11 +536,11 @@ p {
 }
 ```
 
-As duas regras CSS acima são equivalentes.
 
-### Padding
+### Padding {-}
 
-A propriedade `padding` é utilizada para criar espaço ao redor do conteúdo de um elemento, dentro de qualquer borda definida.
+A propriedade `padding` é utilizada para criar espaço ao redor do conteúdo de um elemento, dentro de qualquer borda definida. As duas regras CSS a seguir são equivalentes.
+
 
 ```{html}
 p {
@@ -518,19 +555,7 @@ p {
 }
 ```
 
-As duas regras CSS acima são equivalentes.
-
-### Box model
-
-O *box model* do CSS é essencialmente uma caixa que envolve todos os elementos HTML. Ele consiste de uma margem, uma borda, *padding* e o próprio conteúdo do elemento.
-
-A imagem abaixo ilustra o *box model*:
-
-```{r, out.width="84%", echo = FALSE}
-knitr::include_graphics("img/box_model.png")
-```
-
-### Display
+### Display {-}
 
 A propriedade `display` especifica se e como um elemento HTML é exibido na tela.
 
@@ -547,21 +572,23 @@ Todo elemento HTML tem um valor padrão para essa propriedade. O valor padrão d
 ```
 
 
-**Nota**: também é possível atribuir o valor `none` a essa proprieda, fazendo com que o elemento não seja mostrado na tela. Isso é utilizado com JavaScript para mostrar/esconder elementos.
+Também é possível atribuir o valor `none` a essa proprieda, fazendo com que o elemento não seja mostrado na tela. Isso é utilizado com JavaScript para mostrar/esconder elementos.
 
-### Posicionamento
+### Posicionamento {-}
 
-A propriedade `position` define que tipo de posicionamento será usado em um elemento HTML.
+A propriedade `position` define que tipo de posicionamento será utilizado para exibir um elemento na página.
 
-As principais opções são:
+Os principais valores dessa propriedade são:
 
-- `static`, elementos são renderizados na ordem que eles aparecem no documento HTML (valor padrão)
+- `static` --- os elementos são renderizados na ordem que eles aparecem no documento HTML (valor padrão);
 
-- `relative`, os elementos são posicionados relativamente a sua posição normal, permitindo o ajuste do elemento a partir de `offsets`
+- `relative` --- os elementos são posicionados relativamente a sua posição normal, permitindo o ajuste do elemento a partir de `offsets` (propriedades `top`, `bottom`, `left` e `right`);
 
-- `absolute`, os elementos são posicionados relativamente ao seu primeiro elemento ancestral com `position` diferente de `static`
+- `absolute` --- os elementos são posicionados relativamente ao seu primeiro elemento ancestral com `position` diferente de `static`;
 
-- `fixed`, os elementos são posicionados relativamente à janela do navegador
+- `fixed` --- os elementos são posicionados relativamente à janela do navegador.
+
+Leia [este artigo](https://developer.mozilla.org/en-US/docs/Web/CSS/position) para saber mais sobre posicionamento.
 
 ## JavaScript
 
