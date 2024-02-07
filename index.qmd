@@ -1,3 +1,10 @@
+```{=html}
+<style>
+body{text-align: justify}
+</style>
+```
+
+
 # Boas-vindas! {-}
 
 Este é um livro em desenvolvimento. Toda contribuição, seja correção de erros ortográficos ou sugestões de novos conteúdos, será bem-vinda. Você pode contribuir criando *issues* [nesse repositório](https://github.com/curso-r/livro-shiny). 
