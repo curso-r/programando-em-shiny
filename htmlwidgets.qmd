@@ -581,9 +581,9 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-Para acessarmos eventos em um highchart, precisamos adicionar as funções `highcharter::hc_add_event_point()` ou `highcharter::hc_add_event_series`() no código que gera os gráficos. Dessa forma, a informação é adiciona à lista `input` em valores com a seguinte nomenclatura `outputId_eventType`.
+Para acessarmos eventos em um highchart, precisamos adicionar as funções `highcharter::hc_add_event_point()` ou `highcharter::hc_add_event_series`() no código que gera os gráficos. Dessa forma, a informação é adicionada à lista `input` em valores com a seguinte nomenclatura `outputId_eventType`.
 
-Por exemplo, para um highchart com `outputId = "grafico"`, teremos
+Por exemplo, para um highchart com `outputId = "grafico"`, teremos:
 
 ```{r, eval = FALSE}
 input$grafico_click
