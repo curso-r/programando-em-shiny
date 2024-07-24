@@ -234,7 +234,7 @@ Em vez de gerar um erro silencioso, não mostrando nada na tela, podemos criar u
 
 - `NULL`, se o valor for válido;
 
-- `FALSE`, se o você quiser retornar um erro silencioso, assim como na função `req()`;
+- `FALSE`, se você quiser retornar um erro silencioso, assim como na função `req()`;
 
 - uma string, que será transformada em uma mensagem de erro e mostrada na tela^[Em cor cinza, não o vermelho padrão das mensagens de erro.].
 
