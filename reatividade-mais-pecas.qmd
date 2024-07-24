@@ -230,7 +230,7 @@ output$orcamento <- renderInfoBox({
 
 ###  Mensagens de erro personalizadas
 
-Em vez de enviar gerar um erro silencioso, não mostrando nada na tela, podemos criar uma mensagem de erro customizada quando um valor for inválido ou não cumprir algum requisito. Para isso, utilizamos a função `validate()`. Essa função deve receber um dos três seguintes valores:
+Em vez de gerar um erro silencioso, não mostrando nada na tela, podemos criar uma mensagem de erro customizada quando um valor for inválido ou não cumprir algum requisito. Para isso, utilizamos a função `validate()`. Essa função deve receber um dos três seguintes valores:
 
 - `NULL`, se o valor for válido;
 
