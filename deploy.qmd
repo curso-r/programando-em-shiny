@@ -69,7 +69,7 @@ knitr::include_graphics("img/shinyapps-publishing.png")
 
 O processo de deploy pode levar alguns minutos, a depender das dependências do seu app e tamanho dos arquivos que você subir. Quando o processo terminar, você receberá uma URL para acessar o aplicativo.
 
-Caso o seu app não abra devido a algum erro, você pode acessar a os logs de utilização para ter uma dica do que aconteceu. Para isso, no dashboard do ShinyApps.io, acesse Applications > All, no meu lateral. Em seguida, clique no app que você gostaria de investigar. Por fim, acesse a opção "Logs".
+Caso o seu app não abra devido a algum erro, você pode acessar os logs de utilização para ter uma dica do que aconteceu. Para isso, no dashboard do ShinyApps.io, acesse Applications > All, no meu lateral. Em seguida, clique no app que você gostaria de investigar. Por fim, acesse a opção "Logs".
 
 ```{r, echo = FALSE, out.width="100%"}
 knitr::include_graphics("img/shinyapps-log.png")
@@ -91,7 +91,7 @@ Você pode instalar o pacote diretamente do CRAN:
 install.packages("auth0")
 ```
 
-A seguir, apresentaremos um passo-a-passo para criar um app com autenticação usando o `auth0`. Para mais informações sobre o pacote, [clique aqui](https://github.com/curso-r/auth0).
+A seguir, apresentaremos um passo a passo para criar um app com autenticação usando o `auth0`. Para mais informações sobre o pacote, [clique aqui](https://github.com/curso-r/auth0).
 
 #### Passo 1: criar uma conta no serviço Auth0 {-}
 
