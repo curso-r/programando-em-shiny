@@ -41,17 +41,17 @@ As tags no HTML definem os chamados **elementos HTML**. Um elemento HTML é comp
 <nome_da_tag> conteúdo </nome_da_tag>
 ```
 
-> Alguns elementos podem aparecer corretamente sem a tag de fechamento, mas não conte sempre com isso. Resultados inexperados e erros podem acontecer se você esquercar a tag de fechamento.
+> Alguns elementos podem aparecer corretamente sem a tag de fechamento, mas não conte sempre com isso. Resultados inesperados e erros podem acontecer se você esquecer a tag de fechamento.
 
 ### Documento HTML {-}
 
-Um documento HTML é um arquivo de texto com extensão `.html` que possui um código HTML válido dentro. Todo HTML precisa começar com uma declaração de tipo
+Um documento HTML é um arquivo de texto com extensão `.html` que possui um código HTML válido dentro. Todo HTML precisa começar com uma declaração de tipo.
 
 ```{html}
 <!DOCTYPE html>
 ```
 
-Ela representa o tipo de documento, o que ajuda os navegarores a mostrar as páginas corretamente. Ela deve aparecer apenas uma vez, no topo da página.
+Ela representa o tipo de documento, o que ajuda os navegadores a mostrar as páginas corretamente. Ela deve aparecer apenas uma vez, no topo da página.
 
 O código HTML em si começa com a tag `<html>` e deve terminar com `</html> `.
 
@@ -90,7 +90,7 @@ Veremos ainda neste capítulo outros metadados que podemos definir na seção `<
 
 ### Cabeçalhos {-}
 
-Você pode construir títulos e subtítulos com as tags `<h1>` a `<h6>`
+Você pode construir títulos e subtítulos com as tags `<h1>` a `<h6>`.
 
 ```{html}
 <h1>Título 1</h1>
@@ -197,7 +197,7 @@ A tag `<br>`, que gera uma quebra de linha na página, é um exemplo de elemento
 <p>Parágrafo 2</p>
 ```
 
-Veja que não precisamos fechar a tag `<br>` com uma tag `</br>`
+Veja que não precisamos fechar a tag `<br>` com uma tag `</br>`.
 
 ### Imagens {-}
 
@@ -221,7 +221,7 @@ No elemento acima:
 
 Os elementos HTML podem ser divididos em dois tipos: **elementos em bloco** e **elementos em linha**.
 
-Elementos em bloco sempre começam em uma nova linha e ocupam todo o comprimento da tela ou todo o comprimento que tiverem a disposão. Os navegadores automaticamente adicionam algum espaço (margem) antes e depois desses elementos.
+Elementos em bloco sempre começam em uma nova linha e ocupam todo o comprimento da tela ou todo o comprimento que tiverem à disposição. Os navegadores automaticamente adicionam algum espaço (margem) antes e depois desses elementos.
 
 Elementos em linha não iniciam uma nova linha. Esses elementos só ocupam o comprimento necessário para apresentar seu conteúdo na tela.
 
@@ -469,7 +469,7 @@ Repare que para usar um id como seletor, colocamos um `#` antes do nome do id.
 
 ### Especificidade {-}
 
-Quando mais de uma declaração afeta uma mesma propriedade um elemento HTML, o navegador precisa decidir qual delas será aplicada. Para isso, ele vai se basear nos seguintes valores:
+Quando mais de uma declaração afeta uma mesma propriedade de um elemento HTML, o navegador precisa decidir qual delas será aplicada. Para isso, ele vai se basear nos seguintes valores:
 
 1. Se o estilo é inline: +1000
 2. Se o seletor é um id: +100
@@ -594,7 +594,7 @@ Leia [este artigo](https://developer.mozilla.org/en-US/docs/Web/CSS/position) pa
 
 O JavaScript (JS) é uma linguagem de programação criada para a Web. Ele foi criado em apenas 10 dias, em 1995, por uma única pessoa, Brendan Eich. Ele foi inicialmente chamado LiveScript, mas como a linguagem Java era popular na época, o nome mudou para JavaScript, embora as duas linguagens não tenham nenhuma relação uma com a outra.
 
-O papel do JavaScript é possibilitar interatividade em páginas Web. Enquanto o HTML e o CSS apenas ditam como esse conteúdo será apresentada na tela, códigos JavaScript geram comportamentos disparados por ações da pessoa acessando a pagina.
+O papel do JavaScript é possibilitar interatividade em páginas Web. Enquanto o HTML e o CSS apenas ditam como esse conteúdo será apresentado na tela, códigos JavaScript geram comportamentos disparados por ações da pessoa acessando a página.
 
 O código JS é colocado junto ao HTML e interpretado pelo navegador. Todo navegador moderno possui um interpretador de JavaScript: você pode testar isso acessando as "Ferramentas de desenvolvedor" do seu navegador e clicando na aba "Console". O terminal apresentado será um interpretador JavaScript.
 
@@ -631,7 +631,7 @@ Para inserir um código JavaScript em um arquivo HTML, utilizamos o elemento `<s
 </html>
 
   
-# Importanto o código de um arquivo JS
+# Importando o código de um arquivo JS
 
 # HTML
 <!DOCTYPE html>
@@ -702,7 +702,7 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-Um ponto de atenção sobre a utilização de códigos JS em documentos HTML é a posição onde eles são definidos dentro do documento. Como o HTML é interpretado pelo navegador na ordem em que o código foi escrito, se um elemento `<script>` utilziar elementos que ainda não foram criados, o código JS não vai funcionar. 
+Um ponto de atenção sobre a utilização de códigos JS em documentos HTML é a posição onde eles são definidos dentro do documento. Como o HTML é interpretado pelo navegador na ordem em que o código foi escrito, se um elemento `<script>` utilizar elementos que ainda não foram criados, o código JS não vai funcionar. 
 
 No exemplo anterior, poderíamos definir o código JavaScript em qualquer lugar do script pois ele define uma função que só será usada quando o botão for clicado. No exemplo a seguir, o código JavaScript pinta de vermelho todos os parágrafos com classe `vermelho`. Para que isso seja possível, o elemento `script` deve vir após a criação dos elementos `p`. Se estivesse definido antes dos elementos `p`, nenhum parágrafo ficaria vermelho.
 
