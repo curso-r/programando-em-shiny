@@ -28,7 +28,7 @@ Módulos são um framework para gerenciar a complexidade de aplicativos Shiny mu
 
 O primeiro conceito que precisamos guardar é que **módulos são funções**. Então, todas as regras válidas para a criação de uma função valem para a criação de módulos.
 
-O segundo conceito fala sobre como enxergamos os módulos na prática. Cada módulo será um pedaço do nosso aplicativo, com sua própria UI e seu próprio `server`. No entanto, um módulo não funciona sozinho, não podemos rodar um módulo como se fosse um app isolado. Cada módulo será *encaixado* no app, funcinando apenas em conjunto.
+O segundo conceito fala sobre como enxergamos os módulos na prática. Cada módulo será um pedaço do nosso aplicativo, com sua própria UI e seu próprio `server`. No entanto, um módulo não funciona sozinho, não podemos rodar um módulo como se fosse um app isolado. Cada módulo será *encaixado* no app, funcionando apenas em conjunto.
 
 O terceiro conceito diz respeito à unicidade dos IDs. Cada módulo terá o seu próprio ID, sendo que dois módulos não devem ter IDs iguais. Esse ID será utilizado para modificar os IDs dos inputs e outputs dentro do módulo, de tal forma que poderemos ter dois `outputId = "grafico"` se estiverem em módulos diferentes. Dentro de um módulo, continuamos mantendo a unicidade dos `inputId` e `outputId`.
 
@@ -92,7 +92,7 @@ Repare que:
 
 - A função `moduleServer()` recebe como primeiro argumento o `id` e como segundo a nossa função `server` habitual, isto é, a declaração de uma função com os argumentos `input`, `output` e `session` e que possui a lógica do servidor do módulo.
 
-- Na função `server`, graças à função `moduleServer()`, não preciamos nos preocupar com o `ns()`^[No entanto, podemos precisar da função `ns()` se estivermos criando parte da UI dentro do servidor, usando `uiOutput()` e `renderUI()`. Nesse caso, basta acrescentar um `ns <- NS(id)` no começo da função `server`.], isto é, podemos usar diretamente os IDs que definimos na UI do módulo (`input$variavel_x`, `input$variavel_y`, `output$grafico`).
+- Na função `server`, graças à função `moduleServer()`, não precisamos nos preocupar com o `ns()`^[No entanto, podemos precisar da função `ns()` se estivermos criando parte da UI dentro do servidor, usando `uiOutput()` e `renderUI()`. Nesse caso, basta acrescentar um `ns <- NS(id)` no começo da função `server`.], isto é, podemos usar diretamente os IDs que definimos na UI do módulo (`input$variavel_x`, `input$variavel_y`, `output$grafico`).
 
 Para chamar dentro de um app o módulo `dispersao` construído, basta salvar o código dentro de uma pasta chamada `/R` e chamar as funções no `app.R`:
 
