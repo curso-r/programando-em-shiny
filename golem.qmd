@@ -174,7 +174,7 @@ Para saber mais sobre documentação de pacotes, leia [este capítulo do R Packa
 
 ### Instalando e compartilhando o seu pacote
 
-Para verificar se você não feriu alguma regra de desenvolvimento de pacotes R, você pode usar a função `devtools::check()`. Essa função devolverá uma relatório com possíveis problemas que o seu pacote pode ter, como erros de sintaxe, arquivos com extensões não permitidos, dependências não declaradas ou erros de documentação.
+Para verificar se você não feriu alguma regra de desenvolvimento de pacotes R, você pode usar a função `devtools::check()`. Essa função devolverá um relatório com possíveis problemas que o seu pacote pode ter, como erros de sintaxe, arquivos com extensões não permitidos, dependências não declaradas ou erros de documentação.
 
 Para instalar o seu pacote localmente durante o desenvolvimento, rode a função `devtools::install()`. Isso é equivalente a ter o pacote instalado via `install.packages()`.
 
@@ -218,7 +218,7 @@ Veja que ela possui, entre outras coisas, a estrutura básica de um pacote. Vamo
 
 - A pasta `R/`: guarda as funções do pacote. Como o app será feito dentro de um pacote R, todo o seu código será escrito em funções nessa pasta. O Golem já cria os arquivos para construirmos a UI e o servidor. Os scripts contendo os módulos do aplicativo também devem ser colocados nessa pasta, assim como scripts com funções úteis utilizadas em vários lugares do app.
 
-- O arquivo `R/app_config.R`: usado especificar alguns mecanismos do Golem, como ler o arquivo de configuração localizado em `inst/golem-config.yml`.
+- O arquivo `R/app_config.R`: usado para especificar alguns mecanismos do Golem, como ler o arquivo de configuração localizado em `inst/golem-config.yml`.
 
 - O arquivo `R/app_server.R`: script com a função `app_server()`, onde você vai desenvolver o servidor do seu aplicativo.
 
@@ -255,7 +255,7 @@ Neste capítulo, vamos falar sobre como fazer o deploy do seu app feito em Golem
 
 ### Deploy para o shinyapps.io
 
-Para subir um Shiny app para o shinyapps.io (veja a [Seção -@sec-deploy-shinyapps] para mais detalhes), precisamos enviar o script primário do nosso app^[O arquivo com a chamada da função `shiny::shinyApp()` no final.], normalmente chamado de  `app.R`, junto de todos os arquivos dos quais ele depende (outros scripts, bases de dados, imagens etc). A partir do RStudio, podemos fazer isso com alguns cliques a partir do botão Publish, disponível quando abrimos o arquivo `app.R`, ou a partir da função `rsconnect::rsconnect::deployApp()`, que consegue identificar esse script primário caso você não especifique para ela no argumento `appPrimaryDoc`.
+Para subir um Shiny app para o shinyapps.io (veja a [Seção -@sec-deploy-shinyapps] para mais detalhes), precisamos enviar o script primário do nosso app^[O arquivo com a chamada da função `shiny::shinyApp()` no final.], normalmente chamado de  `app.R`, junto de todos os arquivos dos quais ele depende (outros scripts, bases de dados, imagens etc). A partir do RStudio, podemos fazer isso com alguns cliques a partir do botão Publish, disponível quando abrimos o arquivo `app.R`, ou a partir da função `rsconnect::deployApp()`, que consegue identificar esse script primário caso você não especifique para ela no argumento `appPrimaryDoc`.
 
 No entanto, na estrutura do Golem que vimos até o momento não temos esse arquivo, já que todas as partes do app são construídas dentro de funções na pasta `R/`. O script `run_app.R` não pode ser considerado esse script primário pois a chamada da função `shiny::shinyApp()` está dentro da definição da função `run_app()`. O que fazer nesse caso?
 
@@ -276,7 +276,7 @@ run_app()
 
 - `run_app()`: roda o seu app, isto é, executa a função `shiny::shinyApp()`.
 
-Com esse arquivo criado, você também poderá utilizar normalmente a função `rsconnect::rsconnect::deployApp()` para fazer o deploy.
+Com esse arquivo criado, você também poderá utilizar normalmente a função `rsconnect::deployApp()` para fazer o deploy.
 
 ### Deploy com Docker
 
