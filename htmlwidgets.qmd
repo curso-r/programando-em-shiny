@@ -709,11 +709,11 @@ Além dos eventos associados a um elemento do mapa, o `leaflet` também disponib
 
 ## Exercícios
 
-1 - O que são HTML Widgets?
+1 - O que são HTMLWidgets?
 
 ___
 
-2 - Reproduza [este app](https://acursor.shinyapps.io/htmlwidgets-1/).
+2 - Reproduza [este app](https://cursodashboards.shinyapps.io/htmlwidgets-1/).
 
 A base utilizada foi a `cetesb`. [Clique aqui](https://github.com/curso-r/programando-em-shiny/raw/main/exemplos/data/cetesb.rds) para fazer o download dela.
 

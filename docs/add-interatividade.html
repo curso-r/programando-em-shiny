@@ -360,16 +360,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Os outputs são definidos na UI e criados no server. Cada tipo de output é definido por uma função do tipo <code>*Output()</code>. Veja as principais funções dessa família:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-286b9d2bc08cbefe75b2" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-286b9d2bc08cbefe75b2">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Função":["plotOutput()","tableOutput()","textOutput()","uiOutput()"],"Saída":["Gráficos","Tabelas","Textos","Elementos HTML"]},"columns":[{"id":"Função","name":"Função","type":"character"},{"id":"Saída","name":"Saída","type":"character"}],"sortable":false,"dataKey":"23d91c636baea4ac757c96fe6490c083"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-ae1ef81b410d8e378ee3" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ae1ef81b410d8e378ee3">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Função":["plotOutput()","tableOutput()","textOutput()","uiOutput()"],"Saída":["Gráficos","Tabelas","Textos","Elementos HTML"]},"columns":[{"id":"Função","name":"Função","type":"character"},{"id":"Saída","name":"Saída","type":"character"}],"sortable":false,"dataKey":"23d91c636baea4ac757c96fe6490c083"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Essas funções especificam <strong>onde</strong> os outputs serão colocados dentro da UI. Elas não especificam <strong>como</strong> eles serão criados. Para isso, utilizamos as funções do tipo <code>render*()</code>, responsáveis por definir o código R que gera cada output. Além disso, elas <em>renderizam</em> os resultados para HTML, possibilitando que essas visualizações sejam inseridas no código HTML que gera a UI. Na grande maioria dos casos, teremos o par <code>visualizacaoOutput()</code> e <code>renderVisualizacao()</code>.</p>
 <p>Veja a seguir as principais funções <code>render*()</code> e como elas se comunicam com as funções <code>*Output()</code>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-f18ab4eccdecd717a795" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-f18ab4eccdecd717a795">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"*Output()":["plotOutput()","tableOutput()","textOutput()","uiOutput()"],"render*()":["renderPlot()","renderTable()","renderText()","renderUI()"]},"columns":[{"id":"*Output()","name":"*Output()","type":"character"},{"id":"render*()","name":"render*()","type":"character"}],"sortable":false,"dataKey":"5ba50ffec12cd4ad910ebee8a23cf09f"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-bad59d17a56d47c5921b" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-bad59d17a56d47c5921b">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"*Output()":["plotOutput()","tableOutput()","textOutput()","uiOutput()"],"render*()":["renderPlot()","renderTable()","renderText()","renderUI()"]},"columns":[{"id":"*Output()","name":"*Output()","type":"character"},{"id":"render*()","name":"render*()","type":"character"}],"sortable":false,"dataKey":"5ba50ffec12cd4ad910ebee8a23cf09f"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>O argumento <code>outputId</code> das funções <code>*Output()</code> é utilizado para identificarmos cada output dentro da função <code>server</code>. Todos os outputs criados ficarão dentro da lista <code>output</code>. Veja a seguir, o exemplo de um aplicativo que contém um histograma da variável <code>mpg</code> da base <code>mtcars</code>.</p>

@@ -70,8 +70,11 @@ server <- function(input, output, session) {
     )
   })
 
-  cetesb_filtrada <- eventReactive(input$botao, {
-    req(input$poluente)
+  cetesb_filtrada <- eventReactive(input$botao, ignoreNULL = FALSE, {
+    validate(need(
+      isTruthy(input$botao),
+      "Clique no botão Gerar visualizações para ver os resultados."
+    ))
     cetesb |>
       filter(
         estacao_cetesb == input$estacao,
