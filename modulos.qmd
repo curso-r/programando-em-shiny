@@ -127,7 +127,7 @@ Uma pergunta comum para quem está começando a usar módulos é: quais partes d
 
 - Transformar em módulo uma parte do app que será utilizada várias vezes.
 
-- Em um app com várias páginas (`navbarPage`, `shinydashobard`), cada página pode ser um módulo.
+- Em um app com várias páginas (`navbarPage`, `shinydashboard`), cada página pode ser um módulo.
 
 ## Passando e retornando parâmetros para um módulo
 
